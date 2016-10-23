@@ -2,14 +2,36 @@
 % Please edit documentation in R/easy_glmnet.R
 \name{easy_glmnet}
 \alias{easy_glmnet}
-\title{TO BE EDITED.}
+\title{Quickly and easily run penalized linear or logistic regression on a dataset.}
 \usage{
-easy_glmnet()
+easy_glmnet(data = NULL, dependent_variable = NULL, family = c("gaussian",
+  "binomial", "poisson", "multinomial", "cox", "mgaussian"),
+  n_iterations = 1000, out_of_sample = TRUE, proportion = 0.667,
+  alpha = 1, n_folds = 5, survival_threshold = 0.05)
+}
+\arguments{
+\item{data}{An object of class "DataFrame".}
+
+\item{dependent_variable}{A character string, the name of the dependent variable.}
+
+\item{family}{A character string, the response type.}
+
+\item{n_iterations}{An integer, the number of iterations. Defaults to 1000.}
+
+\item{out_of_sample}{A boolean, indicating if out-of-sample predictions be generated. Defaults to TRUE.}
+
+\item{proportion}{Percentage of data to use as a training set. Defaults to 0.667.}
+
+\item{alpha}{A numeric, the value to use for elasticnet. Use 0 for Ridge or 1 for LASSO. Defaults to 1.}
+
+\item{n_folds}{An integer, number of folds to use for cross-validation. Defaults to 5.}
+
+\item{survival_threshold}{A numeric between 0 and 1.0, the threshold cutoff for variables to be included in the beta matrix. Defaults to 0.05.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Quickly and easily run penalized linear or logistic regression on a dataset.
 }
 

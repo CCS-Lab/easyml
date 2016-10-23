@@ -2,5 +2,4 @@
 
 export(correlation_test)
 export(easy_glmnet)
-export(quick_glmnet)
 export(sample_equal_proportion)
