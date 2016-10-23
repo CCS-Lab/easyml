@@ -1,0 +1,19 @@
+Package: easyGlmnet
+Version: 0.1.0
+Title: To Be Edited
+Description: To be edited. To be edited.
+Authors@R: c(
+    person("Woo-Young", "Ahn", , "ahn.280@osu.edu", c("aut", "cre")),
+    person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", "aut"),
+    person("OSU-CCSL", role = "cph"))
+License: CC0
+LazyData: true
+Depends:
+    R (>= 3.3.1)
+Imports:
+    glmnet
+Suggests:
+    testthat
+URL: https://github.com/paulhendricks/CCS-Lab/easyGlmnet
+BugReports: https://github.com/paulhendricks/CCS-Lab/easyGlmnet/issues
+RoxygenNote: 5.0.1

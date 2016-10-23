@@ -1,0 +1,38 @@
+#' Sample in equal proportion.
+#'
+#' This will sample in equal proportion.
+#'
+#' @param y A numeric vector with two classes, 0 and 1.
+#' @param proportion The proportoin of data in training set.
+#' @param seed An integer to seed the random number generator.
+#' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
+#' @export
+sample_equal_proportion <- function(y, proportion = 0.667, seed = 1) {
+  # set seed
+  set.seed(seed = seed)
+
+  # calculate number of observations
+  n_obs <- length(y)
+
+  # identify index number for class1 and class2
+  index_class1 <- which(y == 0)
+  index_class2 <- which(y == 1)
+
+  # calculate  number of class1 and class2 observations
+  n_class1 <- length(index_class1)
+  n_class2 <- length(index_class2)
+
+  # calculate number of class1 and class2 observations in the train set
+  n_class1_train <- round(n_class1 * proportion)
+  n_class2_train <- round(n_class2 * proportion)
+
+  # generate indices for class1 and class2 observations in the train set
+  index_class1_train <- sample(index_class1, n_class1_train, replace = FALSE)
+  index_class2_train <- sample(index_class2, n_class2_train, replace = FALSE)
+  index_train <- c(index_class1_train, index_class2_train)
+
+  # return a boolean vector of length n_obs where TRUE represents
+  # that observation should be in the train set
+  index <- 1:n_obs %in% index_train
+  return(index)
+}
