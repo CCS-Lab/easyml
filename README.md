@@ -11,17 +11,9 @@ Codes for performing penalized linear or logistic regression analysis (e.g., LAS
 Installation
 ------------
 
-You can install:
+You can install the latest development version from github with:
 
--   the latest released version from CRAN with
-
-    ``` r
-    install.packages("easyGlmnet")
-    ```
-
--   the latest development version from github with
-
-    ``` r
+    ```R
     if (packageVersion("devtools") < 1.6) {
       install.packages("devtools")
     }
@@ -37,14 +29,14 @@ For a dataset with a continuous dependent variable:
 
 ``` r
 prostate <- data("prostate", package = "easyGlmnet")
-output <- quick_glmnet(data = prostate, dependent_variable = "lpsa")
+output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` r
 cocaine <- data("cocaine", package = "easyGlmnet")
-output <- quick_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
+output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
 
 References
@@ -55,10 +47,3 @@ Ahn, W.-Y.∗, Ramesh∗, D., Moeller, F. G., & Vassileva, J. (2016) Utility of 
 Ahn, W.-Y. & Vassileva, J. (2016) Machine-learning identifies substance-specific behavioral markers for opiate and stimulant dependence. Drug and Alcohol Dependence, 161 (1), 247–257. [PDF](https://u.osu.edu/ccsl/files/2016/02/Ahn2016_DAD-oftlf3.pdf)
 
 Ahn, W.-Y., Kishida, K. T., Gu, X., Lohrenz, T., Harvey, A. H., Alford, J. R., Smith, K. B., Yaffe, G., Hibbing, J. R., Dayan, P., & Montague, P. R. (2014) Nonpolitical images evoke neural predictors of political ideology. Current Biology, 24(22), 2693-2599. [PDF](https://u.osu.edu/ccsl/files/2015/11/Ahn2014_CB-1l5475k.pdf) [SOM](https://u.osu.edu/ccsl/files/2015/11/Ahn2014_CB_SOM-1xag1ph.pdf)
-
-People
-------
-
--   The original authors of `easyGlmnet` are [Woo-Young Ahn](http://www.ahnlab.org/) and [Paul Hendricks](https://github.com/paulhendricks).
-
--   The lead maintainer of `easyGlmnet` is [Paul Hendricks](https://github.com/paulhendricks).

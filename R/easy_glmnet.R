@@ -12,7 +12,7 @@
 #' @return TO BE EDITED.
 #' @export
 easy_glmnet <- function(data = NULL, dependent_variable = NULL, 
-                        family = c("gaussian","binomial","poisson","multinomial","cox","mgaussian"), 
+                        family = c("gaussian", "binomial", "poisson", "multinomial", "cox", "mgaussian"), 
                         n_iterations = 1000, out_of_sample = TRUE, proportion = 0.667, alpha = 1.0, 
                         n_folds  = 5, survival_threshold = 0.05) { 
   # Detect OS
