@@ -44,7 +44,7 @@ output <- quick_glmnet(data = cocaine, dependentVar = "DIAGNOSIS", depCate = "bi
 For a dataset with a continuous dependent variable (e.g., prostateData.txt):
 
 ``` r
-prostate <- data("prostate_data", package = "easyGlmnet")
+prostate <- data("prostate", package = "easyGlmnet")
 output <- quick_glmnet(data = prostate, dependentVar = "lpsa", depCate = "continuous", 
                        numIterations = 100, outOfSample = T)
 ```
