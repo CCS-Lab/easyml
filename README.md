@@ -33,21 +33,18 @@ If you encounter a clear bug, please file a minimal reproducible example on [git
 Examples
 --------
 
-For a dataset with a binary dependent variable (e.g., cocaineData\_frontiers.txt):
-
-``` r
-cocaine <- data("cocaine", package = "easyGlmnet")
-output <- quick_glmnet(data = cocaine, dependentVar = "DIAGNOSIS", depCate = "binary", 
-                       numIterations = 100, outOfSample = T, excludeVar = c("subject"), 
-                       categoricalVar = c("Male") )
-```
-
-For a dataset with a continuous dependent variable (e.g., prostateData.txt):
+For a dataset with a continuous dependent variable:
 
 ``` r
 prostate <- data("prostate", package = "easyGlmnet")
-output <- quick_glmnet(data = prostate, dependentVar = "lpsa", depCate = "continuous", 
-                       numIterations = 100, outOfSample = T)
+output <- quick_glmnet(data = prostate, dependent_variable = "lpsa")
+```
+
+For a dataset with a binary dependent variable:
+
+``` r
+cocaine <- data("cocaine", package = "easyGlmnet")
+output <- quick_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
 
 References
