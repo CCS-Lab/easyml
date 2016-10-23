@@ -17,6 +17,6 @@ correlation_test(x, confidence_level = 0.95, ...)
 A list containing three matrices; p_value, lower_bound, and upper bound.
 }
 \description{
-See here for source: \link{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
+See here for source: \url{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
 }
 

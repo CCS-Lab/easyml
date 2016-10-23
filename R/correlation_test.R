@@ -1,6 +1,6 @@
 #' Compute the matrix of p-value.
 #' 
-#' See here for source: \link{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
+#' See here for source: \url{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
 #'
 #' @param x An object of class "DataFrame" or "matrix".
 #' @param confidence_level confidence level for the returned confidence interval. Currently only used for the Pearson product moment correlation coefficient if there are at least 4 complete pairs of observations.
