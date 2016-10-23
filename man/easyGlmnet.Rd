@@ -4,8 +4,8 @@
 \name{easyGlmnet}
 \alias{easyGlmnet}
 \alias{easyGlmnet-package}
-\title{easyGlmnet: TO BE EDITED}
+\title{easyGlmnet: Easily build and evaluate penalized regression models.}
 \description{
-easyGlmnet: TO BE EDITED
+easyGlmnet: Easily build and evaluate penalized regression models.
 }
 
