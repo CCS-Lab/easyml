@@ -34,5 +34,5 @@ sample_equal_proportion <- function(y, proportion = 0.667, seed = 1) {
   # return a boolean vector of length n_obs where TRUE represents
   # that observation should be in the train set
   index <- 1:n_obs %in% index_train
-  return(index)
+  index
 }

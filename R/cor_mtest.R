@@ -9,16 +9,18 @@
 cor_mtest <- function(mat, conf_level = 0.95){
   mat <- as.matrix(mat)
   n <- ncol(mat)
-  p.mat <- lowCI.mat <- uppCI.mat <- matrix(NA, n, n)
-  diag(p.mat) <- 0
-  diag(lowCI.mat) <- diag(uppCI.mat) <- 1
+  p_mat <- lowCI_mat <- uppCI_mat <- matrix(NA, n, n)
+  diag(p_mat) <- 0
+  diag(lowCI_mat) <- diag(uppCI_mat) <- 1
+  
   for(i in 1:(n-1)){
     for(j in (i+1):n){
       tmp <- stats::cor.test(mat[,i], mat[,j], conf.level = conf_level)
-      p.mat[i,j] <- p.mat[j,i] <- tmp$p.value
-      lowCI.mat[i,j] <- lowCI.mat[j,i] <- tmp$conf.int[1]
-      uppCI.mat[i,j] <- uppCI.mat[j,i] <- tmp$conf.int[2]
+      p_mat[i,j] <- p_mat[j,i] <- tmp$p.value
+      lowCI_mat[i,j] <- lowCI_mat[j,i] <- tmp$conf.int[1]
+      uppCI_mat[i,j] <- uppCI_mat[j,i] <- tmp$conf.int[2]
     }
   }
-  return(list(p.mat, lowCI.mat, uppCI.mat))
+  
+  list(p_mat, lowCI_mat, uppCI_mat)
 }
