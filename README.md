@@ -13,12 +13,12 @@ Installation
 
 You can install the latest development version from github with:
 
-    ``` r
-    if (packageVersion("devtools") < 1.6) {
-      install.packages("devtools")
-    }
-    devtools::install_github("CCS-Lab/easyGlmnet")
-    ```
+``` r
+if (packageVersion("devtools") < 1.6) {
+  install.packages("devtools")
+}
+devtools::install_github("CCS-Lab/easyGlmnet")
+```
 
 If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyGlmnet/issues).
 
