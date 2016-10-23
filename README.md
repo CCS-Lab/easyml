@@ -38,7 +38,8 @@ For a dataset with a binary dependent variable (e.g., cocaineData\_frontiers.txt
 ``` r
 cocaine <- data("cocaine", package = "easyGlmnet")
 output <- quick_glmnet(data = cocaine, dependentVar = "DIAGNOSIS", depCate = "binary", 
-                       numIterations = 100, outOfSample = T, excludeVar = c("subject"), categoricalVar = c("Male") )
+                       numIterations = 100, outOfSample = T, excludeVar = c("subject"), 
+                       categoricalVar = c("Male") )
 ```
 
 For a dataset with a continuous dependent variable (e.g., prostateData.txt):
