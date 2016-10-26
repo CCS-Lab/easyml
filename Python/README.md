@@ -10,14 +10,13 @@ Codes for performing penalized linear or logistic regression analysis (e.g., LAS
 Installation
 ------------
 
-TO BE EDITED
+```bash
+git clone https://github.com/CCS-Lab/easyGlmnet.git
+cd easyGlmnet/Python
+python setup.py install
+```
 
 If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyGlmnet/issues).
-
-Examples
---------
-
-TO BE EDITED
 
 References
 ----------
