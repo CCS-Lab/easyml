@@ -1,22 +1,22 @@
-easyGlmnet
-==========
+easyML
+======
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
 
 Codes for performing penalized linear or logistic regression analysis (e.g., LASSO, elastic net, ridge).
 
-![A typical machine learning workflow](https://github.com/CCS-Lab/easyGlmnet/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
+![A typical machine learning workflow](https://github.com/CCS-Lab/easyML/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
 
 Installation
 ------------
 
 ```bash
-git clone https://github.com/CCS-Lab/easyGlmnet.git
-cd easyGlmnet/Python
+git clone https://github.com/CCS-Lab/easyML.git
+cd easyML/Python
 python setup.py install
 ```
 
-If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyGlmnet/issues).
+If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyML/issues).
 
 References
 ----------

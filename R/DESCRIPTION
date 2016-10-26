@@ -1,4 +1,4 @@
-Package: easyGlmnet
+Package: easyML
 Version: 0.1.0
 Title: Easily Build and Evaluate Penalized Regression Models
 Description: Quickly and easily run penalized linear or logistic regression on a dataset.
@@ -18,6 +18,6 @@ Imports:
     pROC
 Suggests:
     testthat
-URL: https://github.com/paulhendricks/CCS-Lab/easyGlmnet
-BugReports: https://github.com/paulhendricks/CCS-Lab/easyGlmnet/issues
+URL: https://github.com/paulhendricks/CCS-Lab/easyML
+BugReports: https://github.com/paulhendricks/CCS-Lab/easyML/issues
 RoxygenNote: 5.0.1

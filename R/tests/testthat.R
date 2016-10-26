@@ -1,4 +1,4 @@
 library(testthat)
-library(easyGlmnet)
+library(easyML)
 
-test_check("easyGlmnet")
+test_check("easyML")

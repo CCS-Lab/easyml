@@ -1,4 +1,4 @@
-library(easyGlmnet)
+library(easyML)
 context("correlation_test()")
 
 test_that("Produces the correct output.", {

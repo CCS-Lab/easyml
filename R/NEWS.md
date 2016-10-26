@@ -1,4 +1,4 @@
-# easyGlmnet 0.1.0
+# easyML 0.1.0
 
 ## Improvements
 

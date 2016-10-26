@@ -1,12 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-easyGlmnet
-==========
+easyML
+======
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
 
 Codes for performing penalized linear or logistic regression analysis (e.g., LASSO, elastic net, ridge).
 
-![A typical machine learning workflow](https://github.com/CCS-Lab/easyGlmnet/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
+![A typical machine learning workflow](https://github.com/CCS-Lab/easyML/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
 
 Installation
 ------------
@@ -17,10 +17,10 @@ You can install the latest development version from github with:
 if (packageVersion("devtools") < 1.6) {
   install.packages("devtools")
 }
-devtools::install_github("CCS-Lab/easyGlmnet", subdir = "R")
+devtools::install_github("CCS-Lab/easyML", subdir = "R")
 ```
 
-If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyGlmnet/issues).
+If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyML/issues).
 
 Examples
 --------
@@ -28,14 +28,14 @@ Examples
 For a dataset with a continuous dependent variable:
 
 ``` r
-prostate <- data("prostate", package = "easyGlmnet")
+prostate <- data("prostate", package = "easyML")
 output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` r
-cocaine <- data("cocaine", package = "easyGlmnet")
+cocaine <- data("cocaine", package = "easyML")
 output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
 
