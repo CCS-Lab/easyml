@@ -6,7 +6,7 @@ easyGlmnet
 
 Codes for performing penalized linear or logistic regression analysis (e.g., LASSO, elastic net, ridge).
 
-![A typical machine learning workflow](https://github.com/CCS-Lab/easyGlmnet/raw/master/inst/imgs/ml_figure.png "A typical machine learning workflow")
+![A typical machine learning workflow](https://github.com/CCS-Lab/easyGlmnet/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
 
 Installation
 ------------
