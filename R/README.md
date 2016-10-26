@@ -1,3 +1,4 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 easyGlmnet
 ==========
 
@@ -10,14 +11,33 @@ Codes for performing penalized linear or logistic regression analysis (e.g., LAS
 Installation
 ------------
 
-TO BE EDITED
+You can install the latest development version from github with:
+
+``` r
+if (packageVersion("devtools") < 1.6) {
+  install.packages("devtools")
+}
+devtools::install_github("CCS-Lab/easyGlmnet")
+```
 
 If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyGlmnet/issues).
 
 Examples
 --------
 
-TO BE EDITED
+For a dataset with a continuous dependent variable:
+
+``` r
+prostate <- data("prostate", package = "easyGlmnet")
+output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
+```
+
+For a dataset with a binary dependent variable:
+
+``` r
+cocaine <- data("cocaine", package = "easyGlmnet")
+output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
+```
 
 References
 ----------
