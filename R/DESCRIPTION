@@ -6,7 +6,7 @@ Authors@R: c(
     person("Woo-Young", "Ahn", , "ahn.280@osu.edu", c("aut", "cre")),
     person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", "aut"),
     person("OSU-CCSL", role = "cph"))
-License: CC0
+License: MIT + file LICENSE
 LazyData: true
 Depends:
     R (>= 3.3.1)

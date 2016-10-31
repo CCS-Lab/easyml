@@ -11,63 +11,16 @@
 #' @param survival_threshold A numeric between 0 and 1.0, the threshold cutoff for variables to be included in the beta matrix. Defaults to 0.05.
 #' @return TO BE EDITED.
 #' @export
-easy_glmnet <- function(data = NULL, dependent_variable = NULL, 
+easy_glmnet <- function(data, dependent_variable = NULL, 
                         family = c("gaussian", "binomial", "poisson", "multinomial", "cox", "mgaussian"), 
                         n_iterations = 1000, out_of_sample = TRUE, proportion = 0.667, alpha = 1.0, 
                         n_folds  = 5, survival_threshold = 0.05) { 
-  # Detect OS
-  if ( Sys.info()["sysname"] == "Darwin" ) {  # if Mac OS X --> use 'quartz'
-    x11 <- function( ... ) quartz( ... )
-  }
-  
-  plotColor = c("black")     # Use your favorite color for your ROC curve
+
   cat("Generating out-of-sample predictions? ", outOfSample, "\n")
   
   # Read (raw) data
-  rawDat = data
-  
-  # DV category - binary or continuous?
-  if (depCate == "binary") {
-    glmnetDist = "binomial"
-  } else if (depCate == "continuous") {
-    glmnetDist = "gaussian"
-  } else {
-    stop("A dependent variable should be either a binary or continuous variable\n")
-  }
-  # exclude variables (if there is any)
-  if ( !is.null(excludeVar)) {
-    rawDat = eval(parse(text = paste0( "subset(rawDat, select = -c(", noquote(paste( excludeVar, collapse=", ")), "))" ) ) )
-  }
-  # specify dependent variable.
-  depVar = eval(parse(text = paste("rawDat$", dependentVar, sep="")))
-  # to make sure depVar is an integer...
-  depVar = as.numeric(depVar)
-  # indepVar --> independent variables
-  indepVar = eval(parse(text = paste0( "subset(rawDat, select = -c(", dependentVar, "))") ) )
-  
-  # categorical variables --> no z-scoring.
-  if ( !is.null(categoricalVar)) {
-    cateVar = eval(parse(text = paste0( "indepVar[, c(", paste(shQuote(categoricalVar), collapse=", ") , ")]") ) )
-    # remove categorical variables from indepVar
-    contVar = eval(parse(text = paste0( "subset(indepVar, select = -c(", noquote(paste( categoricalVar, collapse=", ")), "))" ) ) )
-    # if there is only one categorical variable, change its name to categoricalVar
-    if (length(categoricalVar) ==1) {
-      cateVar = data.frame(cateVar)
-      colnames(cateVar) = categoricalVar
-    }
-  } else {
-    contVar = indepVar
-  }
-  
-  # z-score continuous variables
-  contVar = scale(contVar)
-  
-  if ( is.null(categoricalVar)) {
-    # combine raw categorical and z-scored continuous (independent) variables
-    allDat = as.matrix( contVar )
-  } else {
-    allDat = as.matrix( data.frame(cateVar, contVar) )
-  }
+  raw_data <- data
+
   numSubjs = length(depVar) # number of participants (i.e., n)
   numPredictors = dim(allDat)[2] + 1  # number of features (i.e, p). +1 because of intercept
   cat("# of participants=", numSubjs, ", # of measures=", numPredictors, "\n", sep="")
@@ -115,57 +68,6 @@ easy_glmnet <- function(data = NULL, dependent_variable = NULL,
   ### Implement a penalized logistic regression     ###
   #####################################################
   
-  # To save values for the test (validation) set.
-  # for min lambda
-  all_predictedVar_min = array(NA, c(numSubjs_v, numIterations) )    # predicted depVar (on the test set)
-  all_beta_min = array(NA, c(numPredictors, numIterations) )         # fitted beta coefficients (w/ train set)
-  all_survivalRate_min = array(NA, c(numPredictors, numIterations) ) # survival rate (w/ train set)
-  # for +1se lambda
-  all_predictedVar_1se = array(NA, c(numSubjs_v, numIterations) )    # predicted depVar (on the test set)
-  all_beta_1se = array(NA, c(numPredictors, numIterations) )         # fitted beta coefficients (w/ train set)
-  all_survivalRate_1se = array(NA, c(numPredictors, numIterations) ) # survival rate (w/ train set)
-  
-  # To save values for the train set (w/ min lambda)
-  all_predictedVar_min_t = array(NA, c(numSubjs_t, numIterations) )  # predicted depVar (on the train set)
-  
-  # A text based progress bar
-  progressBar = txtProgressBar(min=1, max=numIterations, style=3)
-  cat("Running ", numIterations, " iterations.\n")
-  
-  for (rIdx in 1:numIterations) {
-    # fit LASSO with the training set
-    lasso_glmnet = glmnet(x=trainVar, y=depVar_t, family=glmnetDist, standardize=F, alpha=myAlpha, maxit=10^6)
-    lasso_cv_glmnet = cv.glmnet(x=trainVar, y=depVar_t, family=glmnetDist, standardize=F, alpha=myAlpha, nfolds=nFolds, maxit=10^6)
-    
-    ## test predictions on the test set (with min lambda)
-    tmp_preddepVar_min = predict(lasso_glmnet, newx = testVar, s = lasso_cv_glmnet$lambda.min , type="response")
-    
-    # test predictions on the training set (with min lambda)
-    tmp_preddepVar_min_t = predict(lasso_glmnet, newx = trainVar, s = lasso_cv_glmnet$lambda.min, type="response")
-    
-    ## test predictions on the test set (with +1se lambda)
-    tmp_preddepVar_1se = predict(lasso_glmnet, newx = testVar, s = lasso_cv_glmnet$lambda.1se, type="link" )
-    
-    # extract beta coefficients with min lambda
-    tmp_beta = predict(lasso_glmnet, s = lasso_cv_glmnet$lambda.min, type="coefficient" )
-    # extract beta coefficients with min lambda
-    tmp_beta_1se = predict(lasso_glmnet, s = lasso_cv_glmnet$lambda.1se, type="coefficient" )
-    
-    # save predictions made on the test set (w/ min lambda)
-    all_predictedVar_min[, rIdx] = tmp_preddepVar_min
-    all_beta_min[, rIdx] = as.matrix(tmp_beta)
-    all_survivalRate_min[, rIdx] = as.numeric(abs(tmp_beta) > 0)
-    
-    # save predictions made on the test set (w/ +1se lambda)
-    all_predictedVar_1se[, rIdx] = tmp_preddepVar_1se
-    all_beta_1se[, rIdx] = as.matrix(tmp_beta_1se)
-    all_survivalRate_1se[, rIdx] = as.numeric(abs(tmp_beta_1se) > 0)
-    
-    # save predictions made on the train set (w/ min lambda)
-    all_predictedVar_min_t[, rIdx] = tmp_preddepVar_min_t
-    
-    setTxtProgressBar(progressBar, rIdx)
-  }
   
   ###############################################################
   ### compute mean values of multiple(e.g., 1,000) iterations ###
@@ -182,77 +84,6 @@ easy_glmnet <- function(data = NULL, dependent_variable = NULL,
   # To plot ROC curves (train set) w/ ggplot2
   dat_min_t = data.frame(Actual = as.numeric(depVar_t), Predicted = as.numeric(preddepVar_min_t))
   
-  if (depCate == "binary") { # if binary classification --> draw ROC curves
-    ### Drawing
-    auc_figure_tmp = roc(Actual ~ Predicted, data = dat_min)
-    auc_figure = as.numeric( auc_figure_tmp$auc )
-    auc_figure_digit = prettyNum(auc_figure, digits=3, nsmall=3,width=5, format="fg")
-    auc_dat = data.frame(Sens = auc_figure_tmp$sensitivities, OneMinusSpec = 1 - auc_figure_tmp$specificities)
-    
-    # Draw a ROC curve (test set)
-    x11()
-    h1 = ggplot(auc_dat, aes(x=OneMinusSpec, y=Sens)) +
-      geom_path(alpha=1, size=1, colour = plotColor) +
-      ggtitle(paste0("ROC Curve ", ggtitle_v) ) +
-      annotate("text", label = paste("AUC = ", auc_figure_digit, sep=""), x = 0.6, y = 0.1, size = 15, colour = "black") +
-      theme(plot.title=element_text(size=30)) +
-      theme(axis.title = element_text(size = 30) ) +
-      geom_segment(aes(x = 0, y = 0, xend = 1, yend = 1) , linetype="dashed") +
-      theme(axis.text = element_text(size = 20, colour="black")) +   # for black tick label color
-      xlab("1 - Specificity") + ylab("Sensitivity")
-    print(h1)
-    
-    # training set
-    auc_figure_tmp_t = roc(Actual ~ Predicted, data = dat_min_t)
-    auc_figure_t = as.numeric( auc_figure_tmp_t$auc )
-    auc_figure_digit_t = prettyNum(auc_figure_t, digits=3, nsmall=3, width=5, format="fg")
-    auc_dat_t = data.frame(Sens = auc_figure_tmp_t$sensitivities, OneMinusSpec = 1 - auc_figure_tmp_t$specificities)
-    
-    x11()
-    h2 = ggplot(auc_dat_t, aes(x=OneMinusSpec, y=Sens)) +
-      geom_path(alpha=1, size=1, colour = plotColor) +
-      ggtitle(paste0("ROC Curve ",  ggtitle_t) ) +
-      annotate("text", label = paste("AUC = ", auc_figure_digit_t, sep=""), x = 0.6, y = 0.1, size = 15, colour = "black") +
-      theme(plot.title=element_text(size=30)) +
-      theme(axis.title = element_text(size = 30) ) +
-      geom_segment(aes(x = 0, y = 0, xend = 1, yend = 1) , linetype="dashed") +
-      theme(axis.text = element_text(size = 20, colour="black")) +   # for black tick label color
-      xlab("1 - Specificity") + ylab("Sensitivity")
-    print(h2)
-    
-  } else if (depCate == "continuous") { # if linear regression --> draw correlation plots
-    
-    # Draw a ROC curve (test set)
-    cor_figure = cor.test(~ Actual + Predicted, data = dat_min)
-    num = cor_figure$p.value
-    r_figure = prettyNum(cor_figure$estimate, digits=3, width=5, format="fg")
-    pValue_figure = ifelse(num==0, "< 2.200e-16" , paste0("= ", format(num, scientific=T, digits=4)) )
-    
-    x11()
-    h1 = ggplot(dat_min, aes(x=Actual, y=Predicted, color=plotColor)) +
-      geom_point(shape=19, alpha=0.8, size=3) +
-      geom_smooth(method=lm, aes(group=1), colour="black") +
-      ggtitle( paste0("Correlation between actual and predicted values: ", dependentVar, " (Test Set)") ) +
-      annotate("text", label = paste("r = ", r_figure, ", p ", pValue_figure, sep=""),
-               x=Inf, y=Inf, size = 6, colour = plotColor, vjust=1, hjust=1)
-    print(h1)
-    
-    # training set
-    # Draw a ROC curve (test set)
-    cor_figure_t = cor.test(~ Actual + Predicted, data = dat_min_t)
-    num_t = cor_figure_t$p.value
-    r_figure_t = prettyNum(cor_figure_t$estimate, digits=3, width=5, format="fg")
-    pValue_figure_t = ifelse(num_t==0, "< 2.200e-16" , paste0("= ", format(num_t, scientific=T, digits=4)) )
-    
-    x11()
-    h2 = ggplot(dat_min_t, aes(x=Actual, y=Predicted, color=plotColor)) +
-      geom_point(shape=19, alpha=0.8, size=3) +
-      geom_smooth(method=lm, aes(group=1), colour="black") +
-      ggtitle( paste0("Correlation between actual and predicted values: ", dependentVar, " (Training Set)") ) +
-      annotate("text", label = paste("r = ", r_figure_t, ", p ", pValue_figure_t, sep=""),
-               x=Inf, y=Inf, size = 6, colour = plotColor, vjust=1, hjust=1)
-    print(h2)
-  }
   #############################################
   ### mean beta coefficients of regressors  ###
   ### (only using the training set)         ###

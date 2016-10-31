@@ -1,3 +1,5 @@
+"""Utility functions for sampling data.
+"""
 import numpy as np
 
 
@@ -6,18 +8,19 @@ __all__ = ['sample_equal_proportion']
 
 def sample_equal_proportion(y, proportion=0.667, random_state=None):
     """Sample in equal proportion.
-    Sample in equal proportion.
+
     Parameters
     ----------
-    y : array, shape (n_obs)
-        Input data to be split
-    proportion : float, default: 0.667
+    :param y: array, shape (n_obs) Input data to be split
+    :param proportion: float, default: 0.667
         Proportion to split into train and test
-    random_state : int seed, RandomState instance, default: None
+    :param random_state: int seed, default: None
         The seed of the pseudo random number generator to use when shuffling the data.
+    TODO figure out best practices for documenting Python functions
+
     Returns
     -------
-    self : array, shape (n_obs)
+    self: array, shape (n_obs)
         A boolean array of length n_obs where True represents that observation should be in the train set.
     """
     # Set random_state
