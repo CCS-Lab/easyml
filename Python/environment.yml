@@ -1,4 +1,4 @@
-name: easyML
+name: easyml
 dependencies:
 - mkl=11.3.3=0
 - numpy=1.11.2=py35_0
@@ -14,7 +14,6 @@ dependencies:
 - zlib=1.2.8=3
 - pip:
   - cycler==0.10.0
-  - easyml==0.1.0
   - glmnet==1.0.0
   - matplotlib==1.5.3
   - pandas==0.19.0
