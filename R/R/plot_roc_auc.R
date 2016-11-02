@@ -1,5 +1,5 @@
 ### Drawing
-auc_figure_tmp = roc(Actual ~ Predicted, data = dat_min)
+auc_figure_tmp = pROC::roc(Actual ~ Predicted, data = dat_min)
 auc_figure = as.numeric( auc_figure_tmp$auc )
 auc_figure_digit = prettyNum(auc_figure, digits=3, nsmall=3,width=5, format="fg")
 auc_dat = data.frame(Sens = auc_figure_tmp$sensitivities, OneMinusSpec = 1 - auc_figure_tmp$specificities)
@@ -18,7 +18,7 @@ h1 = ggplot(auc_dat, aes(x=OneMinusSpec, y=Sens)) +
 print(h1)
 
 # training set
-auc_figure_tmp_t = roc(Actual ~ Predicted, data = dat_min_t)
+auc_figure_tmp_t = pROC::roc(Actual ~ Predicted, data = dat_min_t)
 auc_figure_t = as.numeric( auc_figure_tmp_t$auc )
 auc_figure_digit_t = prettyNum(auc_figure_t, digits=3, nsmall=3, width=5, format="fg")
 auc_dat_t = data.frame(Sens = auc_figure_tmp_t$sensitivities, OneMinusSpec = 1 - auc_figure_tmp_t$specificities)
