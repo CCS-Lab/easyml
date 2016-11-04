@@ -1,4 +1,4 @@
-library(easyML)
+library(easyml)
 context("correlation_test()")
 
 test_that("Produces the correct output.", {

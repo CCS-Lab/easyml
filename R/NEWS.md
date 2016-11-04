@@ -1,4 +1,4 @@
-# easyML 0.1.0
+# easyml 0.1.0
 
 ## Improvements
 

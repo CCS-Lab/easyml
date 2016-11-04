@@ -1,4 +1,4 @@
-library(easyML)
+library(easyml)
 context("easy_glmnet()")
 
 test_that("Produces the correct output.", {

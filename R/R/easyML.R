@@ -1,5 +1,5 @@
-#' easyML: Easily build and evaluate penalized regression models. 
+#' easyml: Easily build and evaluate machine learning models. 
 #'
 #' @docType package
-#' @name easyML
+#' @name easyml
 NULL

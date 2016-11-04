@@ -1,3 +1,15 @@
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @param y_true Ground truth (correct) target values.
+#' @param y_pred Estimated target values.
+#' @return TO BE EDITED.
+#' @export
+plot_roc_auc <- function(y_true, y_pred) {
+  return(1L)
+}
+
 # ### Drawing
 # auc_figure_tmp = pROC::roc(Actual ~ Predicted, data = dat_min)
 # auc_figure = as.numeric( auc_figure_tmp$auc )

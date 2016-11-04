@@ -1,4 +1,4 @@
 library(testthat)
-library(easyML)
+library(easyml)
 
-test_check("easyML")
+test_check("easyml")
