@@ -4,7 +4,7 @@ easyml
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
-Codes for performing penalized linear or logistic regression analysis (e.g., LASSO, elastic net, ridge).
+A toolkit for easily building and evaluation machine learning models.
 
 ![A typical machine learning workflow](https://github.com/CCS-Lab/easyml/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
 
