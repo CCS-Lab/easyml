@@ -30,12 +30,11 @@ def bootstrap_aucs(estimator, X, y, n_divisions=1000, n_iterations=100):
         # Loop over number of iterations
         for j in range(n_iterations):
             # Fit estimator with the training set
-            e = estimator()
-            e = e.fit(X_train, y_train)
+            estimator.fit(X_train, y_train)
 
             # Generate scores for training and test sets
-            y_train_scores = e.predict_proba(X_train)[:, 1]
-            y_test_scores = e.predict_proba(X_test)[:, 1]
+            y_train_scores = estimator.predict_proba(X_train)[:, 1]
+            y_test_scores = estimator.predict_proba(X_test)[:, 1]
 
             # Calculate AUC on training and test sets
             train_auc = metrics.roc_auc_score(y_train, y_train_scores)
@@ -48,6 +47,11 @@ def bootstrap_aucs(estimator, X, y, n_divisions=1000, n_iterations=100):
         # Process loop and save in temporary containers
         all_train_aucs.append(np.mean(train_aucs))
         all_test_aucs.append(np.mean(test_aucs))
+
+    # cast to np.ndarray
+    all_train_aucs = np.array(all_train_aucs)
+    all_test_aucs = np.array(all_test_aucs)
+
     return all_train_aucs, all_test_aucs
 
 
@@ -58,16 +62,18 @@ def bootstrap_coefficients(estimator, X, y, n_samples=1000):
     # Loop over number of iterations
     for _ in range(n_samples):
         # Fit estimator with the training set
-        e = estimator()
-        e.fit(X, y)
+        estimator.fit(X, y)
 
         # Extract and save coefficients
-        coefs.append(list(e.coef_[0]))
+        coefs.append(list(estimator.coef_[0]))
+
+    # cast to np.ndarray
+    coefs = np.array(coefs)
 
     return coefs
 
 
-def bootstrap_predictions(estimator, X_train, y_train, X_test, y_test, n_samples=1000):
+def bootstrap_predictions(estimator, X_train, y_train, X_test, n_samples=1000):
     # Initialize containers
     all_y_train_predictions = []
     all_y_test_predictions = []
@@ -75,15 +81,18 @@ def bootstrap_predictions(estimator, X_train, y_train, X_test, y_test, n_samples
     # Loop over number of iterations
     for _ in range(n_samples):
         # Fit estimator with the training set
-        e = estimator()
-        e.fit(X_train, y_train)
+        estimator.fit(X_train, y_train)
 
         # Generate predictions for training and test sets
-        y_train_predictions = e.predict_proba(X_train)[:, 1]
-        y_test_predictions = e.predict_proba(X_test)[:, 1]
+        y_train_predictions = estimator.predict_proba(X_train)[:, 1]
+        y_test_predictions = estimator.predict_proba(X_test)[:, 1]
 
         # Save predictions
         all_y_train_predictions.append(y_train_predictions)
         all_y_test_predictions.append(y_test_predictions)
+
+    # cast to np.ndarray
+    all_y_train_predictions = np.array(all_y_train_predictions)
+    all_y_test_predictions = np.array(all_y_test_predictions)
 
     return all_y_train_predictions, all_y_test_predictions

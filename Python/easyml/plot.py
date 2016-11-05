@@ -5,7 +5,7 @@ import numpy as np
 from sklearn import metrics
 
 
-__all__ = ['plot_auc_histogram', 'plot_betas', 'plot_roc_curve']
+__all__ = ['plot_auc_histogram', 'plot_roc_curve']
 
 
 def plot_auc_histogram(x, bins):
@@ -18,10 +18,6 @@ def plot_auc_histogram(x, bins):
     plt.xlabel('AUC')
     plt.ylabel('Frequency')
     plt.title('Distribution of AUCs (Training Set)')
-
-
-def plot_betas(betas):
-    return 1
 
 
 def plot_roc_curve(y_true, y_pred):

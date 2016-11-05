@@ -14,8 +14,8 @@ Imports:
     corrplot, 
     ggplot2, 
     glmnet, 
-    modelr, 
-    pROC
+    pROC, 
+    scales
 Suggests:
     testthat
 URL: https://github.com/paulhendricks/CCS-Lab/easyml

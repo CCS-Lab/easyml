@@ -50,5 +50,9 @@ def sample_equal_proportion(y, proportion=0.667, random_state=None):
     # return a boolean vector of len n_obs where TRUE represents
     # that observation should be in the train set
     sequence = list(np.arange(n_obs))
-    index = np.array([True if i in index_train else False for i in sequence])
+    index = [True if i in index_train else False for i in sequence]
+
+    # Cast to np.ndarray
+    index = np.array(index)
+
     return index

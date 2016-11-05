@@ -4,17 +4,18 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-from easyml.bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
-from easyml.plot import plot_auc_histogram, plot_roc_curve
-from easyml.process import process_coefficients
-from easyml.sample import sample_equal_proportion
-
-
 # Set matplotlib settings
 mpl.get_backend()
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
+
+from easyml.bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
+from easyml.datasets import cocaine
+from easyml.plot import plot_auc_histogram, plot_roc_curve
+from easyml.utils import process_coefficients
+from easyml.sample import sample_equal_proportion
+
 
 # Constants
 EXCLUDE_AGE = False
@@ -31,7 +32,8 @@ SHOW = False
 SAVE = True
 
 # Load data
-data = pd.read_table('../data/cocaine.txt')
+# data = cocaine.load_data()
+data = pd.read_table('./cocaine.txt')
 
 # Drop subjects column
 data = data.drop('subject', axis=1)
@@ -65,7 +67,7 @@ coefs = bootstrap_coefficients(lr, X, y)
 
 # Process coefficients
 betas = process_coefficients(coefs)
-betas.to_csv('./imgs/betas.csv', index=False)
+betas.to_csv('./results/betas.csv', index=False)
 
 ##############################################################################
 # Replicating figure 2 - Done!
@@ -82,30 +84,27 @@ lr = LogitNet(alpha=ALPHA, n_lambda=N_LAMBDA, standardize=False, cut_point=CUT_P
 all_y_train_scores, all_y_test_scores = bootstrap_predictions(lr, X_train, y_train, X_test, y_test, n_samples=1000)
 
 # Generate scores for training and test sets
-all_y_train_scores = np.array(all_y_train_scores)
 y_train_scores_mean = np.mean(all_y_train_scores, axis=0)
-all_y_test_scores = np.array(all_y_test_scores)
 y_test_scores_mean = np.mean(all_y_test_scores, axis=0)
 
-# Compute ROC curve and ROC area for each training
+# Compute ROC curve and ROC area for training
 plot_roc_curve(y_train, y_train_scores_mean)
+plt.savefig('./results/train_roc_curve.png')
 
-# Compute ROC curve and ROC area for each test
+# Compute ROC curve and ROC area for test
 plot_roc_curve(y_test, y_test_scores_mean)
+plt.savefig('./results/test_roc_curve.png')
 
 ##############################################################################
 # Replicating figure 4 - Done!
 ##############################################################################
-all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=1000, n_iterations=100)
-
-all_train_aucs = np.array(all_train_aucs)
-all_train_auc_mean = np.mean(all_train_aucs)
-all_test_aucs = np.array(all_test_aucs)
-all_test_auc_mean = np.mean(all_test_aucs)
+all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=1000, n_iterations=5)
 bins = np.arange(0, 1, 0.02)
 
 # Plot histogram of training AUCS
 plot_auc_histogram(all_train_aucs, bins)
+plt.savefig('./results/train_auc_distribution.png')
 
 # Plot histogram of test AUCS
 plot_auc_histogram(all_test_aucs, bins)
+plt.savefig('./results/test_auc_distribution.png')
