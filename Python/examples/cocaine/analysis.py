@@ -99,12 +99,11 @@ plt.savefig('./results/test_roc_curve.png')
 # Replicating figure 4 - Done!
 ##############################################################################
 all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=1000, n_iterations=5)
-bins = np.arange(0, 1, 0.02)
 
 # Plot histogram of training AUCS
-plot_auc_histogram(all_train_aucs, bins)
+plot_auc_histogram(all_train_aucs)
 plt.savefig('./results/train_auc_distribution.png')
 
 # Plot histogram of test AUCS
-plot_auc_histogram(all_test_aucs, bins)
+plot_auc_histogram(all_test_aucs)
 plt.savefig('./results/test_auc_distribution.png')

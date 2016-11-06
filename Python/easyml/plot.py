@@ -8,7 +8,8 @@ from sklearn import metrics
 __all__ = ['plot_auc_histogram', 'plot_roc_curve']
 
 
-def plot_auc_histogram(x, bins):
+def plot_auc_histogram(x):
+    bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
     plt.figure()
     plt.hist(x, bins=bins, color='white', edgecolor='black')
