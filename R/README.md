@@ -28,14 +28,14 @@ Examples
 For a dataset with a continuous dependent variable:
 
 ``` r
-prostate <- data("prostate", package = "easyml")
+data("prostate", package = "easyml")
 output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` r
-cocaine <- data("cocaine", package = "easyml")
+data("cocaine", package = "easyml")
 output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
 

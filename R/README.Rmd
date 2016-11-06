@@ -40,14 +40,14 @@ If you encounter a clear bug, please file a minimal reproducible example on [git
 For a dataset with a continuous dependent variable:
 
 ```R
-prostate <- data("prostate", package = "easyml")
+data("prostate", package = "easyml")
 output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ```R
-cocaine <- data("cocaine", package = "easyml")
+data("cocaine", package = "easyml")
 output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
 
