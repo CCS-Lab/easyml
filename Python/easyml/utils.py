@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-__all__ = ['correlation_test', 'process_coefficients']
+__all__ = ['correlation_test', 'process_coefficients', 'process_data']
 
 
 def correlation_test():
@@ -52,3 +52,21 @@ def process_coefficients(coefs):
     betas['dotColor2'] = (1 * np.logical_and(betas['dotColor1'] > 0, betas['sig'] > 0)) + 1
     betas['dotColor'] = betas['dotColor1'] * betas['dotColor2']
     return betas
+
+
+def process_data(data, dependent_variables=None, exclude_variables=None):
+    # Handle dependent variable
+    if dependent_variables is not None:
+        raise ValueError
+    else:
+        y = data[dependent_variables].values
+        data = data.drop(dependent_variables, axis=1)
+
+    # Possibly exclude columns
+    if exclude_variables is not None:
+        data = data.drop(exclude_variables, axis=1)
+
+    # Create X array
+    X = data.values
+
+    return X, y

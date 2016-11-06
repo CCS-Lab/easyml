@@ -2,7 +2,6 @@ from glmnet import LogitNet
 import matplotlib as mpl
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 
 # Set matplotlib settings
 mpl.get_backend()
@@ -13,7 +12,7 @@ plt.style.use('ggplot')
 from easyml.bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
 from easyml.datasets import cocaine
 from easyml.plot import plot_auc_histogram, plot_roc_curve
-from easyml.utils import process_coefficients
+from easyml.utils import process_coefficients, process_data
 from easyml.sample import sample_equal_proportion
 
 
@@ -35,28 +34,14 @@ SAVE = True
 # data = cocaine.load_data()
 data = pd.read_table('./cocaine.txt')
 
-# Drop subjects column
-data = data.drop('subject', axis=1)
+# Exclude certain variables
+variables = ['subject']
 
-# Possibly exclude age
 if EXCLUDE_AGE:
-    data = data.drop('AGE', axis=1)
+    variables.append('AGE')
 
-# Handle dependent variables
-y = data['DIAGNOSIS'].values
-data = data.drop('DIAGNOSIS', axis=1)
-
-# Handle categorical variable
-male = np.array([data['Male'].values]).T
-data = data.drop('Male', axis=1)
-X_raw = data.values
-
-# Handle numeric variables
-stdsc = StandardScaler()
-X_std = stdsc.fit_transform(X_raw)
-
-# Combine categorical variables and continuous variables
-X = np.concatenate([male, X_std], axis=1)
+# Process the data
+X, y = process_data(data, dependent_variables='DIAGNOSIS', exclude_variables=variables)
 
 ##############################################################################
 # Replicating figure 1 - Done!
