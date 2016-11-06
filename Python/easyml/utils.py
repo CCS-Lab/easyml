@@ -35,10 +35,10 @@ def correlation_test():
     return 1
 
 
-def process_coefficients(coefs):
+def process_coefficients(coefs, survival_rate_cutoff=0.05):
     survived = 1 * (abs(coefs) > 0)
     survival_rate = np.sum(survived, axis=0) / float(1000)
-    mask = 1 * (survival_rate > 0.05)
+    mask = 1 * (survival_rate > survival_rate_cutoff)
     coefs_updated = coefs * mask
     coefs_q025 = np.percentile(coefs_updated, q=2.5, axis=0)
     coefs_mean = np.mean(coefs_updated, axis=0)

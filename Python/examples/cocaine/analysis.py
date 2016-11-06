@@ -1,7 +1,6 @@
 from glmnet import LogitNet
 import matplotlib as mpl
 import numpy as np
-import pandas as pd
 
 # Set matplotlib settings
 mpl.get_backend()
@@ -16,23 +15,26 @@ from easyml.utils import process_coefficients, process_data
 from easyml.sample import sample_equal_proportion
 
 
-# Constants
+# Analysis constants
 EXCLUDE_AGE = False
 TRAIN_SIZE = 0.667
-MAX_ITER = 1e6
-ALPHA = 1
-N_LAMBDA = 200
-N_FOLDS = 5
 N_DIVISIONS = 1000
 N_ITERATIONS = 10
+N_SAMPLES = 1000
+
+# Model constants
+ALPHA = 1
 CUT_POINT = 0  # use 0 for minimum, 1 for within 1 SE
-SURVIVAL_RATE_CUTOFF = 0.05
-SHOW = False
-SAVE = True
+MAX_ITER = 1e6
+N_FOLDS = 5
+N_LAMBDA = 200
+STANDARDIZE = False
+
+# Create model
+lr = LogitNet(alpha=ALPHA, cut_point=CUT_POINT, max_iter=MAX_ITER, n_folds=N_FOLDS, n_lambda=N_LAMBDA, standardize=STANDARDIZE)
 
 # Load data
-# data = cocaine.load_data()
-data = pd.read_table('./cocaine.txt')
+data = cocaine.load_data()
 
 # Exclude certain variables
 variables = ['subject']
@@ -47,7 +49,6 @@ X, y = process_data(data, dependent_variables='DIAGNOSIS', exclude_variables=var
 # Replicating figure 1 - Done!
 ##############################################################################
 # Bootstrap coefficients
-lr = LogitNet(alpha=ALPHA, n_lambda=N_LAMBDA, standardize=False, cut_point=CUT_POINT, max_iter=MAX_ITER)
 coefs = bootstrap_coefficients(lr, X, y)
 
 # Process coefficients
@@ -65,8 +66,7 @@ X_train = X[mask, :]
 X_test = X[np.logical_not(mask), :]
 
 # Bootstrap predictions
-lr = LogitNet(alpha=ALPHA, n_lambda=N_LAMBDA, standardize=False, cut_point=CUT_POINT, max_iter=MAX_ITER)
-all_y_train_scores, all_y_test_scores = bootstrap_predictions(lr, X_train, y_train, X_test, y_test, n_samples=1000)
+all_y_train_scores, all_y_test_scores = bootstrap_predictions(lr, X_train, y_train, X_test, y_test, n_samples=N_SAMPLES)
 
 # Generate scores for training and test sets
 y_train_scores_mean = np.mean(all_y_train_scores, axis=0)
@@ -83,7 +83,7 @@ plt.savefig('./results/test_roc_curve.png')
 ##############################################################################
 # Replicating figure 4 - Done!
 ##############################################################################
-all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=1000, n_iterations=5)
+all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=N_DIVISIONS, n_iterations=N_ITERATIONS)
 
 # Plot histogram of training AUCS
 plot_auc_histogram(all_train_aucs)
