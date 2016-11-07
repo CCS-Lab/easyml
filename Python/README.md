@@ -5,7 +5,7 @@ easyml
 
 A toolkit for easily building and evaluation machine learning models.
 
-A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED, and here's a BibTeX entry that you can use to cite it in a publication::
+A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED, and here's a BibTeX entry that you can use to cite it in a publication:
 
 	@misc{TOBEEDITED,
 		Author = {Woo-Young Ahn and Paul Hendricks},
