@@ -83,4 +83,3 @@ def easy_glmnet(data):
     # Plot histogram of test AUCS
     plot_auc_histogram(all_test_aucs)
     plt.savefig(path.join(OUT_DIRECTORY, 'test_auc_distribution.png'))
-
