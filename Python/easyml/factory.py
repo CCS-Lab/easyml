@@ -19,7 +19,7 @@ from .sample import sample_equal_proportion
 __all__ = ['easy_glmnet']
 
 
-def easy_glmnet():
+def easy_glmnet(data):
     # Analysis constants
     EXCLUDE_VARIABLES = ['subject', 'AGE']
     DEPENDENT_VARIABLE = 'DIAGNOSIS'
