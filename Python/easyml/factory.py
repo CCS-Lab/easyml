@@ -1,8 +1,9 @@
+"""Factory functions for quick and easy analysis.
+"""
 from glmnet import LogitNet
 import matplotlib as mpl
 import numpy as np
 from os import path
-import pandas as pd
 
 # Set matplotlib settings
 mpl.get_backend()
@@ -10,10 +11,12 @@ mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
-from easyml.bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
-from easyml.plot import plot_auc_histogram, plot_roc_curve
-from easyml.utils import process_coefficients, process_data
-from easyml.sample import sample_equal_proportion
+from .bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
+from .plot import plot_auc_histogram, plot_roc_curve
+from .utils import process_coefficients, process_data
+from .sample import sample_equal_proportion
+
+__all__ = ['easy_glmnet']
 
 
 def easy_glmnet():
