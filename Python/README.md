@@ -5,8 +5,6 @@ easyml
 
 A toolkit for easily building and evaluation machine learning models.
 
-![A typical machine learning workflow](https://github.com/CCS-Lab/easyml/raw/master/imgs/ml_figure.png "A typical machine learning workflow")
-
 Installation
 ------------
 
