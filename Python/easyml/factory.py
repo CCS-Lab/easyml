@@ -15,7 +15,7 @@ __all__ = ['easy_glmnet']
 
 
 def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variables=None, train_size=0.667,
-                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='./results', random_state=None,
+                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='.', random_state=None,
                 **kwargs):
 
     # Create model
