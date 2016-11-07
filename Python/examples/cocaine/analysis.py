@@ -8,4 +8,4 @@ if __name__ == "__main__":
     data = pd.read_table('./cocaine.txt')
 
     # Analyze data
-    easy_glmnet(data) # need to update constants and make them arguments
+    easy_glmnet(data)  # need to update constants and make them arguments
