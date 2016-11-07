@@ -18,7 +18,7 @@ def plot_auc_histogram(x):
     plt.xlim([0.0, 1.0])
     plt.xlabel('AUC')
     plt.ylabel('Frequency')
-    plt.title('Distribution of AUCs (Training Set)')
+    plt.title('Distribution of AUCs')
 
 
 def plot_roc_curve(y_true, y_pred):
@@ -39,5 +39,5 @@ def plot_roc_curve(y_true, y_pred):
     plt.ylim([0.0, 1.05])
     plt.xlabel('1 - Specificity')
     plt.ylabel('Sensitivity')
-    plt.title('ROC Curve (Training Set)')
+    plt.title('ROC Curve')
     plt.legend(loc="lower right")
