@@ -1,15 +1,9 @@
 """Factory functions for quick and easy analysis.
 """
 from glmnet import ElasticNet, LogitNet
-import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 from os import path
-
-# Set matplotlib settings
-mpl.get_backend()
-mpl.use('TkAgg')
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
 
 from .bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_predictions
 from .plot import plot_auc_histogram, plot_roc_curve
@@ -21,7 +15,8 @@ __all__ = ['easy_glmnet']
 
 
 def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variables=None, train_size=0.667,
-                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='./results', **kwargs):
+                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='./results', random_state=None,
+                **kwargs):
 
     # Create model
     if family == 'gaussian':
@@ -42,7 +37,7 @@ def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variab
     betas.to_csv(path.join(out_directory, 'betas.csv'), index=False)
 
     # Split data
-    mask = sample_equal_proportion(y, proportion=train_size, random_state=43210)
+    mask = sample_equal_proportion(y, proportion=train_size, random_state=random_state)
     y_train = y[mask]
     y_test = y[np.logical_not(mask)]
     X_train = X[mask, :]
