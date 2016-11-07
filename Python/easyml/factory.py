@@ -1,6 +1,6 @@
 """Factory functions for quick and easy analysis.
 """
-from glmnet import LogitNet
+from glmnet import ElasticNet, LogitNet
 import matplotlib as mpl
 import numpy as np
 from os import path
@@ -21,15 +21,13 @@ __all__ = ['easy_glmnet']
 
 
 def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variables=None, train_size=0.667,
-                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='./results',
-                alpha=1, cut_point=0, max_iter=1e6, n_folds=5, n_lambda=200, standardize=False,
-                verbose=False, n_jobs=None):
+                n_divisions=1000, n_iterations=10, n_samples=1000, out_directory='./results', **kwargs):
 
     # Create model
     if family == 'gaussian':
-        pass
+        model = ElasticNet(**kwargs)
     elif family == 'binomial':
-        lr = LogitNet(alpha=alpha, cut_point=cut_point, max_iter=max_iter, n_folds=n_folds, n_lambda=n_lambda, standardize=standardize)
+        model = LogitNet(**kwargs)
     else:
         raise ValueError
 
@@ -37,7 +35,7 @@ def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variab
     X, y = process_data(data, dependent_variable=dependent_variable, exclude_variables=exclude_variables)
 
     # Bootstrap coefficients
-    coefs = bootstrap_coefficients(lr, X, y)
+    coefs = bootstrap_coefficients(model, X, y)
 
     # Process coefficients
     betas = process_coefficients(coefs)
@@ -51,7 +49,7 @@ def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variab
     X_test = X[np.logical_not(mask), :]
 
     # Bootstrap predictions
-    all_y_train_scores, all_y_test_scores = bootstrap_predictions(lr, X_train, y_train, X_test, n_samples=n_samples)
+    all_y_train_scores, all_y_test_scores = bootstrap_predictions(model, X_train, y_train, X_test, n_samples=n_samples)
 
     # Generate scores for training and test sets
     y_train_scores_mean = np.mean(all_y_train_scores, axis=0)
@@ -66,7 +64,7 @@ def easy_glmnet(data, dependent_variable=None, family='gaussian', exclude_variab
     plt.savefig(path.join(out_directory, 'test_roc_curve.png'))
 
     # Bootstrap training and test AUCS
-    all_train_aucs, all_test_aucs = bootstrap_aucs(lr, X, y, n_divisions=n_divisions, n_iterations=n_iterations)
+    all_train_aucs, all_test_aucs = bootstrap_aucs(model, X, y, n_divisions=n_divisions, n_iterations=n_iterations)
 
     # Plot histogram of training AUCS
     plot_auc_histogram(all_train_aucs)
