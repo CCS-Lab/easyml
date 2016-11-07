@@ -54,13 +54,13 @@ def process_coefficients(coefs, survival_rate_cutoff=0.05):
     return betas
 
 
-def process_data(data, dependent_variables=None, exclude_variables=None):
+def process_data(data, dependent_variable=None, exclude_variables=None):
     # Handle dependent variable
-    if dependent_variables is not None:
+    if dependent_variable is not None:
         raise ValueError
     else:
-        y = data[dependent_variables].values
-        data = data.drop(dependent_variables, axis=1)
+        y = data[dependent_variable].values
+        data = data.drop(dependent_variable, axis=1)
 
     # Possibly exclude columns
     if exclude_variables is not None:
