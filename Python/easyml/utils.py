@@ -4,35 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-__all__ = ['correlation_test', 'process_coefficients', 'process_data']
-
-
-def correlation_test():
-    # correlation_test < - function(x, confidence_level=0.95, ...)
-    # {
-    # # Initialize matrices
-    # x < - as.matrix(x)
-    # n < - ncol(x)
-    # p_value < - lower_bound < - upper_bound < - matrix(NA, n, n)
-    # diag(p_value) < - 0
-    # diag(lower_bound) < - diag(upper_bound) < - 1
-    #
-    # # Loop through and test for correlation at some confidence_level
-    # for (i in 1: (n - 1)) {
-    # for (j in (i + 1): n) {
-    #     result < - stats::cor.test(x[, i], x[, j], conf.level = confidence_level, ...)
-    # p_value[i, j] < - p_value[j, i] < - result$p.value
-    # lower_bound[i, j] < - lower_bound[j, i] < - result$conf.int[1]
-    # upper_bound[i, j] < - upper_bound[j, i] < - result$conf.int[2]
-    # }
-    # }
-    #
-    # # Return a list containing three matrices; p_value, lower_bound, and upper bound.
-    # list(p_value=p_value,
-    #      lower_bound=lower_bound,
-    #      upper_bound=upper_bound)
-    # }
-    return 1
+__all__ = ['process_coefficients', 'process_data']
 
 
 def process_coefficients(coefs, survival_rate_cutoff=0.05):
@@ -57,10 +29,10 @@ def process_coefficients(coefs, survival_rate_cutoff=0.05):
 def process_data(data, dependent_variable=None, exclude_variables=None):
     # Handle dependent variable
     if dependent_variable is not None:
-        raise ValueError
-    else:
         y = data[dependent_variable].values
         data = data.drop(dependent_variable, axis=1)
+    else:
+        raise ValueError
 
     # Possibly exclude columns
     if exclude_variables is not None:

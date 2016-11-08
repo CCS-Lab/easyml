@@ -7,11 +7,13 @@ mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
+# from easyml.datasets import prostate
 from easyml.factory import easy_glmnet
 
 
 if __name__ == "__main__":
     # Load data
+    # data = prostate.load_data()
     data = pd.read_table('./prostate.txt')
 
     # Analyze data

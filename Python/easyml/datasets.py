@@ -5,9 +5,17 @@
 __all__ = ['cocaine', 'prostate']
 
 
-def cocaine():
-    raise NotImplementedError
+class cocaine:
+    def __init__(self):
+        pass
+
+    def load_data(self):
+        raise NotImplementedError
 
 
-def prostate():
-    raise NotImplementedError
+class prostate:
+    def __init__(self):
+        pass
+
+    def load_data(self):
+        raise NotImplementedError
