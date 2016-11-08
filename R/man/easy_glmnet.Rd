@@ -4,7 +4,10 @@
 \alias{easy_glmnet}
 \title{TO BE EDITED.}
 \usage{
-easy_glmnet()
+easy_glmnet(data, dependent_variable = None, family = "gaussian",
+  exclude_variables = NULL, train_size = 0.667, n_divisions = 1000,
+  n_iterations = 10, n_samples = 1000, out_directory = ".",
+  random_state = None, ...)
 }
 \value{
 TO BE EDITED.

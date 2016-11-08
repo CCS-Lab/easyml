@@ -4,10 +4,13 @@
 \alias{bootstrap_predictions}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_predictions(estimator, X_train, y_train, X_test, n_samples = 1000)
+bootstrap_predictions(fit, predict, X_train, y_train, X_test,
+  n_samples = 1000)
 }
 \arguments{
-\item{estimator}{TO BE EDITED.}
+\item{fit}{TO BE EDITED.}
+
+\item{predict}{TO BE EDITED.}
 
 \item{X_train}{TO BE EDITED.}
 

@@ -4,10 +4,12 @@
 \alias{bootstrap_coefficients}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_coefficients(estimator, X, y, n_samples = 1000)
+bootstrap_coefficients(fit, extract, X, y, n_samples = 1000)
 }
 \arguments{
-\item{estimator}{TO BE EDITED.}
+\item{fit}{TO BE EDITED.}
+
+\item{extract}{TO BE EDITED.}
 
 \item{X}{TO BE EDITED.}
 

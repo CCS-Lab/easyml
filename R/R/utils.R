@@ -30,3 +30,32 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
        lower_bound = lower_bound, 
        upper_bound = upper_bound)
 }
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @param data TO BE EDITED.
+#' @param dependent_variable TO BE EDITED.
+#' @param exclude_variables TO BE EDITED.
+#' @return TO BE EDITED.
+#' @export
+process_data <- function(data, dependent_variable = NULL, exclude_variables = NULL) {
+  # Handle dependent variable
+  if (!is.null(dependent_variable)) {
+    y <- data[, dependent_variable]
+    data[, dependent_variable] <- NULL
+  } else {
+    stop("Value error.")
+  }
+  
+  # Possibly exclude columns
+  if (!is.null(dependent_variable)) {
+    data[, exclude_variables] <- NULL
+  }
+  
+  # Create X array
+  X = data
+    
+  return(list(X = X, y = y))
+}

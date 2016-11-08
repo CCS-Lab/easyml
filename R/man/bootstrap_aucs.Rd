@@ -4,10 +4,12 @@
 \alias{bootstrap_aucs}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_aucs(estimator, X, y, n_divisions = 1000, n_iterations = 100)
+bootstrap_aucs(fit, predict, X, y, n_divisions = 1000, n_iterations = 100)
 }
 \arguments{
-\item{estimator}{TO BE EDITED.}
+\item{fit}{TO BE EDITED.}
+
+\item{predict}{TO BE EDITED.}
 
 \item{X}{TO BE EDITED.}
 
