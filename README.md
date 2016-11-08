@@ -5,21 +5,26 @@ easyml
 
 A toolkit for easily building and evaluation machine learning models.
 
-A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED, and here's a BibTeX entry that you can use to cite it in a publication:
-
-	@misc{TOBEEDITED,
-		Author = {Woo-Young Ahn and Paul Hendricks},
-		Title = {easyml: A toolkit for easily building and evaluation machine learning models.},
-		Year = {2016},
-		Eprint = {arXiv:TOBEEDITED},
-	}
-
 Installation
 ------------
 
 See installation instructions for the Python or R packages.
 
 If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/CCS-Lab/easyml/issues).
+
+Citation
+--------
+
+A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED. If you find this code useful please cite us in your work:
+
+```
+@inproceedings{TOBEEDITED,
+	title = {easyml: A toolkit for easily building and evaluation machine learning models.},
+	author = {Woo-Young Ahn and Paul Hendricks},
+	eprint = {arXiv:TOBEEDITED},
+	year = {2016},
+}
+```
 
 References
 ----------

@@ -6,15 +6,6 @@ easyml
 
 A toolkit for easily building and evaluation machine learning models.
 
-A whitepaper for easyml is available at <http://arxiv.org/abs/TOBEEDITED>, and here's a BibTeX entry that you can use to cite it in a publication:
-
-    @misc{TOBEEDITED,
-        Author = {Woo-Young Ahn and Paul Hendricks},
-        Title = {easyml: A toolkit for easily building and evaluation machine learning models.},
-        Year = {2016},
-        Eprint = {arXiv:TOBEEDITED},
-    }
-
 Installation
 ------------
 
@@ -45,6 +36,18 @@ For a dataset with a binary dependent variable:
 data("cocaine", package = "easyml")
 output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
 ```
+
+Citation
+--------
+
+A whitepaper for easyml is available at <http://arxiv.org/abs/TOBEEDITED>. If you find this code useful please cite us in your work:
+
+    @inproceedings{TOBEEDITED,
+        title = {easyml: A toolkit for easily building and evaluation machine learning models.},
+        author = {Woo-Young Ahn and Paul Hendricks},
+        eprint = {arXiv:TOBEEDITED},
+        year = {2016},
+    }
 
 References
 ----------
