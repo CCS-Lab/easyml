@@ -3,13 +3,11 @@
 import numpy as np
 from sklearn import metrics
 
-from .sample import sample_equal_proportion
-
 
 __all__ = ['bootstrap_aucs', 'bootstrap_coefficients', 'bootstrap_predictions']
 
 
-def bootstrap_aucs(estimator, X, y, n_divisions=1000, n_iterations=100):
+def bootstrap_aucs(estimator, sampler, X, y, n_divisions=1000, n_iterations=100):
     # Create temporary containers
     all_train_aucs = []
     all_test_aucs = []
@@ -17,11 +15,7 @@ def bootstrap_aucs(estimator, X, y, n_divisions=1000, n_iterations=100):
     # Loop over number of divisions
     for i in range(n_divisions):
         # Split data
-        mask = sample_equal_proportion(y, random_state=i)
-        y_train = y[mask]
-        y_test = y[np.logical_not(mask)]
-        X_train = X[mask, :]
-        X_test = X[np.logical_not(mask), :]
+        X_train, X_test, y_train, y_test = sampler(X, y)
 
         # Create temporary containers
         train_aucs = []
@@ -65,7 +59,15 @@ def bootstrap_coefficients(estimator, X, y, n_samples=1000):
         estimator.fit(X, y)
 
         # Extract and save coefficients
-        coefs.append(list(estimator.coef_[0]))
+        coef = estimator.coef_
+        if len(coef.shape) == 1:
+            pass
+        elif len(coef.shape) > 1:
+            coef = coef[0]
+        else:
+            raise ValueError
+
+        coefs.append(list(coef))
 
     # cast to np.ndarray
     coefs = np.array(coefs)

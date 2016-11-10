@@ -6,7 +6,7 @@ import numpy as np
 __all__ = ['sample_equal_proportion']
 
 
-def sample_equal_proportion(y, proportion=0.667, random_state=None):
+def sample_equal_proportion(X, y, proportion=0.667, random_state=None):
     """Sample in equal proportion.
 
     Parameters
@@ -53,6 +53,12 @@ def sample_equal_proportion(y, proportion=0.667, random_state=None):
     index = [True if i in index_train else False for i in sequence]
 
     # Cast to np.ndarray
-    index = np.array(index)
+    mask = np.array(index)
 
-    return index
+    # Create train and test splits
+    X_train = X[mask, :]
+    X_test = X[np.logical_not(mask), :]
+    y_train = y[mask]
+    y_test = y[np.logical_not(mask)]
+
+    return X_train, X_test, y_train, y_test
