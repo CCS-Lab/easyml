@@ -9,17 +9,29 @@ easy_glmnet <- function(data, dependent_variable = None, family = "gaussian",
                         n_divisions = 1000, n_iterations = 10, 
                         n_samples = 1000, out_directory = '.', random_state = None,
                         ...) {
-  args <- list(...)
+  # args <- list(...)
   # Create fit, extract, and predict functions
-  fit <- function(X, y, family, args) {
-    glmnet::glmnet(X, y, family = family, args)
+  fit <- function(X, y) {
+    model <- glmnet::glmnet(X, y, family = family)
+    cv_model <- glmnet::glmnet(X, y, family = family)
+    list(model = model, cv_model = cv_model)
   }
-  extract <- glmnet::coef.glmnet
-  predict <- glmnet::predict.glmnet
+  
+  extract <- function(results) {
+    model <- results[["model"]]
+    cv_model <- results[["cv_model"]]
+    coef(model, s = cv_model$lambda.min, type="coefficient")
+  }
+  
+  predict <- function(results) {
+    model <- results[["model"]]
+    cv_model <- results[["cv_model"]]
+    predict(model, s = cv_model$lambda.1se, type="coefficient", type="response")
+  }
   
   # Process the data
   data <- process_data(data, dependent_variable = dependent_variable, exclude_variables = exclude_variables)
-  X <- data[["X"]]
+  X <- as.matrix(data[["X"]])
   y <- data[["y"]]
 
   # Bootstrap coefficients

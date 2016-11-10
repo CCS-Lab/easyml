@@ -68,7 +68,7 @@ bootstrap_coefficients <- function(fit, extract, X, y, n_samples = 1000) {
   # Loop over number of iterations
   for (i in 1:n_samples) {
     # Fit estimator with the training set
-    model <- fit(X_train, y_train)
+    model <- fit(X, y)
 
     # Extract and save coefficients
     coefs[i, ] <- extract(model)
