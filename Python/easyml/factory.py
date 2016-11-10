@@ -17,14 +17,14 @@ __all__ = ['easy_glmnet']
 
 def easy_glmnet(data, dependent_variable=None, family='gaussian', sampler=None,
                 exclude_variables=None, train_size=0.667, n_divisions=1000, n_iterations=10,
-                n_samples=1000, out_directory='.', random_state=None):
+                n_samples=1000, out_directory='.', random_state=None, **kwargs):
 
     # Process the data
     X, y = process_data(data, dependent_variable=dependent_variable, exclude_variables=exclude_variables)
 
     if family == 'gaussian':
         # Set binomial specific functions
-        model = ElasticNet()
+        model = ElasticNet(**kwargs)
 
         if sampler is None:
             sampler = train_test_split
@@ -38,7 +38,7 @@ def easy_glmnet(data, dependent_variable=None, family='gaussian', sampler=None,
 
     elif family == 'binomial':
         # Set binomial specific functions
-        model = LogitNet()
+        model = LogitNet(**kwargs)
 
         if sampler is None:
             sampler = sample_equal_proportion
