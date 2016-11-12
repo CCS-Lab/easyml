@@ -4,14 +4,14 @@
 \alias{process_data}
 \title{TO BE EDITED.}
 \usage{
-process_data(data, dependent_variable = NULL, exclude_variables = NULL)
+process_data(.df, dependent_variable = NULL, exclude_variables = NULL)
 }
 \arguments{
-\item{data}{TO BE EDITED.}
-
 \item{dependent_variable}{TO BE EDITED.}
 
 \item{exclude_variables}{TO BE EDITED.}
+
+\item{data}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

@@ -2,14 +2,15 @@
 #'
 #' This will sample in equal proportion.
 #'
+#' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param proportion The proportoin of data in training set.
 #' @param seed An integer to seed the random number generator.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @export
-sample_equal_proportion <- function(y, proportion = 0.667, seed = 1) {
+sample_equal_proportion <- function(X, y, proportion = 0.667, seed = 1) {
   # set seed
-  set.seed(seed = seed)
+  # set.seed(seed = seed)
 
   # calculate number of observations
   n_obs <- length(y)
@@ -33,6 +34,13 @@ sample_equal_proportion <- function(y, proportion = 0.667, seed = 1) {
 
   # return a boolean vector of length n_obs where TRUE represents
   # that observation should be in the train set
-  index <- 1:n_obs %in% index_train
-  index
+  mask <- 1:n_obs %in% index_train
+  
+  # Create splits
+  X_train <- X[mask, ]
+  X_test <- X[!mask, ]
+  y_train <- y[mask]
+  y_test <- y[!mask]
+
+  list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
 }

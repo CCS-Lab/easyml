@@ -40,22 +40,53 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
 #' @param exclude_variables TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-process_data <- function(data, dependent_variable = NULL, exclude_variables = NULL) {
+process_data <- function(.df, dependent_variable = NULL, exclude_variables = NULL) {
   # Handle dependent variable
   if (!is.null(dependent_variable)) {
-    y <- data[, dependent_variable]
-    data[, dependent_variable] <- NULL
+    y <- .df[, dependent_variable]
+    .df[, dependent_variable] <- NULL
   } else {
     stop("Value error.")
   }
   
   # Possibly exclude columns
   if (!is.null(dependent_variable)) {
-    data[, exclude_variables] <- NULL
+    .df[, exclude_variables] <- NULL
   }
   
   # Create X array
-  X = data
+  X = .df
     
-  return(list(X = X, y = y))
+  list(X = X, y = y)
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @param coefs TO BE EDITED.
+#' @param n_samples TO BE EDITED.
+#' @param survival_rate_cutoff TO BE EDITED.
+#' @return TO BE EDITED.
+#' @export
+process_coefficients <- function(coefs, column_names, survival_rate_cutoff = 0.05) {
+  survived <- 1 * (abs(coefs) > 0)
+  survival_rate <- apply(survived, 1, sum) / 1000
+  mask <- 1 * (survival_rate > survival_rate_cutoff)
+  coefs_updated <- coefs * mask
+  coefs_q025 <- apply(coefs_updated, 1, quantile, probs = 0.025)
+  coefs_mean <- apply(coefs_updated, 1, mean)
+  coefs_q975 <- apply(coefs_updated, 1, quantile, probs = 0.975)
+  betas <- data.frame(predictor = column_names, stringsAsFactors = FALSE)
+  betas['mean'] <- coefs_mean
+  betas['lb'] <- coefs_q025
+  betas['ub'] <- coefs_q975
+  betas['survival'] <- mask
+  betas['sig'] <- betas['survival']
+  betas['dotColor1'] <- 1 * (betas['mean'] != 0)
+  cond1 <- betas['dotColor1'] > 0
+  cond2 <- betas['sig'] > 0
+  betas['dotColor2'] <- (1 * (cond1 & cond2)) + 1
+  betas['dotColor'] <- betas['dotColor1'] * betas['dotColor2']
+  betas
 }
