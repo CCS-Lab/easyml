@@ -19,7 +19,7 @@ easyml
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 
-A toolkit for easily building and evaluation machine learning models.
+A toolkit for easily building and evaluate machine learning models.
 
 Installation
 ------------
@@ -38,18 +38,25 @@ If you encounter a clear bug, please file a minimal reproducible example on [git
 Examples
 --------
 
+Load the `easyml` library:
+
+```R
+library(easyml)
+```
+
 For a dataset with a continuous dependent variable:
 
 ```R
 data("prostate", package = "easyml")
-output <- easy_glmnet(data = prostate, dependent_variable = "lpsa")
+easy_glmnet(data = prostate, dependent_variable = "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ```R
 data("cocaine", package = "easyml")
-output <- easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", family = "binomial")
+easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", 
+            family = "binomial", exclude_variables = c("subject", "AGE"))
 ```
 
 Citation
