@@ -4,15 +4,14 @@
 \alias{process_coefficients}
 \title{TO BE EDITED.}
 \usage{
-process_coefficients(coefs, n_samples, column_names,
-  survival_rate_cutoff = 0.05)
+process_coefficients(coefs, column_names, survival_rate_cutoff = 0.05)
 }
 \arguments{
 \item{coefs}{TO BE EDITED.}
 
-\item{n_samples}{TO BE EDITED.}
-
 \item{survival_rate_cutoff}{TO BE EDITED.}
+
+\item{n_samples}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

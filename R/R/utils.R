@@ -74,13 +74,10 @@ process_coefficients <- function(coefs, column_names, survival_rate_cutoff = 0.0
   survival_rate <- apply(survived, 1, sum) / 1000
   mask <- 1 * (survival_rate > survival_rate_cutoff)
   coefs_updated <- coefs * mask
-  coefs_q025 <- apply(coefs_updated, 1, quantile, probs = 0.025)
-  coefs_mean <- apply(coefs_updated, 1, mean)
-  coefs_q975 <- apply(coefs_updated, 1, quantile, probs = 0.975)
   betas <- data.frame(predictor = column_names, stringsAsFactors = FALSE)
-  betas['mean'] <- coefs_mean
-  betas['lb'] <- coefs_q025
-  betas['ub'] <- coefs_q975
+  betas['mean'] <- as.numeric(apply(coefs_updated, 1, mean))
+  betas['lb'] <- as.numeric(apply(coefs_updated, 1, quantile, probs = 0.025))
+  betas['ub'] <- as.numeric(apply(coefs_updated, 1, quantile, probs = 0.975))
   betas['survival'] <- mask
   betas['sig'] <- betas['survival']
   betas['dotColor1'] <- 1 * (betas['mean'] != 0)
