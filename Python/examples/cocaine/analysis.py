@@ -12,8 +12,9 @@ from easyml.factory import easy_glmnet
 
 if __name__ == "__main__":
     # Load data
-    data = pd.read_table('./cocaine.txt')
+    cocaine = pd.read_table('./cocaine.txt')
 
     # Analyze data
-    easy_glmnet(data, dependent_variable='DIAGNOSIS',
-                family='binomial', exclude_variables=['subject', 'AGE'])
+    easy_glmnet(cocaine, 'DIAGNOSIS',
+                family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
+                alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)
