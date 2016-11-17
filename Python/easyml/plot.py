@@ -22,13 +22,12 @@ def plot_auc_histogram(x):
 
 
 def plot_mse_histogram(x):
-    bins = np.arange(0, 1, 0.02)
+    bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)
     plt.figure()
     plt.hist(x, bins=bins, color='white', edgecolor='black')
     plt.axvline(x=x_mean, color='black', linestyle='--')
     plt.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlim([0.0, 1.0])
     plt.xlabel('MSE')
     plt.ylabel('Frequency')
     plt.title('Distribution of MSEs')
@@ -58,4 +57,7 @@ def plot_roc_curve(y_true, y_pred):
 
 def plot_gaussian_predictions(y_true, y_pred):
     plt.figure()
-    plt.plot(y_true, y_pred)
+    plt.plot(y_true, y_pred, "o")
+    plt.xlabel('True y values')
+    plt.ylabel('Predicted y values')
+    plt.title('')
