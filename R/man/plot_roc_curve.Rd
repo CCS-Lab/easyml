@@ -5,26 +5,16 @@
 \title{TO BE EDITED.}
 \usage{
 plot_roc_curve(y_true, y_pred)
-
-plot_roc_curve(y_true, y_pred)
 }
 \arguments{
-\item{y_true}{Ground truth (correct) target values.}
-
-\item{y_pred}{Estimated target values.}
-
 \item{y_true}{Ground truth (correct) target values.}
 
 \item{y_pred}{Estimated target values.}
 }
 \value{
 TO BE EDITED.
-
-TO BE EDITED.
 }
 \description{
-TO BE EDITED.
-
 TO BE EDITED.
 }
 

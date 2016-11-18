@@ -22,8 +22,8 @@
 #' \item{IGT_TOTAL}{To Be Edited}
 #' }
 #' @examples
-#'   cocaine
-"cocaine"
+#'   cocaine_dependence
+"cocaine_dependence"
 
 #' Prostate data.
 #'

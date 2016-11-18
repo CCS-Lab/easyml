@@ -4,14 +4,14 @@
 \alias{sample_equal_proportion}
 \title{Sample in equal proportion.}
 \usage{
-sample_equal_proportion(X, y, proportion = 0.667, seed = 1)
+sample_equal_proportion(X, y, train_size = 0.667, seed = 1)
 }
 \arguments{
 \item{X}{TO BE EDITED.}
 
 \item{y}{A numeric vector with two classes, 0 and 1.}
 
-\item{proportion}{The proportoin of data in training set.}
+\item{train_size}{The proportoin of data in training set.}
 
 \item{seed}{An integer to seed the random number generator.}
 }

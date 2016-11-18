@@ -4,19 +4,45 @@
 #'
 #' @return TO BE EDITED.
 #' @export
-easy_glmnet <- function(.data, dependent_variable = NULL, family = "gaussian", 
-                        exclude_variables = NULL, train_size = 0.667,
-                        n_divisions = 1000, n_iterations = 10, 
-                        n_samples = 1000, out_directory = '.', random_state = NULL,
-                        ...) {
-  # Process the data
-  .processed_data <- process_data(.data, dependent_variable = dependent_variable, exclude_variables = exclude_variables)
-  X_data_frame <- .processed_data[["X"]]
-  X <- as.matrix(X_data_frame)
-  y <- .processed_data[["y"]]
+easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
+                        sampler = NULL, exclude_variables = NULL, 
+                        categorical_variables = NULL, foo = TRUE, 
+                        train_size = 0.667, survival_rate_cutoff = 0.05, 
+                        n_samples = 1000, n_divisions = 1000, 
+                        n_iterations = 10, out_directory = ".", ...) {
+  # Handle columns
+  column_names <- colnames(.data)
+  column_names <- column_names[column_names != dependent_variable]
+  if (!is.null(exclude_variables)) {
+    column_names <- column_names[!(column_names %in% exclude_variables)]
+  }
+  
+  # Exclude certain variables and y
+  y <- .data[, dependent_variable]
+  .data[, dependent_variable] <- NULL
+  
+  if (!is.null(exclude_variables)) {
+    .data[, exclude_variables] <- NULL
+  }
+  
+  # If True, standardize the data
+  if (foo) {
+    if (is.null(categorical_variables)) {
+      X_data_frame <- data.frame(scale(.data))
+      X <- as.matrix(X_data_frame)
+    } else {
+      mask <- colnames(.data) %in% categorical_variables
+      X_categorical <- .data[, mask, drop = FALSE]
+      X_numeric <- .data[, !mask]
+      X_std <- data.frame(scale(X_numeric))
+      X_data_frame <- cbind(X_categorical, X_std)
+      X <- as.matrix(X_data_frame)
+      column_names <- c(categorical_variables, setdiff(column_names, categorical_variables))
+    }
+  }
   
   # Create fit, extract, and predict wrapper functions
-  fit_model <- function(X, y) {
+  fit_model <- function(X, y, ...) {
     model <- glmnet::glmnet(X, y, family = family, ...)
     cv_model <- glmnet::cv.glmnet(X, y, family = family, ...)
     list(model = model, cv_model = cv_model)
@@ -40,31 +66,33 @@ easy_glmnet <- function(.data, dependent_variable = NULL, family = "gaussian",
                                     X, y, n_samples = n_samples)
     
     # Process coefficients
-    betas <- process_coefficients(coefs, n_samples, c("Intercept", colnames(X_data_frame)))
+    coefs <- process_coefficients(coefs, column_names, 
+                                  survival_rate_cutoff = survival_rate_cutoff)
     plot_betas(betas)
-    ggplot2::ggsave("betas.png")
+    ggplot2::ggsave(file.path(out_directory, "betas.png"))
 
   } else if (family == "binomial") {
-    # Set sampler
+    # Set sample
     sampler <- sample_equal_proportion
     
     # Bootstrap coefficients
     coefs <- bootstrap_coefficients(fit_model, extract_coefficients, 
                                     X, y, n_samples = n_samples)
     
-    # # Process coefficients
-    betas <- process_coefficients(coefs, n_samples, c("Intercept", colnames(X_data_frame)))
+    # Process coefficients
+    betas <- process_coefficients(coefs, column_names, 
+                                  survival_rate_cutoff = survival_rate_cutoff)
     plot_betas(betas)
-    ggplot2::ggsave("betas.png")
+    ggplot2::ggsave(file.path(out_directory, "betas.png"))
 
     # Split data
-    split_data <- sampler(X, y)
+    split_data <- sampler(X, y, train_size = train_size)
     X_train <- split_data[["X_train"]]
     X_test <- split_data[["X_test"]]
     y_train <- split_data[["y_train"]]
     y_test <- split_data[["y_test"]]
     
-    # # Bootstrap predictions
+    # Bootstrap predictions
     predictions <- bootstrap_predictions(fit_model, predict_model, 
                                          X_train, y_train, X_test, 
                                          n_samples = n_samples)
@@ -77,11 +105,11 @@ easy_glmnet <- function(.data, dependent_variable = NULL, family = "gaussian",
 
     # Compute ROC curve and ROC area for training
     plot_roc_curve(y_train, y_train_predictions_mean)
-    ggplot2::ggsave("train_roc_curve.png")
+    ggplot2::ggsave(file.path(out_directory, "train_roc_curve.png"))
 
     # Compute ROC curve and ROC area for test
     plot_roc_curve(y_test, y_test_predictions_mean)
-    ggplot2::ggsave("test_roc_curve.png")
+    ggplot2::ggsave(file.path(out_directory, "test_roc_curve.png"))
 
     # Bootstrap training and test AUCS
     aucs <- bootstrap_aucs(fit_model, predict_model, sampler, X, y, 
@@ -91,11 +119,11 @@ easy_glmnet <- function(.data, dependent_variable = NULL, family = "gaussian",
 
     # Plot histogram of training AUCS
     plot_auc_histogram(train_aucs)
-    ggplot2::ggsave("train_auc_distribution.png")
+    ggplot2::ggsave(file.path(out_directory, "train_auc_distribution.png"))
 
     # Plot histogram of test AUCS
     plot_auc_histogram(test_aucs)
-    ggplot2::ggsave("test_auc_distribution.png")
+    ggplot2::ggsave(file.path(out_directory, "test_auc_distribution.png"))
 
   } else {
     stop("Value error!")
