@@ -19,4 +19,5 @@ setup(
     license='MIT',
     keywords='glmnet penalized regression',
     packages=find_packages(exclude=['docs', 'examples', 'scripts', 'tests']),
+    test_suite='nose2.collector.collector',
 )
