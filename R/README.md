@@ -33,15 +33,16 @@ For a dataset with a continuous dependent variable:
 
 ``` r
 data("prostate", package = "easyml")
-easy_glmnet(data = prostate, dependent_variable = "lpsa")
+easy_glmnet(prostate, "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` r
-data("cocaine", package = "easyml")
-easy_glmnet(data = cocaine, dependent_variable = "DIAGNOSIS", 
-            family = "binomial", exclude_variables = c("subject", "AGE"))
+data("cocaine_dependence", package = "easyml")
+easy_glmnet(cocaine_dependence, "DIAGNOSIS", 
+            family = "binomial", exclude_variables = c("subject", "AGE"), 
+            categorical_variables = c("Male"))
 ```
 
 Citation
