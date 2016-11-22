@@ -57,7 +57,7 @@ def plot_roc_curve(y_true, y_pred):
 
 def plot_gaussian_predictions(y_true, y_pred):
     plt.figure()
-    plt.plot(y_true, y_pred, "o")
-    plt.xlabel('True y values')
-    plt.ylabel('Predicted y values')
+    plt.plot(y_pred, y_true, "o")
+    plt.xlabel('Predicted y values')
+    plt.ylabel('True y values')
     plt.title('')
