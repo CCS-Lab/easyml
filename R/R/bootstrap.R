@@ -60,6 +60,61 @@ bootstrap_aucs <- function(fit_model, predict_model, sampler, X, y, n_divisions 
 #' TO BE EDITED.
 #'
 #' @param fit_model TO BE EDITED.
+#' @param predict_model TO BE EDITED.
+#' @param X TO BE EDITED.
+#' @param y TO BE EDITED.
+#' @param n_divisions TO BE EDITED.
+#' @param n_iterations TO BE EDITED.
+#' @return TO BE EDITED.
+#' @export
+bootstrap_mses <- function(fit_model, predict_model, sampler, X, y, n_divisions = 1000, n_iterations = 100) {
+  # Create temporary containers
+  all_train_mses <- numeric()
+  all_test_mses <- numeric()
+  
+  # Loop over number of divisions
+  for (i in 1:n_divisions) {
+    # Split data
+    split_data <- sampler(X, y)
+    X_train <- split_data[["X_train"]]
+    X_test <- split_data[["X_test"]]
+    y_train <- split_data[["y_train"]]
+    y_test <- split_data[["y_test"]]
+    
+    # Create temporary containers
+    train_mses <- numeric()
+    test_mses <- numeric()
+    
+    # Loop over number of iterations
+    for (j in 1:n_iterations) {
+      # Fit estimator with the training set
+      results <- fit_model(X_train, y_train)
+      
+      # Generate scores for training and test sets
+      y_train_predictions <- predict_model(results, X_train)
+      y_test_predictions <- predict_model(results, X_test)
+      
+      # Save MSEs
+      train_mse <- scorer::mean_squared_error(y_train, y_train_predictions)
+      test_mse <- scorer::mean_squared_error(y_test, y_test_predictions)
+      train_mses <- c(train_mses, train_mse)
+      test_mses <- c(test_mses, test_mse)
+    }
+    
+    # Save mean of MSES
+    all_train_mses <- c(all_train_mses, mean(train_mses))
+    all_test_mses <- c(all_test_mses, mean(test_mses))
+    
+  }
+  
+  list(train_mses = all_train_mses, test_mses = all_test_mses)
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @param fit_model TO BE EDITED.
 #' @param extract_coefficients TO BE EDITED.
 #' @param X TO BE EDITED.
 #' @param y TO BE EDITED.
