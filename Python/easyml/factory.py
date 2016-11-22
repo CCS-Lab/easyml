@@ -18,7 +18,7 @@ __all__ = ['easy_glmnet']
 
 def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
                 exclude_variables=None, categorical_variables=None,
-                foo=True, train_size=0.667, survival_rate_cutoff=0.05,
+                standardize_data=True, train_size=0.667, survival_rate_cutoff=0.05,
                 n_samples=1000, n_divisions=1000, n_iterations=10,
                 out_directory='.', **kwargs):
     # Handle columns
@@ -34,7 +34,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         data = data.drop(exclude_variables, axis=1)
 
     # If True, standardize the data
-    if foo:
+    if standardize_data:
         stdsc = StandardScaler()
         if categorical_variables is None:
             X = data.values
