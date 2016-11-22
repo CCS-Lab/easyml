@@ -15,7 +15,8 @@ Imports:
     ggplot2, 
     glmnet, 
     pROC, 
-    scales
+    scales, 
+    scorer
 Suggests:
     testthat
 URL: https://github.com/paulhendricks/CCS-Lab/easyml
