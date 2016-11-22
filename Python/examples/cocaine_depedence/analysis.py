@@ -17,4 +17,5 @@ if __name__ == "__main__":
     # Analyze data
     easy_glmnet(cocaine_depedence, 'DIAGNOSIS',
                 family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
-                alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)
+                alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6,
+                n_samples=10, n_divisions=10, n_iterations=2)
