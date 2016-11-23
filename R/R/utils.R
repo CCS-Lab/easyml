@@ -59,3 +59,27 @@ process_coefficients <- function(coefs, column_names, survival_rate_cutoff = 0.0
   betas[, "dotColor"] <- factor(betas[, "dotColor1"] * betas[, "dotColor2"])
   betas
 }
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+identify_looper <- function(progress_bar = FALSE, parallel = FALSE) {
+  # Handle settings
+  if (progress_bar & parallel) {
+    # Initialize progress bar and run in parallel (optional)
+    l <- pbmcapply::pbmclapply
+  } else if (parallel) {
+    # Run in parallel (optional)
+    l <- parallel::mclapply
+  } else if (progress_bar) {
+    # Initialize progress bar (optional)
+    l <- pbapply::pblapply
+  } else {
+    # Default to base R lapply
+    l <- lapply
+  }
+  l
+}

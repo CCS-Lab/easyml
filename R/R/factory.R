@@ -9,7 +9,14 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                         categorical_variables = NULL, standardize_data = TRUE, 
                         train_size = 0.667, survival_rate_cutoff = 0.05, 
                         n_samples = 1000, n_divisions = 1000, 
-                        n_iterations = 10, out_directory = ".", ...) {
+                        n_iterations = 10, out_directory = ".", 
+                        random_state = NULL, progress_bar = FALSE, 
+                        parallel = FALSE, ...) {
+  # Handle random state
+  if (!is.null(random_state)) {
+    set.seed(random_state)
+  }
+  
   # Handle columns
   column_names <- colnames(.data)
   column_names <- column_names[column_names != dependent_variable]
@@ -67,8 +74,10 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     }
     
     # Bootstrap coefficients
-    coefs <- bootstrap_coefficients(fit_model, extract_coefficients, 
-                                    X, y, n_samples = n_samples)
+    coefs <- bootstrap_coefficients(fit_model, extract_coefficients, X, y, 
+                                    n_samples = n_samples, 
+                                    progress_bar = progress_bar, 
+                                    parallel = parallel)
     
     # Process coefficients
     betas <- process_coefficients(coefs, column_names, 
@@ -86,7 +95,9 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     # Bootstrap predictions
     predictions <- bootstrap_predictions(fit_model, predict_model, 
                                          X_train, y_train, X_test, 
-                                         n_samples = n_samples)
+                                         n_samples = n_samples, 
+                                         progress_bar = progress_bar, 
+                                         parallel = parallel)
     y_train_predictions <- predictions[["y_train_predictions"]]
     y_test_predictions <- predictions[["y_test_predictions"]]
     
@@ -104,9 +115,10 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     
     # Bootstrap training and test MSEs
     mses <- bootstrap_mses(fit_model, predict_model, sampler, X, y, 
-                           n_divisions = n_divisions, n_iterations = n_iterations)
-    train_mses <- mses[["train_mses"]]
-    test_mses <- mses[["test_mses"]]
+                           n_divisions = n_divisions, n_iterations = n_iterations, 
+                           progress_bar = progress_bar, parallel = parallel)
+    train_mses <- mses[["mean_train_metrics"]]
+    test_mses <- mses[["mean_test_metrics"]]
     
     # Plot histogram of training MSEs
     plot_mse_histogram(train_mses)
@@ -124,7 +136,9 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
 
     # Bootstrap coefficients
     coefs <- bootstrap_coefficients(fit_model, extract_coefficients, 
-                                    X, y, n_samples = n_samples)
+                                    X, y, n_samples = n_samples, 
+                                    progress_bar = progress_bar, 
+                                    parallel = parallel)
     
     # Process coefficients
     betas <- process_coefficients(coefs, column_names, 
@@ -142,7 +156,9 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     # Bootstrap predictions
     predictions <- bootstrap_predictions(fit_model, predict_model, 
                                          X_train, y_train, X_test, 
-                                         n_samples = n_samples)
+                                         n_samples = n_samples, 
+                                         progress_bar = progress_bar, 
+                                         parallel = parallel)
     y_train_predictions <- predictions[["y_train_predictions"]]
     y_test_predictions <- predictions[["y_test_predictions"]]
 
@@ -160,9 +176,10 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
 
     # Bootstrap training and test AUCs
     aucs <- bootstrap_aucs(fit_model, predict_model, sampler, X, y, 
-                           n_divisions = n_divisions, n_iterations = n_iterations)
-    train_aucs <- aucs[["train_aucs"]]
-    test_aucs <- aucs[["test_aucs"]]
+                           n_divisions = n_divisions, n_iterations = n_iterations, 
+                           progress_bar = progress_bar, parallel = parallel)
+    train_aucs <- aucs[["mean_train_metrics"]]
+    test_aucs <- aucs[["mean_test_metrics"]]
 
     # Plot histogram of training AUCs
     plot_auc_histogram(train_aucs)

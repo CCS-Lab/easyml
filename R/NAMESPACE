@@ -2,10 +2,12 @@
 
 export(bootstrap_aucs)
 export(bootstrap_coefficients)
+export(bootstrap_metrics)
 export(bootstrap_mses)
 export(bootstrap_predictions)
 export(correlation_test)
 export(easy_glmnet)
+export(identify_looper)
 export(plot_auc_histogram)
 export(plot_betas)
 export(plot_gaussian_predictions)

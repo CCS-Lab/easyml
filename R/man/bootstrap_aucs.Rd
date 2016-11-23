@@ -5,7 +5,7 @@
 \title{TO BE EDITED.}
 \usage{
 bootstrap_aucs(fit_model, predict_model, sampler, X, y, n_divisions = 1000,
-  n_iterations = 100)
+  n_iterations = 100, progress_bar = FALSE, parallel = FALSE)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}
@@ -19,6 +19,12 @@ bootstrap_aucs(fit_model, predict_model, sampler, X, y, n_divisions = 1000,
 \item{n_divisions}{TO BE EDITED.}
 
 \item{n_iterations}{TO BE EDITED.}
+
+\item{progress_bar}{TO BE EDITED.}
+
+\item{parallel}{TO BE EDITED.}
+
+\item{predict_model}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

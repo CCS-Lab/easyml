@@ -5,7 +5,7 @@
 \title{TO BE EDITED.}
 \usage{
 bootstrap_predictions(fit_model, predict_model, X_train, y_train, X_test,
-  n_samples = 1000)
+  n_samples = 1000, progress_bar = FALSE, parallel = FALSE)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}
@@ -19,6 +19,10 @@ bootstrap_predictions(fit_model, predict_model, X_train, y_train, X_test,
 \item{X_test}{TO BE EDITED.}
 
 \item{n_samples}{TO BE EDITED.}
+
+\item{progress_bar}{TO BE EDITED.}
+
+\item{parallel}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

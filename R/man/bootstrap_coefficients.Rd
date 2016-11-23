@@ -5,7 +5,7 @@
 \title{TO BE EDITED.}
 \usage{
 bootstrap_coefficients(fit_model, extract_coefficients, X, y,
-  n_samples = 1000)
+  n_samples = 1000, progress_bar = FALSE, parallel = FALSE)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}
@@ -17,6 +17,10 @@ bootstrap_coefficients(fit_model, extract_coefficients, X, y,
 \item{y}{TO BE EDITED.}
 
 \item{n_samples}{TO BE EDITED.}
+
+\item{progress_bar}{TO BE EDITED.}
+
+\item{parallel}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

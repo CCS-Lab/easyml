@@ -14,6 +14,9 @@ Imports:
     corrplot, 
     ggplot2, 
     glmnet, 
+    parallel,
+    pbapply,
+    pbmcapply, 
     pROC, 
     scales, 
     scorer
