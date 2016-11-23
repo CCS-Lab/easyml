@@ -15,7 +15,7 @@ system.time(easy_glmnet(prostate, "lpsa",
 )
 
 # Analyze data
-options(mc.cores = 8)
+options(mc.cores = parallel::detectCores())
 system.time(easy_glmnet(prostate, "lpsa", 
                         n_samples = 500, n_divisions = 500, n_iterations = 1, 
                         random_state = 1, progress_bar = TRUE, parallel = TRUE)

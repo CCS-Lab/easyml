@@ -19,7 +19,7 @@ system.time(easy_glmnet(cocaine_dependence, "DIAGNOSIS",
 )
 
 # Analyze data
-options(mc.cores = 8)
+options(mc.cores = parallel::detectCores())
 system.time(easy_glmnet(cocaine_dependence, "DIAGNOSIS", 
                         family = "binomial", exclude_variables = c("subject"), 
                         categorical_variables = c("Male"), 
