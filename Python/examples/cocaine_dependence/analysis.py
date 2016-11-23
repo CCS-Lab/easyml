@@ -9,15 +9,16 @@ from easyml.factory import easy_glmnet
 plt.style.use('ggplot')
 
 import os
-os.chdir('./Python/examples/prostate')
+os.chdir('./Python/examples/cocaine_dependence')
 
 
 if __name__ == "__main__":
     # Load data
-    prostate = pd.read_table('./prostate.txt')
+    cocaine_depedence = pd.read_table('./cocaine_depedence.txt')
 
     # Analyze data
-    easy_glmnet(prostate, 'lpsa',
+    easy_glmnet(cocaine_depedence, 'DIAGNOSIS',
+                family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
                 random_state=1, progress_bar=True, parallel=True,
-                n_samples=10, n_divisions=10, n_iterations=5,
+                n_samples=10, n_divisions=10, n_iterations=2,
                 alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)

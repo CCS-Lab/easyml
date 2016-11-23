@@ -20,7 +20,12 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
                 exclude_variables=None, categorical_variables=None,
                 standardize_data=True, train_size=0.667, survival_rate_cutoff=0.05,
                 n_samples=1000, n_divisions=1000, n_iterations=10,
-                out_directory='.', **kwargs):
+                out_directory='.', random_state=None, progress_bar=False,
+                parallel=False, **kwargs):
+    # Handle random state
+    if random_state is not None:
+        np.random.seed(random_state)
+
     # Handle columns
     column_names = data.columns
     column_names = [c for c in column_names if c != dependent_variable]
@@ -65,7 +70,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
             sample = train_test_split
 
         # Bootstrap coefficients
-        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples)
+        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples,
+                                       progress_bar=progress_bar, parallel=parallel)
 
         # Process coefficients
         betas = process_coefficients(coefs, column_names, survival_rate_cutoff=survival_rate_cutoff)
@@ -76,7 +82,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Bootstrap predictions
         y_train_pred, y_test_pred = bootstrap_predictions(model, fit, predict, X_train, y_train, X_test,
-                                                          n_samples=n_samples)
+                                                          n_samples=n_samples, progress_bar=progress_bar,
+                                                          parallel=parallel)
 
         # Take average of predictions for training and test sets
         y_train_pred_mean = np.mean(y_train_pred, axis=0)
@@ -92,7 +99,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Bootstrap training and test MSEs
         train_mses, test_mses = bootstrap_mses(model, sample, fit, predict, X, y,
-                                               n_divisions=n_divisions, n_iterations=n_iterations)
+                                               n_divisions=n_divisions, n_iterations=n_iterations,
+                                               progress_bar=progress_bar, parallel=parallel)
 
         # Plot histogram of training MSEs
         plot_mse_histogram(train_mses)
@@ -116,7 +124,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
             sample = sample_equal_proportion
 
         # Bootstrap coefficients
-        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples)
+        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples,
+                                       progress_bar=progress_bar, parallel=parallel)
 
         # Process coefficients
         betas = process_coefficients(coefs, column_names, survival_rate_cutoff=survival_rate_cutoff)
@@ -127,7 +136,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Bootstrap predictions
         y_train_pred, y_test_pred = bootstrap_predictions(model, fit, predict, X_train, y_train, X_test,
-                                                          n_samples=n_samples)
+                                                          n_samples=n_samples, progress_bar=progress_bar,
+                                                          parallel=parallel)
 
         # Take average of predictions for training and test sets
         y_train_pred_mean = np.mean(y_train_pred, axis=0)
@@ -143,7 +153,8 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Bootstrap training and test AUCSs
         train_aucs, test_aucs = bootstrap_aucs(model, sample, fit, predict, X, y,
-                                               n_divisions=n_divisions, n_iterations=n_iterations)
+                                               n_divisions=n_divisions, n_iterations=n_iterations,
+                                               progress_bar=progress_bar, parallel=parallel)
 
         # Plot histogram of training AUCs
         plot_auc_histogram(train_aucs)
