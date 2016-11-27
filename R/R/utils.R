@@ -67,7 +67,12 @@ process_coefficients <- function(coefs, column_names, survival_rate_cutoff = 0.0
 #' @return TO BE EDITED.
 #' @export
 identify_looper <- function(progress_bar = FALSE, n_core = 1) {
-  # Set cores
+  # Reduce number of cores if argument is too high
+  if (n_core > parallel::detectCores()) {
+    n_core <- parallel::detectCores()
+  }
+  
+  # Identify if parallel or not
   parallel <- FALSE
   if (n_core > 1) {
     parallel <- TRUE
