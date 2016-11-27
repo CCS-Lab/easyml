@@ -5,7 +5,7 @@
 \title{TO BE EDITED.}
 \usage{
 bootstrap_predictions(fit_model, predict_model, X_train, y_train, X_test,
-  n_samples = 1000, progress_bar = FALSE, parallel = FALSE)
+  n_samples = 1000, progress_bar = TRUE, n_core = 1)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}

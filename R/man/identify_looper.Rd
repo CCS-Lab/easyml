@@ -4,7 +4,7 @@
 \alias{identify_looper}
 \title{TO BE EDITED.}
 \usage{
-identify_looper(progress_bar = FALSE, parallel = FALSE)
+identify_looper(progress_bar = FALSE, n_core = 1)
 }
 \value{
 TO BE EDITED.

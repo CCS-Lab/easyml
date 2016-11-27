@@ -66,7 +66,14 @@ process_coefficients <- function(coefs, column_names, survival_rate_cutoff = 0.0
 #'
 #' @return TO BE EDITED.
 #' @export
-identify_looper <- function(progress_bar = FALSE, parallel = FALSE) {
+identify_looper <- function(progress_bar = FALSE, n_core = 1) {
+  # Set cores
+  parallel <- FALSE
+  if (n_core > 1) {
+    parallel <- TRUE
+    options(mc.cores = n_core)
+  }
+  
   # Handle settings
   if (progress_bar & parallel) {
     # Initialize progress bar and run in parallel (optional)
