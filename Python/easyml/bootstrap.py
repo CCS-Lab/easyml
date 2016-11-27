@@ -9,14 +9,9 @@ __all__ = []
 
 
 def bootstrap_coefficients(estimator, fit, extract, X, y,
-                           n_samples=1000, progress_bar=False, parallel=False):
-    # Run in parallel (optional)
-    if parallel:
-        print("Running in parallel...")
-
+                           n_samples=1000, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
-        print("Bootstrapping coefficients...")
         loop = trange
     else:
         loop = range
@@ -24,16 +19,37 @@ def bootstrap_coefficients(estimator, fit, extract, X, y,
     # Initialize containers
     coefs = []
 
-    # Loop over number of iterations
-    for _ in loop(n_samples):
-        # Fit estimator with the training set
-        estimator = fit(estimator, X, y)
+    # Evaluate parallelism
+    if n_core == 1:
+        # Run sequentially
+        print("Bootstrapping coefficients:")
 
-        # Extract coefficients
-        coef = extract(estimator)
+        # Loop over number of iterations
+        for _ in loop(n_samples):
+            # Fit estimator with the training set
+            estimator = fit(estimator, X, y)
 
-        # Save coefficients
-        coefs.append(coef)
+            # Extract coefficients
+            coef = extract(estimator)
+
+            # Save coefficients
+            coefs.append(coef)
+    elif n_core > 1:
+        # Run in parallel using n_core cores
+        print("Bootstrapping coefficients in parallel:")
+
+        # Loop over number of iterations
+        for _ in loop(n_samples):
+            # Fit estimator with the training set
+            estimator = fit(estimator, X, y)
+
+            # Extract coefficients
+            coef = extract(estimator)
+
+            # Save coefficients
+            coefs.append(coef)
+    else:
+        raise ValueError
 
     # cast to np.ndarray
     coefs = np.array(coefs)
@@ -42,14 +58,14 @@ def bootstrap_coefficients(estimator, fit, extract, X, y,
 
 
 def bootstrap_predictions(estimator, fit, predict, X_train, y_train, X_test,
-                          n_samples=1000, progress_bar=False, parallel=False):
+                          n_samples=1000, progress_bar=True, n_core=1):
     # Run in parallel (optional)
-    if parallel:
+    if n_core > 1:
         print("Running in parallel...")
 
     # Initialize progress bar (optional)
     if progress_bar:
-        print("Bootstrapping predictions...")
+        print("Bootstrapping predictions:")
         loop = trange
     else:
         loop = range
@@ -79,14 +95,14 @@ def bootstrap_predictions(estimator, fit, predict, X_train, y_train, X_test,
 
 
 def bootstrap_metrics(estimator, sample, fit, predict, measure, X, y,
-                      n_divisions=1000, n_iterations=100, progress_bar=False, parallel=False):
+                      n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
     # Run in parallel (optional)
-    if parallel:
+    if n_core > 1:
         print("Running in parallel...")
 
     # Initialize progress bar (optional)
     if progress_bar:
-        print("Bootstrapping metrics...")
+        print("Bootstrapping metrics:")
         loop = trange
     else:
         loop = range
@@ -133,16 +149,16 @@ def bootstrap_metrics(estimator, sample, fit, predict, measure, X, y,
 
 
 def bootstrap_aucs(estimator, sample, fit, predict, X, y,
-                   n_divisions=1000, n_iterations=100, progress_bar=False, parallel=False):
+                   n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
     return bootstrap_metrics(estimator=estimator, sample=sample,
                              fit=fit, predict=predict, measure=metrics.roc_auc_score,
                              X=X, y=y, n_divisions=n_divisions, n_iterations=n_iterations,
-                             progress_bar=progress_bar, parallel=parallel)
+                             progress_bar=progress_bar, n_core=n_core)
 
 
 def bootstrap_mses(estimator, sample, fit, predict, X, y,
-                    n_divisions=1000, n_iterations=100, progress_bar=False, parallel=False):
+                    n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
     return bootstrap_metrics(estimator=estimator, sample=sample,
                              fit=fit, predict=predict, measure=metrics.mean_squared_error,
                              X=X, y=y, n_divisions=n_divisions, n_iterations=n_iterations,
-                             progress_bar=progress_bar, parallel=parallel)
+                             progress_bar=progress_bar, n_core=n_core)

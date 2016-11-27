@@ -12,14 +12,15 @@
 #' @return TO BE EDITED.
 #' @export
 bootstrap_coefficients <- function(fit_model, extract_coefficients, X, y, 
-                                   n_samples = 1000, progress_bar = FALSE, 
-                                   parallel = FALSE) {
+                                   n_samples = 1000, progress_bar = TRUE, 
+                                   n_core = 1) {
+  # Handle progress bar
   if (progress_bar) {
-    print(paste0("Bootstrapping coefficients", ifelse(parallel, " in parallel:", ":")))
+    print(paste0("Bootstrapping coefficients", ifelse(n_core > 1, " in parallel:", ":")))
   }
-  
-  # Handle settings
-  loop <- identify_looper(progress_bar = progress_bar, parallel = parallel)
+
+  # Identify which looping mechanism to use
+  loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
 
   # Loop over number of iterations
   output <- loop(1:n_samples, function(i) {
@@ -44,14 +45,15 @@ bootstrap_coefficients <- function(fit_model, extract_coefficients, X, y,
 #' @return TO BE EDITED.
 #' @export
 bootstrap_predictions <- function(fit_model, predict_model, X_train, y_train, X_test, 
-                                  n_samples = 1000, progress_bar = FALSE, 
-                                  parallel = FALSE) {
+                                  n_samples = 1000, progress_bar = TRUE, 
+                                  n_core = 1) {
+  # Handle progress bar
   if (progress_bar) {
-    print(paste0("Bootstrapping predictions", ifelse(parallel, " in parallel:", ":")))
+    print(paste0("Bootstrapping predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
-  # Handle settings
-  loop <- identify_looper(progress_bar = progress_bar, parallel = parallel)
+  # Identify which looping mechanism to use
+  loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
   
   # Loop over number of iterations
   output <- loop(1:n_samples, function(i) {
@@ -92,13 +94,14 @@ bootstrap_predictions <- function(fit_model, predict_model, X_train, y_train, X_
 #' @export
 bootstrap_metrics <- function(fit_model, predict_model, sampler, measure, X, y, 
                            n_divisions = 1000, n_iterations = 100, 
-                           progress_bar = FALSE, parallel = FALSE) {
+                           progress_bar = TRUE, n_core = 1) {
+  # Handle progress bar
   if (progress_bar) {
-    print(paste0("Bootstrapping metrics", ifelse(parallel, " in parallel:", ":")))
+    print(paste0("Bootstrapping metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
-  # Handle settings
-  loop <- identify_looper(progress_bar = progress_bar, parallel = parallel)
+  # Identify which looping mechanism to use
+  loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
   
   # Loop over number of divisions
   output_divisions <- loop(1:n_divisions, function(i) {
@@ -161,7 +164,7 @@ bootstrap_metrics <- function(fit_model, predict_model, sampler, measure, X, y,
 #' @export
 bootstrap_aucs <- function(fit_model, predict_model, sampler, X, y, 
                            n_divisions = 1000, n_iterations = 100, 
-                           progress_bar = FALSE, parallel = FALSE) {
+                           progress_bar = TRUE, n_core = 1) {
   area_under_roc_curve <- function(y_true, y_pred) {
     as.numeric(pROC::roc(y_true, y_pred)$auc)
   }
@@ -169,7 +172,7 @@ bootstrap_aucs <- function(fit_model, predict_model, sampler, X, y,
                     sampler = sampler, measure = area_under_roc_curve, 
                     X = X, y = y, n_divisions = n_divisions, 
                     n_iterations = n_iterations, progress_bar = progress_bar, 
-                    parallel = parallel)
+                    n_core = n_core)
 }
 
 #' TO BE EDITED.
@@ -188,10 +191,10 @@ bootstrap_aucs <- function(fit_model, predict_model, sampler, X, y,
 #' @export
 bootstrap_mses <- function(fit_model, predict_model, sampler, X, y, 
                            n_divisions = 1000, n_iterations = 100, 
-                           progress_bar = FALSE, parallel = FALSE) {
+                           progress_bar = TRUE, n_core = 1) {
   bootstrap_metrics(fit_model = fit_model, predict_model = predict_model, 
                     sampler = sampler, measure = scorer::mean_squared_error, 
                     X = X, y = y, n_divisions = n_divisions, 
                     n_iterations = n_iterations, progress_bar = progress_bar, 
-                    parallel = parallel)
+                    n_core = n_core)
 }

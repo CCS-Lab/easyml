@@ -5,7 +5,7 @@
 \title{TO BE EDITED.}
 \usage{
 bootstrap_coefficients(fit_model, extract_coefficients, X, y,
-  n_samples = 1000, progress_bar = FALSE, parallel = FALSE)
+  n_samples = 1000, progress_bar = TRUE, n_core = 1)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}
