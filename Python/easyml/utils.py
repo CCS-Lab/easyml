@@ -1,4 +1,4 @@
-"""Utility functions for prcoessing data.
+"""Utility functions for processing data.
 """
 import numpy as np
 import pandas as pd
