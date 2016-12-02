@@ -50,15 +50,11 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
   
   # Create fit, extract, and predict wrapper functions
   fit_model <- function(X, y, ...) {
-    model <- glmnet::glmnet(X, y, family = family, ...)
-    cv_model <- glmnet::cv.glmnet(X, y, family = family, ...)
-    list(model = model, cv_model = cv_model)
+    randomForest::randomForest(X, y, ...)
   }
   
   predict_model <- function(results, newx) {
-    model <- results[["model"]]
-    cv_model <- results[["cv_model"]]
-    predict(model, newx = newx, s = cv_model$lambda.min, type = "response")
+    predict(results, newdata = newx)
   }
   
   if (family == "gaussian") {

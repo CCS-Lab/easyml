@@ -6,22 +6,6 @@
 #' @param extract_coefficients TO BE EDITED.
 #' @param X TO BE EDITED.
 #' @param y TO BE EDITED.
-#' @return TO BE EDITED.
-#' @export
-bootstrap_coefficient <- function(fit_model, extract_coefficients, X, y) {
-  model <- fit_model(X, y)
-  coef <- extract_coefficients(model)
-  coef
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @param fit_model TO BE EDITED.
-#' @param extract_coefficients TO BE EDITED.
-#' @param X TO BE EDITED.
-#' @param y TO BE EDITED.
 #' @param n_samples TO BE EDITED.
 #' @param progress_bar TO BE EDITED.
 #' @param parallel TO BE EDITED.
@@ -39,29 +23,13 @@ bootstrap_coefficients <- function(fit_model, extract_coefficients, X, y,
   loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
 
   # Loop over number of iterations
-  output <- loop(1:n_samples, bootstrap_coefficient, fit_model, extract_coefficients, X, y)
+  output <- loop(1:n_samples, function(i) {
+      model <- fit_model(X, y)
+      coef <- extract_coefficients(model)
+      coef
+    })
   
   t(matrix(unlist(output), ncol = ncol(X) + 1, byrow = TRUE))
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param X_train TO BE EDITED.
-#' @param y_train TO BE EDITED.
-#' @param X_test TO BE EDITED.
-#' @return TO BE EDITED.
-#' @export
-bootstrap_prediction <- function(fit_model, predict_model, X_train, y_train, X_test) {
-  # Fit model with the training set
-  results <- fit_model(X_train, y_train)
-  
-  # Save predictions
-  list(y_train_predictions = predict_model(results, X_train), 
-       y_test_predictions = predict_model(results, X_test))
 }
 
 #' TO BE EDITED.
@@ -90,7 +58,14 @@ bootstrap_predictions <- function(fit_model, predict_model, X_train, y_train, X_
   loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
   
   # Loop over number of iterations
-  output <- loop(1:n_samples, bootstrap_prediction, fit_model, predict_model, X_train, y_train, X_test)
+  output <- loop(1:n_samples, function(i) {
+    # Fit model with the training set
+    results <- fit_model(X_train, y_train)
+    
+    # Save predictions
+    list(y_train_predictions = predict_model(results, X_train), 
+         y_test_predictions = predict_model(results, X_test))
+  })
   
   y_train_predictions <- lapply(output, function(x) x$y_train_predictions)
   y_test_predictions <- lapply(output, function(x) x$y_test_predictions)
@@ -102,35 +77,6 @@ bootstrap_predictions <- function(fit_model, predict_model, X_train, y_train, X_
   
   list(y_train_predictions = y_train_predictions, 
        y_test_predictions = y_test_predictions)
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param X_train TO BE EDITED.
-#' @param y_train TO BE EDITED.
-#' @param X_test TO BE EDITED.
-#' @param y_test TO BE EDITED.
-#' @param parallel TO BE EDITED.
-#' @return TO BE EDITED.
-#' @export
-bootstrap_metric <- function(fit_model, predict_model, sampler, measure, 
-                             X_train, y_train, X_test, y_test) {
-  # Fit estimator with the training set
-  results <- fit_model(X_train, y_train)
-  
-  # Generate scores for training and test sets
-  y_train_predictions <- predict_model(results, X_train)
-  y_test_predictions <- predict_model(results, X_test)
-  
-  # Save metrics
-  train_metric <- measure(y_train, y_train_predictions)
-  test_metric <- measure(y_test, y_test_predictions)
-  list(train_metric = train_metric, test_metric = test_metric)
 }
 
 #' TO BE EDITED.
@@ -160,7 +106,7 @@ bootstrap_metrics <- function(fit_model, predict_model, sampler, measure, X, y,
   loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
   
   # Loop over number of divisions
-  output_divisions <- lapply(1:n_divisions, function(i) {
+  output_divisions <- loop(1:n_divisions, function(i) {
     # Split data
     split_data <- sampler(X, y)
     X_train <- split_data[["X_train"]]
@@ -173,9 +119,19 @@ bootstrap_metrics <- function(fit_model, predict_model, sampler, measure, X, y,
     test_metrics <- numeric()
     
     # Loop over number of iterations
-    output_iterations <- loop(1:n_iterations, bootstrap_metric, fit_model, 
-                              predict_model, sampler, measure, 
-                              X_train, y_train, X_test, y_test)
+    output_iterations <- lapply(1:n_iterations, function(i) {
+      # Fit estimator with the training set
+      results <- fit_model(X_train, y_train)
+      
+      # Generate scores for training and test sets
+      y_train_predictions <- predict_model(results, X_train)
+      y_test_predictions <- predict_model(results, X_test)
+      
+      # Save metrics
+      train_metric <- measure(y_train, y_train_predictions)
+      test_metric <- measure(y_test, y_test_predictions)
+      list(train_metric = train_metric, test_metric = test_metric)
+    })
     
     # Take average of metrics
     train_metrics <- unlist(lapply(output_iterations, function(x) x$train_metric))
