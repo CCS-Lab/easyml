@@ -53,24 +53,24 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
             column_names = categorical_variables + column_names
 
     # Set glmnet specific handlers
-    def fit(e, X, y):
+    def fit_model(e, X, y):
         return e.fit(X, y)
 
     if family == 'gaussian':
         # Set gaussian specific functions
         model = ElasticNet(**kwargs)
 
-        def extract(e):
+        def extract_coefficients(e):
             return e.coef_
 
-        def predict(e, X):
+        def predict_model(e, X):
             return e.predict(X)
 
         if sample is None:
             sample = train_test_split
 
         # Bootstrap coefficients
-        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples,
+        coefs = bootstrap_coefficients(model, fit_model, extract_coefficients, X, y, n_samples=n_samples,
                                        progress_bar=progress_bar, n_core=n_core)
 
         # Process coefficients
@@ -81,7 +81,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         X_train, X_test, y_train, y_test = sample(X, y, train_size=train_size)
 
         # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit, predict, X_train, y_train, X_test,
+        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, X_train, y_train, X_test,
                                                           n_samples=n_samples, progress_bar=progress_bar,
                                                           n_core=n_core)
 
@@ -98,7 +98,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         plt.savefig(path.join(out_directory, 'test_predictions.png'))
 
         # Bootstrap training and test MSEs
-        train_mses, test_mses = bootstrap_mses(model, sample, fit, predict, X, y,
+        train_mses, test_mses = bootstrap_mses(model, sample, fit_model, predict_model, X, y,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
 
@@ -114,17 +114,17 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         # Set binomial specific functions
         model = LogitNet(**kwargs)
 
-        def extract(e):
+        def extract_coefficients(e):
             return e.coef_[0]
 
-        def predict(e, X):
+        def predict_model(e, X):
             return e.predict_proba(X)[:, 1]
 
         if sample is None:
             sample = sample_equal_proportion
 
         # Bootstrap coefficients
-        coefs = bootstrap_coefficients(model, fit, extract, X, y, n_samples=n_samples,
+        coefs = bootstrap_coefficients(model, fit_model, extract_coefficients, X, y, n_samples=n_samples,
                                        progress_bar=progress_bar, n_core=n_core)
 
         # Process coefficients
@@ -135,7 +135,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         X_train, X_test, y_train, y_test = sample(X, y, train_size=train_size)
 
         # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit, predict, X_train, y_train, X_test,
+        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, X_train, y_train, X_test,
                                                           n_samples=n_samples, progress_bar=progress_bar,
                                                           n_core=n_core)
 
@@ -152,7 +152,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         plt.savefig(path.join(out_directory, 'test_roc_curve.png'))
 
         # Bootstrap training and test AUCSs
-        train_aucs, test_aucs = bootstrap_aucs(model, sample, fit, predict, X, y,
+        train_aucs, test_aucs = bootstrap_aucs(model, sample, fit_model, predict_model, X, y,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
 
