@@ -21,6 +21,9 @@ def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
                        n_samples=1000, n_divisions=1000, n_iterations=10,
                        out_directory='.', random_state=None, progress_bar=True,
                        n_core=1, **kwargs):
+    # Make it run in sequential for now
+    n_core = 1
+
     # Handle random state
     if random_state is not None:
         np.random.seed(random_state)
