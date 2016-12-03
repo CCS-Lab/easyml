@@ -22,7 +22,9 @@ Examples
 Load the `easyml` library:
 
 ``` python
+import os
 import pandas as pd
+
 from easyml.glmnet import easy_glmnet
 ```
 
