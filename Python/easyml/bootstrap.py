@@ -56,7 +56,7 @@ def bootstrap_coefficients(estimator, fit, extract_coefficients, X, y,
 
         # Loop over number of iterations
         indexes = range(n_samples)
-        with concurrent.futures.ThreadPoolExecutor(max_workers=n_core) as executor:
+        with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
             futures = {executor.submit(bootstrap_coefficient, estimator, fit, extract_coefficients, X, y): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:
@@ -127,7 +127,7 @@ def bootstrap_predictions(estimator, fit_model, predict_model, X_train, y_train,
 
         # Loop over number of iterations
         indexes = range(n_samples)
-        with concurrent.futures.ThreadPoolExecutor(max_workers=n_core) as executor:
+        with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
             futures = {executor.submit(bootstrap_prediction, estimator, fit_model, predict_model, X_train, y_train, X_test): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:
@@ -246,7 +246,7 @@ def bootstrap_metrics(estimator, sample, fit_model, predict_model, measure, X, y
 
         # Loop over number of iterations
         indexes = range(n_divisions)
-        with concurrent.futures.ThreadPoolExecutor(max_workers=n_core) as executor:
+        with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
             futures = {executor.submit(bootstrap_metric, estimator, sample, fit_model, predict_model, measure, X, y, n_iterations): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:

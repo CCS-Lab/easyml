@@ -12,16 +12,16 @@ os.chdir('./Python/examples/cocaine_dependence/random_forest')
 
 if __name__ == "__main__":
     # Load data
-    cocaine_depedence = pd.read_table('./cocaine_depedence.txt')
+    cocaine_dependence = pd.read_table('./cocaine_dependence.txt')
 
     # Analyze data
-    easy_random_forest(cocaine_depedence, 'DIAGNOSIS',
+    easy_random_forest(cocaine_dependence, 'DIAGNOSIS',
                        family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
                        random_state=1, progress_bar=True, n_core=1,
                        n_samples=100, n_divisions=10, n_iterations=5)
 
     # Analyze data
-    easy_random_forest(cocaine_depedence, 'DIAGNOSIS',
+    easy_random_forest(cocaine_dependence, 'DIAGNOSIS',
                        family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
                        random_state=1, progress_bar=True, n_core=os.cpu_count(),
                        n_samples=100, n_divisions=10, n_iterations=5)
