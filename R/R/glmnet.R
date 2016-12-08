@@ -5,47 +5,33 @@
 #' @return TO BE EDITED.
 #' @export
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
-                        sampler = NULL, exclude_variables = NULL, 
-                        categorical_variables = NULL, standardize_data = TRUE, 
+                        sampler = NULL, preprocessor = NULL, 
+                        exclude_variables = NULL, categorical_variables = NULL, 
                         train_size = 0.667, survival_rate_cutoff = 0.05, 
                         n_samples = 1000, n_divisions = 1000, 
                         n_iterations = 10, out_directory = ".", 
                         random_state = NULL, progress_bar = TRUE, 
                         n_core = 1, ...) {
-  # Handle random state
-  if (!is.null(random_state)) {
-    set.seed(random_state)
-  }
+  # Set random state
+  set_random_state(random_state)
   
-  # Handle columns
+  # Set column names
   column_names <- colnames(.data)
-  column_names <- column_names[column_names != dependent_variable]
-  if (!is.null(exclude_variables)) {
-    column_names <- column_names[!(column_names %in% exclude_variables)]
-  }
   
-  # Exclude certain variables and y
+  # Isolate y
   y <- .data[, dependent_variable]
+  
+  # Remove y column name from column names
+  column_names <- setdiff(column_names, dependent_variable)
   .data[, dependent_variable] <- NULL
   
+  # Isolate X
+  X <- .data
+  
+  # Exclude certain variables
   if (!is.null(exclude_variables)) {
     .data[, exclude_variables] <- NULL
-  }
-  
-  # If True, standardize the data
-  if (standardize_data) {
-    if (is.null(categorical_variables)) {
-      X_data_frame <- data.frame(scale(.data))
-      X <- as.matrix(X_data_frame)
-    } else {
-      mask <- colnames(.data) %in% categorical_variables
-      X_categorical <- .data[, mask, drop = FALSE]
-      X_numeric <- .data[, !mask]
-      X_std <- data.frame(scale(X_numeric))
-      X_data_frame <- cbind(X_categorical, X_std)
-      X <- as.matrix(X_data_frame)
-      column_names <- c(categorical_variables, setdiff(column_names, categorical_variables))
-    }
+    column_names <- column_names[!(column_names %in% exclude_variables)]
   }
   
   # Create fit, extract, and predict wrapper functions
@@ -67,14 +53,22 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     predict(model, newx = newx, s = cv_model$lambda.min, type = "response")
   }
   
+  # Set preprocessor function
+  if (is.null(preprocessor)) {
+    preprocessor <- preprocess_identity
+  }
+  
+  # assess family of regression
   if (family == "gaussian") {
-    # Set sample
+    # Set sampler function
     if (is.null(sampler)) {
       sampler <- train_test_split
     }
     
     # Bootstrap coefficients
-    coefs <- bootstrap_coefficients(fit_model, extract_coefficients, X, y, 
+    coefs <- bootstrap_coefficients(fit_model, extract_coefficients, 
+                                    preprocessor, X, y, 
+                                    categorical_variables = categorical_variables, 
                                     n_samples = n_samples, 
                                     progress_bar = progress_bar, 
                                     n_core = n_core)
@@ -94,6 +88,7 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     
     # Bootstrap predictions
     predictions <- bootstrap_predictions(fit_model, predict_model, 
+                                         preprocessor, 
                                          X_train, y_train, X_test, 
                                          n_samples = n_samples, 
                                          progress_bar = progress_bar, 
@@ -114,8 +109,9 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     ggplot2::ggsave(file.path(out_directory, "test_gaussian_predictions.png"))
     
     # Bootstrap training and test MSEs
-    mses <- bootstrap_mses(fit_model, predict_model, sampler, X, y, 
-                           n_divisions = n_divisions, n_iterations = n_iterations, 
+    mses <- bootstrap_mses(fit_model, predict_model, sampler, preprocessor, 
+                           X, y, n_divisions = n_divisions, 
+                           n_iterations = n_iterations, 
                            progress_bar = progress_bar, n_core = n_core)
     train_mses <- mses[["mean_train_metrics"]]
     test_mses <- mses[["mean_test_metrics"]]

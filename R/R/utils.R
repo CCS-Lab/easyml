@@ -95,3 +95,15 @@ identify_looper <- function(progress_bar = FALSE, n_core = 1) {
   }
   l
 }
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+set_random_state <- function(random_state = NULL) {
+  if (!is.null(random_state)) {
+    set.seed(random_state)
+  }
+}

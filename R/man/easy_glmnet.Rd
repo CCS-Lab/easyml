@@ -5,8 +5,8 @@
 \title{TO BE EDITED.}
 \usage{
 easy_glmnet(.data, dependent_variable, family = "gaussian", sampler = NULL,
-  exclude_variables = NULL, categorical_variables = NULL,
-  standardize_data = TRUE, train_size = 0.667,
+  preprocessor = NULL, exclude_variables = NULL,
+  categorical_variables = NULL, train_size = 0.667,
   survival_rate_cutoff = 0.05, n_samples = 1000, n_divisions = 1000,
   n_iterations = 10, out_directory = ".", random_state = NULL,
   progress_bar = TRUE, n_core = 1, ...)

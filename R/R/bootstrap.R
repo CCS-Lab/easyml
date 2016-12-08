@@ -11,13 +11,19 @@
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_coefficients <- function(fit_model, extract_coefficients, X, y, 
+bootstrap_coefficients <- function(fit_model, extract_coefficients, 
+                                   preprocessor, X, y, 
+                                   categorical_variables = NULL, 
                                    n_samples = 1000, progress_bar = TRUE, 
                                    n_core = 1) {
   # Handle progress bar
   if (progress_bar) {
     print(paste0("Bootstrapping coefficients", ifelse(n_core > 1, " in parallel:", ":")))
   }
+  
+  # Preprocess data
+  result <- preprocessor(list(X = X), categorical_variables = categorical_variables)
+  X <- result[["X"]]
 
   # Identify which looping mechanism to use
   loop <- identify_looper(progress_bar = progress_bar, n_core = n_core)
