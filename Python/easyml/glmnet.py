@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from os import path
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
 from .bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_mses, bootstrap_predictions
 from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
@@ -48,6 +47,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
         # Set gaussian specific functions
         model = ElasticNet(**kwargs)
 
+        # convert these to class methods?
         def extract_coefficients(e):
             return e.coef_
 
@@ -63,6 +63,9 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Process coefficients
         betas = process_coefficients(coefs, column_names, survival_rate_cutoff=survival_rate_cutoff)
+
+        # Write coefficients
+        # write_coefficients(out_directory, index=False)
         betas.to_csv(path.join(out_directory, 'betas.csv'), index=False)
 
         # Split data
@@ -74,16 +77,18 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
                                                           n_core=n_core)
 
         # Take average of predictions for training and test sets
+        # Process predictions
+        # y_train_pred_mean, y_test_pred_mean = process_predictions(y_train_pred, y_test_pred)
         y_train_pred_mean = np.mean(y_train_pred, axis=0)
         y_test_pred_mean = np.mean(y_test_pred, axis=0)
 
         # Plot the gaussian predictions for training
         plot_gaussian_predictions(y_train, y_train_pred_mean)
-        plt.savefig(path.join(out_directory, 'train_predictions.png'))
+        # plt.savefig(path.join(out_directory, 'train_predictions.png'))
 
         # Plot the gaussian predictions for test
         plot_gaussian_predictions(y_test, y_test_pred_mean)
-        plt.savefig(path.join(out_directory, 'test_predictions.png'))
+        # plt.savefig(path.join(out_directory, 'test_predictions.png'))
 
         # Bootstrap training and test MSEs
         train_mses, test_mses = bootstrap_mses(model, sample, fit_model, predict_model, X, y,
@@ -92,11 +97,11 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
 
         # Plot histogram of training MSEs
         plot_mse_histogram(train_mses)
-        plt.savefig(path.join(out_directory, 'train_mse_distribution.png'))
+        # plt.savefig(path.join(out_directory, 'train_mse_distribution.png'))
 
         # Plot histogram of test MSEs
         plot_mse_histogram(test_mses)
-        plt.savefig(path.join(out_directory, 'test_mse_distribution.png'))
+        # plt.savefig(path.join(out_directory, 'test_mse_distribution.png'))
 
     elif family == 'binomial':
         # Set binomial specific functions
