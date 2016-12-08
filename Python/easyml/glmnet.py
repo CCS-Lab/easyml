@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 
 from .bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_mses, bootstrap_predictions
 from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
-from .utils import process_coefficients
+from .utils import process_coefficients, set_random_state
 from .sample import sample_equal_proportion
 
 
@@ -17,40 +17,28 @@ __all__ = ['easy_glmnet']
 
 
 def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
-                exclude_variables=None, categorical_variables=None,
-                standardize_data=True, train_size=0.667, survival_rate_cutoff=0.05,
+                exclude_variables=None, train_size=0.667, survival_rate_cutoff=0.05,
                 n_samples=1000, n_divisions=1000, n_iterations=10,
                 out_directory='.', random_state=None, progress_bar=True,
                 n_core=1, **kwargs):
     # Handle random state
-    if random_state is not None:
-        np.random.seed(random_state)
+    set_random_state(random_state)
 
-    # Handle columns
+    # Set columns
     column_names = data.columns
-    column_names = [c for c in column_names if c != dependent_variable]
-    if exclude_variables is not None:
-        column_names = [c for c in column_names if c not in exclude_variables]
 
-    # Exclude certain variables and y
-    y = data[dependent_variable].values
-    data = data.drop(dependent_variable, axis=1)
+    # Exclude certain variables
     if exclude_variables is not None:
         data = data.drop(exclude_variables, axis=1)
+        column_names = [c for c in column_names if c not in exclude_variables]
 
-    # If True, standardize the data
-    if standardize_data:
-        stdsc = StandardScaler()
-        if categorical_variables is None:
-            X = data.values
-            X = stdsc.fit_transform(X)
-        else:
-            X_categorical = data[categorical_variables].values
-            X_numeric = data.drop(categorical_variables, axis=1).values
-            X_std = stdsc.fit_transform(X_numeric)
-            X = np.concatenate([X_categorical, X_std], axis=1)
-            column_names = [c for c in column_names if c not in categorical_variables]
-            column_names = categorical_variables + column_names
+    # Isolate y
+    y = data[dependent_variable].values
+    data = data.drop(dependent_variable, axis=1)
+    column_names = [c for c in column_names if c != dependent_variable]
+
+    # Isolate X
+    X = data.values
 
     # Set glmnet specific handlers
     def fit_model(e, X, y):

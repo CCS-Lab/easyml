@@ -23,3 +23,8 @@ def process_coefficients(coefs, column_names, survival_rate_cutoff=0.05):
     betas['dotColor2'] = (1 * np.logical_and(betas['dotColor1'] > 0, betas['sig'] > 0)) + 1
     betas['dotColor'] = betas['dotColor1'] * betas['dotColor2']
     return betas
+
+
+def set_random_state(random_state=None):
+    if random_state is not None:
+        np.random.seed(random_state)

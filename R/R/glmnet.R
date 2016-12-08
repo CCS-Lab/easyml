@@ -4,14 +4,14 @@
 #'
 #' @return TO BE EDITED.
 #' @export
-easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
-                        sampler = NULL, preprocessor = NULL, 
-                        exclude_variables = NULL, categorical_variables = NULL, 
-                        train_size = 0.667, survival_rate_cutoff = 0.05, 
-                        n_samples = 1000, n_divisions = 1000, 
-                        n_iterations = 10, out_directory = ".", 
-                        random_state = NULL, progress_bar = TRUE, 
-                        n_core = 1, ...) {
+glmnet_analysis <- function(.data, dependent_variable, family = "gaussian", 
+                            sampler = NULL, preprocessor = NULL, 
+                            exclude_variables = NULL, categorical_variables = NULL, 
+                            train_size = 0.667, survival_rate_cutoff = 0.05, 
+                            n_samples = 1000, n_divisions = 1000, 
+                            n_iterations = 10, out_directory = ".", 
+                            random_state = NULL, progress_bar = TRUE, 
+                            n_core = 1, ...) {
   # Set random state
   set_random_state(random_state)
   
@@ -32,25 +32,6 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
   if (!is.null(exclude_variables)) {
     .data[, exclude_variables] <- NULL
     column_names <- column_names[!(column_names %in% exclude_variables)]
-  }
-  
-  # Create fit, extract, and predict wrapper functions
-  fit_model <- function(X, y, ...) {
-    model <- glmnet::glmnet(X, y, family = family, ...)
-    cv_model <- glmnet::cv.glmnet(X, y, family = family, ...)
-    list(model = model, cv_model = cv_model)
-  }
-  
-  extract_coefficients <- function(results) {
-    model <- results[["model"]]
-    cv_model <- results[["cv_model"]]
-    as.numeric(coef(model, s = cv_model$lambda.min))
-  }
-  
-  predict_model <- function(results, newx) {
-    model <- results[["model"]]
-    cv_model <- results[["cv_model"]]
-    predict(model, newx = newx, s = cv_model$lambda.min, type = "response")
   }
   
   # Set preprocessor function
@@ -190,4 +171,40 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
   }
   
   invisible()
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+glmnet_fit_model <- function(X, y, ...) {
+  model <- glmnet::glmnet(X, y, family = family, ...)
+  cv_model <- glmnet::cv.glmnet(X, y, family = family, ...)
+  list(model = model, cv_model = cv_model)
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+glmnet_extract_coefficients <- function(results) {
+  model <- results[["model"]]
+  cv_model <- results[["cv_model"]]
+  as.numeric(coef(model, s = cv_model$lambda.min))
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+glmnet_predict_model <- function(results, newx) {
+  model <- results[["model"]]
+  cv_model <- results[["cv_model"]]
+  predict(model, newx = newx, s = cv_model$lambda.min, type = "response")
 }
