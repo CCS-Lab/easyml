@@ -12,9 +12,3 @@ glmnet_analysis(prostate, "lpsa",
 glmnet_analysis(prostate, "lpsa", preprocessor = preprocess_scaler, 
                 n_samples = 10, n_divisions = 10, n_iterations = 10, 
                 random_state = 1, n_core = 8)
-
-# Time analysis of data
-system.time(easy_glmnet(prostate, "lpsa", 
-                        n_samples = 1000, n_divisions = 100, n_iterations = 10, 
-                        random_state = 1, n_core = 8)
-)

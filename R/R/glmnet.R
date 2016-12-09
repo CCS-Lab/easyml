@@ -91,8 +91,8 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
     ggplot2::ggsave(file.path(out_directory, "test_gaussian_predictions.png"))
     
     # Bootstrap training and test MSEs
-    mses <- bootstrap_mses(glmnet_fit_model_gaussian, glmnet_predict_model, sampler, 
-                           preprocessor, X, y, 
+    mses <- bootstrap_mses(glmnet_fit_model_gaussian, glmnet_predict_model, 
+                           sampler, preprocessor, X, y, 
                            categorical_variables = categorical_variables, 
                            n_divisions = n_divisions, 
                            n_iterations = n_iterations, 
@@ -115,10 +115,12 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
     }
     
     # Bootstrap coefficients
-    coefs <- bootstrap_coefficients(fit_model, extract_coefficients, 
-                                    X, y, n_samples = n_samples, 
+    coefs <- bootstrap_coefficients(glmnet_fit_model_binomial, glmnet_extract_coefficients, 
+                                    preprocessor, X, y, 
+                                    categorical_variables = categorical_variables, 
+                                    n_samples = n_samples, 
                                     progress_bar = progress_bar, 
-                                    n_core = n_core)
+                                    n_core = n_core, ...)
     
     # Process coefficients
     betas <- process_coefficients(coefs, column_names, 
@@ -134,11 +136,13 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
     y_test <- split_data[["y_test"]]
     
     # Bootstrap predictions
-    predictions <- bootstrap_predictions(fit_model, predict_model, 
+    predictions <- bootstrap_predictions(glmnet_fit_model_binomial, glmnet_predict_model, 
+                                         preprocessor, 
                                          X_train, y_train, X_test, 
+                                         categorical_variables = categorical_variables, 
                                          n_samples = n_samples, 
                                          progress_bar = progress_bar, 
-                                         n_core = n_core)
+                                         n_core = n_core, ...)
     y_train_predictions <- predictions[["y_train_predictions"]]
     y_test_predictions <- predictions[["y_test_predictions"]]
     
@@ -155,9 +159,11 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
     ggplot2::ggsave(file.path(out_directory, "test_roc_curve.png"))
     
     # Bootstrap training and test AUCs
-    aucs <- bootstrap_aucs(fit_model, predict_model, sampler, X, y, 
+    aucs <- bootstrap_aucs(glmnet_fit_model_binomial, glmnet_predict_model, 
+                           sampler, preprocessor, X, y, 
+                           categorical_variables = categorical_variables, 
                            n_divisions = n_divisions, n_iterations = n_iterations, 
-                           progress_bar = progress_bar, n_core = n_core)
+                           progress_bar = progress_bar, n_core = n_core, ...)
     train_aucs <- aucs[["mean_train_metrics"]]
     test_aucs <- aucs[["mean_test_metrics"]]
     
