@@ -18,6 +18,18 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
   # Set column names
   column_names <- colnames(.data)
   
+  # Exclude certain variables
+  if (!is.null(exclude_variables)) {
+    .data[, exclude_variables] <- NULL
+    column_names <- setdiff(column_names, exclude_variables)
+  }
+  
+  # Move categorical names to the front when there are categorical variables
+  if (!is.null(categorical_variables) && !is.null(preprocessor)) {
+    column_names <- setdiff(column_names, categorical_variables)
+    column_names <- c(categorical_variables, column_names)
+  }
+  
   # Isolate y
   y <- .data[, dependent_variable]
   
@@ -27,12 +39,6 @@ glmnet_analysis <- function(.data, dependent_variable, family = "gaussian",
   
   # Isolate X
   X <- .data
-  
-  # Exclude certain variables
-  if (!is.null(exclude_variables)) {
-    .data[, exclude_variables] <- NULL
-    column_names <- column_names[!(column_names %in% exclude_variables)]
-  }
   
   # Set preprocessor function
   if (is.null(preprocessor)) {

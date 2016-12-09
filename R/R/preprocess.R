@@ -51,7 +51,7 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       output <- list(X_train = X_train_output, X_test = X_test_output)
     } else {
       # Categorical variables
-      mask <- (colnames(X) == categorical_variables)
+      mask <- (colnames(X_train) == categorical_variables)
       X_train_categorical <- X_train[, mask, drop = FALSE]
       X_train_numerical <- X_train[, !mask, drop = FALSE]
       X_test_categorical <- X_test[, mask, drop = FALSE]
