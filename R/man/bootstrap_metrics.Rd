@@ -4,9 +4,9 @@
 \alias{bootstrap_metrics}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_metrics(fit_model, predict_model, sampler, measure, X, y,
-  n_divisions = 1000, n_iterations = 100, progress_bar = TRUE,
-  n_core = 1)
+bootstrap_metrics(fit_model, predict_model, sampler, preprocessor, measure, X,
+  y, categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
+  progress_bar = TRUE, n_core = 1, ...)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}

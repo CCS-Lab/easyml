@@ -4,8 +4,9 @@
 \alias{bootstrap_aucs}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_aucs(fit_model, predict_model, sampler, X, y, n_divisions = 1000,
-  n_iterations = 100, progress_bar = TRUE, n_core = 1)
+bootstrap_aucs(fit_model, predict_model, sampler, preprocessor, X, y,
+  categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
+  progress_bar = TRUE, n_core = 1, ...)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}

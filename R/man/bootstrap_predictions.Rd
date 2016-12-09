@@ -4,8 +4,9 @@
 \alias{bootstrap_predictions}
 \title{TO BE EDITED.}
 \usage{
-bootstrap_predictions(fit_model, predict_model, X_train, y_train, X_test,
-  n_samples = 1000, progress_bar = TRUE, n_core = 1)
+bootstrap_predictions(fit_model, predict_model, preprocessor, X_train, y_train,
+  X_test, categorical_variables = NULL, n_samples = 1000,
+  progress_bar = TRUE, n_core = 1, ...)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}

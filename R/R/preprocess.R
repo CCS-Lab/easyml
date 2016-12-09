@@ -43,7 +43,9 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       scaled_scale <- attr(X_train_scaled, "scaled:scale")
       
       # scale test
-      X_test_scaled <- scale(X_train, scaled_center, scaled_scale)
+      X_test_scaled <- scale(X_test, scaled_center, scaled_scale)
+      
+      # output data
       X_train_output <- data.frame(X_train_scaled)
       X_test_output <- data.frame(X_test_scaled)
       output <- list(X_train = X_train_output, X_test = X_test_output)
@@ -59,11 +61,12 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       X_train_scaled <- scale(X_train_numerical)
       scaled_center <- attr(X_train_scaled, "scaled:center")
       scaled_scale <- attr(X_train_scaled, "scaled:scale")
-      X_train_output <- cbind(X_train_categorical, data.frame(X_train_scaled))
       
       # scale test
       X_test_scaled <- scale(X_test_numerical, scaled_center, scaled_scale)
-      X_test_output <- cbind(X_test_categorical, data.frame(X_test_scaled))
+      
+      # output data
+      X_train_output <- cbind(X_train_categorical, data.frame(X_train_scaled))
       X_test_output <- cbind(X_test_categorical, data.frame(X_test_scaled))
       output <- list(X_train = X_train_output, X_test = X_test_output)
     }
