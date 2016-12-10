@@ -4,61 +4,50 @@
 #'
 #' @return TO BE EDITED.
 #' @export
-easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
-                               sampler = NULL, exclude_variables = NULL, 
-                               categorical_variables = NULL, standardize_data = TRUE, 
-                               train_size = 0.667, survival_rate_cutoff = 0.05, 
-                               n_samples = 1000, n_divisions = 1000, 
-                               n_iterations = 10, out_directory = ".", 
-                               random_state = NULL, progress_bar = TRUE, 
-                               n_core = 1, ...) {
-  # Handle random state
-  if (!is.null(random_state)) {
-    set.seed(random_state)
-  }
+random_forest_analysis <- function(.data, dependent_variable, family = "gaussian", 
+                                   sampler = NULL, preprocessor = NULL, 
+                                   exclude_variables = NULL, categorical_variables = NULL, 
+                                   train_size = 0.667, survival_rate_cutoff = 0.05, 
+                                   n_samples = 1000, n_divisions = 1000, 
+                                   n_iterations = 10, out_directory = ".", 
+                                   random_state = NULL, progress_bar = TRUE, 
+                                   n_core = 1, ...) {
+  # Set random state
+  set_random_state(random_state)
   
-  # Handle columns
+  # Set column names
   column_names <- colnames(.data)
-  column_names <- column_names[column_names != dependent_variable]
-  if (!is.null(exclude_variables)) {
-    column_names <- column_names[!(column_names %in% exclude_variables)]
-  }
   
-  # Exclude certain variables and y
-  y <- .data[, dependent_variable]
-  .data[, dependent_variable] <- NULL
-  
+  # Exclude certain variables
   if (!is.null(exclude_variables)) {
     .data[, exclude_variables] <- NULL
+    column_names <- setdiff(column_names, exclude_variables)
   }
   
-  # If True, standardize the data
-  if (standardize_data) {
-    if (is.null(categorical_variables)) {
-      X_data_frame <- data.frame(scale(.data))
-      X <- as.matrix(X_data_frame)
-    } else {
-      mask <- colnames(.data) %in% categorical_variables
-      X_categorical <- .data[, mask, drop = FALSE]
-      X_numeric <- .data[, !mask]
-      X_std <- data.frame(scale(X_numeric))
-      X_data_frame <- cbind(X_categorical, X_std)
-      X <- as.matrix(X_data_frame)
-      column_names <- c(categorical_variables, setdiff(column_names, categorical_variables))
-    }
+  # Move categorical names to the front when there are categorical variables
+  if (!is.null(categorical_variables) && !is.null(preprocessor)) {
+    column_names <- setdiff(column_names, categorical_variables)
+    column_names <- c(categorical_variables, column_names)
   }
   
-  # Create fit, extract, and predict wrapper functions
-  fit_model <- function(X, y, ...) {
-    randomForest::randomForest(X, y, ...)
+  # Isolate y
+  y <- .data[, dependent_variable]
+  
+  # Remove y column name from column names
+  column_names <- setdiff(column_names, dependent_variable)
+  .data[, dependent_variable] <- NULL
+  
+  # Isolate X
+  X <- .data
+  
+  # Set preprocessor function
+  if (is.null(preprocessor)) {
+    preprocessor <- preprocess_identity
   }
   
-  predict_model <- function(results, newx) {
-    predict(results, newdata = newx)
-  }
-  
+  # assess family of regression
   if (family == "gaussian") {
-    # Set sample
+    # Set sampler function
     if (is.null(sampler)) {
       sampler <- train_test_split
     }
@@ -71,11 +60,14 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
     y_test <- split_data[["y_test"]]
     
     # Bootstrap predictions
-    predictions <- bootstrap_predictions(fit_model, predict_model, 
+    predictions <- bootstrap_predictions(random_forest_fit_model_gaussian, 
+                                         random_forest_predict_model, 
+                                         preprocessor, 
                                          X_train, y_train, X_test, 
+                                         categorical_variables = categorical_variables, 
                                          n_samples = n_samples, 
                                          progress_bar = progress_bar, 
-                                         n_core = n_core)
+                                         n_core = n_core, ...)
     y_train_predictions <- predictions[["y_train_predictions"]]
     y_test_predictions <- predictions[["y_test_predictions"]]
     
@@ -92,9 +84,11 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
     ggplot2::ggsave(file.path(out_directory, "test_gaussian_predictions.png"))
     
     # Bootstrap training and test MSEs
-    mses <- bootstrap_mses(fit_model, predict_model, sampler, X, y, 
+    mses <- bootstrap_mses(random_forest_fit_model_gaussian, 
+                           random_forest_predict_model, sampler, preprocessor, X, y, 
+                           categorical_variables = categorical_variables, 
                            n_divisions = n_divisions, n_iterations = n_iterations, 
-                           progress_bar = progress_bar, n_core = n_core)
+                           progress_bar = progress_bar, n_core = n_core, ...)
     train_mses <- mses[["mean_train_metrics"]]
     test_mses <- mses[["mean_test_metrics"]]
     
@@ -120,11 +114,14 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
     y_test <- split_data[["y_test"]]
     
     # Bootstrap predictions
-    predictions <- bootstrap_predictions(fit_model, predict_model, 
+    predictions <- bootstrap_predictions(random_forest_fit_model_binomial, 
+                                         random_forest_predict_model, 
+                                         preprocessor, 
                                          X_train, y_train, X_test, 
+                                         categorical_variables = categorical_variables, 
                                          n_samples = n_samples, 
                                          progress_bar = progress_bar, 
-                                         n_core = n_core)
+                                         n_core = n_core, ...)
     y_train_predictions <- predictions[["y_train_predictions"]]
     y_test_predictions <- predictions[["y_test_predictions"]]
     
@@ -141,9 +138,12 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
     ggplot2::ggsave(file.path(out_directory, "test_roc_curve.png"))
     
     # Bootstrap training and test AUCs
-    aucs <- bootstrap_aucs(fit_model, predict_model, sampler, X, y, 
+    aucs <- bootstrap_aucs(random_forest_fit_model_binomial, 
+                           random_forest_predict_model, 
+                           sampler, preprocessor, X, y, 
+                           categorical_variables = categorical_variables, 
                            n_divisions = n_divisions, n_iterations = n_iterations, 
-                           progress_bar = progress_bar, n_core = n_core)
+                           progress_bar = progress_bar, n_core = n_core, ...)
     train_aucs <- aucs[["mean_train_metrics"]]
     test_aucs <- aucs[["mean_test_metrics"]]
     
@@ -160,4 +160,37 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
   }
   
   invisible()
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+random_forest_fit_model_gaussian <- function(X, y, ...) {
+  X <- as.matrix(X)
+  randomForest::randomForest(X, y, ...)
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+random_forest_fit_model_binomial <- function(X, y, ...) {
+  X <- as.matrix(X)
+  y <- factor(y)
+  randomForest::randomForest(X, y, ...)
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @return TO BE EDITED.
+#' @export
+random_forest_predict_model <- function(results, newx) {
+  as.numeric(predict(results, newdata = newx))
 }
