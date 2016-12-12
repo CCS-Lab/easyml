@@ -4,11 +4,6 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 data("prostate", package = "easyml")
 
 # Analyze data
-random_forest_analysis(prostate, "lpsa", 
-                       n_samples = 100, n_divisions = 100, n_iterations = 10, 
-                       random_state = 1, n_core = 8)
-
-# Analyze data
-random_forest_analysis(prostate, "lpsa", preprocessor = preprocess_scaler, 
-                       n_samples = 100, n_divisions = 100, n_iterations = 10, 
-                       random_state = 1, n_core = 8)
+easy_random_forest(prostate, "lpsa", 
+                   n_samples = 100, n_divisions = 100, n_iterations = 10, 
+                   random_state = 1, n_core = 8)

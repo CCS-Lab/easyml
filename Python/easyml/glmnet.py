@@ -15,18 +15,18 @@ from .sample import sample_equal_proportion
 __all__ = ['easy_glmnet']
 
 
-def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
+def easy_glmnet(data, dependent_variable, family='gaussian', sample=None, preprocessor=None,
                 exclude_variables=None, train_size=0.667, survival_rate_cutoff=0.05,
                 n_samples=1000, n_divisions=1000, n_iterations=10,
                 out_directory='.', random_state=None, progress_bar=True,
                 n_core=1, **kwargs):
-    # Handle random state
+    # Set random state
     set_random_state(random_state)
 
     # Set columns
     column_names = data.columns
 
-    # Exclude certain variables
+    # Exclude variables
     if exclude_variables is not None:
         data = data.drop(exclude_variables, axis=1)
         column_names = [c for c in column_names if c not in exclude_variables]
@@ -43,6 +43,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian', sample=None,
     def fit_model(e, X, y):
         return e.fit(X, y)
 
+    # assess family of regression
     if family == 'gaussian':
         # Set gaussian specific functions
         model = ElasticNet(**kwargs)

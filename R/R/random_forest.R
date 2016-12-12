@@ -4,14 +4,14 @@
 #'
 #' @return TO BE EDITED.
 #' @export
-random_forest_analysis <- function(.data, dependent_variable, family = "gaussian", 
-                                   sampler = NULL, preprocessor = NULL, 
-                                   exclude_variables = NULL, categorical_variables = NULL, 
-                                   train_size = 0.667, survival_rate_cutoff = 0.05, 
-                                   n_samples = 1000, n_divisions = 1000, 
-                                   n_iterations = 10, out_directory = ".", 
-                                   random_state = NULL, progress_bar = TRUE, 
-                                   n_core = 1, ...) {
+easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
+                               sampler = NULL, preprocessor = NULL, 
+                               exclude_variables = NULL, categorical_variables = NULL, 
+                               train_size = 0.667, survival_rate_cutoff = 0.05, 
+                               n_samples = 1000, n_divisions = 1000, 
+                               n_iterations = 10, out_directory = ".", 
+                               random_state = NULL, progress_bar = TRUE, 
+                               n_core = 1, ...) {
   # Set random state
   set_random_state(random_state)
   
