@@ -24,9 +24,8 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       output <- list(X = X_output)
     } else {
       # Categorical variables
-      mask <- (colnames(X) == categorical_variables)
-      X_categorical <- X[, mask, drop = FALSE]
-      X_numerical <- X[, !mask, drop = FALSE]
+      X_categorical <- X[, categorical_variables, drop = FALSE]
+      X_numerical <- X[, !categorical_variables, drop = FALSE]
       X_standardized <- data.frame(scale(X_numerical))
       X_output <- cbind(X_categorical, X_numerical)
       output <- list(X = X_output)
@@ -51,11 +50,10 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       output <- list(X_train = X_train_output, X_test = X_test_output)
     } else {
       # Categorical variables
-      mask <- (colnames(X_train) == categorical_variables)
-      X_train_categorical <- X_train[, mask, drop = FALSE]
-      X_train_numerical <- X_train[, !mask, drop = FALSE]
-      X_test_categorical <- X_test[, mask, drop = FALSE]
-      X_test_numerical <- X_test[, !mask, drop = FALSE]
+      X_train_categorical <- X_train[, categorical_variables, drop = FALSE]
+      X_train_numerical <- X_train[, !categorical_variables, drop = FALSE]
+      X_test_categorical <- X_test[, categorical_variables, drop = FALSE]
+      X_test_numerical <- X_test[, !categorical_variables, drop = FALSE]
       
       # scale train
       X_train_scaled <- scale(X_train_numerical)

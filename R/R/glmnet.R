@@ -28,6 +28,7 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
   if (!is.null(categorical_variables) && !is.null(preprocessor)) {
     column_names <- setdiff(column_names, categorical_variables)
     column_names <- c(categorical_variables, column_names)
+    categorical_variables <- categorical_variables %in% column_names
   }
   
   # Isolate y
