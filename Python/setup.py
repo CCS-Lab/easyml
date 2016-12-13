@@ -13,7 +13,7 @@ setup(
     version='0.1.0',
     description='A Python toolkit for easily building and evaluating penalized regression models.',
     long_description=long_description,
-    url='https://github.com/CCS-Lab/easyML',
+    url='https://github.com/CCS-Lab/easyml',
     author='OSU CCSL',
     author_email='https://github.com/CCS-Lab/',
     license='MIT',
