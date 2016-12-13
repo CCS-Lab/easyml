@@ -9,8 +9,8 @@ from sklearn.model_selection import train_test_split
 from .bootstrap import bootstrap_aucs, bootstrap_coefficients, bootstrap_mses, bootstrap_predictions
 from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
 from .preprocess import preprocess_identity
-from .utils import process_coefficients, set_random_state
 from .sample import sample_equal_proportion
+from .utils import process_coefficients, set_random_state
 
 
 __all__ = ['easy_glmnet']

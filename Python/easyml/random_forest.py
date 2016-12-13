@@ -5,56 +5,58 @@ import numpy as np
 from os import path
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
 from .bootstrap import bootstrap_aucs, bootstrap_mses, bootstrap_predictions
 from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
+from .preprocess import preprocess_identity
 from .sample import sample_equal_proportion
+from .utils import set_random_state
 
 
 __all__ = ['easy_random_forest']
 
 
-def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
-                       exclude_variables=None, categorical_variables=None,
-                       standardize_data=True, train_size=0.667, survival_rate_cutoff=0.05,
+def easy_random_forest(data, dependent_variable, family='gaussian',
+                       sampler=None, preprocessor=None,
+                       exclude_variables=None, categorical_variables=None, train_size=0.667,
                        n_samples=1000, n_divisions=1000, n_iterations=10,
                        out_directory='.', random_state=None, progress_bar=True,
                        n_core=1, **kwargs):
     # Make it run in sequential for now
     n_core = 1
 
-    # Handle random state
-    if random_state is not None:
-        np.random.seed(random_state)
+    # Set random state
+    set_random_state(random_state)
 
-    # Handle columns
+    # Set columns
     column_names = data.columns
-    column_names = [c for c in column_names if c != dependent_variable]
-    if exclude_variables is not None:
-        column_names = [c for c in column_names if c not in exclude_variables]
 
-    # Exclude certain variables and y
-    y = data[dependent_variable].values
-    data = data.drop(dependent_variable, axis=1)
+    # Exclude variables
     if exclude_variables is not None:
         data = data.drop(exclude_variables, axis=1)
+        column_names = [c for c in column_names if c not in exclude_variables]
 
-    # If True, standardize the data
-    if standardize_data:
-        stdsc = StandardScaler()
-        if categorical_variables is None:
-            X = data.values
-            X = stdsc.fit_transform(X)
-        else:
-            X_categorical = data[categorical_variables].values
-            X_numeric = data.drop(categorical_variables, axis=1).values
-            X_std = stdsc.fit_transform(X_numeric)
-            X = np.concatenate([X_categorical, X_std], axis=1)
-            column_names = [c for c in column_names if c not in categorical_variables]
-            column_names = categorical_variables + column_names
+    # Isolate y
+    y = data[dependent_variable].values
 
-    # Set glmnet specific handlers
+    # Remove y column name from column names
+    column_names = [c for c in column_names if c != dependent_variable]
+    data = data.drop(dependent_variable, axis=1)
+
+    # Isolate X
+    X = data.values
+
+    # Move categorical names to the front when there are categorical variables
+    if categorical_variables is not None and preprocessor is not None:
+        column_names = [c for c in column_names if c not in categorical_variables]
+        column_names = categorical_variables + column_names
+        categorical_variables = np.array([True if c in categorical_variables else False for c in column_names])
+
+    # Set preprocessor function
+    if preprocessor is None:
+        preprocessor = preprocess_identity
+
+    # Set random_forest specific handlers
     def fit_model(e, X, y):
         return e.fit(X, y)
 
@@ -65,14 +67,16 @@ def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
         def predict_model(e, X):
             return e.predict(X)
 
-        if sample is None:
-            sample = train_test_split
+        if sampler is None:
+            sampler = train_test_split
 
         # Split data
-        X_train, X_test, y_train, y_test = sample(X, y, train_size=train_size)
+        X_train, X_test, y_train, y_test = sampler(X, y, train_size=train_size)
 
         # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, X_train, y_train, X_test,
+        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, preprocessor,
+                                                          X_train, y_train, X_test,
+                                                          categorical_variables=categorical_variables,
                                                           n_samples=n_samples, progress_bar=progress_bar,
                                                           n_core=n_core)
 
@@ -89,7 +93,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
         plt.savefig(path.join(out_directory, 'test_predictions.png'))
 
         # Bootstrap training and test MSEs
-        train_mses, test_mses = bootstrap_mses(model, sample, fit_model, predict_model, X, y,
+        train_mses, test_mses = bootstrap_mses(model, sampler, fit_model, predict_model, preprocessor, X, y,
+                                               categorical_variables=categorical_variables,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
 
@@ -108,14 +113,16 @@ def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
         def predict_model(e, X):
             return e.predict_proba(X)[:, 1]
 
-        if sample is None:
-            sample = sample_equal_proportion
+        if sampler is None:
+            sampler = sample_equal_proportion
 
         # Split data
-        X_train, X_test, y_train, y_test = sample(X, y, train_size=train_size)
+        X_train, X_test, y_train, y_test = sampler(X, y, train_size=train_size)
 
         # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, X_train, y_train, X_test,
+        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, preprocessor,
+                                                          X_train, y_train, X_test,
+                                                          categorical_variables=categorical_variables,
                                                           n_samples=n_samples, progress_bar=progress_bar,
                                                           n_core=n_core)
 
@@ -132,7 +139,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian', sample=None,
         plt.savefig(path.join(out_directory, 'test_roc_curve.png'))
 
         # Bootstrap training and test AUCSs
-        train_aucs, test_aucs = bootstrap_aucs(model, sample, fit_model, predict_model, X, y,
+        train_aucs, test_aucs = bootstrap_aucs(model, sampler, fit_model, predict_model, preprocessor, X, y,
+                                               categorical_variables=categorical_variables,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
 
