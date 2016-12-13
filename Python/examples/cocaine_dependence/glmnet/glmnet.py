@@ -4,6 +4,7 @@ import os
 import pandas as pd
 
 from easyml.glmnet import easy_glmnet
+from easyml.preprocess import preprocess_scaler
 
 
 # Set matplotlib settings
@@ -16,6 +17,13 @@ if __name__ == "__main__":
 
     # Analyze data
     easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
+                family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
+                random_state=1, progress_bar=True, n_core=1,
+                n_samples=100, n_divisions=10, n_iterations=5,
+                alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)
+
+    # Analyze data
+    easy_glmnet(cocaine_dependence, 'DIAGNOSIS', preprocessor=preprocess_scaler,
                 family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
                 random_state=1, progress_bar=True, n_core=1,
                 n_samples=100, n_divisions=10, n_iterations=5,

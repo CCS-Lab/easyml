@@ -8,13 +8,19 @@ __all__ = []
 
 
 def preprocess_identity(*data, categorical_variables=None):
-    return data
+    if len(data) == 1:
+        output = data[0]
+    elif len(data) == 2:
+        output = data[0], data[1]
+    else:
+        raise ValueError
+    return output
 
 
 def preprocess_scaler(*data, categorical_variables=None):
     sclr = StandardScaler()
     if len(data) == 1:
-        X = data
+        X = data[0]
         if categorical_variables is None:
             sclr.fit_transform(X)
             output = X
@@ -24,12 +30,13 @@ def preprocess_scaler(*data, categorical_variables=None):
             sclr.fit_transform(X_numerical)
             output = np.concatenate([X_categorical, X_numerical], axis=1)
     elif len(data) == 2:
-        X_train, X_test = data
+        X_train, X_test = data[0], data[1]
         if categorical_variables is None:
             sclr.fit_transform(X_train)
             sclr.transform(X_test)
             output = X_train, X_test
         else:
+            print(categorical_variables)
             X_train_categorical = X_train[:, categorical_variables]
             X_train_numerical = X_train[:, np.logical_not(categorical_variables)]
             X_test_categorical = X_test[:, categorical_variables]

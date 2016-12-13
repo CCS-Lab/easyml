@@ -38,7 +38,7 @@ def easy_glmnet(data, dependent_variable, family='gaussian',
     if categorical_variables is not None and preprocessor is not None:
         column_names = [c for c in column_names if c not in categorical_variables]
         column_names = categorical_variables + column_names
-        categorical_variables = np.array([True if c in column_names else False for c in categorical_variables])
+        categorical_variables = np.array([True if c in categorical_variables else False for c in column_names])
 
     # Isolate y
     y = data[dependent_variable].values
