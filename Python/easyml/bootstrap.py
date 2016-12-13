@@ -21,12 +21,17 @@ def bootstrap_coefficient(estimator, fit, extract_coefficients, X, y):
     return coef
 
 
-def bootstrap_coefficients(estimator, fit, extract_coefficients, X, y,
+def bootstrap_coefficients(estimator, fit, extract_coefficients,
+                           preprocessor, X, y,
+                           categorical_variables=None,
                            n_samples=1000, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
         bar = progressbar.ProgressBar(max_value=n_samples)
         i = 0
+
+    # Preprocess data
+    X = preprocessor(X, categorical_variables=categorical_variables)
 
     # Initialize containers
     coefs = []
@@ -90,12 +95,15 @@ def bootstrap_prediction(estimator, fit_model, predict_model, X_train, y_train, 
     return y_train_pred, y_test_pred
 
 
-def bootstrap_predictions(estimator, fit_model, predict_model, X_train, y_train, X_test,
-                          n_samples=1000, progress_bar=True, n_core=1):
+def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_train, y_train, X_test,
+                          categorical_variables=None, n_samples=1000, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
         bar = progressbar.ProgressBar(max_value=n_samples)
         i = 0
+
+    # Preprocess data
+    X_train, X_test = preprocessor(X_train, X_test, categorical_variables=categorical_variables)
 
     # Initialize containers
     y_train_preds = []
@@ -152,12 +160,16 @@ def bootstrap_predictions(estimator, fit_model, predict_model, X_train, y_train,
     return y_train_preds, y_test_preds
 
 
-def bootstrap_metric(estimator, sample, fit_model, predict_model, measure, X, y, n_iterations=100):
+def bootstrap_metric(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
+                     categorical_variables=None, n_iterations=100):
     # Split data
     try:
-        X_train, X_test, y_train, y_test = sample(X, y)
+        X_train, X_test, y_train, y_test = sampler(X, y)
     except Exception as e:
         print('Sample Exception: {}'.format(e))
+
+    # Preprocess data
+    X_train, X_test = preprocessor(X_train, X_test, categorical_variables=categorical_variables)
 
     # Create temporary containers
     train_metrics = []
@@ -204,8 +216,8 @@ def bootstrap_metric(estimator, sample, fit_model, predict_model, measure, X, y,
     return mean_train_metric, mean_test_metric
 
 
-def bootstrap_metrics(estimator, sample, fit_model, predict_model, measure, X, y,
-                      n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
+def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
+                      categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
         bar = progressbar.ProgressBar(max_value=n_divisions)
@@ -223,9 +235,9 @@ def bootstrap_metrics(estimator, sample, fit_model, predict_model, measure, X, y
         # Loop over number of divisions
         for _ in range(n_divisions):
             # Bootstrap metric
-            mean_train_metric, mean_test_metric = bootstrap_metric(estimator, sample, fit_model,
-                                                                   predict_model, measure, X, y,
-                                                                   n_iterations)
+            mean_train_metric, mean_test_metric = bootstrap_metric(estimator, sampler, fit_model,
+                                                                   predict_model, preprocessor, measure, X, y,
+                                                                   categorical_variables, n_iterations)
 
             # Process loop and save in temporary containers
             mean_train_metrics.append(mean_train_metric)
@@ -275,17 +287,21 @@ def bootstrap_metrics(estimator, sample, fit_model, predict_model, measure, X, y
     return mean_train_metrics, mean_test_metrics
 
 
-def bootstrap_aucs(estimator, sample, fit_model, predict_model, X, y,
-                   n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
-    return bootstrap_metrics(estimator=estimator, sample=sample,
-                             fit_model=fit_model, predict_model=predict_model, measure=metrics.roc_auc_score,
-                             X=X, y=y, n_divisions=n_divisions, n_iterations=n_iterations,
+def bootstrap_aucs(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
+                   categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
+    return bootstrap_metrics(estimator=estimator, sampler=sampler,
+                             fit_model=fit_model, predict_model=predict_model,
+                             preprocessor=preprocessor, measure=metrics.roc_auc_score,
+                             X=X, y=y, categorical_variables=categorical_variables,
+                             n_divisions=n_divisions, n_iterations=n_iterations,
                              progress_bar=progress_bar, n_core=n_core)
 
 
-def bootstrap_mses(estimator, sample, fit_model, predict_model, X, y,
-                    n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
-    return bootstrap_metrics(estimator=estimator, sample=sample,
-                             fit_model=fit_model, predict_model=predict_model, measure=metrics.mean_squared_error,
-                             X=X, y=y, n_divisions=n_divisions, n_iterations=n_iterations,
+def bootstrap_mses(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
+                   categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
+    return bootstrap_metrics(estimator=estimator, sampler=sampler,
+                             fit_model=fit_model, predict_model=predict_model,
+                             preprocessor=preprocessor, measure=metrics.mean_squared_error,
+                             X=X, y=y, categorical_variables=categorical_variables,
+                             n_divisions=n_divisions, n_iterations=n_iterations,
                              progress_bar=progress_bar, n_core=n_core)
