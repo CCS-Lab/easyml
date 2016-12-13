@@ -25,6 +25,7 @@ def preprocess_scaler(*data, categorical_variables=None):
             sclr.fit_transform(X)
             output = X
         else:
+            # import pdb; pdb.set_trace()
             X_categorical = X[:, categorical_variables]
             X_numerical = X[:, np.logical_not(categorical_variables)]
             sclr.fit_transform(X_numerical)
@@ -36,7 +37,6 @@ def preprocess_scaler(*data, categorical_variables=None):
             sclr.transform(X_test)
             output = X_train, X_test
         else:
-            print(categorical_variables)
             X_train_categorical = X_train[:, categorical_variables]
             X_train_numerical = X_train[:, np.logical_not(categorical_variables)]
             X_test_categorical = X_test[:, categorical_variables]

@@ -24,13 +24,6 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
     column_names <- setdiff(column_names, exclude_variables)
   }
   
-  # Move categorical names to the front when there are categorical variables
-  if (!is.null(categorical_variables) && !is.null(preprocessor)) {
-    column_names <- setdiff(column_names, categorical_variables)
-    column_names <- c(categorical_variables, column_names)
-    categorical_variables <- categorical_variables %in% column_names
-  }
-  
   # Isolate y
   y <- .data[, dependent_variable]
   
@@ -40,6 +33,13 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
   
   # Isolate X
   X <- .data
+  
+  # Move categorical names to the front when there are categorical variables
+  if (!is.null(categorical_variables) && !is.null(preprocessor)) {
+    column_names <- setdiff(column_names, categorical_variables)
+    column_names <- c(categorical_variables, column_names)
+    categorical_variables <- categorical_variables %in% column_names
+  }
   
   # Set preprocessor function
   if (is.null(preprocessor)) {
