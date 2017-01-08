@@ -13,3 +13,9 @@ apt_packages:
 
 before_install:
   - cd R/
+
+r_github_packages:
+  - jimhester/covr
+
+after_success:
+- Rscript -e 'library(covr);codecov()'
