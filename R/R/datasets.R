@@ -4,22 +4,22 @@
 #' @format Data frame with columns
 #' \describe{
 #' \item{subject}{To Be Edited}
-#' \item{DIAGNOSIS}{To Be Edited}
-#' \item{AGE}{To Be Edited}
-#' \item{Male}{To Be Edited}
-#' \item{EDU_YRS}{To Be Edited}
-#' \item{IMT_COMM_errors}{To Be Edited}
-#' \item{IMT_OMIS_errors}{To Be Edited}
-#' \item{A_IMT}{To Be Edited}
-#' \item{B_D_IMT}{To Be Edited}
-#' \item{Stop_ssrt}{To Be Edited}
+#' \item{diagnosis}{To Be Edited}
+#' \item{age}{To Be Edited}
+#' \item{male}{To Be Edited}
+#' \item{edu_yrs}{To Be Edited}
+#' \item{imt_comm_errors}{To Be Edited}
+#' \item{imt_omis_errors}{To Be Edited}
+#' \item{a_imt}{To Be Edited}
+#' \item{b_d_imt}{To Be Edited}
+#' \item{stop_ssrt}{To Be Edited}
 #' \item{lnk_adjdd}{To Be Edited}
-#' \item{lkhat_Kirby}{To Be Edited}
-#' \item{REVLR_per_errors}{To Be Edited}
-#' \item{BIS_attention}{To Be Edited}
-#' \item{BIS_motor}{To Be Edited}
-#' \item{BIS_NonPL}{To Be Edited}
-#' \item{IGT_TOTAL}{To Be Edited}
+#' \item{lkhat_kirby}{To Be Edited}
+#' \item{revlr_per_errors}{To Be Edited}
+#' \item{bis_attention}{To Be Edited}
+#' \item{bis_motor}{To Be Edited}
+#' \item{bis_nonpL}{To Be Edited}
+#' \item{igt_total}{To Be Edited}
 #' }
 #' @examples
 #'   cocaine_dependence
