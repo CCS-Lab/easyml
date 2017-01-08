@@ -8,6 +8,8 @@ A toolkit for easily building and evaluating machine learning models.
 Installation
 ------------
 
+You can install the latest development version from github with:
+
 ```bash
 git clone https://github.com/CCS-Lab/easyml.git
 cd easyml/Python
