@@ -67,7 +67,7 @@ A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED. If you 
 	title = {easyml: A toolkit for easily building and evaluation machine learning models.},
 	author = {Paul Hendricks and Woo-Young Ahn},
 	eprint = {arXiv:TOBEEDITED},
-	year = {2016},
+	year = {2017},
 }
 ```
 
