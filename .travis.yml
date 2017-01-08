@@ -10,3 +10,6 @@ sudo: required
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
+
+before_install:
+  - cd R/
