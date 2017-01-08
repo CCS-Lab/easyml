@@ -4,7 +4,7 @@
 \alias{process_coefficients}
 \title{TO BE EDITED.}
 \usage{
-process_coefficients(coefs, column_names, survival_rate_cutoff = 0.05)
+process_coefficients(coefs, survival_rate_cutoff = 0.05)
 }
 \arguments{
 \item{coefs}{TO BE EDITED.}

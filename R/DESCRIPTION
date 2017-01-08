@@ -12,6 +12,7 @@ Depends:
     R (>= 3.3.1)
 Imports:
     corrplot, 
+    e1071, 
     ggplot2, 
     glmnet, 
     parallel,

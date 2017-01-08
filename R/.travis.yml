@@ -10,14 +10,3 @@ sudo: required
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
-
-r_binary_packages:
- - testthat
-
-r_github_packages:
- - jimhester/covr
- - jimhester/lintr
-
-after_success:
- - Rscript -e 'covr::codecov()'
- - Rscript -e 'lintr::lint_package()'

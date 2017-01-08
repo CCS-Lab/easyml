@@ -15,17 +15,18 @@ preprocess_identity <- function(.data, categorical_variables = NULL) {
 #' @return TO BE EDITED.
 #' @export
 preprocess_scaler <- function(.data, categorical_variables = NULL) {
+  mask <- categorical_variables
   if (length(.data) == 1) {
     # Handle case of list(X)
     X <- .data[["X"]]
-    if (is.null(categorical_variables)) {
+    if (is.null(mask)) {
       # No categorical variables
       X_output <- data.frame(scale(X))
       output <- list(X = X_output)
     } else {
       # Categorical variables
-      X_categorical <- X[, categorical_variables, drop = FALSE]
-      X_numerical <- X[, !categorical_variables, drop = FALSE]
+      X_categorical <- X[, mask, drop = FALSE]
+      X_numerical <- X[, !mask, drop = FALSE]
       X_standardized <- data.frame(scale(X_numerical))
       X_output <- cbind(X_categorical, X_numerical)
       output <- list(X = X_output)
@@ -34,7 +35,7 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
     # Handle case of list(X_train, X_test)
     X_train <- .data[["X_train"]]
     X_test <- .data[["X_test"]]
-    if (is.null(categorical_variables)) {
+    if (is.null(mask)) {
       # No categorical variables
       # scale train
       X_train_scaled <- scale(X_train)
@@ -50,10 +51,10 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       output <- list(X_train = X_train_output, X_test = X_test_output)
     } else {
       # Categorical variables
-      X_train_categorical <- X_train[, categorical_variables, drop = FALSE]
-      X_train_numerical <- X_train[, !categorical_variables, drop = FALSE]
-      X_test_categorical <- X_test[, categorical_variables, drop = FALSE]
-      X_test_numerical <- X_test[, !categorical_variables, drop = FALSE]
+      X_train_categorical <- X_train[, mask, drop = FALSE]
+      X_train_numerical <- X_train[, !mask, drop = FALSE]
+      X_test_categorical <- X_test[, mask, drop = FALSE]
+      X_test_numerical <- X_test[, !mask, drop = FALSE]
       
       # scale train
       X_train_scaled <- scale(X_train_numerical)

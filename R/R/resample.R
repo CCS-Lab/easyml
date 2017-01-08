@@ -5,12 +5,12 @@
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size The proportoin of data in training set.
-#' @param seed An integer to seed the random number generator.
+#' @param random_state An integer to seed the random number generator.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @export
-train_test_split <- function(X, y, train_size = 0.667, seed = 1) {
-  # set seed
-  # set.seed(seed = seed)
+resample_simple_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {
+  # Set random state
+  set_random_state(random_state)
 
   # return a boolean vector of length n_obs where TRUE represents
   # that observation should be in the train set
@@ -34,12 +34,12 @@ train_test_split <- function(X, y, train_size = 0.667, seed = 1) {
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size The proportoin of data in training set.
-#' @param seed An integer to seed the random number generator.
+#' @param random_state An integer to seed the random number generator.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @export
-sample_equal_proportion <- function(X, y, train_size = 0.667, seed = 1) {
-  # set seed
-  # set.seed(seed = seed)
+resample_stratified_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {
+  # Set random state
+  set_random_state(random_state)
   
   # calculate number of observations
   n_obs <- length(y)

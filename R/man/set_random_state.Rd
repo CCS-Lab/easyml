@@ -10,6 +10,6 @@ set_random_state(random_state = NULL)
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Please note this affects global state.
 }
 

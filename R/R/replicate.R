@@ -11,32 +11,38 @@
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_coefficients <- function(fit_model, extract_coefficients, 
+replicate_coefficients <- function(fit_model, extract_coefficients, 
                                    preprocessor, X, y, 
                                    categorical_variables = NULL, 
                                    n_samples = 1000, progress_bar = TRUE, 
                                    n_core = 1, ...) {
-  # Handle progress bar
+  # Print an informative message
   if (progress_bar) {
-    print(paste0("Bootstrapping coefficients", ifelse(n_core > 1, " in parallel:", ":")))
+    parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
+    print(paste0("Replicating coefficients", parallel_string))
   }
   
   # Preprocess data
-  result <- preprocessor(list(X = X), categorical_variables = categorical_variables)
+  result <- preprocessor(list(X = X), categorical_variables)
   X <- result[["X"]]
 
-  # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar = progress_bar, n_core = n_core)
-
-  # Loop over number of iterations
-  output <- looper(1:n_samples, function(i) {
+  # Define closure
+  replicate_coefficient <- function(i) {
     model <- fit_model(X, y, ...)
     coef <- extract_coefficients(model)
     coef
-  })
+  }
   
-  # TODO: return this as a tidy data.frame
-  t(matrix(unlist(output), ncol = ncol(X) + 1, byrow = TRUE))
+  # Identify which looping mechanism to use
+  looper <- identify_looper(progress_bar, n_core)
+  
+  # Loop over number of iterations
+  output <- looper(1:n_samples, replicate_coefficient)
+  
+  # Combine list of data.frames into one data.frame; 
+  # structure should be a data.frame of n_samples by ncol(X)
+  output <- do.call(rbind, output)
+  output
 }
 
 #' TO BE EDITED.
@@ -53,14 +59,14 @@ bootstrap_coefficients <- function(fit_model, extract_coefficients,
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_predictions <- function(fit_model, predict_model, preprocessor, 
+replicate_predictions <- function(fit_model, predict_model, preprocessor, 
                                   X_train, y_train, X_test, 
                                   categorical_variables = NULL, 
                                   n_samples = 1000, progress_bar = TRUE, 
                                   n_core = 1, ...) {
   # Handle progress bar
   if (progress_bar) {
-    print(paste0("Bootstrapping predictions", ifelse(n_core > 1, " in parallel:", ":")))
+    print(paste0("Replicating predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
   # Preprocess data
@@ -69,18 +75,21 @@ bootstrap_predictions <- function(fit_model, predict_model, preprocessor,
   X_train <- result[["X_train"]]
   X_test <- result[["X_test"]]
   
-  # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar = progress_bar, n_core = n_core)
-  
-  # Loop over number of iterations
-  output <- looper(1:n_samples, function(i) {
+  # Define closure
+  replicate_prediction <- function(i) {
     # Fit model with the training set
     results <- fit_model(X_train, y_train, ...)
     
     # Save predictions
     list(y_train_predictions = predict_model(results, X_train), 
          y_test_predictions = predict_model(results, X_test))
-  })
+  }
+  
+  # Identify which looping mechanism to use
+  looper <- identify_looper(progress_bar, n_core)
+  
+  # Loop over number of iterations
+  output <- looper(1:n_samples, replicate_prediction)
   
   y_train_predictions <- lapply(output, function(x) x$y_train_predictions)
   y_test_predictions <- lapply(output, function(x) x$y_test_predictions)
@@ -90,7 +99,6 @@ bootstrap_predictions <- function(fit_model, predict_model, preprocessor,
   y_test_predictions <- t(matrix(unlist(y_test_predictions), 
                                  ncol = nrow(X_test), byrow = TRUE))
   
-  # TODO: return this as a tidy data.frame
   list(y_train_predictions = y_train_predictions, 
        y_test_predictions = y_test_predictions)
 }
@@ -110,20 +118,20 @@ bootstrap_predictions <- function(fit_model, predict_model, preprocessor,
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_metrics <- function(fit_model, predict_model, sampler, preprocessor, 
+replicate_metrics <- function(fit_model, predict_model, sampler, preprocessor, 
                               measure, X, y, categorical_variables = NULL, 
                               n_divisions = 1000, n_iterations = 100, 
                               progress_bar = TRUE, n_core = 1, ...) {
   # Handle progress bar
   if (progress_bar) {
-    print(paste0("Bootstrapping metrics", ifelse(n_core > 1, " in parallel:", ":")))
+    print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
   # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar = progress_bar, n_core = n_core)
+  looper <- identify_looper(progress_bar, n_core)
   
-  # Loop over number of divisions
-  output_divisions <- looper(1:n_divisions, function(i) {
+  # Define closure
+  replicate_metric <- function(i) {
     # Split data
     split_data <- sampler(X, y)
     X_train <- split_data[["X_train"]]
@@ -163,12 +171,14 @@ bootstrap_metrics <- function(fit_model, predict_model, sampler, preprocessor,
     # Save mean of metrics
     list(mean_train_metric = mean(train_metrics), 
          mean_test_metric = mean(test_metrics))
-  })
+  }
+  
+  # Loop over number of divisions
+  output_divisions <- looper(1:n_divisions, replicate_metric)
   
   mean_train_metrics <- unlist(lapply(output_divisions, function(x) x$mean_train_metric))
   mean_test_metrics <- unlist(lapply(output_divisions, function(x) x$mean_test_metric))
   
-  # TODO: return this as a tidy data.frame
   list(mean_train_metrics = mean_train_metrics, 
        mean_test_metrics = mean_test_metrics)
 }
@@ -188,11 +198,11 @@ bootstrap_metrics <- function(fit_model, predict_model, sampler, preprocessor,
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_aucs <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
+replicate_aucs <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
                            categorical_variables = NULL, 
                            n_divisions = 1000, n_iterations = 100, 
                            progress_bar = TRUE, n_core = 1, ...) {
-  bootstrap_metrics(fit_model = fit_model, predict_model = predict_model, 
+  replicate_metrics(fit_model = fit_model, predict_model = predict_model, 
                     sampler = sampler, preprocessor = preprocessor, 
                     measure = area_under_roc_curve, 
                     X = X, y = y, categorical_variables = categorical_variables, 
@@ -215,11 +225,11 @@ bootstrap_aucs <- function(fit_model, predict_model, sampler, preprocessor, X, y
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-bootstrap_mses <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
+replicate_mses <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
                            categorical_variables = NULL, 
                            n_divisions = 1000, n_iterations = 100, 
                            progress_bar = TRUE, n_core = 1, ...) {
-  bootstrap_metrics(fit_model = fit_model, predict_model = predict_model, 
+  replicate_metrics(fit_model = fit_model, predict_model = predict_model, 
                     sampler = sampler, preprocessor = preprocessor, 
                     measure = scorer::mean_squared_error, 
                     X = X, y = y, categorical_variables = categorical_variables, 
