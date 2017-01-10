@@ -4,7 +4,7 @@
 \alias{reduce_cores}
 \title{Reduce number of cores.}
 \usage{
-reduce_cores(n_core)
+reduce_cores(n_core, cpu_count = NULL)
 }
 \value{
 TO BE EDITED.

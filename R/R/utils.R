@@ -31,10 +31,11 @@ identify_parallel <- function(n_core) {
 #'
 #' @return TO BE EDITED.
 #' @export
-reduce_cores <- function(n_core) {
-  if (n_core > parallel::detectCores()) {
-    n_core <- parallel::detectCores()
+reduce_cores <- function(n_core, cpu_count = NULL) {
+  if (is.null(cpu_count)) {
+    cpu_count <- parallel::detectCores()
   }
+  n_core <- min(n_core, cpu_count)
   n_core
 }
 
@@ -179,7 +180,7 @@ set_sampler <- function(sampler = NULL, family = NULL) {
 #'
 #' @return TO BE EDITED.
 #' @export
-isolate_dependent_variable <- function(.data = NULL, dependent_variable = NULL) {
+isolate_dependent_variable <- function(.data, dependent_variable) {
   y <- as.vector(.data[, dependent_variable, drop = TRUE])
   y
 }
@@ -190,7 +191,7 @@ isolate_dependent_variable <- function(.data = NULL, dependent_variable = NULL) 
 #'
 #' @return TO BE EDITED.
 #' @export
-isolate_independent_variables <- function(.data = NULL, dependent_variable = NULL) {
+isolate_independent_variables <- function(.data, dependent_variable) {
   .data <- remove_variables(.data, dependent_variable)
   .data
 }

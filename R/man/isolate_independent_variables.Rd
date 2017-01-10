@@ -4,7 +4,7 @@
 \alias{isolate_independent_variables}
 \title{TO BE EDITED.}
 \usage{
-isolate_independent_variables(.data = NULL, dependent_variable = NULL)
+isolate_independent_variables(.data, dependent_variable)
 }
 \value{
 TO BE EDITED.

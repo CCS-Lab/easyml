@@ -7,9 +7,9 @@ test_that("Test identify_parallel.", {
 })
 
 test_that("Test reduce_cores.", {
-  expect_equal(reduce_cores(16), parallel::detectCores())
-  expect_equal(reduce_cores(8), parallel::detectCores())
-  expect_equal(reduce_cores(1), 1)
+  expect_equal(reduce_cores(2, 4), 2)
+  expect_equal(reduce_cores(4, 4), 4)
+  expect_equal(reduce_cores(8, 4), 4)
 })
 
 test_that("Test identify_looper_.", {
