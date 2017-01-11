@@ -1,4 +1,4 @@
-"""Factory functions for quick and easy analysis.
+"""Functions for glmnet analysis.
 """
 from glmnet import ElasticNet, LogitNet
 import numpy as np

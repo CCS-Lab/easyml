@@ -1,4 +1,4 @@
-"""Factory functions for quick and easy analysis.
+"""Functions for random forest analysis.
 """
 import matplotlib.pyplot as plt
 import numpy as np

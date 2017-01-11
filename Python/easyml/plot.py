@@ -1,4 +1,4 @@
-"""Utility functions for plotting.
+"""Functions for plotting.
 """
 import matplotlib.pyplot as plt
 import numpy as np

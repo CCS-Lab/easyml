@@ -1,4 +1,4 @@
-"""Utility functions for sampling data.
+"""Functions for sampling data.
 """
 import numpy as np
 

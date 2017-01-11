@@ -1,4 +1,4 @@
-"""Utility functions for bootstrapping estimators.
+"""Functions for preprocessing.
 """
 import numpy as np
 from sklearn.preprocessing import StandardScaler

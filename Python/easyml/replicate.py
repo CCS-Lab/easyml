@@ -1,10 +1,11 @@
-"""Utility functions for replicating estimates.
+"""Functions for replicating estimates.
 """
 import concurrent.futures
 import numpy as np
-import os
 import progressbar
 from sklearn import metrics
+
+from . import utils
 
 
 __all__ = []
@@ -56,8 +57,7 @@ def replicate_coefficients(estimator, fit, extract_coefficients,
         print("Replicating coefficients in parallel:")
 
         # Handle case where n_core > os.cpu_count()
-        if n_core > os.cpu_count():
-            n_core = os.cpu_count()
+        n_core = utils.reduce_cores(n_core)
 
         # Loop over number of iterations
         indexes = range(n_samples)
@@ -130,8 +130,7 @@ def replicate_predictions(estimator, fit_model, predict_model, preprocessor, X_t
         print("Replicating predictions in parallel:")
 
         # Handle case where n_core > os.cpu_count()
-        if n_core > os.cpu_count():
-            n_core = os.cpu_count()
+        n_core = utils.reduce_cores(n_core)
 
         # Loop over number of iterations
         indexes = range(n_samples)
@@ -253,8 +252,7 @@ def replicate_metrics(estimator, sampler, fit_model, predict_model, preprocessor
         print("Replicating metrics in parallel:")
 
         # Handle case where n_core > os.cpu_count()
-        if n_core > os.cpu_count():
-            n_core = os.cpu_count()
+        n_core = utils.reduce_cores(n_core)
 
         # Loop over number of iterations
         indexes = range(n_divisions)
