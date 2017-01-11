@@ -1,4 +1,4 @@
-"""Utility functions for bootstrapping estimators.
+"""Utility functions for replicating estimates.
 """
 import concurrent.futures
 import numpy as np
@@ -10,7 +10,7 @@ from sklearn import metrics
 __all__ = []
 
 
-def bootstrap_coefficient(estimator, fit, extract_coefficients, X, y):
+def replicate_coefficient(estimator, fit, extract_coefficients, X, y):
     # Fit estimator with the training set
     estimator = fit(estimator, X, y)
 
@@ -21,7 +21,7 @@ def bootstrap_coefficient(estimator, fit, extract_coefficients, X, y):
     return coef
 
 
-def bootstrap_coefficients(estimator, fit, extract_coefficients,
+def replicate_coefficients(estimator, fit, extract_coefficients,
                            preprocessor, X, y,
                            categorical_variables=None,
                            n_samples=1000, progress_bar=True, n_core=1):
@@ -39,11 +39,11 @@ def bootstrap_coefficients(estimator, fit, extract_coefficients,
     # Evaluate parallelism
     if n_core == 1:
         # Run sequentially
-        print("Bootstrapping coefficients:")
+        print("Replicating coefficients:")
 
         # Loop over number of iterations
         for _ in range(n_samples):
-            coef = bootstrap_coefficient(estimator, fit, extract_coefficients, X, y)
+            coef = replicate_coefficient(estimator, fit, extract_coefficients, X, y)
             coefs.append(coef)
 
             # Increment progress bar
@@ -53,7 +53,7 @@ def bootstrap_coefficients(estimator, fit, extract_coefficients,
 
     elif n_core > 1:
         # Run in parallel using n_core cores
-        print("Bootstrapping coefficients in parallel:")
+        print("Replicating coefficients in parallel:")
 
         # Handle case where n_core > os.cpu_count()
         if n_core > os.cpu_count():
@@ -62,7 +62,7 @@ def bootstrap_coefficients(estimator, fit, extract_coefficients,
         # Loop over number of iterations
         indexes = range(n_samples)
         with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-            futures = {executor.submit(bootstrap_coefficient, estimator, fit, extract_coefficients, X, y): ix for ix in indexes}
+            futures = {executor.submit(replicate_coefficient, estimator, fit, extract_coefficients, X, y): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:
                     coef = future.result()
@@ -83,7 +83,7 @@ def bootstrap_coefficients(estimator, fit, extract_coefficients,
     return coefs
 
 
-def bootstrap_prediction(estimator, fit_model, predict_model, X_train, y_train, X_test):
+def replicate_prediction(estimator, fit_model, predict_model, X_train, y_train, X_test):
     # Fit estimator with the training set
     estimator = fit_model(estimator, X_train, y_train)
 
@@ -95,7 +95,7 @@ def bootstrap_prediction(estimator, fit_model, predict_model, X_train, y_train, 
     return y_train_pred, y_test_pred
 
 
-def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_train, y_train, X_test,
+def replicate_predictions(estimator, fit_model, predict_model, preprocessor, X_train, y_train, X_test,
                           categorical_variables=None, n_samples=1000, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
@@ -112,11 +112,11 @@ def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_t
     # Evaluate parallelism
     if n_core == 1:
         # Run sequentially
-        print("Bootstrapping predictions:")
+        print("Replicating predictions:")
 
         # Loop over number of iterations
         for _ in range(n_samples):
-            y_train_pred, y_test_pred = bootstrap_prediction(estimator, fit_model, predict_model, X_train, y_train, X_test)
+            y_train_pred, y_test_pred = replicate_prediction(estimator, fit_model, predict_model, X_train, y_train, X_test)
             y_train_preds.append(y_train_pred)
             y_test_preds.append(y_test_pred)
 
@@ -127,7 +127,7 @@ def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_t
 
     elif n_core > 1:
         # Run in parallel using n_core cores
-        print("Bootstrapping predictions in parallel:")
+        print("Replicating predictions in parallel:")
 
         # Handle case where n_core > os.cpu_count()
         if n_core > os.cpu_count():
@@ -136,7 +136,7 @@ def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_t
         # Loop over number of iterations
         indexes = range(n_samples)
         with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-            futures = {executor.submit(bootstrap_prediction, estimator, fit_model, predict_model, X_train, y_train, X_test): ix for ix in indexes}
+            futures = {executor.submit(replicate_prediction, estimator, fit_model, predict_model, X_train, y_train, X_test): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:
                     y_train_pred, y_test_pred = future.result()
@@ -160,7 +160,7 @@ def bootstrap_predictions(estimator, fit_model, predict_model, preprocessor, X_t
     return y_train_preds, y_test_preds
 
 
-def bootstrap_metric(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
+def replicate_metric(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
                      categorical_variables=None, n_iterations=100):
     # Split data
     try:
@@ -216,7 +216,7 @@ def bootstrap_metric(estimator, sampler, fit_model, predict_model, preprocessor,
     return mean_train_metric, mean_test_metric
 
 
-def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
+def replicate_metrics(estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
                       categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
     # Initialize progress bar (optional)
     if progress_bar:
@@ -230,12 +230,12 @@ def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor
     # Evaluate parallelism
     if True:
         # Run sequentially
-        print("Bootstrapping metrics (parallelism is currently disabled for this function):")
+        print("Replicating metrics (parallelism is currently disabled for this function):")
 
         # Loop over number of divisions
         for _ in range(n_divisions):
             # Bootstrap metric
-            mean_train_metric, mean_test_metric = bootstrap_metric(estimator, sampler, fit_model,
+            mean_train_metric, mean_test_metric = replicate_metric(estimator, sampler, fit_model,
                                                                    predict_model, preprocessor, measure, X, y,
                                                                    categorical_variables, n_iterations)
 
@@ -250,7 +250,7 @@ def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor
 
     elif False:
         # Run in parallel using n_core cores
-        print("Bootstrapping metrics in parallel:")
+        print("Replicating metrics in parallel:")
 
         # Handle case where n_core > os.cpu_count()
         if n_core > os.cpu_count():
@@ -259,7 +259,7 @@ def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor
         # Loop over number of iterations
         indexes = range(n_divisions)
         with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-            futures = {executor.submit(bootstrap_metric, estimator, sample, fit_model, predict_model, measure, X, y, n_iterations): ix for ix in indexes}
+            futures = {executor.submit(replicate_metric, estimator, sample, fit_model, predict_model, measure, X, y, n_iterations): ix for ix in indexes}
             for future in concurrent.futures.as_completed(futures):
                 try:
                     mean_train_metric, mean_test_metric = future.result()
@@ -287,9 +287,9 @@ def bootstrap_metrics(estimator, sampler, fit_model, predict_model, preprocessor
     return mean_train_metrics, mean_test_metrics
 
 
-def bootstrap_aucs(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
+def replicate_aucs(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
                    categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
-    return bootstrap_metrics(estimator=estimator, sampler=sampler,
+    return replicate_metrics(estimator=estimator, sampler=sampler,
                              fit_model=fit_model, predict_model=predict_model,
                              preprocessor=preprocessor, measure=metrics.roc_auc_score,
                              X=X, y=y, categorical_variables=categorical_variables,
@@ -297,9 +297,9 @@ def bootstrap_aucs(estimator, sampler, fit_model, predict_model, preprocessor, X
                              progress_bar=progress_bar, n_core=n_core)
 
 
-def bootstrap_mses(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
+def replicate_mses(estimator, sampler, fit_model, predict_model, preprocessor, X, y,
                    categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
-    return bootstrap_metrics(estimator=estimator, sampler=sampler,
+    return replicate_metrics(estimator=estimator, sampler=sampler,
                              fit_model=fit_model, predict_model=predict_model,
                              preprocessor=preprocessor, measure=metrics.mean_squared_error,
                              X=X, y=y, categorical_variables=categorical_variables,
