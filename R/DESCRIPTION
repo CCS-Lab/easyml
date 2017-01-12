@@ -19,6 +19,7 @@ Imports:
     pbapply,
     pbmcapply, 
     pROC, 
+    randomForest, 
     scales, 
     scorer
 Suggests:
