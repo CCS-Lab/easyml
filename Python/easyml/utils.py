@@ -38,7 +38,7 @@ def set_column_names(column_names, dependent_variable,
     column_names = [c for c in column_names if c != dependent_variable]
     if exclude_variables is not None:
         column_names = [c for c in column_names if c not in exclude_variables]
-    if categorical_variables is not None and preprocessor is not None:
+    if categorical_variables is not None and preprocessor is preprocess.preprocess_scaler:
         column_names = [c for c in column_names if c not in categorical_variables]
         column_names = categorical_variables + column_names
     return column_names

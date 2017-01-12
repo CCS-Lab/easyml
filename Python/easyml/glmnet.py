@@ -47,9 +47,9 @@ def easy_glmnet(data, dependent_variable, family='gaussian',
     utils.set_random_state(random_state)
 
     # Set columns
-    column_names = data.columns
+    column_names = list(data.columns.values)
     column_names = utils.set_column_names(column_names, dependent_variable,
-                                          exclude_variables=None, preprocessor=None, categorical_variables=None)
+                                          exclude_variables, preprocessor, categorical_variables)
 
     # Remove variables
     data = utils.remove_variables(data, exclude_variables)

@@ -23,7 +23,50 @@ def test_reduce_cores():
 
 
 def test_set_column_names():
-    assert 1 == 1
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                           preprocessor=None, exclude_variables=None, categorical_variables=None)
+    assert value == ['a', 'b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=None, exclude_variables=['a'], categorical_variables=None)
+    assert value == ['b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=None, exclude_variables=None, categorical_variables=['c'])
+    assert value == ['a', 'b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=None, exclude_variables=['a'], categorical_variables=['c'])
+    assert value == ['b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_identity,
+                                   exclude_variables=None, categorical_variables=None)
+    assert value == ['a', 'b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_identity,
+                                   exclude_variables=['a'], categorical_variables=None)
+    assert value == ['b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_identity,
+                                   exclude_variables=None, categorical_variables=['c'])
+    assert value == ['a', 'b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_identity,
+                                   exclude_variables=['a'], categorical_variables=['c'])
+    assert value == ['b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_scaler,
+                                   exclude_variables=None, categorical_variables=None)
+    assert value == ['a', 'b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_scaler,
+                                   exclude_variables=['a'], categorical_variables=None)
+    assert value == ['b', 'c']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_scaler,
+                                   exclude_variables=None, categorical_variables=['c'])
+    assert value == ['c', 'a', 'b']
+    value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
+                                   preprocessor=preprocess.preprocess_scaler,
+                                   exclude_variables=['a'], categorical_variables=['c'])
+    assert value == ['c', 'b']
 
 
 def test_set_categorical_variables():
