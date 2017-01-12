@@ -24,7 +24,7 @@ def test_reduce_cores():
 
 def test_set_column_names():
     value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
-                           preprocessor=None, exclude_variables=None, categorical_variables=None)
+                                   preprocessor=None, exclude_variables=None, categorical_variables=None)
     assert value == ['a', 'b', 'c']
     value = utils.set_column_names(['y', 'a', 'b', 'c'], 'y',
                                    preprocessor=None, exclude_variables=['a'], categorical_variables=None)
