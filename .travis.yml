@@ -20,8 +20,13 @@ addons:
       - libcurl4-openssl-dev
       - libxml2-dev
 
+before_install:
+  - chmod 755 tests/travis/setup.sh
+
+install:
+  - source tests/travis/setup.sh
+
 before_script:
-  - ls
   - chmod 755 tests/travis/run_test.sh
 
 script:

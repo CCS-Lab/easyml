@@ -18,14 +18,16 @@ if [ ${TASK} == "r_test" ]; then
     cd ..
     
     # Build package
-    R CMD INSTALL easyml_*.tar.gz
+    R CMD INSTALL R
     
     # Run tests
     cd R
     Rscript -e "devtools::test()" || exit -1
     Rscript tests/travis/r_vignettes.R
     
-    # If successful this far, exit with exit code 0 (sucess)
+    # If successful this far, submit to test coverage and exit with exit 
+    # code 0 (sucess).
+    Rscript -e "library(covr); codecov()"
     exit 0
 fi
 
