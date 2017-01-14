@@ -1,10 +1,6 @@
+sudo: false
+
 language: cpp
-
-# Be strict when checking our package
-warnings_are_errors: false
-
-# Sudo is required
-sudo: required
 
 os:
   # - linux
@@ -19,6 +15,9 @@ addons:
     packages:
       - libcurl4-openssl-dev
       - libxml2-dev
+
+install:
+  - source tests/travis/setup.sh
 
 script:
   - tests/travis/run_test.sh
