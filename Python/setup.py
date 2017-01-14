@@ -17,7 +17,7 @@ setup(
     author='OSU CCSL',
     author_email='https://github.com/CCS-Lab/',
     license='MIT',
-    keywords='glmnet penalized regression',
-    packages=find_packages(exclude=['docs', 'examples', 'scripts', 'tests']),
+    keywords='easy machine learning glmnet penalized regression random forest penalized regression',
+    packages=['easyml'],
     test_suite='nose2.collector.collector',
 )
