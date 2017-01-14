@@ -20,5 +20,9 @@ addons:
       - libcurl4-openssl-dev
       - libxml2-dev
 
+before_script:
+  - ls
+  - chmod 755 tests/travis/run_test.sh
+
 script:
   - tests/travis/run_test.sh
