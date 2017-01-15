@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# Set environment to exit with any non-zero exit codes
+set -e
+
 if [ ${TASK} == "r_test" ]; then
-    # Set environment to exit with any non-zero exit codes
-    set -e
+    # Not sure what this export does
     export _R_CHECK_TIMINGS_=0
     
     # Install R for OSx
@@ -15,9 +17,9 @@ if [ ${TASK} == "r_test" ]; then
     # Install package dependencies
     cd R
     Rscript -e "library(devtools); library(methods); options(repos=c(CRAN='https://cran.rstudio.com')); install_deps(dependencies = TRUE)"
-    cd ..
-    
+    Rscript -e 'install.packages("roxygen2")'
     # Build package
+    cd ..
     R CMD INSTALL R
     
     # Run tests
@@ -32,24 +34,12 @@ if [ ${TASK} == "r_test" ]; then
 fi
 
 if [ ${TASK} == "python_test" ]; then
-    # make all || exit -1
-    # # use cached dir for storing data
-    # rm -rf ${PWD}/data
-    # mkdir -p ${CACHE_PREFIX}/data
-    # ln -s ${CACHE_PREFIX}/data ${PWD}/data
-    # 
-    # if [ ${TRAVIS_OS_NAME} == "osx" ]; then
-    #     python -m nose tests/python/unittest || exit -1
-    #     python3 -m nose tests/python/unittest || exit -1
-    #     make cython3
-    #     # cython tests
-    #     export MXNET_ENFORCE_CYTHON=1
-    #     python3 -m nose tests/python/unittest || exit -1
-    #     python3 -m nose tests/python/train || exit -1
-    # else
-    #     nosetests tests/python/unittest || exit -1
-    #     nosetests3 tests/python/unittest || exit -1
-    #     nosetests3 tests/python/train || exit -1
-    # fi
+    # Install Python?
+    
+    # Run tests
+    python3 -m nose tests/python/unittest || exit -1
+    
+    # If successful this far, submit to test coverage and exit with exit 
+    # code 0 (sucess).
     exit 0
 fi
