@@ -65,11 +65,16 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                         n_samples = 1000, n_divisions = 1000, 
                         n_iterations = 10, random_state = NULL, 
                         progress_bar = TRUE, n_core = 1, ...) {
+  # Instantiate output
+  output <- list()
+  
   # Set sampler function
   sampler <- set_sampler(sampler, family)
+  output[["sampler"]] <- sampler
   
   # Set preprocessor function
   preprocessor <- set_preprocessor(preprocessor)
+  output[["preprocessor"]] <- preprocessor
   
   # Set random state
   set_random_state(random_state)
@@ -88,38 +93,39 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
   
   # Isolate dependent variable
   y <- isolate_dependent_variable(.data, dependent_variable)
+  output[["y"]] <- y
   
   # Isolate independent variables
   X <- isolate_independent_variables(.data, dependent_variable)
+  output[["X"]] <- X
   
-  # Instantiate output
-  output <- list()
+  # Split data
+  split_data <- sampler(X, y, train_size = train_size)
+  output <- c(output, split_data)
+  X_train <- split_data[["X_train"]]
+  X_test <- split_data[["X_test"]]
+  y_train <- split_data[["y_train"]]
+  y_test <- split_data[["y_test"]]
   
   # assess family of regression
   if (family == "gaussian") {
 
     # Replicate coefficients
-    coefs <- replicate_coefficients(glmnet_fit_model_gaussian, 
-                                    glmnet_extract_coefficients, 
-                                    preprocessor, X, y, 
-                                    categorical_variables = categorical_variables, 
-                                    n_samples = n_samples, 
-                                    progress_bar = progress_bar, 
-                                    n_core = n_core, ...)
-    output[["coefs"]] <- coefs
+    coefficients <- replicate_coefficients(glmnet_fit_model_gaussian, 
+                                           glmnet_extract_coefficients, 
+                                           preprocessor, X, y, 
+                                           categorical_variables = categorical_variables, 
+                                           n_samples = n_samples, 
+                                           progress_bar = progress_bar, 
+                                           n_core = n_core, ...)
+    output[["coefficients"]] <- coefficients
     
     # Process coefficients
-    betas <- process_coefficients(coefs, survival_rate_cutoff)
-    output[["betas"]] <- betas
-    output[["betas_plot"]] <- plot_betas(betas)
+    coefficients_processed <- process_coefficients(coefficients, survival_rate_cutoff)
+    output[["coefficients_processed"]] <- coefficients_processed
     
-    # Split data
-    split_data <- sampler(X, y, train_size = train_size)
-    output <- c(output, split_data)
-    X_train <- split_data[["X_train"]]
-    X_test <- split_data[["X_test"]]
-    y_train <- split_data[["y_train"]]
-    y_test <- split_data[["y_test"]]
+    # Save coefficients plots
+    output[["plot_coefficients_processed"]] <- plot_coefficients_processed(coefficients_processed)
     
     # Replicate predictions
     predictions <- replicate_predictions(glmnet_fit_model_gaussian, 
@@ -131,55 +137,51 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                                          progress_bar = progress_bar, 
                                          n_core = n_core, ...)
     output <- c(output, predictions)
-    y_train_predictions <- predictions[["y_train_predictions"]]
-    y_test_predictions <- predictions[["y_test_predictions"]]
+    predictions_train <- predictions[["predictions_train"]]
+    predictions_test <- predictions[["predictions_test"]]
     
-    # Take average of predictions for training and test sets
-    y_train_predictions_mean <- apply(y_train_predictions, 1, mean)
-    y_test_predictions_mean <- apply(y_test_predictions, 1, mean)
+    # Process predictions
+    predictions_train_mean <- apply(predictions_train, 1, mean)
+    predictions_test_mean <- apply(predictions_test, 1, mean)
+    output[["predictions_train_mean"]] <- predictions_train_mean
+    output[["predictions_test_mean"]] <- predictions_test_mean
     
-    # Save plots
-    output[["predictions_train_plot"]] <- plot_gaussian_predictions(y_train, y_train_predictions_mean)
-    output[["predictions_test_plot"]] <- plot_gaussian_predictions(y_test, y_test_predictions_mean)
+    # Save predictions plots
+    output[["plot_predictions_train"]] <- plot_gaussian_predictions(y_train, predictions_train_mean)
+    output[["plot_predictions_test"]] <- plot_gaussian_predictions(y_test, predictions_test_mean)
     
-    # Replicate training and test metrics
-    mses <- replicate_mses(glmnet_fit_model_gaussian, glmnet_predict_model, 
-                           sampler, preprocessor, X, y, 
-                           categorical_variables = categorical_variables, 
-                           n_divisions = n_divisions, 
-                           n_iterations = n_iterations, 
-                           progress_bar = progress_bar, n_core = n_core, ...)
-    output <- c(output, mses)
-    train_mses <- mses[["mean_train_metrics"]]
-    test_mses <- mses[["mean_test_metrics"]]
+    # Replicate metrics
+    metrics <- replicate_mses(glmnet_fit_model_gaussian, glmnet_predict_model, 
+                              sampler, preprocessor, X, y, 
+                              categorical_variables = categorical_variables, 
+                              n_divisions = n_divisions, 
+                              n_iterations = n_iterations, 
+                              progress_bar = progress_bar, n_core = n_core, ...)
+    output <- c(output, metrics)
+    metrics_train_mean <- metrics[["metrics_train_mean"]]
+    metrics_test_mean <- metrics[["metrics_test_mean"]]
     
-    # Save plots
-    output[["metrics_train_plot"]] <- plot_mse_histogram(train_mses)
-    output[["metrics_test_plot"]] <- plot_mse_histogram(test_mses)
+    # Save metrics plots
+    output[["plot_metrics_train_mean"]] <- plot_mse_histogram(metrics_train_mean)
+    output[["plot_metrics_test_mean"]] <- plot_mse_histogram(metrics_test_mean)
 
   } else if (family == "binomial") {
 
     # Replicate coefficients
-    coefs <- replicate_coefficients(glmnet_fit_model_binomial, glmnet_extract_coefficients, 
-                                    preprocessor, X, y, 
-                                    categorical_variables = categorical_variables, 
-                                    n_samples = n_samples, 
-                                    progress_bar = progress_bar, 
-                                    n_core = n_core, ...)
-    output[["coefs"]] <- coefs
+    coefficients <- replicate_coefficients(glmnet_fit_model_binomial, glmnet_extract_coefficients, 
+                                           preprocessor, X, y, 
+                                           categorical_variables = categorical_variables, 
+                                           n_samples = n_samples, 
+                                           progress_bar = progress_bar, 
+                                           n_core = n_core, ...)
+    output[["coefficients"]] <- coefficients
     
     # Process coefficients
-    betas <- process_coefficients(coefs, survival_rate_cutoff)
-    output[["betas"]] <- betas
-    output[["betas_plot"]] <- plot_betas(betas)
+    coefficients_processed <- process_coefficients(coefficients, survival_rate_cutoff)
+    output[["coefficients_processed"]] <- coefficients_processed
     
-    # Split data
-    split_data <- sampler(X, y, train_size = train_size)
-    output <- c(output, split_data)
-    X_train <- split_data[["X_train"]]
-    X_test <- split_data[["X_test"]]
-    y_train <- split_data[["y_train"]]
-    y_test <- split_data[["y_test"]]
+    # Save coefficients plots
+    output[["plot_coefficients_processed"]] <- plot_coefficients_processed(coefficients_processed)
     
     # Replicate predictions
     predictions <- replicate_predictions(glmnet_fit_model_binomial, glmnet_predict_model, 
@@ -190,30 +192,32 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                                          progress_bar = progress_bar, 
                                          n_core = n_core, ...)
     output <- c(output, predictions)
-    y_train_predictions <- predictions[["y_train_predictions"]]
-    y_test_predictions <- predictions[["y_test_predictions"]]
+    predictions_train <- predictions[["predictions_train"]]
+    predictions_test <- predictions[["predictions_test"]]
     
-    # Generate scores for training and test sets
-    y_train_predictions_mean <- apply(y_train_predictions, 1, mean)
-    y_test_predictions_mean <- apply(y_test_predictions, 1, mean)
+    # Process predictions
+    predictions_train_mean <- apply(predictions_train, 1, mean)
+    predictions_test_mean <- apply(predictions_test, 1, mean)
+    output[["predictions_train_mean"]] <- predictions_train_mean
+    output[["predictions_test_mean"]] <- predictions_test_mean
     
-    # Save plots
-    output[["predictions_train_plot"]] <- plot_roc_curve(y_train, y_train_predictions_mean)
-    output[["predictions_test_plot"]] <- plot_roc_curve(y_test, y_test_predictions_mean)
+    # Save predictions plots
+    output[["plot_predictions_train"]] <- plot_roc_curve(y_train, predictions_train_mean)
+    output[["plot_predictions_test"]] <- plot_roc_curve(y_test, predictions_test_mean)
     
-    # Replicate training and test AUCs
-    aucs <- replicate_aucs(glmnet_fit_model_binomial, glmnet_predict_model, 
-                           sampler, preprocessor, X, y, 
-                           categorical_variables = categorical_variables, 
-                           n_divisions = n_divisions, n_iterations = n_iterations, 
-                           progress_bar = progress_bar, n_core = n_core, ...)
-    output <- c(output, aucs)
-    train_aucs <- aucs[["mean_train_metrics"]]
-    test_aucs <- aucs[["mean_test_metrics"]]
+    # Replicate metrics
+    metrics <- replicate_aucs(glmnet_fit_model_binomial, glmnet_predict_model, 
+                              sampler, preprocessor, X, y, 
+                              categorical_variables = categorical_variables, 
+                              n_divisions = n_divisions, n_iterations = n_iterations, 
+                              progress_bar = progress_bar, n_core = n_core, ...)
+    output <- c(output, metrics)
+    metrics_train_mean <- metrics[["metrics_train_mean"]]
+    metrics_test_mean <- metrics[["metrics_test_mean"]]
     
-    # Save plots
-    output[["metrics_train_plot"]] <- plot_auc_histogram(train_aucs)
-    output[["metrics_test_plot"]] <- plot_auc_histogram(test_aucs)
+    # Save metrics plots
+    output[["plot_metrics_train_mean"]] <- plot_auc_histogram(metrics_train_mean)
+    output[["plot_metrics_test_mean"]] <- plot_auc_histogram(metrics_test_mean)
 
   } else {
     stop("Value error!")
