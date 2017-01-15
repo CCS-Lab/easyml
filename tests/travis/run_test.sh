@@ -26,6 +26,9 @@ if [ ${TASK} == "r_test" ]; then
     cd R/
     Rscript -e "devtools::test()" || exit -1
     
+    # Check build
+    Rscript -e "devtools::check()" || exit -1
+    
     # If successful this far, submit to test coverage and exit with exit 
     # code 0 (sucess).
     Rscript -e "library(covr); codecov()"
