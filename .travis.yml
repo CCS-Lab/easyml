@@ -1,4 +1,4 @@
-language: python
+language: cpp
 
 # Be strict when checking our package
 warnings_are_errors: true
