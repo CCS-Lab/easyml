@@ -7,6 +7,8 @@
 #' @return TO BE EDITED.
 #' @export
 plot_betas <- function(betas) {
+  if (nrow(betas) > 20) 
+    warning("Number of predictors exceeds 20; plot may not render as nicely.")
   g <- 
     ggplot2::ggplot(betas, ggplot2::aes(x = reorder(predictor, -(1:nrow(betas))), 
                                         y = mean, colour = dotColor)) +
