@@ -11,13 +11,13 @@ if [ ${TASK} == "r_test" ]; then
     wget https://cran.rstudio.com/bin/macosx/R-latest.pkg  -O /tmp/R-latest.pkg
     sudo installer -pkg "/tmp/R-latest.pkg" -target /
     
-    # Install devtools
+    # Install devtools and roxygen2
     Rscript -e "install.packages('devtools', repo = 'https://cran.rstudio.com')"
+    Rscript -e "install.packages('roxygen2', repo = 'https://cran.rstudio.com')"
     
     # Install package dependencies
     cd R
     Rscript -e "library(devtools); library(methods); options(repos=c(CRAN='https://cran.rstudio.com')); install_deps(dependencies = TRUE)"
-    Rscript -e 'install.packages("roxygen2")'
     # Build package
     cd ..
     R CMD INSTALL R
