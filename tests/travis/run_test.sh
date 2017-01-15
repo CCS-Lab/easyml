@@ -12,8 +12,7 @@ if [ ${TASK} == "r_test" ]; then
     sudo installer -pkg "/tmp/R-latest.pkg" -target /
     
     # Install devtools and roxygen2
-    Rscript -e "install.packages('devtools', repo = 'https://cran.rstudio.com')"
-    Rscript -e "install.packages('roxygen2', repo = 'https://cran.rstudio.com')"
+    Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.rstudio.com')"
     
     # Install package dependencies
     cd R/
@@ -35,14 +34,15 @@ fi
 
 if [ ${TASK} == "python_test" ]; then
     # Install Python for OSx
-    brew update
+    brew update && brew upgrade
+    brew reinstall gcc
     brew tap homebrew/science
     brew install python3
     brew unlink gcc@4.9
     brew install gcc49 --with-fortran
     
     # Install pytest
-    python3 -m pip install --user pytest numpy
+    pip3 install pytest
     
     # Install package
     cd Python/
