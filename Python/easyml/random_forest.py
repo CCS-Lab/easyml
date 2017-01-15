@@ -6,10 +6,10 @@ from os import path
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
-from .bootstrap import bootstrap_aucs, bootstrap_mses, bootstrap_predictions
+from .replicate import replicate_aucs, replicate_mses, replicate_predictions
 from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
 from .preprocess import preprocess_identity
-from .sample import sample_equal_proportion
+from .resample import sample_equal_proportion
 from .utils import set_random_state
 
 
@@ -73,8 +73,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian',
         # Split data
         X_train, X_test, y_train, y_test = sampler(X, y, train_size=train_size)
 
-        # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, preprocessor,
+        # Replicate predictions
+        y_train_pred, y_test_pred = replicate_predictions(model, fit_model, predict_model, preprocessor,
                                                           X_train, y_train, X_test,
                                                           categorical_variables=categorical_variables,
                                                           n_samples=n_samples, progress_bar=progress_bar,
@@ -92,8 +92,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian',
         plot_gaussian_predictions(y_test, y_test_pred_mean)
         plt.savefig(path.join(out_directory, 'test_predictions.png'))
 
-        # Bootstrap training and test MSEs
-        train_mses, test_mses = bootstrap_mses(model, sampler, fit_model, predict_model, preprocessor, X, y,
+        # Replicate training and test MSEs
+        train_mses, test_mses = replicate_mses(model, sampler, fit_model, predict_model, preprocessor, X, y,
                                                categorical_variables=categorical_variables,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
@@ -119,8 +119,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian',
         # Split data
         X_train, X_test, y_train, y_test = sampler(X, y, train_size=train_size)
 
-        # Bootstrap predictions
-        y_train_pred, y_test_pred = bootstrap_predictions(model, fit_model, predict_model, preprocessor,
+        # Replicate predictions
+        y_train_pred, y_test_pred = replicate_predictions(model, fit_model, predict_model, preprocessor,
                                                           X_train, y_train, X_test,
                                                           categorical_variables=categorical_variables,
                                                           n_samples=n_samples, progress_bar=progress_bar,
@@ -138,8 +138,8 @@ def easy_random_forest(data, dependent_variable, family='gaussian',
         plot_roc_curve(y_test, y_test_pred_mean)
         plt.savefig(path.join(out_directory, 'test_roc_curve.png'))
 
-        # Bootstrap training and test AUCSs
-        train_aucs, test_aucs = bootstrap_aucs(model, sampler, fit_model, predict_model, preprocessor, X, y,
+        # Replicate training and test AUCSs
+        train_aucs, test_aucs = replicate_aucs(model, sampler, fit_model, predict_model, preprocessor, X, y,
                                                categorical_variables=categorical_variables,
                                                n_divisions=n_divisions, n_iterations=n_iterations,
                                                progress_bar=progress_bar, n_core=n_core)
