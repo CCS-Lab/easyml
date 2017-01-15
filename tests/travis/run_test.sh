@@ -43,13 +43,13 @@ if [ ${TASK} == "python_test" ]; then
     python3 -m pip install --user pytest numpy
     
     # Install package
+    cd Python/
     pip3 install .
     
     # Install package dependencies
     pip3 install -r requirements.txt
     
     # Run tests
-    cd Python/
     python3 -m pytest || exit -1
     
     # If successful this far, submit to test coverage and exit with exit 
