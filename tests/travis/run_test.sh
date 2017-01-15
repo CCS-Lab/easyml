@@ -27,7 +27,7 @@ if [ ${TASK} == "r_test" ]; then
     Rscript -e "devtools::test()" || exit -1
     
     # Check build
-    Rscript -e "ifelse(length(devtools::check()$warnings(x)) > 0, stop('Erorr!'), 1L)" || exit -1
+    Rscript -e "ifelse(length(devtools::check()$warnings) > 0, stop('Error!'), 0L)" || exit -1
     
     # If successful this far, submit to test coverage and exit with exit 
     # code 0 (sucess).
