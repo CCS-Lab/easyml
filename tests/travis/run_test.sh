@@ -48,7 +48,7 @@ if [ ${TASK} == "python_test" ]; then
     pip3 install .
     
     # Install package dependencies
-    pip3 install numpy
+    pip3 install numpy scipy
     pip3 install -r requirements.txt
     
     # Run tests
