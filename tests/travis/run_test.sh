@@ -16,16 +16,16 @@ if [ ${TASK} == "r_test" ]; then
     Rscript -e "install.packages('roxygen2', repo = 'https://cran.rstudio.com')"
     
     # Install package dependencies
-    cd R
+    cd R/
     Rscript -e "library(devtools); library(methods); options(repos=c(CRAN='https://cran.rstudio.com')); install_deps(dependencies = TRUE)"
+    
     # Build package
     cd ..
     R CMD INSTALL R
     
     # Run tests
-    cd R
+    cd R/
     Rscript -e "devtools::test()" || exit -1
-    Rscript tests/travis/r_vignettes.R
     
     # If successful this far, submit to test coverage and exit with exit 
     # code 0 (sucess).
@@ -34,10 +34,23 @@ if [ ${TASK} == "r_test" ]; then
 fi
 
 if [ ${TASK} == "python_test" ]; then
-    # Install Python?
+    # Install Python for OSx
+    brew update
+    brew tap homebrew/science
+    brew install python3
+    
+    # Install pytest
+    python3 -m pip install --user pytest numpy
+    
+    # Install package
+    pip3 install .
+    
+    # Install package dependencies
+    pip3 install -r requirements.txt
     
     # Run tests
-    python3 -m nose tests/python/unittest || exit -1
+    cd Python/
+    python3 -m pytest || exit -1
     
     # If successful this far, submit to test coverage and exit with exit 
     # code 0 (sucess).
