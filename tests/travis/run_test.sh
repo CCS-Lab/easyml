@@ -33,16 +33,15 @@ if [ ${TASK} == "r_test" ]; then
 fi
 
 if [ ${TASK} == "python_test" ]; then
-    # Install Python for OSx
-    brew update && brew upgrade
+    # Update and upgrade brew
+    brew update
+    
+    # Reinstall gcc (since it doesn't work for some reason)
     brew reinstall gcc
+    
+    # Install Python for OSx
     brew tap homebrew/science
     brew install python3
-    brew unlink gcc@4.9
-    brew install gcc49 --with-fortran
-    
-    # Install pytest
-    pip3 install pytest
     
     # Install package
     cd Python/
@@ -52,7 +51,7 @@ if [ ${TASK} == "python_test" ]; then
     pip3 install -r requirements.txt
     
     # Run tests
-    python3 -m pytest || exit -1
+    pytest || exit -1
     
     # If successful this far, submit to test coverage and exit with exit 
     # code 0 (sucess).
