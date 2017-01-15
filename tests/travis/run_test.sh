@@ -38,6 +38,7 @@ if [ ${TASK} == "python_test" ]; then
     brew update
     brew tap homebrew/science
     brew install python3
+    brew install gcc49 --with-fortran
     
     # Install pytest
     python3 -m pip install --user pytest numpy
