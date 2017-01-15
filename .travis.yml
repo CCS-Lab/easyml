@@ -1,7 +1,7 @@
-language: cpp
+language: python
 
 # Be strict when checking our package
-warnings_are_errors: false
+warnings_are_errors: true
 
 # Sudo is required
 sudo: required
