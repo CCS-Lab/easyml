@@ -6,7 +6,7 @@ import numpy as np
 __all__ = []
 
 
-def sample_equal_proportion(X, y, train_size=0.667):
+def resample_equal_proportion(X, y, train_size=0.667):
     """Sample in equal proportion.
 
     Parameters

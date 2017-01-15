@@ -61,7 +61,7 @@ def set_sampler(sampler=None, family=None):
         if family == "gaussian":
             sampler = train_test_split
         elif family == "binomial":
-            sampler = resample.sample_equal_proportion
+            sampler = resample.resample_equal_proportion
         else:
             raise ValueError
     return sampler

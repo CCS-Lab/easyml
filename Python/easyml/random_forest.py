@@ -1,16 +1,11 @@
 """Functions for random forest analysis.
 """
-import matplotlib.pyplot as plt
 import numpy as np
-from os import path
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.model_selection import train_test_split
 
-from .replicate import replicate_aucs, replicate_mses, replicate_predictions
-from .plot import plot_auc_histogram, plot_gaussian_predictions, plot_mse_histogram, plot_roc_curve
-from .preprocess import preprocess_identity
-from .resample import sample_equal_proportion
-from .utils import set_random_state
+from . import replicate
+from . import plot
+from . import utils
 
 
 __all__ = ['easy_random_forest']
@@ -25,50 +20,39 @@ def easy_random_forest(data, dependent_variable, family='gaussian',
     # Make it run in sequential for now
     n_core = 1
 
-    # Set random state
-    set_random_state(random_state)
-
-    # Set columns
-    column_names = data.columns
-
-    # Exclude variables
-    if exclude_variables is not None:
-        data = data.drop(exclude_variables, axis=1)
-        column_names = [c for c in column_names if c not in exclude_variables]
-
-    # Isolate y
-    y = data[dependent_variable].values
-
-    # Remove y column name from column names
-    column_names = [c for c in column_names if c != dependent_variable]
-    data = data.drop(dependent_variable, axis=1)
-
-    # Isolate X
-    X = data.values
-
-    # Move categorical names to the front when there are categorical variables
-    if categorical_variables is not None and preprocessor is not None:
-        column_names = [c for c in column_names if c not in categorical_variables]
-        column_names = categorical_variables + column_names
-        categorical_variables = np.array([True if c in categorical_variables else False for c in column_names])
+    # Set sampler function
+    sampler = utils.set_sampler(sampler, family)
 
     # Set preprocessor function
-    if preprocessor is None:
-        preprocessor = preprocess_identity
+    preprocessor = utils.set_preprocessor(preprocessor)
 
-    # Set random_forest specific handlers
-    def fit_model(e, X, y):
-        return e.fit(X, y)
+    # Set random state
+    utils.set_random_state(random_state)
 
+    # Set columns
+    column_names = list(data.columns.values)
+    column_names = utils.set_column_names(column_names, dependent_variable,
+                                          exclude_variables, preprocessor, categorical_variables)
+
+    # Remove variables
+    data = utils.remove_variables(data, exclude_variables)
+
+    # Set categorical variables
+    categorical_variables = utils.set_categorical_variables(column_names, categorical_variables)
+
+    # Isolate y
+    y = utils.isolate_dependent_variable(data, dependent_variable)
+
+    # Isolate X
+    X = utils.isolate_independent_variables(data, dependent_variable)
+
+    # Instantiate output
+    output = dict()
+
+    # assess family of regression
     if family == 'gaussian':
         # Set gaussian specific functions
         model = RandomForestRegressor(**kwargs)
-
-        def predict_model(e, X):
-            return e.predict(X)
-
-        if sampler is None:
-            sampler = train_test_split
 
         # Split data
         X_train, X_test, y_train, y_test = sampler(X, y, train_size=train_size)
