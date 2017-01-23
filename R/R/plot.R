@@ -6,7 +6,7 @@
 #' @param y_pred Estimated target values.
 #' @return TO BE EDITED.
 #' @export
-plot_betas <- function(betas) {
+plot_coefficients_processed <- function(betas) {
   if (nrow(betas) > 20) 
     warning("Number of predictors exceeds 20; plot may not render as nicely.")
   g <- 
@@ -34,7 +34,7 @@ plot_betas <- function(betas) {
 #' @param y_pred Estimated target values.
 #' @return TO BE EDITED.
 #' @export
-plot_gaussian_predictions <- function(y_true, y_pred) {
+plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
   
   g <- 
@@ -55,7 +55,7 @@ plot_gaussian_predictions <- function(y_true, y_pred) {
 #' @param y_pred Estimated target values.
 #' @return TO BE EDITED.
 #' @export
-plot_roc_curve <- function(y_true, y_pred) {
+plot_predictions_binomial <- function(y_true, y_pred) {
   results <- pROC::roc(y_true, y_pred)
   auc <- as.numeric(results$auc)
   auc_label <- paste("AUC = ", round(auc, digits = 3), sep = "")
@@ -83,7 +83,7 @@ plot_roc_curve <- function(y_true, y_pred) {
 #' @param mses TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-plot_mse_histogram <- function(mses) {
+plot_metrics_gaussian_mean_squared_error <- function(mses) {
   mean_mse <- mean(mses)
   mse_label <- paste("Mean MSE = ", round(mean_mse, digits = 3), sep = "")
   df <- data.frame(mses = mses, stringsAsFactors = FALSE)
@@ -92,9 +92,32 @@ plot_mse_histogram <- function(mses) {
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_mse, linetype = "dotted") + 
     ggplot2::annotate("text", label = mse_label, x = 0.2, y = 0.2, size = 8) + 
-    ggplot2::scale_x_continuous("MSE", limits = c(0, 1)) + 
+    ggplot2::scale_x_continuous("MSE") + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
     ggplot2::ggtitle("Distribution of MSEs") + 
+    ggplot2::theme_bw()
+  g
+}
+
+#' TO BE EDITED.
+#' 
+#' TO BE EDITED.
+#'
+#' @param mses TO BE EDITED.
+#' @return TO BE EDITED.
+#' @export
+plot_metrics_gaussian_r2_score <- function(r2_scores) {
+  mean_r2_score <- mean(r2_scores)
+  r2_score_label <- paste("Mean R^2 Score = ", round(mean_r2_score, digits = 3), sep = "")
+  df <- data.frame(r2_scores = r2_scores, stringsAsFactors = FALSE)
+  g <- 
+    ggplot2::ggplot(df, ggplot2::aes(x = r2_scores)) +
+    ggplot2::geom_histogram(binwidth = 0.02) + 
+    ggplot2::geom_vline(xintercept = mean_r2_score, linetype = "dotted") + 
+    ggplot2::annotate("text", label = r2_score_label, x = 0.2, y = 0.2, size = 8) + 
+    ggplot2::scale_x_continuous("R^2 Score", limits = c(0, 1)) + 
+    ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
+    ggplot2::ggtitle("Distribution of R^2 Scores") + 
     ggplot2::theme_bw()
   g
 }
@@ -106,7 +129,7 @@ plot_mse_histogram <- function(mses) {
 #' @param aucs TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-plot_auc_histogram <- function(aucs) {
+plot_metrics_binomial_area_under_curve <- function(aucs) {
   mean_auc <- mean(aucs)
   auc_label <- paste("Mean AUC = ", round(mean_auc, digits = 3), sep = "")
   df <- data.frame(aucs = aucs, stringsAsFactors = FALSE)

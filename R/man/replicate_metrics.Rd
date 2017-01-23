@@ -4,8 +4,8 @@
 \alias{replicate_metrics}
 \title{TO BE EDITED.}
 \usage{
-replicate_metrics(fit_model, predict_model, sampler, preprocessor, measure, X,
-  y, categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
+replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
+  categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
   progress_bar = TRUE, n_core = 1, ...)
 }
 \arguments{

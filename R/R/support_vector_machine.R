@@ -4,9 +4,9 @@
 #'
 #' @return TO BE EDITED.
 #' @export
-random_forest_fit_model_gaussian <- function(X, y, ...) {
+support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
   X <- as.matrix(X)
-  randomForest::randomForest(X, y, ...)
+  e1071::svm(X, y, scale = FALSE, type = "nu-regression", ...)
 }
 
 #' TO BE EDITED.
@@ -15,10 +15,10 @@ random_forest_fit_model_gaussian <- function(X, y, ...) {
 #'
 #' @return TO BE EDITED.
 #' @export
-random_forest_fit_model_binomial <- function(X, y, ...) {
+support_vector_machine_fit_model_binomial <- function(X, y, ...) {
   X <- as.matrix(X)
   y <- factor(y)
-  randomForest::randomForest(X, y, ...)
+  e1071::svm(X, y, scale = FALSE, type = "C-classification", ...)
 }
 
 #' TO BE EDITED.
@@ -27,7 +27,7 @@ random_forest_fit_model_binomial <- function(X, y, ...) {
 #'
 #' @return TO BE EDITED.
 #' @export
-random_forest_predict_model <- function(results, newx) {
+support_vector_machine_predict_model <- function(results, newx) {
   as.numeric(predict(results, newdata = newx))
 }
 
@@ -37,14 +37,14 @@ random_forest_predict_model <- function(results, newx) {
 #'
 #' @return TO BE EDITED.
 #' @export
-easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
-                               resample = NULL, preprocess = NULL, measure = NULL, 
-                               exclude_variables = NULL, categorical_variables = NULL, 
-                               train_size = 0.667, survival_rate_cutoff = 0.05, 
-                               n_samples = 1000, n_divisions = 1000, 
-                               n_iterations = 10, random_state = NULL, 
-                               progress_bar = TRUE, n_core = 1, ...) {
-  easy_analysis(.data, dependent_variable, algorithm = "random_forest", 
+easy_support_vector_machine <- function(.data, dependent_variable, family = "gaussian", 
+                     resample = NULL, preprocess = NULL, measure = NULL, 
+                     exclude_variables = NULL, categorical_variables = NULL, 
+                     train_size = 0.667, survival_rate_cutoff = 0.05, 
+                     n_samples = 1000, n_divisions = 1000, 
+                     n_iterations = 10, random_state = NULL, 
+                     progress_bar = TRUE, n_core = 1, ...) {
+  easy_analysis(.data, dependent_variable, algorithm = "support_vector_machine", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 
                 exclude_variables = exclude_variables, 

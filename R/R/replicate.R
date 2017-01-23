@@ -12,7 +12,7 @@
 #' @return TO BE EDITED.
 #' @export
 replicate_coefficients <- function(fit_model, extract_coefficients, 
-                                   preprocessor, X, y, 
+                                   preprocess, X, y, 
                                    categorical_variables = NULL, 
                                    n_samples = 1000, progress_bar = TRUE, 
                                    n_core = 1, ...) {
@@ -23,26 +23,26 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
   }
   
   # Preprocess data
-  result <- preprocessor(list(X = X), categorical_variables)
+  result <- preprocess(list(X = X), categorical_variables)
   X <- result[["X"]]
 
   # Define closure
   replicate_coefficient <- function(i) {
     model <- fit_model(X, y, ...)
-    coef <- extract_coefficients(model)
-    coef
+    coefficient <- extract_coefficients(model)
+    coefficient
   }
   
-  # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar, n_core)
+  # Set which looping mechanism to use
+  looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
-  output <- looper(1:n_samples, replicate_coefficient)
+  coefficients <- looper(1:n_samples, replicate_coefficient)
   
   # Combine list of data.frames into one data.frame; 
   # structure should be a data.frame of n_samples by ncol(X)
-  output <- do.call(rbind, output)
-  output
+  coefficients <- do.call(rbind, coefficients)
+  coefficients
 }
 
 #' TO BE EDITED.
@@ -59,7 +59,7 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-replicate_predictions <- function(fit_model, predict_model, preprocessor, 
+replicate_predictions <- function(fit_model, predict_model, preprocess, 
                                   X_train, y_train, X_test, 
                                   categorical_variables = NULL, 
                                   n_samples = 1000, progress_bar = TRUE, 
@@ -70,7 +70,7 @@ replicate_predictions <- function(fit_model, predict_model, preprocessor,
   }
   
   # Preprocess data
-  result <- preprocessor(list(X_train = X_train, X_test = X_test), 
+  result <- preprocess(list(X_train = X_train, X_test = X_test), 
                          categorical_variables = categorical_variables)
   X_train <- result[["X_train"]]
   X_test <- result[["X_test"]]
@@ -81,26 +81,26 @@ replicate_predictions <- function(fit_model, predict_model, preprocessor,
     results <- fit_model(X_train, y_train, ...)
     
     # Save predictions
-    list(y_train_predictions = predict_model(results, X_train), 
-         y_test_predictions = predict_model(results, X_test))
+    list(prediction_train = predict_model(results, X_train), 
+         prediction_test = predict_model(results, X_test))
   }
   
-  # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar, n_core)
+  # Set which looping mechanism to use
+  looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
   output <- looper(1:n_samples, replicate_prediction)
   
-  y_train_predictions <- lapply(output, function(x) x$y_train_predictions)
-  y_test_predictions <- lapply(output, function(x) x$y_test_predictions)
+  predictions_train <- lapply(output, function(x) x$prediction_train)
+  predictions_test <- lapply(output, function(x) x$prediction_test)
   
-  y_train_predictions <- t(matrix(unlist(y_train_predictions), 
-                                  ncol = nrow(X_train), byrow = TRUE))
-  y_test_predictions <- t(matrix(unlist(y_test_predictions), 
-                                 ncol = nrow(X_test), byrow = TRUE))
+  predictions_train <- t(matrix(unlist(predictions_train), 
+                                ncol = nrow(X_train), byrow = TRUE))
+  predictions_test <- t(matrix(unlist(predictions_test), 
+                               ncol = nrow(X_test), byrow = TRUE))
   
-  list(y_train_predictions = y_train_predictions, 
-       y_test_predictions = y_test_predictions)
+  list(predictions_train = predictions_train, 
+       predictions_test = predictions_test)
 }
 
 #' TO BE EDITED.
@@ -118,7 +118,7 @@ replicate_predictions <- function(fit_model, predict_model, preprocessor,
 #' @param parallel TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-replicate_metrics <- function(fit_model, predict_model, sampler, preprocessor, 
+replicate_metrics <- function(fit_model, predict_model, resample, preprocess, 
                               measure, X, y, categorical_variables = NULL, 
                               n_divisions = 1000, n_iterations = 100, 
                               progress_bar = TRUE, n_core = 1, ...) {
@@ -127,26 +127,26 @@ replicate_metrics <- function(fit_model, predict_model, sampler, preprocessor,
     print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
-  # Identify which looping mechanism to use
-  looper <- identify_looper(progress_bar, n_core)
+  # Set which looping mechanism to use
+  looper <- set_looper(progress_bar, n_core)
   
   # Define closure
   replicate_metric <- function(i) {
     # Split data
-    split_data <- sampler(X, y)
+    split_data <- resample(X, y)
     X_train <- split_data[["X_train"]]
     X_test <- split_data[["X_test"]]
     y_train <- split_data[["y_train"]]
     y_test <- split_data[["y_test"]]
     
     # Preprocess data
-    result <- preprocessor(list(X_train = X_train, X_test = X_test), 
+    result <- preprocess(list(X_train = X_train, X_test = X_test), 
                            categorical_variables = categorical_variables)
     X_train <- result[["X_train"]]
     X_test <- result[["X_test"]]
     
     # Create temporary containers
-    train_metrics <- numeric()
+    metric_train <- numeric()
     test_metrics <- numeric()
     
     # Loop over number of iterations
@@ -155,95 +155,30 @@ replicate_metrics <- function(fit_model, predict_model, sampler, preprocessor,
       results <- fit_model(X_train, y_train, ...)
       
       # Generate scores for training and test sets
-      y_train_predictions <- predict_model(results, X_train)
-      y_test_predictions <- predict_model(results, X_test)
+      predictions_train <- predict_model(results, X_train)
+      predictions_test <- predict_model(results, X_test)
       
       # Save metrics
-      train_metric <- measure(y_train, y_train_predictions)
-      test_metric <- measure(y_test, y_test_predictions)
-      list(train_metric = train_metric, test_metric = test_metric)
+      metric_train <- measure(y_train, predictions_train)
+      metric_test <- measure(y_test, predictions_test)
+      list(metric_train = metric_train, metric_test = metric_test)
     })
     
     # Take average of metrics
-    train_metrics <- unlist(lapply(output_iterations, function(x) x$train_metric))
-    test_metrics <- unlist(lapply(output_iterations, function(x) x$test_metric))
+    metrics_train <- unlist(lapply(output_iterations, function(x) x$metric_train))
+    metrics_test <- unlist(lapply(output_iterations, function(x) x$metric_test))
     
     # Save mean of metrics
-    list(mean_train_metric = mean(train_metrics), 
-         mean_test_metric = mean(test_metrics))
+    list(metrics_train_mean = mean(metrics_train), 
+         metrics_test_mean = mean(metrics_test))
   }
   
   # Loop over number of divisions
   output_divisions <- looper(1:n_divisions, replicate_metric)
   
-  mean_train_metrics <- unlist(lapply(output_divisions, function(x) x$mean_train_metric))
-  mean_test_metrics <- unlist(lapply(output_divisions, function(x) x$mean_test_metric))
+  metrics_train_mean <- unlist(lapply(output_divisions, function(x) x$metrics_train_mean))
+  metrics_test_mean <- unlist(lapply(output_divisions, function(x) x$metrics_test_mean))
   
-  list(mean_train_metrics = mean_train_metrics, 
-       mean_test_metrics = mean_test_metrics)
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param X TO BE EDITED.
-#' @param y TO BE EDITED.
-#' @param n_divisions TO BE EDITED.
-#' @param n_iterations TO BE EDITED.
-#' @param progress_bar TO BE EDITED.
-#' @param parallel TO BE EDITED.
-#' @return TO BE EDITED.
-#' @export
-replicate_aucs <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
-                           categorical_variables = NULL, 
-                           n_divisions = 1000, n_iterations = 100, 
-                           progress_bar = TRUE, n_core = 1, ...) {
-  replicate_metrics(fit_model = fit_model, predict_model = predict_model, 
-                    sampler = sampler, preprocessor = preprocessor, 
-                    measure = area_under_roc_curve, 
-                    X = X, y = y, categorical_variables = categorical_variables, 
-                    n_divisions = n_divisions, 
-                    n_iterations = n_iterations, progress_bar = progress_bar, 
-                    n_core = n_core, ...)
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param X TO BE EDITED.
-#' @param y TO BE EDITED.
-#' @param n_divisions TO BE EDITED.
-#' @param n_iterations TO BE EDITED.
-#' @param progress_bar TO BE EDITED.
-#' @param parallel TO BE EDITED.
-#' @return TO BE EDITED.
-#' @export
-replicate_mses <- function(fit_model, predict_model, sampler, preprocessor, X, y, 
-                           categorical_variables = NULL, 
-                           n_divisions = 1000, n_iterations = 100, 
-                           progress_bar = TRUE, n_core = 1, ...) {
-  replicate_metrics(fit_model = fit_model, predict_model = predict_model, 
-                    sampler = sampler, preprocessor = preprocessor, 
-                    measure = scorer::mean_squared_error, 
-                    X = X, y = y, categorical_variables = categorical_variables, 
-                    n_divisions = n_divisions, 
-                    n_iterations = n_iterations, progress_bar = progress_bar, 
-                    n_core = n_core, ...)
-}
-
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @return TO BE EDITED.
-#' @export
-area_under_roc_curve <- function(y_true, y_pred) {
-  as.numeric(pROC::roc(y_true, y_pred)$auc)
+  list(metrics_train_mean = metrics_train_mean, 
+       metrics_test_mean = metrics_test_mean)
 }

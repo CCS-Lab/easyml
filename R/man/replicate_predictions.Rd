@@ -4,7 +4,7 @@
 \alias{replicate_predictions}
 \title{TO BE EDITED.}
 \usage{
-replicate_predictions(fit_model, predict_model, preprocessor, X_train, y_train,
+replicate_predictions(fit_model, predict_model, preprocess, X_train, y_train,
   X_test, categorical_variables = NULL, n_samples = 1000,
   progress_bar = TRUE, n_core = 1, ...)
 }

@@ -4,7 +4,7 @@
 \alias{replicate_coefficients}
 \title{TO BE EDITED.}
 \usage{
-replicate_coefficients(fit_model, extract_coefficients, preprocessor, X, y,
+replicate_coefficients(fit_model, extract_coefficients, preprocess, X, y,
   categorical_variables = NULL, n_samples = 1000, progress_bar = TRUE,
   n_core = 1, ...)
 }
