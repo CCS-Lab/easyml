@@ -61,21 +61,20 @@ glmnet_predict_model <- function(results, newx) {
 #' @examples 
 #' library(easyml) # https://github.com/CCS-Lab/easyml
 #' 
-#' # Load data
-#' data("cocaine_dependence", package = "easyml")
+#' # Gaussian
 #' data("prostate", package = "easyml")
+#' results <- easy_glmnet(prostate, "lpsa", 
+#'                        n_samples = 10L, n_divisions = 10L, 
+#'                        n_iterations = 2L, random_state = 12345L, 
+#'                        n_core = 1L, alpha = 1.0)
 #' 
-#' # Analyze data
+#' # Binomial
+#' data("cocaine_dependence", package = "easyml")
 #' results <- easy_glmnet(cocaine_dependence, "diagnosis", 
 #'                        family = "binomial", 
 #'                        exclude_variables = c("subject"), 
 #'                        categorical_variables = c("male"), 
 #'                        preprocess = preprocess_scaler, 
-#'                        n_samples = 10L, n_divisions = 10L, 
-#'                        n_iterations = 2L, random_state = 12345L, 
-#'                        n_core = 1L, alpha = 1.0)
-#'
-#' results <- easy_glmnet(prostate, "lpsa", 
 #'                        n_samples = 10L, n_divisions = 10L, 
 #'                        n_iterations = 2L, random_state = 12345L, 
 #'                        n_core = 1L, alpha = 1.0)

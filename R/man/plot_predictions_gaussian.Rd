@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_predictions_gaussian}
 \alias{plot_predictions_gaussian}
-\title{TO BE EDITED.}
+\title{Plot gaussian predictions.}
 \usage{
 plot_predictions_gaussian(y_true, y_pred)
 }
@@ -15,6 +15,6 @@ plot_predictions_gaussian(y_true, y_pred)
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot gaussian predictions.
 }
 

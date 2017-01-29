@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_metrics_gaussian_mean_squared_error}
 \alias{plot_metrics_gaussian_mean_squared_error}
-\title{TO BE EDITED.}
+\title{Plot mean squared error metrics.}
 \usage{
 plot_metrics_gaussian_mean_squared_error(mses)
 }
@@ -13,6 +13,6 @@ plot_metrics_gaussian_mean_squared_error(mses)
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot mean squared error metrics.
 }
 

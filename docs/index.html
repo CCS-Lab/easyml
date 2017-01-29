@@ -81,12 +81,12 @@ devtools::<span class="kw">install_github</span>(<span class="st">"CCS-Lab/easym
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)</code></pre></div>
 <p>For a dataset with a continuous dependent variable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"prostate"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
-<span class="kw"><a href="reference/easy_glmnet.html">easy_glmnet</a></span>(prostate, <span class="st">"lpsa"</span>)</code></pre></div>
+results &lt;-<span class="st"> </span><span class="kw"><a href="reference/easy_glmnet.html">easy_glmnet</a></span>(prostate, <span class="st">"lpsa"</span>)</code></pre></div>
 <p>For a dataset with a binary dependent variable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
-<span class="kw"><a href="reference/easy_glmnet.html">easy_glmnet</a></span>(cocaine_dependence, <span class="st">"diagnosis"</span>, 
-            <span class="dt">family =</span> <span class="st">"binomial"</span>, <span class="dt">exclude_variables =</span> <span class="kw">c</span>(<span class="st">"subject"</span>, <span class="st">"age"</span>), 
-            <span class="dt">categorical_variables =</span> <span class="kw">c</span>(<span class="st">"male"</span>))</code></pre></div>
+results &lt;-<span class="st"> </span><span class="kw"><a href="reference/easy_glmnet.html">easy_glmnet</a></span>(cocaine_dependence, <span class="st">"diagnosis"</span>, 
+                       <span class="dt">family =</span> <span class="st">"binomial"</span>, <span class="dt">exclude_variables =</span> <span class="kw">c</span>(<span class="st">"subject"</span>, <span class="st">"age"</span>), 
+                       <span class="dt">categorical_variables =</span> <span class="kw">c</span>(<span class="st">"male"</span>))</code></pre></div>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">

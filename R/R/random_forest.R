@@ -41,11 +41,16 @@ random_forest_predict_model <- function(results, newx) {
 #' @examples 
 #' library(easyml) # https://github.com/CCS-Lab/easyml
 #' 
-#' # Load data
-#' data("cocaine_dependence", package = "easyml")
+#' # Gaussian
 #' data("prostate", package = "easyml")
+#' results <- easy_random_forest(prostate, "lpsa", 
+#'                               n_samples = 10L, 
+#'                               n_divisions = 10L, 
+#'                               n_iterations = 2L, 
+#'                               random_state = 12345L, n_core = 1L)
 #' 
-#' # Analyze data
+#' # Binomial
+#' data("cocaine_dependence", package = "easyml")
 #' results <- easy_random_forest(cocaine_dependence, "diagnosis", 
 #'                               family = "binomial", 
 #'                               exclude_variables = c("subject"),
@@ -54,13 +59,6 @@ random_forest_predict_model <- function(results, newx) {
 #'                               n_divisions = 10L, 
 #'                               n_iterations = 2L, 
 #'                               random_state = 12345L, n_core = 1L)
-#'                               
-#' results <- easy_random_forest(prostate, "lpsa", 
-#'                               n_samples = 10L, 
-#'                               n_divisions = 10L, 
-#'                               n_iterations = 2L, 
-#'                               random_state = 12345L, n_core = 1L)
-#' 
 #' @export
 easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
                                resample = NULL, preprocess = NULL, measure = NULL, 

@@ -11,21 +11,21 @@ from . import utils
 __all__ = []
 
 
-def replicate_coefficient(estimator, fit, extract_coefficients, X, y):
+def replicate_coefficient(fit_model, extract_coefficients, X, y, **kwargs):
     # Fit estimator with the training set
-    estimator = fit(estimator, X, y)
+    estimator = fit_model(X, y, **kwargs)
 
-    # Extract coefficients
-    coef = extract_coefficients(estimator)
+    # Extract coefficient
+    coefficient = extract_coefficients(estimator)
 
-    # Save coefficients
-    return coef
+    # Save coefficient
+    return coefficient
 
 
-def replicate_coefficients(estimator, fit, extract_coefficients,
+def replicate_coefficients(fit_model, extract_coefficients,
                            preprocessor, X, y,
                            categorical_variables=None,
-                           n_samples=1000, progress_bar=True, n_core=1):
+                           n_samples=1000, progress_bar=True, n_core=1, **kwargs):
     # Initialize progress bar (optional)
     if progress_bar:
         bar = progressbar.ProgressBar(max_value=n_samples)
@@ -44,7 +44,7 @@ def replicate_coefficients(estimator, fit, extract_coefficients,
 
         # Loop over number of iterations
         for _ in range(n_samples):
-            coef = replicate_coefficient(estimator, fit, extract_coefficients, X, y)
+            coef = replicate_coefficient(fit_model, extract_coefficients, X, y, **kwargs)
             coefs.append(coef)
 
             # Increment progress bar

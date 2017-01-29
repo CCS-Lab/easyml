@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_metrics_binomial_area_under_curve}
 \alias{plot_metrics_binomial_area_under_curve}
-\title{TO BE EDITED.}
+\title{Plot AUC metrics.}
 \usage{
 plot_metrics_binomial_area_under_curve(aucs)
 }
@@ -13,6 +13,6 @@ plot_metrics_binomial_area_under_curve(aucs)
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot AUC metrics.
 }
 

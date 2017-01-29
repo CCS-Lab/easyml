@@ -53,22 +53,21 @@ Easily build and evaluate a support vector machine regression model.
 \examples{
 library(easyml) # https://github.com/CCS-Lab/easyml
 
-# Load data
-data("cocaine_dependence", package = "easyml")
+# Gaussian
 data("prostate", package = "easyml")
+results <- easy_support_vector_machine(prostate, "lpsa", 
+                                       n_samples = 10L, 
+                                       n_divisions = 10L, 
+                                       n_iterations = 2L, 
+                                       random_state = 1L, n_core = 1L)
 
-# Analyze data
+# Binomial
+data("cocaine_dependence", package = "easyml")
 results <- easy_support_vector_machine(cocaine_dependence, "diagnosis", 
                                        family = "binomial", 
                                        preprocessor = preprocess_scaler, 
                                        exclude_variables = c("subject"), 
                                        categorical_variables = c("male"), 
-                                       n_samples = 10L, 
-                                       n_divisions = 10L, 
-                                       n_iterations = 2L, 
-                                       random_state = 1L, n_core = 1L)
-                                       
-results <- easy_support_vector_machine(prostate, "lpsa", 
                                        n_samples = 10L, 
                                        n_divisions = 10L, 
                                        n_iterations = 2L, 
