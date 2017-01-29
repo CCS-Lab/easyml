@@ -2,8 +2,4 @@
 
 ## Improvements
 
-* None.
-  
-## Bug fixes
-
-* None.
+* Added easy recipes for penalized regression (glmnet), random forest, and support vector machine models.
