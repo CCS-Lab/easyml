@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_metrics_gaussian_r2_score}
 \alias{plot_metrics_gaussian_r2_score}
-\title{TO BE EDITED.}
+\title{Plot R^2 metrics.}
 \usage{
 plot_metrics_gaussian_r2_score(r2_scores)
 }
@@ -13,6 +13,6 @@ plot_metrics_gaussian_r2_score(r2_scores)
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot R^2 metrics.
 }
 

@@ -1,6 +1,4 @@
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot processed coefficients.
 #'
 #' @param coefficients_processed TO BE EDITED.
 #' @return TO BE EDITED.
@@ -25,9 +23,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
   g
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot gaussian predictions.
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
@@ -47,9 +43,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
   g
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot binomial predictions.
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
@@ -76,9 +70,7 @@ plot_predictions_binomial <- function(y_true, y_pred) {
   g
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot mean squared error metrics.
 #'
 #' @param mses TO BE EDITED.
 #' @return TO BE EDITED.
@@ -101,9 +93,7 @@ plot_metrics_gaussian_mean_squared_error <- function(mses) {
   g
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot R^2 metrics.
 #'
 #' @param r2_scores TO BE EDITED.
 #' @return TO BE EDITED.
@@ -126,9 +116,7 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
   g
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Plot AUC metrics.
 #'
 #' @param aucs TO BE EDITED.
 #' @return TO BE EDITED.

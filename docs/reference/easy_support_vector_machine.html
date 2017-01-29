@@ -132,16 +132,9 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>easyml</span>) <span class='co'># https://github.com/CCS-Lab/easyml</span>
 
-<span class='co'># Load data</span>
-<span class='fu'>data</span>(<span class='st'>"cocaine_dependence"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
+<span class='co'># Gaussian</span>
 <span class='fu'>data</span>(<span class='st'>"prostate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
-
-<span class='co'># Analyze data</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_support_vector_machine</span>(<span class='no'>cocaine_dependence</span>, <span class='st'>"diagnosis"</span>,
-                                       <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>,
-                                       <span class='kw'>preprocessor</span> <span class='kw'>=</span> <span class='no'>preprocess_scaler</span>,
-                                       <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"subject"</span>),
-                                       <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"male"</span>),
+<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_support_vector_machine</span>(<span class='no'>prostate</span>, <span class='st'>"lpsa"</span>,
                                        <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
                                        <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
                                        <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>2L</span>,
@@ -149,7 +142,13 @@
 #&gt;   |=====                                             | 10% elapsed =00s, remaining ~00s  |==========                                        | 20% elapsed =00s, remaining ~00s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =00s, remaining ~00s  |========================================         | 80% elapsed =00s, remaining ~00s  |=============================================    | 90% elapsed =00s, remaining ~00s  |==================================================| 100% elapsed =00s, remaining ~00s
 #&gt; [1] &quot;Replicating metrics:&quot;
 #&gt;   |=====                                             | 10% elapsed =00s, remaining ~00s  |==========                                        | 20% elapsed =00s, remaining ~00s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =00s, remaining ~00s  |========================================         | 80% elapsed =00s, remaining ~00s  |=============================================    | 90% elapsed =00s, remaining ~00s  |==================================================| 100% elapsed =00s, remaining ~00s</div><div class='input'>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_support_vector_machine</span>(<span class='no'>prostate</span>, <span class='st'>"lpsa"</span>,
+<span class='co'># Binomial</span>
+<span class='fu'>data</span>(<span class='st'>"cocaine_dependence"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
+<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_support_vector_machine</span>(<span class='no'>cocaine_dependence</span>, <span class='st'>"diagnosis"</span>,
+                                       <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>,
+                                       <span class='kw'>preprocessor</span> <span class='kw'>=</span> <span class='no'>preprocess_scaler</span>,
+                                       <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"subject"</span>),
+                                       <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"male"</span>),
                                        <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
                                        <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>10L</span>,
                                        <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>2L</span>,

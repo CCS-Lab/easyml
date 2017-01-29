@@ -49,7 +49,7 @@ random_forest_predict_model <- function(results, newx) {
 #'                               n_iterations = 2L, 
 #'                               random_state = 12345L, n_core = 1L)
 #' 
-#' Binomial
+#' # Binomial
 #' data("cocaine_dependence", package = "easyml")
 #' results <- easy_random_forest(cocaine_dependence, "diagnosis", 
 #'                               family = "binomial", 
