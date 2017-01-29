@@ -17,4 +17,9 @@ TO BE EDITED.
 \description{
 Remove variables from a dataset.
 }
+\seealso{
+Other utils: \code{\link{correlation_test}},
+  \code{\link{process_coefficients}},
+  \code{\link{reduce_cores}}
+}
 

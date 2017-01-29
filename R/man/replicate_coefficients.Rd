@@ -35,4 +35,8 @@ TO BE EDITED.
 \description{
 Replicate coefficients.
 }
+\seealso{
+Other replicate: \code{\link{replicate_metrics}},
+  \code{\link{replicate_predictions}}
+}
 

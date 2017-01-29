@@ -38,6 +38,7 @@ support_vector_machine_predict_model <- function(results, newx) {
 #'@param ... Arguments to be passed to \code{\link[e1071]{svm}}. See that function's documentation for more details.
 #' @inheritParams easy_analysis
 #' @return TO BE EDITED.
+#' @family recipes
 #' @examples 
 #' library(easyml) # https://github.com/CCS-Lab/easyml
 #' 

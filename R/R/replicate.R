@@ -11,6 +11,7 @@
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_coefficients <- function(fit_model, extract_coefficients, 
                                    preprocess, X, y, 
@@ -60,6 +61,7 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_predictions <- function(fit_model, predict_model, preprocess, 
                                   X_train, y_train, X_test, 
@@ -121,6 +123,7 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_metrics <- function(fit_model, predict_model, resample, preprocess, 
                               measure, X, y, categorical_variables = NULL, 

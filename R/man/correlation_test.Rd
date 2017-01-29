@@ -19,4 +19,9 @@ A list containing three matrices; p_value, lower_bound, and upper bound.
 \description{
 See here for source: \url{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
 }
+\seealso{
+Other utils: \code{\link{process_coefficients}},
+  \code{\link{reduce_cores}},
+  \code{\link{remove_variables}}
+}
 

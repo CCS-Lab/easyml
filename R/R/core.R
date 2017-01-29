@@ -21,6 +21,7 @@
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family recipes
 #' @export
 easy_analysis <- function(.data, dependent_variable, algorithm, 
                           family = "gaussian", resample = NULL, 

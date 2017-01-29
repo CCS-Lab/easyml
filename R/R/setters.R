@@ -2,6 +2,7 @@
 #'
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @return A logical vector of length one; whether coefficients should be replicated for this analyis or not.
+#' @family setters
 #' @export
 set_coefficients_boolean <- function(algorithm) {
   # Add random_forest once feature importances are implemented?
@@ -14,6 +15,7 @@ set_coefficients_boolean <- function(algorithm) {
 #'
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @return A logical vector of length one; whether predictions should be replicated for this analyis or not.
+#' @family setters
 #' @export
 set_predictions_boolean <- function(algorithm) {
   algorithms <- c("glmnet", "random_forest", "support_vector_machine")
@@ -25,6 +27,7 @@ set_predictions_boolean <- function(algorithm) {
 #'
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @return A logical vector of length one; whether metrics should be replicated for this analyis or not.
+#' @family setters
 #' @export
 set_metrics_boolean <- function(algorithm) {
   algorithms <- c("glmnet", "random_forest", "support_vector_machine")
@@ -36,6 +39,7 @@ set_metrics_boolean <- function(algorithm) {
 #' 
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return A logical vector of length one; whether analyis should be run in parallel or not.
+#' @family setters
 #' @export
 set_parallel <- function(n_core) {
   if (n_core == 1) {
@@ -54,6 +58,7 @@ set_parallel <- function(n_core) {
 #'
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return NULL.
+#' @family setters
 #' @export
 set_cores <- function(n_core) {
   options(mc.cores = n_core)
@@ -67,6 +72,7 @@ set_cores <- function(n_core) {
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_looper <- function(progress_bar = FALSE, n_core = 1) {
   # Identify if parallel or not
@@ -90,6 +96,7 @@ set_looper <- function(progress_bar = FALSE, n_core = 1) {
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to FALSE.
 #' @param parallel A logical vector of length one; specifies whether to run calculations in parallel. Defaults to FALSE.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_looper_ <- function(progress_bar = FALSE, parallel = FALSE) {
   if (progress_bar & parallel) {
@@ -117,6 +124,7 @@ set_looper_ <- function(progress_bar = FALSE, parallel = FALSE) {
 #' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
 #' @param categorical_variables A character vector; the variables that are categorical. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_column_names <- function(column_names, dependent_variable, 
                              preprocess = NULL, exclude_variables = NULL, 
@@ -138,6 +146,7 @@ set_column_names <- function(column_names, dependent_variable,
 #' @param column_names A character vector; the column names of the data for this analysis.
 #' @param categorical_variables A character vector; the variables that are categorical. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_categorical_variables <- function(column_names, categorical_variables = NULL) {
   if (!is.null(categorical_variables)) {
@@ -152,6 +161,7 @@ set_categorical_variables <- function(column_names, categorical_variables = NULL
 #'
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_random_state <- function(random_state = NULL) {
   if (!is.null(random_state)) {
@@ -167,6 +177,7 @@ set_random_state <- function(random_state = NULL) {
 #' @param resample A function; the function for resampling the data. Defaults to NULL.
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_resample <- function(resample = NULL, family = NULL) {
   if (is.null(resample)) {
@@ -185,6 +196,7 @@ set_resample <- function(resample = NULL, family = NULL) {
 #'
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_preprocess <- function(preprocess = NULL) {
   if (is.null(preprocess)) {
@@ -201,6 +213,7 @@ set_preprocess <- function(preprocess = NULL) {
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_measure <- function(measure = NULL, algorithm, family) {
   if (is.null(measure)) {
@@ -223,6 +236,7 @@ set_measure <- function(measure = NULL, algorithm, family) {
 #' @param .data A data.frame; the data to be analyzed.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_dependent_variable <- function(.data, dependent_variable) {
   y <- as.vector(.data[, dependent_variable, drop = TRUE])
@@ -234,6 +248,7 @@ set_dependent_variable <- function(.data, dependent_variable) {
 #' @param .data A data.frame; the data to be analyzed.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_independent_variables <- function(.data, dependent_variable) {
   .data <- remove_variables(.data, dependent_variable)
@@ -247,6 +262,7 @@ set_independent_variables <- function(.data, dependent_variable) {
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_fit_model <- function(algorithm, family) {
   if (algorithm == "glmnet") {
@@ -279,6 +295,7 @@ set_fit_model <- function(algorithm, family) {
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_extract_coefficients <- function(algorithm, family) {
   extract_coefficients <- NULL
@@ -296,6 +313,7 @@ set_extract_coefficients <- function(algorithm, family) {
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_predict_model <- function(algorithm, family) {
   if (algorithm == "glmnet") {
@@ -316,6 +334,7 @@ set_predict_model <- function(algorithm, family) {
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_plot_predictions <- function(algorithm, family) {
   plot_predictions <- NULL
@@ -337,6 +356,7 @@ set_plot_predictions <- function(algorithm, family) {
 #'
 #' @param measure A function; the function for measuring the results. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family setters
 #' @export
 set_plot_metrics <- function(measure) {
   plot_metrics <- NULL

@@ -17,4 +17,9 @@ TO BE EDITED.
 \description{
 Reduce number of cores.
 }
+\seealso{
+Other utils: \code{\link{correlation_test}},
+  \code{\link{process_coefficients}},
+  \code{\link{remove_variables}}
+}
 

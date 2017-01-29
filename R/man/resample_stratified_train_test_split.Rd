@@ -22,4 +22,7 @@ A boolean vector of length n_obs where TRUE represents that observation should b
 \description{
 This will sample in equal proportion.
 }
+\seealso{
+Other resample: \code{\link{resample_simple_train_test_split}}
+}
 

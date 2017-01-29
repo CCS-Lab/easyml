@@ -28,5 +28,8 @@ Prostate data.
 \examples{
   prostate
 }
+\seealso{
+Other data: \code{\link{cocaine_dependence}}
+}
 \keyword{datasets}
 
