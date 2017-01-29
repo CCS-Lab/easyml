@@ -65,7 +65,7 @@ results <- easy_support_vector_machine(prostate, "lpsa",
 data("cocaine_dependence", package = "easyml")
 results <- easy_support_vector_machine(cocaine_dependence, "diagnosis", 
                                        family = "binomial", 
-                                       preprocessor = preprocess_scaler, 
+                                       preprocesss = preprocess_scaler, 
                                        exclude_variables = c("subject"), 
                                        categorical_variables = c("male"), 
                                        n_samples = 10L, 

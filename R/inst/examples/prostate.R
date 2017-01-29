@@ -5,7 +5,7 @@ data("prostate", package = "easyml")
 
 # Settings
 .n_samples <- 10L
-.n_divisions <- 10L
+.n_divisions <- 1000L
 .n_iterations <- 2L
 
 # Analyze data
