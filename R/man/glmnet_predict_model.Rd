@@ -2,14 +2,19 @@
 % Please edit documentation in R/glmnet.R
 \name{glmnet_predict_model}
 \alias{glmnet_predict_model}
-\title{TO BE EDITED.}
+\title{Predict values for a penalized regression model.}
 \usage{
 glmnet_predict_model(results, newx)
+}
+\arguments{
+\item{results}{TO BE EDITED.}
+
+\item{newx}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Predict values for a penalized regression model.
 }
 

@@ -4,8 +4,8 @@
 #'
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
-#' @param train_size The proportoin of data in training set.
-#' @param random_state An integer to seed the random number generator.
+#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @export
 resample_simple_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {
@@ -33,8 +33,8 @@ resample_simple_train_test_split <- function(X, y, train_size = 0.667, random_st
 #'
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
-#' @param train_size The proportoin of data in training set.
-#' @param random_state An integer to seed the random number generator.
+#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @export
 resample_stratified_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {

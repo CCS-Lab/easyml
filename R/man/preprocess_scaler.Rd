@@ -2,14 +2,19 @@
 % Please edit documentation in R/preprocess.R
 \name{preprocess_scaler}
 \alias{preprocess_scaler}
-\title{TO BE EDITED.}
+\title{Preprocess data by scaling it.}
 \usage{
 preprocess_scaler(.data, categorical_variables = NULL)
+}
+\arguments{
+\item{.data}{A data.frame; the data to be analyzed.}
+
+\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Preprocess data by scaling it.
 }
 

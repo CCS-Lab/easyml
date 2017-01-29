@@ -7,7 +7,7 @@
 plot_metrics_gaussian_r2_score(r2_scores)
 }
 \arguments{
-\item{mses}{TO BE EDITED.}
+\item{r2_scores}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

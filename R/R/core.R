@@ -1,18 +1,36 @@
-#' TO BE EDITED.
+#' The core reciple of easyml.
 #' 
-#' TO BE EDITED.
+#' This recipe is the workhorse behind all of the easy_* functions. 
 #'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
+#' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
+#' @param resample A function; the function for resampling the data. Defaults to NULL.
+#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param measure A function; the function for measuring the results. Defaults to NULL.
+#' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
+#' @param categorical_variables A character vector; the variables that are categorical. Defaults to NULL.
+#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
+#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
+#' @param n_divisions An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.
+#' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
+#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
 #' @export
-easy_analysis <- function(.data, dependent_variable, algorithm = NULL, 
+easy_analysis <- function(.data, dependent_variable, algorithm, 
                           family = "gaussian", resample = NULL, 
                           preprocess = NULL, measure = NULL, 
                           exclude_variables = NULL, 
                           categorical_variables = NULL, train_size = 0.667, 
-                          survival_rate_cutoff = 0.05, n_samples = 1000, 
-                          n_divisions = 1000, n_iterations = 10, 
+                          survival_rate_cutoff = 0.05, n_samples = 1000L, 
+                          n_divisions = 1000L, n_iterations = 10L, 
                           random_state = NULL, progress_bar = TRUE, 
-                          n_core = 1, ...) {
+                          n_core = 1L, ...) {
   # Instantiate output
   output <- list()
   
@@ -62,8 +80,8 @@ easy_analysis <- function(.data, dependent_variable, algorithm = NULL,
   
   # Set column names
   column_names <- set_column_names(colnames(.data), dependent_variable, 
-                                   exclude_variables = exclude_variables, 
                                    preprocess = preprocess, 
+                                   exclude_variables = exclude_variables, 
                                    categorical_variables = categorical_variables)
   
   # Set categorical variables

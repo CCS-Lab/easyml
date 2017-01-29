@@ -1,17 +1,17 @@
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Preprocess data by leaving it exactly the way it is.
 #'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
 #' @return TO BE EDITED.
 #' @export
 preprocess_identity <- function(.data, categorical_variables = NULL) {
   .data
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Preprocess data by scaling it.
 #'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
 #' @return TO BE EDITED.
 #' @export
 preprocess_scaler <- function(.data, categorical_variables = NULL) {

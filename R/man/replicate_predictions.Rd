@@ -2,7 +2,7 @@
 % Please edit documentation in R/replicate.R
 \name{replicate_predictions}
 \alias{replicate_predictions}
-\title{TO BE EDITED.}
+\title{Replicate predictions.}
 \usage{
 replicate_predictions(fit_model, predict_model, preprocess, X_train, y_train,
   X_test, categorical_variables = NULL, n_samples = 1000,
@@ -13,22 +13,28 @@ replicate_predictions(fit_model, predict_model, preprocess, X_train, y_train,
 
 \item{predict_model}{TO BE EDITED.}
 
-\item{X_train}{TO BE EDITED.}
+\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
 
-\item{y_train}{TO BE EDITED.}
+\item{X_train}{A matrix; the independent variables sampled to a training set.}
 
-\item{X_test}{TO BE EDITED.}
+\item{y_train}{A vector; the dependent variable sampled to a training set.}
 
-\item{n_samples}{TO BE EDITED.}
+\item{X_test}{A matrix; the independent variables sampled to a testing set.}
 
-\item{progress_bar}{TO BE EDITED.}
+\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 
-\item{parallel}{TO BE EDITED.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
+
+\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
+
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+
+\item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Replicate predictions.
 }
 
