@@ -18,4 +18,8 @@ A numeric vector of length one; the AUC metric.
 Given the ground truth (correct) target values and the estimated target 
 values, calculates the the AUC metric.
 }
+\seealso{
+Other measure: \code{\link{measure_mean_squared_error}},
+  \code{\link{measure_r2_score}}
+}
 

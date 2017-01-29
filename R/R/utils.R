@@ -3,6 +3,7 @@
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param cpu_count An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 reduce_cores <- function(n_core, cpu_count = NULL) {
   if (is.null(cpu_count)) {
@@ -17,6 +18,7 @@ reduce_cores <- function(n_core, cpu_count = NULL) {
 #' @param .data A data.frame; the data to be analyzed.
 #' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 remove_variables <- function(.data = NULL, exclude_variables = NULL) {
   if (!is.null(exclude_variables)) {
@@ -33,6 +35,7 @@ remove_variables <- function(.data = NULL, exclude_variables = NULL) {
 #' @param confidence_level confidence level for the returned confidence interval. Currently only used for the Pearson product moment correlation coefficient if there are at least 4 complete pairs of observations.
 #' @param ... further arguments to be passed to or from \code{cor.test}.
 #' @return A list containing three matrices; p_value, lower_bound, and upper bound.
+#' @family utils
 #' @export
 correlation_test <- function(x, confidence_level = 0.95, ...) {
   # Initialize matrices
@@ -63,6 +66,7 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
 #' @param coefs The replicated coefficients.
 #' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 process_coefficients <- function(coefs, survival_rate_cutoff = 0.05) {
   coefs <- coefs[, -1]

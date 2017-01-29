@@ -18,4 +18,8 @@ A numeric vector of length one; the mean squared error metric.
 Given the ground truth (correct) target values and the estimated target 
 values, calculates the mean squared error metric.
 }
+\seealso{
+Other measure: \code{\link{measure_area_under_curve}},
+  \code{\link{measure_r2_score}}
+}
 

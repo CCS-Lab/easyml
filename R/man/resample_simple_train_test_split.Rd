@@ -22,4 +22,7 @@ A boolean vector of length n_obs where TRUE represents that observation should b
 \description{
 This will split the data into train and test.
 }
+\seealso{
+Other resample: \code{\link{resample_stratified_train_test_split}}
+}
 

@@ -2,6 +2,7 @@
 #'
 #' @param coefficients_processed TO BE EDITED.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_coefficients_processed <- function(coefficients_processed) {
   if (nrow(coefficients_processed) > 20) 
@@ -28,6 +29,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
@@ -48,6 +50,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_predictions_binomial <- function(y_true, y_pred) {
   results <- pROC::roc(y_true, y_pred)
@@ -74,6 +77,7 @@ plot_predictions_binomial <- function(y_true, y_pred) {
 #'
 #' @param mses TO BE EDITED.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_metrics_gaussian_mean_squared_error <- function(mses) {
   mean_mse <- mean(mses)
@@ -97,6 +101,7 @@ plot_metrics_gaussian_mean_squared_error <- function(mses) {
 #'
 #' @param r2_scores TO BE EDITED.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_metrics_gaussian_r2_score <- function(r2_scores) {
   mean_r2_score <- mean(r2_scores)
@@ -120,6 +125,7 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
 #'
 #' @param aucs TO BE EDITED.
 #' @return TO BE EDITED.
+#' @family plot
 #' @export
 plot_metrics_binomial_area_under_curve <- function(aucs) {
   mean_auc <- mean(aucs)

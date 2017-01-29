@@ -128,6 +128,12 @@
 
     <p>TO BE EDITED.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>Other recipes: <code><a href='easy_analysis.html'>easy_analysis</a></code>,
+  <code><a href='easy_glmnet.html'>easy_glmnet</a></code>,
+  <code><a href='easy_support_vector_machine.html'>easy_support_vector_machine</a></code></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>easyml</span>) <span class='co'># https://github.com/CCS-Lab/easyml</span>
@@ -141,7 +147,7 @@
                               <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='fl'>12345L</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</div><div class='output co'>#&gt; [1] &quot;Replicating predictions:&quot;
 #&gt;   |=====                                             | 10% elapsed =00s, remaining ~00s  |==========                                        | 20% elapsed =00s, remaining ~00s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =00s, remaining ~00s  |========================================         | 80% elapsed =00s, remaining ~00s  |=============================================    | 90% elapsed =00s, remaining ~00s  |==================================================| 100% elapsed =00s, remaining ~00s
 #&gt; [1] &quot;Replicating metrics:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~00s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~01s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =01s, remaining ~00s  |===================================               | 70% elapsed =01s, remaining ~00s  |========================================         | 80% elapsed =01s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s</div><div class='input'>
+#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~00s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =00s, remaining ~00s  |========================================         | 80% elapsed =00s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s</div><div class='input'>
 <span class='co'># Binomial</span>
 <span class='fu'>data</span>(<span class='st'>"cocaine_dependence"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
 <span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_random_forest</span>(<span class='no'>cocaine_dependence</span>, <span class='st'>"diagnosis"</span>,
@@ -162,6 +168,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -73,4 +73,9 @@ results <- easy_glmnet(cocaine_dependence, "diagnosis",
                        n_iterations = 2L, random_state = 12345L, 
                        n_core = 1L, alpha = 1.0)
 }
+\seealso{
+Other recipes: \code{\link{easy_analysis}},
+  \code{\link{easy_random_forest}},
+  \code{\link{easy_support_vector_machine}}
+}
 
