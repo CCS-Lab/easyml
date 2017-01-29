@@ -2,14 +2,20 @@
 % Please edit documentation in R/measure.R
 \name{measure_r2_score}
 \alias{measure_r2_score}
-\title{TO BE EDITED.}
+\title{Measure R^2 score.}
 \usage{
 measure_r2_score(y_true, y_pred)
 }
+\arguments{
+\item{y_true}{A numeric vector; the ground truth (correct) target values.}
+
+\item{y_pred}{A numeric vector; the estimated target values.}
+}
 \value{
-TO BE EDITED.
+A numeric vector of length one; the R^2 metric.
 }
 \description{
-TO BE EDITED.
+Given the ground truth (correct) target values and the estimated target 
+values, calculates the the R^2 metric.
 }
 

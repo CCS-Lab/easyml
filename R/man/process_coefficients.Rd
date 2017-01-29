@@ -2,21 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{process_coefficients}
 \alias{process_coefficients}
-\title{TO BE EDITED.}
+\title{Process coefficients.}
 \usage{
 process_coefficients(coefs, survival_rate_cutoff = 0.05)
 }
 \arguments{
-\item{coefs}{TO BE EDITED.}
+\item{coefs}{The replicated coefficients.}
 
-\item{survival_rate_cutoff}{TO BE EDITED.}
-
-\item{n_samples}{TO BE EDITED.}
+\item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Process coefficients.
 }
 

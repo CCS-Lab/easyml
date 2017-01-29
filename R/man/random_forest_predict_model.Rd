@@ -2,14 +2,19 @@
 % Please edit documentation in R/random_forest.R
 \name{random_forest_predict_model}
 \alias{random_forest_predict_model}
-\title{TO BE EDITED.}
+\title{Predict values for a random forest regression model.}
 \usage{
 random_forest_predict_model(results, newx)
+}
+\arguments{
+\item{results}{TO BE EDITED.}
+
+\item{newx}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Predict values for a random forest regression model.
 }
 

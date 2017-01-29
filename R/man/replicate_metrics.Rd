@@ -2,7 +2,7 @@
 % Please edit documentation in R/replicate.R
 \name{replicate_metrics}
 \alias{replicate_metrics}
-\title{TO BE EDITED.}
+\title{Replicate metrics.}
 \usage{
 replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
   categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
@@ -13,24 +13,32 @@ replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
 
 \item{predict_model}{TO BE EDITED.}
 
-\item{X}{TO BE EDITED.}
+\item{resample}{A function; the function for resampling the data. Defaults to NULL.}
 
-\item{y}{TO BE EDITED.}
+\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
 
-\item{n_divisions}{TO BE EDITED.}
+\item{measure}{A function; the function for measuring the results. Defaults to NULL.}
 
-\item{n_iterations}{TO BE EDITED.}
+\item{X}{A matrix; the independent variables.}
 
-\item{progress_bar}{TO BE EDITED.}
+\item{y}{A vector; the dependent variable.}
 
-\item{predict_model}{TO BE EDITED.}
+\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 
-\item{parallel}{TO BE EDITED.}
+\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
+
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.}
+
+\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
+
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+
+\item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Replicate metrics.
 }
 

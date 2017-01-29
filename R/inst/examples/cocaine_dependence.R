@@ -4,9 +4,9 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 data("cocaine_dependence", package = "easyml")
 
 # Settings
-.n_samples <- 100
-.n_divisions <- 100
-.n_iterations <- 10
+.n_samples <- 10L
+.n_divisions <- 10L
+.n_iterations <- 2L
 
 # Analyze data
 glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis", 

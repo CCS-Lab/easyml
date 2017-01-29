@@ -4,12 +4,10 @@
 \alias{plot_coefficients_processed}
 \title{TO BE EDITED.}
 \usage{
-plot_coefficients_processed(betas)
+plot_coefficients_processed(coefficients_processed)
 }
 \arguments{
-\item{y_true}{Ground truth (correct) target values.}
-
-\item{y_pred}{Estimated target values.}
+\item{coefficients_processed}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.

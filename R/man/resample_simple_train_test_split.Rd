@@ -12,9 +12,9 @@ resample_simple_train_test_split(X, y, train_size = 0.667,
 
 \item{y}{A numeric vector with two classes, 0 and 1.}
 
-\item{train_size}{The proportoin of data in training set.}
+\item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
 
-\item{random_state}{An integer to seed the random number generator.}
+\item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 }
 \value{
 A boolean vector of length n_obs where TRUE represents that observation should be in the train set.

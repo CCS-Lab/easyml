@@ -2,14 +2,21 @@
 % Please edit documentation in R/random_forest.R
 \name{random_forest_fit_model_binomial}
 \alias{random_forest_fit_model_binomial}
-\title{TO BE EDITED.}
+\title{Fit random forest binomial regression model.}
 \usage{
 random_forest_fit_model_binomial(X, y, ...)
+}
+\arguments{
+\item{X}{a data frame or a matrix of predictors, or a formula describing the model to be fitted (for the print method, an randomForest object).}
+
+\item{y}{A response vector. If a factor, classification is assumed, otherwise regression is assumed. If omitted, randomForest will run in unsupervised mode.}
+
+\item{...}{Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Fit random forest binomial regression model.
 }
 

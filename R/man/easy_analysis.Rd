@@ -2,19 +2,56 @@
 % Please edit documentation in R/core.R
 \name{easy_analysis}
 \alias{easy_analysis}
-\title{TO BE EDITED.}
+\title{The core reciple of easyml.}
 \usage{
-easy_analysis(.data, dependent_variable, algorithm = NULL,
-  family = "gaussian", resample = NULL, preprocess = NULL,
-  measure = NULL, exclude_variables = NULL, categorical_variables = NULL,
-  train_size = 0.667, survival_rate_cutoff = 0.05, n_samples = 1000,
-  n_divisions = 1000, n_iterations = 10, random_state = NULL,
-  progress_bar = TRUE, n_core = 1, ...)
+easy_analysis(.data, dependent_variable, algorithm, family = "gaussian",
+  resample = NULL, preprocess = NULL, measure = NULL,
+  exclude_variables = NULL, categorical_variables = NULL,
+  train_size = 0.667, survival_rate_cutoff = 0.05, n_samples = 1000L,
+  n_divisions = 1000L, n_iterations = 10L, random_state = NULL,
+  progress_bar = TRUE, n_core = 1L, ...)
+}
+\arguments{
+\item{.data}{A data.frame; the data to be analyzed.}
+
+\item{dependent_variable}{A character vector of length one; the dependent variable for this analysis.}
+
+\item{algorithm}{A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").}
+
+\item{family}{A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".}
+
+\item{resample}{A function; the function for resampling the data. Defaults to NULL.}
+
+\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
+
+\item{measure}{A function; the function for measuring the results. Defaults to NULL.}
+
+\item{exclude_variables}{A character vector; the variables from the data set to exclude. Defaults to NULL.}
+
+\item{categorical_variables}{A character vector; the variables that are categorical. Defaults to NULL.}
+
+\item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
+
+\item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
+
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
+
+\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
+
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.}
+
+\item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
+
+\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
+
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+
+\item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+This recipe is the workhorse behind all of the easy_* functions.
 }
 
