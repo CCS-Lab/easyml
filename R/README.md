@@ -33,7 +33,7 @@ For a dataset with a continuous dependent variable:
 
 ``` r
 data("prostate", package = "easyml")
-results <- easy_glmnet(prostate, "lpsa")
+results <- easy_glmnet(prostate, "lpsa", preprocess = preprocess_scaler)
 ```
 
 For a dataset with a binary dependent variable:
@@ -42,6 +42,7 @@ For a dataset with a binary dependent variable:
 data("cocaine_dependence", package = "easyml")
 results <- easy_glmnet(cocaine_dependence, "diagnosis", 
                        family = "binomial", exclude_variables = c("subject", "age"), 
+                       preprocess = preprocess_scaler,
                        categorical_variables = c("male"))
 ```
 
