@@ -23,7 +23,7 @@ random_forest_results <- easy_random_forest(cocaine_dependence, "diagnosis",
                                             n_iterations = .n_iterations, random_state = 1, n_core = 8)
 
 support_vector_machine_results <- easy_support_vector_machine(cocaine_dependence, "diagnosis", 
-                                                              family = "binomial", preprocessor = preprocess_scaler, 
+                                                              family = "binomial", preprocess = preprocess_scaler, 
                                                               exclude_variables = c("subject"), 
                                                               categorical_variables = c("male"), 
                                                               n_samples = .n_samples, n_divisions = .n_divisions, 
