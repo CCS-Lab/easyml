@@ -128,6 +128,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Set independent variables
   X <- set_independent_variables(.data, dependent_variable)
+  X <- X[, column_names]
   output[["X"]] <- X
   
   # Resample data

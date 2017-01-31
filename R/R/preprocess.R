@@ -16,7 +16,7 @@ preprocess_identity <- function(.data, categorical_variables = NULL) {
 #' @return TO BE EDITED.
 #' @family preprocess
 #' @export
-preprocess_scaler <- function(.data, categorical_variables = NULL) {
+preprocess_scale <- function(.data, categorical_variables = NULL) {
   mask <- categorical_variables
   if (length(.data) == 1) {
     # Handle case of list(X)
@@ -30,7 +30,7 @@ preprocess_scaler <- function(.data, categorical_variables = NULL) {
       X_categorical <- X[, mask, drop = FALSE]
       X_numerical <- X[, !mask, drop = FALSE]
       X_standardized <- data.frame(scale(X_numerical))
-      X_output <- cbind(X_categorical, X_numerical)
+      X_output <- cbind(X_categorical, X_standardized)
       output <- list(X = X_output)
     }
   } else if (length(.data) == 2) {

@@ -98,7 +98,7 @@ results <- easy_glmnet(cocaine_dependence, "diagnosis",
                        family = "binomial", 
                        exclude_variables = c("subject"), 
                        categorical_variables = c("male"), 
-                       preprocess = preprocess_scaler, 
+                       preprocess = preprocess_scale, 
                        n_samples = 10L, n_divisions = 10L, 
                        n_iterations = 2L, random_state = 12345L, 
                        n_core = 1L, alpha = 1.0)

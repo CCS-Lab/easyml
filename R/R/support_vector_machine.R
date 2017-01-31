@@ -81,7 +81,7 @@ support_vector_machine_predict_model <- function(results, newx) {
 #' data("cocaine_dependence", package = "easyml")
 #' results <- easy_support_vector_machine(cocaine_dependence, "diagnosis", 
 #'                                        family = "binomial", 
-#'                                        preprocesss = preprocess_scaler, 
+#'                                        preprocesss = preprocess_scale, 
 #'                                        exclude_variables = c("subject"), 
 #'                                        categorical_variables = c("male"), 
 #'                                        n_samples = 10L, 
