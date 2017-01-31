@@ -133,7 +133,7 @@ set_column_names <- function(column_names, dependent_variable,
   column_names <- setdiff(column_names, exclude_variables)
   
   if (!is.null(categorical_variables) && !is.null(preprocess)) {
-    if (identical(preprocess, preprocess_scaler)) {
+    if (identical(preprocess, preprocess_scale)) {
       column_names <- setdiff(column_names, categorical_variables)
       column_names <- c(categorical_variables, column_names)
     }

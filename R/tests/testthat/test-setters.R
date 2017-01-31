@@ -21,7 +21,7 @@ foo <- data.frame(y = c(0, 1, 0, 1),
 test_that("Test set_column_names.", {
   expect_equal(set_column_names(colnames(foo), "y", 
                                 exclude_variables = "x3", 
-                                preprocess = preprocess_scaler, 
+                                preprocess = preprocess_scale, 
                                 categorical_variables = "x2"), 
                c("x2", "x1"))
   expect_equal(set_column_names(colnames(foo), "y", 
