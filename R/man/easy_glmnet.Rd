@@ -44,7 +44,7 @@ easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 
-\item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.}
+\item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}} or \code{\link[glmnet]{cv.glmnet}}. See those functions' documentation for more details on possible arguments and what they mean. Examples of applicable arguments are \code{alpha}, \code{nlambda}, \code{nlambda.min.ratio}, \code{lambda}, \code{standardize}, \code{intercept}, \code{thresh}, \code{dfmax}, \code{pmax}, \code{exclude}, \code{penalty.factor}, \code{lower.limits}, \code{upper.limits}, \code{maxit}, and \code{standardize.response} for \code{\link[glmnet]{glmnet}} and \code{weights}, \code{offset}, \code{lambda}, \code{type.measure}, \code{nfolds}, \code{foldid}, \code{grouped}, \code{keep}, \code{parallel} for \code{\link[glmnet]{cv.glmnet}}.}
 }
 \value{
 A list with the following values:
