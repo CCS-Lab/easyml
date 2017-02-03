@@ -6,9 +6,23 @@
 #' @return TO BE EDITED.
 #' @export
 glmnet_fit_model_gaussian <- function(X, y, ...) {
-  X <- as.matrix(X)
-  model <- glmnet::glmnet(X, y, family = "gaussian", standardize = FALSE, ...)
-  cv_model <- glmnet::cv.glmnet(X, y, family = "gaussian", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["family"]] <- "gaussian"
+  kwargs[["standardize"]] <- FALSE
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build cv_model
+  cv_model <- do.call(glmnet::cv.glmnet, kwargs)
+  
+  # build model
+  kwargs[["nfolds"]] <- NULL
+  model <- do.call(glmnet::glmnet, kwargs)
+  
+  # write output
   list(model = model, cv_model = cv_model)
 }
 
@@ -20,9 +34,23 @@ glmnet_fit_model_gaussian <- function(X, y, ...) {
 #' @return TO BE EDITED.
 #' @export
 glmnet_fit_model_binomial <- function(X, y, ...) {
-  X <- as.matrix(X)
-  model <- glmnet::glmnet(X, y, family = "binomial", standardize = FALSE, ...)
-  cv_model <- glmnet::cv.glmnet(X, y, family = "binomial", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["family"]] <- "binomial"
+  kwargs[["standardize"]] <- FALSE
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build cv_model
+  cv_model <- do.call(glmnet::cv.glmnet, kwargs)
+  
+  # build model
+  kwargs[["nfolds"]] <- NULL
+  model <- do.call( glmnet::glmnet, kwargs)
+  
+  # write output
   list(model = model, cv_model = cv_model)
 }
 

@@ -6,8 +6,18 @@
 #' @return TO BE EDITED.
 #' @export
 random_forest_fit_model_gaussian <- function(X, y, ...) {
-  X <- as.matrix(X)
-  randomForest::randomForest(X, y, ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build model
+  model <- do.call(randomForest::randomForest, kwargs)
+  
+  # write output
+  model
 }
 
 #' Fit random forest binomial regression model.
@@ -18,9 +28,18 @@ random_forest_fit_model_gaussian <- function(X, y, ...) {
 #' @return TO BE EDITED.
 #' @export
 random_forest_fit_model_binomial <- function(X, y, ...) {
-  X <- as.matrix(X)
-  y <- factor(y)
-  randomForest::randomForest(X, y, ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build model
+  model <- do.call(randomForest::randomForest, kwargs)
+  
+  # write output
+  model
 }
 
 #' Predict values for a random forest regression model.

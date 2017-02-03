@@ -51,10 +51,10 @@ Citation
 A whitepaper for easyml is available at <http://arxiv.org/abs/TOBEEDITED>. If you find this code useful please cite us in your work:
 
     @inproceedings{TOBEEDITED,
-        title = {easyml: A toolkit for easily building and evaluation machine learning models},
-        author = {Paul Hendricks and Woo-Young Ahn},
-        eprint = {arXiv:TOBEEDITED},
-        year = {2017},
+    	title = {easyml: A toolkit for easily building and evaluating machine learning models},
+    	author = {Paul Hendricks and Woo-Young Ahn},
+    	eprint = {arXiv:TOBEEDITED},
+    	year = {2017},
     }
 
 References

@@ -6,8 +6,20 @@
 #' @return TO BE EDITED.
 #' @export
 support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
-  X <- as.matrix(X)
-  e1071::svm(X, y, scale = FALSE, type = "nu-regression", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  kwargs[["scale"]] <- FALSE
+  kwargs[["type"]] <- "nu-regression"
+  
+  # build model
+  model <- do.call(e1071::svm, kwargs)
+  
+  # write output
+  model
 }
 
 #' Fit support vector machine binomial regression model.
@@ -18,9 +30,20 @@ support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
 #' @return TO BE EDITED.
 #' @export
 support_vector_machine_fit_model_binomial <- function(X, y, ...) {
-  X <- as.matrix(X)
-  y <- factor(y)
-  e1071::svm(X, y, scale = FALSE, type = "C-classification", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- factor(y)
+  kwargs[["scale"]] <- FALSE
+  kwargs[["type"]] <- "C-classification"
+  
+  # build model
+  model <- do.call(e1071::svm, kwargs)
+  
+  # write output
+  model
 }
 
 #' Predict values for a support vector machine regression model.

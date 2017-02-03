@@ -181,11 +181,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     # Save predictions plots
     plot_predictions_train_mean <- 
       plot_predictions(y_train, predictions_train_mean) + 
-      labs(subtitle = "Train Predictions")
+      ggplot2::labs(subtitle = "Train Predictions")
     output[["plot_predictions_train_mean"]] <- plot_predictions_train_mean
     plot_predictions_test_mean <- 
       plot_predictions(y_test, predictions_test_mean) + 
-      labs(subtitle = "Test Predictions")
+      ggplot2::labs(subtitle = "Test Predictions")
     output[["plot_predictions_test_mean"]] <- plot_predictions_test_mean
   }
   
@@ -204,11 +204,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     # Save metrics plots
     plot_metrics_train_mean <- 
       plot_metrics(metrics_train_mean) + 
-      labs(subtitle = "Train Metrics")
+      ggplot2::labs(subtitle = "Train Metrics")
     output[["plot_metrics_train_mean"]] <- plot_metrics_train_mean
     plot_metrics_test_mean <- 
       plot_metrics(metrics_test_mean) + 
-      labs(subtitle = "Test Metrics")
+      ggplot2::labs(subtitle = "Test Metrics")
     output[["plot_metrics_test_mean"]] <- plot_metrics_test_mean
   }
   
