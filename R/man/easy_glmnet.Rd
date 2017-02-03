@@ -32,17 +32,17 @@ easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
 
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
 
-\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
+\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
 
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
 
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
 \item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}} or \code{\link[glmnet]{cv.glmnet}}. See those functions' documentation for more details on possible arguments and what they mean. Examples of applicable arguments are \code{alpha}, \code{nlambda}, \code{nlambda.min.ratio}, \code{lambda}, \code{standardize}, \code{intercept}, \code{thresh}, \code{dfmax}, \code{pmax}, \code{exclude}, \code{penalty.factor}, \code{lower.limits}, \code{upper.limits}, \code{maxit}, and \code{standardize.response} for \code{\link[glmnet]{glmnet}} and \code{weights}, \code{offset}, \code{lambda}, \code{type.measure}, \code{nfolds}, \code{foldid}, \code{grouped}, \code{keep}, \code{parallel} for \code{\link[glmnet]{cv.glmnet}}.}
 }
