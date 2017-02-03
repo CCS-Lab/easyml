@@ -6,9 +6,23 @@
 #' @return TO BE EDITED.
 #' @export
 glmnet_fit_model_gaussian <- function(X, y, ...) {
-  X <- as.matrix(X)
-  model <- glmnet::glmnet(X, y, family = "gaussian", standardize = FALSE, ...)
-  cv_model <- glmnet::cv.glmnet(X, y, family = "gaussian", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["family"]] <- "gaussian"
+  kwargs[["standardize"]] <- FALSE
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build cv_model
+  cv_model <- do.call(glmnet::cv.glmnet, kwargs)
+  
+  # build model
+  kwargs[["nfolds"]] <- NULL
+  model <- do.call(glmnet::glmnet, kwargs)
+  
+  # write output
   list(model = model, cv_model = cv_model)
 }
 
@@ -20,9 +34,23 @@ glmnet_fit_model_gaussian <- function(X, y, ...) {
 #' @return TO BE EDITED.
 #' @export
 glmnet_fit_model_binomial <- function(X, y, ...) {
-  X <- as.matrix(X)
-  model <- glmnet::glmnet(X, y, family = "binomial", standardize = FALSE, ...)
-  cv_model <- glmnet::cv.glmnet(X, y, family = "binomial", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["family"]] <- "binomial"
+  kwargs[["standardize"]] <- FALSE
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  
+  # build cv_model
+  cv_model <- do.call(glmnet::cv.glmnet, kwargs)
+  
+  # build model
+  kwargs[["nfolds"]] <- NULL
+  model <- do.call( glmnet::glmnet, kwargs)
+  
+  # write output
   list(model = model, cv_model = cv_model)
 }
 
@@ -55,7 +83,7 @@ glmnet_predict_model <- function(results, newx) {
 
 #' Easily build and evaluate a penalized regression model.
 #'
-#' @param ... Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.
+#' @param ... Arguments to be passed to \code{\link[glmnet]{glmnet}} or \code{\link[glmnet]{cv.glmnet}}. See those functions' documentation for more details on possible arguments and what they mean. Examples of applicable arguments are \code{alpha}, \code{nlambda}, \code{nlambda.min.ratio}, \code{lambda}, \code{standardize}, \code{intercept}, \code{thresh}, \code{dfmax}, \code{pmax}, \code{exclude}, \code{penalty.factor}, \code{lower.limits}, \code{upper.limits}, \code{maxit}, and \code{standardize.response} for \code{\link[glmnet]{glmnet}} and \code{weights}, \code{offset}, \code{lambda}, \code{type.measure}, \code{nfolds}, \code{foldid}, \code{grouped}, \code{keep}, \code{parallel} for \code{\link[glmnet]{cv.glmnet}}.
 #' @inheritParams easy_analysis
 #' @return A list with the following values:
 #' \describe{
@@ -95,9 +123,9 @@ glmnet_predict_model <- function(results, newx) {
 #' # Gaussian
 #' data("prostate", package = "easyml")
 #' results <- easy_glmnet(prostate, "lpsa", 
-#'                        n_samples = 10L, n_divisions = 10L, 
-#'                        n_iterations = 2L, random_state = 12345L, 
-#'                        n_core = 1L, alpha = 1.0)
+#'                        n_samples = 10, n_divisions = 10, 
+#'                        n_iterations = 2, random_state = 12345, 
+#'                        n_core = 1, alpha = 1.0)
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
@@ -106,17 +134,17 @@ glmnet_predict_model <- function(results, newx) {
 #'                        exclude_variables = c("subject"), 
 #'                        categorical_variables = c("male"), 
 #'                        preprocess = preprocess_scale, 
-#'                        n_samples = 10L, n_divisions = 10L, 
-#'                        n_iterations = 2L, random_state = 12345L, 
-#'                        n_core = 1L, alpha = 1.0)
+#'                        n_samples = 10, n_divisions = 10, 
+#'                        n_iterations = 2, random_state = 12345, 
+#'                        n_core = 1, alpha = 1.0)
 #' @export
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
                         resample = NULL, preprocess = NULL, measure = NULL, 
                         exclude_variables = NULL, categorical_variables = NULL, 
                         train_size = 0.667, survival_rate_cutoff = 0.05, 
-                        n_samples = 1000L, n_divisions = 1000L, 
-                        n_iterations = 10L, random_state = NULL, 
-                        progress_bar = TRUE, n_core = 1L, ...) {
+                        n_samples = 1000, n_divisions = 1000, 
+                        n_iterations = 10, random_state = NULL, 
+                        progress_bar = TRUE, n_core = 1, ...) {
   easy_analysis(.data, dependent_variable, algorithm = "glmnet", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 

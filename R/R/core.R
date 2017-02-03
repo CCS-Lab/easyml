@@ -58,10 +58,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
                           preprocess = NULL, measure = NULL, 
                           exclude_variables = NULL, 
                           categorical_variables = NULL, train_size = 0.667, 
-                          survival_rate_cutoff = 0.05, n_samples = 1000L, 
-                          n_divisions = 1000L, n_iterations = 10L, 
+                          survival_rate_cutoff = 0.05, n_samples = 1000, 
+                          n_divisions = 1000, n_iterations = 10, 
                           random_state = NULL, progress_bar = TRUE, 
-                          n_core = 1L, ...) {
+                          n_core = 1, ...) {
   # Instantiate output
   output <- list()
   
@@ -179,8 +179,14 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     output[["predictions_test_mean"]] <- predictions_test_mean
     
     # Save predictions plots
-    output[["plot_predictions_train_mean"]] <- plot_predictions(y_train, predictions_train_mean)
-    output[["plot_predictions_test_mean"]] <- plot_predictions(y_test, predictions_test_mean)
+    plot_predictions_train_mean <- 
+      plot_predictions(y_train, predictions_train_mean) + 
+      ggplot2::labs(subtitle = "Train Predictions")
+    output[["plot_predictions_train_mean"]] <- plot_predictions_train_mean
+    plot_predictions_test_mean <- 
+      plot_predictions(y_test, predictions_test_mean) + 
+      ggplot2::labs(subtitle = "Test Predictions")
+    output[["plot_predictions_test_mean"]] <- plot_predictions_test_mean
   }
   
   # Assess if metrics should be replicated for this algorithm
@@ -196,8 +202,14 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     metrics_test_mean <- metrics[["metrics_test_mean"]]
     
     # Save metrics plots
-    output[["plot_metrics_train_mean"]] <- plot_metrics(metrics_train_mean)
-    output[["plot_metrics_test_mean"]] <- plot_metrics(metrics_test_mean)
+    plot_metrics_train_mean <- 
+      plot_metrics(metrics_train_mean) + 
+      ggplot2::labs(subtitle = "Train Metrics")
+    output[["plot_metrics_train_mean"]] <- plot_metrics_train_mean
+    plot_metrics_test_mean <- 
+      plot_metrics(metrics_test_mean) + 
+      ggplot2::labs(subtitle = "Test Metrics")
+    output[["plot_metrics_test_mean"]] <- plot_metrics_test_mean
   }
   
   # Return output

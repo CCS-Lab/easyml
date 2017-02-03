@@ -4,14 +4,14 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 data("cocaine_dependence", package = "easyml")
 
 # Settings
-.n_samples <- 1000L
-.n_divisions <- 10L
-.n_iterations <- 2L
+.n_samples <- 10
+.n_divisions <- 10
+.n_iterations <- 2
 
 # Analyze data
-glmnet_results <- easy_glmnet(bar, "diagnosis", 
+glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis", 
                               family = "binomial", exclude_variables = c("subject"), 
-                              categorical_variables = c("male"), 
+                              categorical_variables = c("male"), preprocess = preprocess_scale, 
                               n_samples = .n_samples, n_divisions = .n_divisions, 
                               n_iterations = .n_iterations, random_state = 12345, n_core = 8, 
                               alpha = 1, nlambda = 200)

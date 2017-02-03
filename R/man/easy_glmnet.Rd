@@ -7,9 +7,9 @@
 easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
   preprocess = NULL, measure = NULL, exclude_variables = NULL,
   categorical_variables = NULL, train_size = 0.667,
-  survival_rate_cutoff = 0.05, n_samples = 1000L, n_divisions = 1000L,
-  n_iterations = 10L, random_state = NULL, progress_bar = TRUE,
-  n_core = 1L, ...)
+  survival_rate_cutoff = 0.05, n_samples = 1000, n_divisions = 1000,
+  n_iterations = 10, random_state = NULL, progress_bar = TRUE,
+  n_core = 1, ...)
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}
@@ -44,7 +44,7 @@ easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 
-\item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.}
+\item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}} or \code{\link[glmnet]{cv.glmnet}}. See those functions' documentation for more details on possible arguments and what they mean. Examples of applicable arguments are \code{alpha}, \code{nlambda}, \code{nlambda.min.ratio}, \code{lambda}, \code{standardize}, \code{intercept}, \code{thresh}, \code{dfmax}, \code{pmax}, \code{exclude}, \code{penalty.factor}, \code{lower.limits}, \code{upper.limits}, \code{maxit}, and \code{standardize.response} for \code{\link[glmnet]{glmnet}} and \code{weights}, \code{offset}, \code{lambda}, \code{type.measure}, \code{nfolds}, \code{foldid}, \code{grouped}, \code{keep}, \code{parallel} for \code{\link[glmnet]{cv.glmnet}}.}
 }
 \value{
 A list with the following values:
@@ -88,9 +88,9 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 # Gaussian
 data("prostate", package = "easyml")
 results <- easy_glmnet(prostate, "lpsa", 
-                       n_samples = 10L, n_divisions = 10L, 
-                       n_iterations = 2L, random_state = 12345L, 
-                       n_core = 1L, alpha = 1.0)
+                       n_samples = 10, n_divisions = 10, 
+                       n_iterations = 2, random_state = 12345, 
+                       n_core = 1, alpha = 1.0)
 
 # Binomial
 data("cocaine_dependence", package = "easyml")
@@ -99,9 +99,9 @@ results <- easy_glmnet(cocaine_dependence, "diagnosis",
                        exclude_variables = c("subject"), 
                        categorical_variables = c("male"), 
                        preprocess = preprocess_scale, 
-                       n_samples = 10L, n_divisions = 10L, 
-                       n_iterations = 2L, random_state = 12345L, 
-                       n_core = 1L, alpha = 1.0)
+                       n_samples = 10, n_divisions = 10, 
+                       n_iterations = 2, random_state = 12345, 
+                       n_core = 1, alpha = 1.0)
 }
 \seealso{
 Other recipes: \code{\link{easy_analysis}},

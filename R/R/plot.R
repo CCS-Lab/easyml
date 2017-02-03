@@ -17,7 +17,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
     ggplot2::scale_y_continuous("Beta estimates") + 
     ggplot2::scale_color_manual("", values = c("0" = "grey", "2" = "black"), 
                                 labels = c("0" = "Insignificant", "2" = "Significant")) + 
-    ggplot2::ggtitle("Beta estimates of predictors") + 
+    ggplot2::ggtitle("Estimates of weights") + 
     ggplot2::theme_bw() + 
     ggplot2::coord_flip()
   
@@ -39,7 +39,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
     ggplot2::geom_point() +
     ggplot2::scale_x_continuous("Predicted y values") + 
     ggplot2::scale_y_continuous("True y values") + 
-    ggplot2::ggtitle("") + 
+    ggplot2::ggtitle("Actual vs. Predicted y values") + 
     ggplot2::theme_bw()
   
   g

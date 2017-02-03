@@ -6,8 +6,20 @@
 #' @return TO BE EDITED.
 #' @export
 support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
-  X <- as.matrix(X)
-  e1071::svm(X, y, scale = FALSE, type = "nu-regression", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- y
+  kwargs[["scale"]] <- FALSE
+  kwargs[["type"]] <- "nu-regression"
+  
+  # build model
+  model <- do.call(e1071::svm, kwargs)
+  
+  # write output
+  model
 }
 
 #' Fit support vector machine binomial regression model.
@@ -18,9 +30,20 @@ support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
 #' @return TO BE EDITED.
 #' @export
 support_vector_machine_fit_model_binomial <- function(X, y, ...) {
-  X <- as.matrix(X)
-  y <- factor(y)
-  e1071::svm(X, y, scale = FALSE, type = "C-classification", ...)
+  # capture additional arguments
+  kwargs <- list(...)
+  
+  # process kwargs
+  kwargs[["x"]] <- as.matrix(X)
+  kwargs[["y"]] <- factor(y)
+  kwargs[["scale"]] <- FALSE
+  kwargs[["type"]] <- "C-classification"
+  
+  # build model
+  model <- do.call(e1071::svm, kwargs)
+  
+  # write output
+  model
 }
 
 #' Predict values for a support vector machine regression model.
@@ -72,10 +95,10 @@ support_vector_machine_predict_model <- function(results, newx) {
 #' # Gaussian
 #' data("prostate", package = "easyml")
 #' results <- easy_support_vector_machine(prostate, "lpsa", 
-#'                                        n_samples = 10L, 
-#'                                        n_divisions = 10L, 
-#'                                        n_iterations = 2L, 
-#'                                        random_state = 1L, n_core = 1L)
+#'                                        n_samples = 10, 
+#'                                        n_divisions = 10, 
+#'                                        n_iterations = 2, 
+#'                                        random_state = 1, n_core = 1)
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
@@ -84,18 +107,18 @@ support_vector_machine_predict_model <- function(results, newx) {
 #'                                        preprocesss = preprocess_scale, 
 #'                                        exclude_variables = c("subject"), 
 #'                                        categorical_variables = c("male"), 
-#'                                        n_samples = 10L, 
-#'                                        n_divisions = 10L, 
-#'                                        n_iterations = 2L, 
-#'                                        random_state = 1L, n_core = 1L)
+#'                                        n_samples = 10, 
+#'                                        n_divisions = 10, 
+#'                                        n_iterations = 2, 
+#'                                        random_state = 1, n_core = 1)
 #' @export
 easy_support_vector_machine <- function(.data, dependent_variable, family = "gaussian", 
                      resample = NULL, preprocess = NULL, measure = NULL, 
                      exclude_variables = NULL, categorical_variables = NULL, 
                      train_size = 0.667, 
-                     n_samples = 1000L, n_divisions = 1000L, 
-                     n_iterations = 10L, random_state = NULL, 
-                     progress_bar = TRUE, n_core = 1L, ...) {
+                     n_samples = 1000, n_divisions = 1000, 
+                     n_iterations = 10, random_state = NULL, 
+                     progress_bar = TRUE, n_core = 1, ...) {
   easy_analysis(.data, dependent_variable, algorithm = "support_vector_machine", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 
