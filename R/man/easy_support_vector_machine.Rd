@@ -30,17 +30,17 @@ easy_support_vector_machine(.data, dependent_variable, family = "gaussian",
 
 \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
 
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
 
-\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
+\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
 
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
 
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
 \item{...}{Arguments to be passed to \code{\link[e1071]{svm}}. See that function's documentation for more details.}
 }
