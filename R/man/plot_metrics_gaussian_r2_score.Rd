@@ -2,17 +2,24 @@
 % Please edit documentation in R/plot.R
 \name{plot_metrics_gaussian_r2_score}
 \alias{plot_metrics_gaussian_r2_score}
-\title{TO BE EDITED.}
+\title{Plot R^2 metrics.}
 \usage{
 plot_metrics_gaussian_r2_score(r2_scores)
 }
 \arguments{
-\item{mses}{TO BE EDITED.}
+\item{r2_scores}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot R^2 metrics.
+}
+\seealso{
+Other plot: \code{\link{plot_coefficients_processed}},
+  \code{\link{plot_metrics_binomial_area_under_curve}},
+  \code{\link{plot_metrics_gaussian_mean_squared_error}},
+  \code{\link{plot_predictions_binomial}},
+  \code{\link{plot_predictions_gaussian}}
 }
 

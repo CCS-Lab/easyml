@@ -2,7 +2,7 @@
 % Please edit documentation in R/replicate.R
 \name{replicate_coefficients}
 \alias{replicate_coefficients}
-\title{TO BE EDITED.}
+\title{Replicate coefficients.}
 \usage{
 replicate_coefficients(fit_model, extract_coefficients, preprocess, X, y,
   categorical_variables = NULL, n_samples = 1000, progress_bar = TRUE,
@@ -13,20 +13,30 @@ replicate_coefficients(fit_model, extract_coefficients, preprocess, X, y,
 
 \item{extract_coefficients}{TO BE EDITED.}
 
-\item{X}{TO BE EDITED.}
+\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
 
-\item{y}{TO BE EDITED.}
+\item{X}{A matrix; the independent variables.}
 
-\item{n_samples}{TO BE EDITED.}
+\item{y}{A vector; the dependent variable.}
 
-\item{progress_bar}{TO BE EDITED.}
+\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 
-\item{parallel}{TO BE EDITED.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
+
+\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
+
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+
+\item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Replicate coefficients.
+}
+\seealso{
+Other replicate: \code{\link{replicate_metrics}},
+  \code{\link{replicate_predictions}}
 }
 

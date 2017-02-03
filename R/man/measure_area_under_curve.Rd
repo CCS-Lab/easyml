@@ -2,14 +2,24 @@
 % Please edit documentation in R/measure.R
 \name{measure_area_under_curve}
 \alias{measure_area_under_curve}
-\title{TO BE EDITED.}
+\title{Measure area under the curve.}
 \usage{
 measure_area_under_curve(y_true, y_pred)
 }
+\arguments{
+\item{y_true}{A numeric vector; the ground truth (correct) target values.}
+
+\item{y_pred}{A numeric vector; the estimated target values.}
+}
 \value{
-TO BE EDITED.
+A numeric vector of length one; the AUC metric.
 }
 \description{
-TO BE EDITED.
+Given the ground truth (correct) target values and the estimated target 
+values, calculates the the AUC metric.
+}
+\seealso{
+Other measure: \code{\link{measure_mean_squared_error}},
+  \code{\link{measure_r2_score}}
 }
 

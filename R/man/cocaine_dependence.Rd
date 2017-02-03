@@ -36,5 +36,8 @@ Cocaine data.
 \examples{
   cocaine_dependence
 }
+\seealso{
+Other data: \code{\link{prostate}}
+}
 \keyword{datasets}
 

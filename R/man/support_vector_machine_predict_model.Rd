@@ -2,14 +2,19 @@
 % Please edit documentation in R/support_vector_machine.R
 \name{support_vector_machine_predict_model}
 \alias{support_vector_machine_predict_model}
-\title{TO BE EDITED.}
+\title{Predict values for a support vector machine regression model.}
 \usage{
 support_vector_machine_predict_model(results, newx)
+}
+\arguments{
+\item{results}{TO BE EDITED.}
+
+\item{newx}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Predict values for a support vector machine regression model.
 }
 

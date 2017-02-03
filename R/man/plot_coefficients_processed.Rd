@@ -2,19 +2,24 @@
 % Please edit documentation in R/plot.R
 \name{plot_coefficients_processed}
 \alias{plot_coefficients_processed}
-\title{TO BE EDITED.}
+\title{Plot processed coefficients.}
 \usage{
-plot_coefficients_processed(betas)
+plot_coefficients_processed(coefficients_processed)
 }
 \arguments{
-\item{y_true}{Ground truth (correct) target values.}
-
-\item{y_pred}{Estimated target values.}
+\item{coefficients_processed}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Plot processed coefficients.
+}
+\seealso{
+Other plot: \code{\link{plot_metrics_binomial_area_under_curve}},
+  \code{\link{plot_metrics_gaussian_mean_squared_error}},
+  \code{\link{plot_metrics_gaussian_r2_score}},
+  \code{\link{plot_predictions_binomial}},
+  \code{\link{plot_predictions_gaussian}}
 }
 

@@ -21,6 +21,7 @@
 #' \item{bis_nonpL}{To Be Edited}
 #' \item{igt_total}{To Be Edited}
 #' }
+#' @family data
 #' @examples
 #'   cocaine_dependence
 "cocaine_dependence"
@@ -40,6 +41,7 @@
 #' \item{pgg45}{To Be Edited}
 #' \item{lpsa}{To Be Edited}
 #' }
+#' @family data
 #' @examples
 #'   prostate
 "prostate"

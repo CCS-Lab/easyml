@@ -2,14 +2,24 @@
 % Please edit documentation in R/measure.R
 \name{measure_mean_squared_error}
 \alias{measure_mean_squared_error}
-\title{TO BE EDITED.}
+\title{Measure mean squared error.}
 \usage{
 measure_mean_squared_error(y_true, y_pred)
 }
+\arguments{
+\item{y_true}{A numeric vector; the ground truth (correct) target values.}
+
+\item{y_pred}{A numeric vector; the estimated target values.}
+}
 \value{
-TO BE EDITED.
+A numeric vector of length one; the mean squared error metric.
 }
 \description{
-TO BE EDITED.
+Given the ground truth (correct) target values and the estimated target 
+values, calculates the mean squared error metric.
+}
+\seealso{
+Other measure: \code{\link{measure_area_under_curve}},
+  \code{\link{measure_r2_score}}
 }
 

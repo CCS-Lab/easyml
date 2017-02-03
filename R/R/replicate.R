@@ -1,15 +1,17 @@
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Replicate coefficients.
 #'
 #' @param fit_model TO BE EDITED.
 #' @param extract_coefficients TO BE EDITED.
-#' @param X TO BE EDITED.
-#' @param y TO BE EDITED.
-#' @param n_samples TO BE EDITED.
-#' @param progress_bar TO BE EDITED.
-#' @param parallel TO BE EDITED.
+#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param X A matrix; the independent variables.
+#' @param y A vector; the dependent variable.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
+#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
+#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_coefficients <- function(fit_model, extract_coefficients, 
                                    preprocess, X, y, 
@@ -45,19 +47,21 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
   coefficients
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Replicate predictions.
 #'
 #' @param fit_model TO BE EDITED.
 #' @param predict_model TO BE EDITED.
-#' @param X_train TO BE EDITED.
-#' @param y_train TO BE EDITED.
-#' @param X_test TO BE EDITED.
-#' @param n_samples TO BE EDITED.
-#' @param progress_bar TO BE EDITED.
-#' @param parallel TO BE EDITED.
+#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param X_train A matrix; the independent variables sampled to a training set.
+#' @param y_train A vector; the dependent variable sampled to a training set.
+#' @param X_test A matrix; the independent variables sampled to a testing set.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
+#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
+#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_predictions <- function(fit_model, predict_model, preprocess, 
                                   X_train, y_train, X_test, 
@@ -103,20 +107,23 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
        predictions_test = predictions_test)
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Replicate metrics.
 #'
 #' @param fit_model TO BE EDITED.
 #' @param predict_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
-#' @param X TO BE EDITED.
-#' @param y TO BE EDITED.
-#' @param n_divisions TO BE EDITED.
-#' @param n_iterations TO BE EDITED.
-#' @param progress_bar TO BE EDITED.
-#' @param parallel TO BE EDITED.
+#' @param resample A function; the function for resampling the data. Defaults to NULL.
+#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param measure A function; the function for measuring the results. Defaults to NULL.
+#' @param X A matrix; the independent variables.
+#' @param y A vector; the dependent variable.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
+#' @param n_divisions An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.
+#' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.
+#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param ... The arguments to be passed to the algorithm specified.
 #' @return TO BE EDITED.
+#' @family replicate
 #' @export
 replicate_metrics <- function(fit_model, predict_model, resample, preprocess, 
                               measure, X, y, categorical_variables = NULL, 

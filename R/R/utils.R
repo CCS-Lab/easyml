@@ -1,18 +1,9 @@
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
-#'
-#' @return TO BE EDITED.
-#' @export
-check_args <- function() {
-  1L
-}
-
 #' Reduce number of cores.
-#' 
-#' TO BE EDITED.
 #'
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param cpu_count An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 reduce_cores <- function(n_core, cpu_count = NULL) {
   if (is.null(cpu_count)) {
@@ -22,11 +13,12 @@ reduce_cores <- function(n_core, cpu_count = NULL) {
   n_core
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Remove variables from a dataset.
 #'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 remove_variables <- function(.data = NULL, exclude_variables = NULL) {
   if (!is.null(exclude_variables)) {
@@ -43,6 +35,7 @@ remove_variables <- function(.data = NULL, exclude_variables = NULL) {
 #' @param confidence_level confidence level for the returned confidence interval. Currently only used for the Pearson product moment correlation coefficient if there are at least 4 complete pairs of observations.
 #' @param ... further arguments to be passed to or from \code{cor.test}.
 #' @return A list containing three matrices; p_value, lower_bound, and upper bound.
+#' @family utils
 #' @export
 correlation_test <- function(x, confidence_level = 0.95, ...) {
   # Initialize matrices
@@ -68,14 +61,12 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
        upper_bound = upper_bound)
 }
 
-#' TO BE EDITED.
-#' 
-#' TO BE EDITED.
+#' Process coefficients.
 #'
-#' @param coefs TO BE EDITED.
-#' @param n_samples TO BE EDITED.
-#' @param survival_rate_cutoff TO BE EDITED.
+#' @param coefs The replicated coefficients.
+#' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
 #' @return TO BE EDITED.
+#' @family utils
 #' @export
 process_coefficients <- function(coefs, survival_rate_cutoff = 0.05) {
   coefs <- coefs[, -1]
@@ -87,14 +78,14 @@ process_coefficients <- function(coefs, survival_rate_cutoff = 0.05) {
   coefs_updated <- coefs * mask
   betas <- data.frame(predictor = factor(column_names, levels = column_names))
   betas[, "mean"] <- as.numeric(apply(coefs_updated, 1, mean))
-  betas[, "lb"] <- as.numeric(apply(coefs_updated, 1, quantile, probs = 0.025))
-  betas[, "ub"] <- as.numeric(apply(coefs_updated, 1, quantile, probs = 0.975))
+  betas[, "lower_bound"] <- as.numeric(apply(coefs_updated, 1, stats::quantile, probs = 0.025))
+  betas[, "upper_bound"] <- as.numeric(apply(coefs_updated, 1, stats::quantile, probs = 0.975))
   betas[, "survival"] <- mask
   betas[, "sig"] <- betas["survival"]
-  betas[, "dotColor1"] <- as.numeric(1 * (betas["mean"] != 0))
-  cond1 <- betas[, "dotColor1"] > 0
+  betas[, "dot_color_1"] <- as.numeric(1 * (betas["mean"] != 0))
+  cond1 <- betas[, "dot_color_1"] > 0
   cond2 <- betas[, "sig"] > 0
-  betas[, "dotColor2"] <- (1 * (cond1 & cond2)) + 1
-  betas[, "dotColor"] <- factor(betas[, "dotColor1"] * betas[, "dotColor2"])
+  betas[, "dot_color_2"] <- (1 * (cond1 & cond2)) + 1
+  betas[, "dot_color"] <- factor(betas[, "dot_color_1"] * betas[, "dot_color_2"])
   betas
 }

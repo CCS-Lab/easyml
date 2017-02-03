@@ -2,14 +2,24 @@
 % Please edit documentation in R/utils.R
 \name{remove_variables}
 \alias{remove_variables}
-\title{TO BE EDITED.}
+\title{Remove variables from a dataset.}
 \usage{
 remove_variables(.data = NULL, exclude_variables = NULL)
+}
+\arguments{
+\item{.data}{A data.frame; the data to be analyzed.}
+
+\item{exclude_variables}{A character vector; the variables from the data set to exclude. Defaults to NULL.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Remove variables from a dataset.
+}
+\seealso{
+Other utils: \code{\link{correlation_test}},
+  \code{\link{process_coefficients}},
+  \code{\link{reduce_cores}}
 }
 

@@ -33,16 +33,16 @@ For a dataset with a continuous dependent variable:
 
 ``` r
 data("prostate", package = "easyml")
-easy_glmnet(prostate, "lpsa")
+results <- easy_glmnet(prostate, "lpsa")
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` r
 data("cocaine_dependence", package = "easyml")
-easy_glmnet(cocaine_dependence, "diagnosis", 
-            family = "binomial", exclude_variables = c("subject", "age"), 
-            categorical_variables = c("male"))
+results <- easy_glmnet(cocaine_dependence, "diagnosis", 
+                       family = "binomial", exclude_variables = c("subject", "age"), 
+                       categorical_variables = c("male"))
 ```
 
 Citation
@@ -51,7 +51,7 @@ Citation
 A whitepaper for easyml is available at <http://arxiv.org/abs/TOBEEDITED>. If you find this code useful please cite us in your work:
 
     @inproceedings{TOBEEDITED,
-        title = {easyml: A toolkit for easily building and evaluation machine learning models},
+        title = {easyml: A toolkit for easily building and evaluating machine learning models},
         author = {Paul Hendricks and Woo-Young Ahn},
         eprint = {arXiv:TOBEEDITED},
         year = {2017},

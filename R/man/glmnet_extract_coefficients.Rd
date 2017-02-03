@@ -2,14 +2,17 @@
 % Please edit documentation in R/glmnet.R
 \name{glmnet_extract_coefficients}
 \alias{glmnet_extract_coefficients}
-\title{TO BE EDITED.}
+\title{Extract coefficients from a penalized regression model.}
 \usage{
 glmnet_extract_coefficients(results)
+}
+\arguments{
+\item{results}{TO BE EDITED.}
 }
 \value{
 TO BE EDITED.
 }
 \description{
-TO BE EDITED.
+Extract coefficients from a penalized regression model.
 }
 
