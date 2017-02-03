@@ -7,9 +7,9 @@
 easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
   preprocess = NULL, measure = NULL, exclude_variables = NULL,
   categorical_variables = NULL, train_size = 0.667,
-  survival_rate_cutoff = 0.05, n_samples = 1000L, n_divisions = 1000L,
-  n_iterations = 10L, random_state = NULL, progress_bar = TRUE,
-  n_core = 1L, ...)
+  survival_rate_cutoff = 0.05, n_samples = 1000, n_divisions = 1000,
+  n_iterations = 10, random_state = NULL, progress_bar = TRUE,
+  n_core = 1, ...)
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}
@@ -88,9 +88,9 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 # Gaussian
 data("prostate", package = "easyml")
 results <- easy_glmnet(prostate, "lpsa", 
-                       n_samples = 10L, n_divisions = 10L, 
-                       n_iterations = 2L, random_state = 12345L, 
-                       n_core = 1L, alpha = 1.0)
+                       n_samples = 10, n_divisions = 10, 
+                       n_iterations = 2, random_state = 12345, 
+                       n_core = 1, alpha = 1.0)
 
 # Binomial
 data("cocaine_dependence", package = "easyml")
@@ -99,9 +99,9 @@ results <- easy_glmnet(cocaine_dependence, "diagnosis",
                        exclude_variables = c("subject"), 
                        categorical_variables = c("male"), 
                        preprocess = preprocess_scale, 
-                       n_samples = 10L, n_divisions = 10L, 
-                       n_iterations = 2L, random_state = 12345L, 
-                       n_core = 1L, alpha = 1.0)
+                       n_samples = 10, n_divisions = 10, 
+                       n_iterations = 2, random_state = 12345, 
+                       n_core = 1, alpha = 1.0)
 }
 \seealso{
 Other recipes: \code{\link{easy_analysis}},

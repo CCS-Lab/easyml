@@ -7,9 +7,9 @@
 easy_support_vector_machine(.data, dependent_variable, family = "gaussian",
   resample = NULL, preprocess = NULL, measure = NULL,
   exclude_variables = NULL, categorical_variables = NULL,
-  train_size = 0.667, n_samples = 1000L, n_divisions = 1000L,
-  n_iterations = 10L, random_state = NULL, progress_bar = TRUE,
-  n_core = 1L, ...)
+  train_size = 0.667, n_samples = 1000, n_divisions = 1000,
+  n_iterations = 10, random_state = NULL, progress_bar = TRUE,
+  n_core = 1, ...)
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}
@@ -83,10 +83,10 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 # Gaussian
 data("prostate", package = "easyml")
 results <- easy_support_vector_machine(prostate, "lpsa", 
-                                       n_samples = 10L, 
-                                       n_divisions = 10L, 
-                                       n_iterations = 2L, 
-                                       random_state = 1L, n_core = 1L)
+                                       n_samples = 10, 
+                                       n_divisions = 10, 
+                                       n_iterations = 2, 
+                                       random_state = 1, n_core = 1)
 
 # Binomial
 data("cocaine_dependence", package = "easyml")
@@ -95,10 +95,10 @@ results <- easy_support_vector_machine(cocaine_dependence, "diagnosis",
                                        preprocesss = preprocess_scale, 
                                        exclude_variables = c("subject"), 
                                        categorical_variables = c("male"), 
-                                       n_samples = 10L, 
-                                       n_divisions = 10L, 
-                                       n_iterations = 2L, 
-                                       random_state = 1L, n_core = 1L)
+                                       n_samples = 10, 
+                                       n_divisions = 10, 
+                                       n_iterations = 2, 
+                                       random_state = 1, n_core = 1)
 }
 \seealso{
 Other recipes: \code{\link{easy_analysis}},

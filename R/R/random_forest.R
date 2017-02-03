@@ -73,9 +73,9 @@ random_forest_predict_model <- function(results, newx) {
 #' data("prostate", package = "easyml")
 #' results <- easy_random_forest(prostate, "lpsa", 
 #'                               n_samples = 10L, 
-#'                               n_divisions = 10L, 
-#'                               n_iterations = 2L, 
-#'                               random_state = 12345L, n_core = 1L)
+#'                               n_divisions = 10, 
+#'                               n_iterations = 2, 
+#'                               random_state = 12345, n_core = 1)
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
@@ -83,18 +83,18 @@ random_forest_predict_model <- function(results, newx) {
 #'                               family = "binomial", 
 #'                               exclude_variables = c("subject"),
 #'                               categorical_variables = c("male"),
-#'                               n_samples = 10L, 
-#'                               n_divisions = 10L, 
-#'                               n_iterations = 2L, 
-#'                               random_state = 12345L, n_core = 1L)
+#'                               n_samples = 10, 
+#'                               n_divisions = 10, 
+#'                               n_iterations = 2, 
+#'                               random_state = 12345, n_core = 1)
 #' @export
 easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
                                resample = NULL, preprocess = NULL, measure = NULL, 
                                exclude_variables = NULL, categorical_variables = NULL, 
                                train_size = 0.667, 
-                               n_samples = 1000L, n_divisions = 1000L, 
-                               n_iterations = 10L, random_state = NULL, 
-                               progress_bar = TRUE, n_core = 1L, ...) {
+                               n_samples = 1000, n_divisions = 1000, 
+                               n_iterations = 10, random_state = NULL, 
+                               progress_bar = TRUE, n_core = 1, ...) {
   easy_analysis(.data, dependent_variable, algorithm = "random_forest", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 
