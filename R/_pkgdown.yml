@@ -1,0 +1,17 @@
+navbar:
+  title: "easyml"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Documentation"
+      href: reference/index.html
+    - text: "Vignettes"
+      href: articles/index.html
+
+articles:
+  - title: "Vignettes"
+    desc: >
+      These are vignettes.
+    contents:
+    - movielens
