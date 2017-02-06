@@ -35,5 +35,5 @@ measure_r2_score <- scorer::r2_score
 #' @family measure
 #' @export
 measure_area_under_curve <- function(y_true, y_pred) {
-  as.numeric(pROC::roc(y_true, y_pred)$auc)
+  as.numeric(pROC::roc(as.numeric(y_true), as.numeric(y_pred))$auc)
 }
