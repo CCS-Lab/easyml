@@ -43,6 +43,7 @@ Replicate metrics.
 }
 \seealso{
 Other replicate: \code{\link{replicate_coefficients}},
-  \code{\link{replicate_predictions}}
+  \code{\link{replicate_predictions}},
+  \code{\link{replicate_variable_importances}}
 }
 

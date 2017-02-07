@@ -60,7 +60,7 @@
       <h1>Titanic</h1>
                         <h4 class="author">Paul Hendricks</h4>
             
-            <h4 class="date">2017-02-05</h4>
+            <h4 class="date">2017-02-06</h4>
           </div>
 
     
@@ -250,7 +250,7 @@ glmnet_results &lt;-<span class="st"> </span><span class="kw"><a href="../refere
 <li>If a passenger is second class, the log-odds of survival decrease by 0.77 units,</li>
 <li>For every unit increase in a passenger’s family size, the log-odds of survival decrease by 0.10 units,</li>
 <li>For every additional Sibling or Spouse in a passenger’s family, the log-odds of survival decrease by 0.21 units,</li>
-<li>If a passenger is male, the log-odds decrase by 2.64 units.</li>
+<li>If a passenger is male, the log-odds of survival decrease by 2.64 units.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_coefficients_processed</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
@@ -286,7 +286,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td>9</td>
 <td align="left">Age</td>
 <td align="right">-0.47</td>
-<td align="right">-0.49</td>
+<td align="right">-0.48</td>
 <td align="right">-0.45</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -298,7 +298,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td>8</td>
 <td align="left">Embarked_S</td>
 <td align="right">-0.40</td>
-<td align="right">-0.42</td>
+<td align="right">-0.41</td>
 <td align="right">-0.38</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -322,7 +322,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td>6</td>
 <td align="left">Pclass_3</td>
 <td align="right">-1.97</td>
-<td align="right">-2.04</td>
+<td align="right">-2.03</td>
 <td align="right">-1.88</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -334,7 +334,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td>5</td>
 <td align="left">Pclass_2</td>
 <td align="right">-0.75</td>
-<td align="right">-0.82</td>
+<td align="right">-0.81</td>
 <td align="right">-0.67</td>
 <td align="right">1</td>
 <td align="right">1</td>

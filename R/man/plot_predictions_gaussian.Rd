@@ -22,6 +22,7 @@ Other plot: \code{\link{plot_coefficients_processed}},
   \code{\link{plot_metrics_binomial_area_under_curve}},
   \code{\link{plot_metrics_gaussian_mean_squared_error}},
   \code{\link{plot_metrics_gaussian_r2_score}},
-  \code{\link{plot_predictions_binomial}}
+  \code{\link{plot_predictions_binomial}},
+  \code{\link{plot_variable_importances}}
 }
 

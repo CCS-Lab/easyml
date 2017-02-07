@@ -24,6 +24,29 @@ plot_coefficients_processed <- function(coefficients_processed) {
   g
 }
 
+#' Plot variable importances.
+#'
+#' @param variable_importances TO BE EDITED.
+#' @return TO BE EDITED.
+#' @family plot
+#' @export
+plot_variable_importances <- function(variable_importances) {
+  if (nrow(variable_importances) > 20) 
+    warning("Number of variables exceeds 20; plot may not render as nicely.")
+  
+  g <- 
+    ggplot2::ggplot(variable_importances, 
+                    ggplot2::aes_string(x = "variable", y = "mean_decrease_gini")) +
+    ggplot2::geom_bar(stat = "identity") + 
+    ggplot2::scale_x_discrete("Predictors") +
+    ggplot2::scale_y_continuous("Variable Importance (Mean Decrease in Gini Index)") + 
+    ggplot2::ggtitle("Variable Importance") + 
+    ggplot2::theme_bw() + 
+    ggplot2::coord_flip()
+  
+  g
+}
+
 #' Plot gaussian predictions.
 #'
 #' @param y_true Ground truth (correct) target values.

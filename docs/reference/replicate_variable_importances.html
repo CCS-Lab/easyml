@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot mean squared error metrics. — plot_metrics_gaussian_mean_squared_error • easyml</title>
+<title>Replicate variable importances. — replicate_variable_importances • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,19 +77,30 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot mean squared error metrics.</h1>
+    <h1>Replicate variable importances.</h1>
     </div>
 
     
-    <p>Plot mean squared error metrics.</p>
+    <p>Replicate variable importances.</p>
     
 
-    <pre><span class='fu'>plot_metrics_gaussian_mean_squared_error</span>(<span class='no'>mses</span>)</pre>
+    <pre><span class='fu'>replicate_variable_importances</span>(<span class='no'>fit_model</span>, <span class='no'>preprocess</span>, <span class='no'>X</span>, <span class='no'>y</span>,
+  <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>mses</dt>
+      <dt>fit_model</dt>
       <dd>TO BE EDITED.</dd>
+      <dt>preprocess</dt>
+      <dd>A function; the function for preprocessing the data. Defaults to NULL.</dd>
+      <dt>X</dt>
+      <dd>A matrix; the independent variables.</dd>
+      <dt>y</dt>
+      <dd>A vector; the dependent variable.</dd>
+      <dt>categorical_variables</dt>
+      <dd>A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.</dd>
+      <dt>...</dt>
+      <dd>The arguments to be passed to the algorithm specified.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -98,12 +109,9 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other plot: <code><a href='plot_coefficients_processed.html'>plot_coefficients_processed</a></code>,
-  <code><a href='plot_metrics_binomial_area_under_curve.html'>plot_metrics_binomial_area_under_curve</a></code>,
-  <code><a href='plot_metrics_gaussian_r2_score.html'>plot_metrics_gaussian_r2_score</a></code>,
-  <code><a href='plot_predictions_binomial.html'>plot_predictions_binomial</a></code>,
-  <code><a href='plot_predictions_gaussian.html'>plot_predictions_gaussian</a></code>,
-  <code><a href='plot_variable_importances.html'>plot_variable_importances</a></code></p>
+    <p>Other replicate: <code><a href='replicate_coefficients.html'>replicate_coefficients</a></code>,
+  <code><a href='replicate_metrics.html'>replicate_metrics</a></code>,
+  <code><a href='replicate_predictions.html'>replicate_predictions</a></code></p>
     
 
   </div>
