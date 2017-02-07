@@ -47,6 +47,38 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
   coefficients
 }
 
+#' Replicate variable importances.
+#'
+#' @param fit_model TO BE EDITED.
+#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param X A matrix; the independent variables.
+#' @param y A vector; the dependent variable.
+#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
+#' @param ... The arguments to be passed to the algorithm specified.
+#' @return TO BE EDITED.
+#' @family replicate
+#' @export
+replicate_variable_importances <- function(fit_model, preprocess, X, y, 
+                                           categorical_variables = NULL, ...) {
+  # Print an informative message
+  print(paste0("Replicating variable importances:"))
+
+  # Preprocess data
+  result <- preprocess(list(X = X), categorical_variables)
+  X <- result[["X"]]
+  
+  # Fit model
+  model <- fit_model(X, y, ...)
+  
+  # Extract variable importances
+  importances <- randomForest::importance(model)
+  variable_importances <- data.frame(variable = rownames(importances),
+                                     mean_decrease_gini = as.numeric(importances), 
+                                     stringsAsFactors = FALSE)
+  
+  variable_importances
+}
+
 #' Replicate predictions.
 #'
 #' @param fit_model TO BE EDITED.
@@ -68,7 +100,7 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
                                   categorical_variables = NULL, 
                                   n_samples = 1000, progress_bar = TRUE, 
                                   n_core = 1, ...) {
-  # Handle progress bar
+  # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
@@ -129,7 +161,7 @@ replicate_metrics <- function(fit_model, predict_model, resample, preprocess,
                               measure, X, y, categorical_variables = NULL, 
                               n_divisions = 1000, n_iterations = 100, 
                               progress_bar = TRUE, n_core = 1, ...) {
-  # Handle progress bar
+  # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }

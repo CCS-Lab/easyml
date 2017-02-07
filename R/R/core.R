@@ -71,6 +71,9 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Set coefficients boolean
   coefficients_boolean <- set_coefficients_boolean(algorithm)
   
+  # Set variable importances boolean
+  variable_importances_boolean <- set_variable_importances_boolean(algorithm)
+  
   # Set predictions boolean
   predictions_boolean <- set_predictions_boolean(algorithm)
   
@@ -156,6 +159,18 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     
     # Save coefficients plots
     output[["plot_coefficients_processed"]] <- plot_coefficients_processed(coefficients_processed)
+  }
+  
+  # Assess if variable importances should be replicated for this algorithm
+  if (variable_importances_boolean) {
+    # Replicate variable importances
+    variable_importances <- replicate_variable_importances(fit_model, preprocess, X, y, 
+                                                           categorical_variables = categorical_variables, 
+                                                           ...)
+    output[["variable_importances"]] <- variable_importances
+    
+    # Save variable importances plot
+    output[["plot_variable_importances"]] <- plot_variable_importances(variable_importances)
   }
   
   # Assess if predictions should be replicated for this algorithm

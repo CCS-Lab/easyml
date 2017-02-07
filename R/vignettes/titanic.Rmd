@@ -80,7 +80,7 @@ glmnet_results <- easy_glmnet(titanic_train_2, "Survived",
 
 ## Assess results
 
-Now let's assess the results of the `easy-glmnet` model.
+Now let's assess the results of the `easy_glmnet` model.
 
 ### Estimates of weights
 
@@ -93,7 +93,7 @@ We can interpret the weights in the following way:
 * If a passenger is second class, the log-odds of survival decrease by 0.77 units, 
 * For every unit increase in a passenger's family size, the log-odds of survival decrease by 0.10 units, 
 * For every additional Sibling or Spouse in a passenger's family, the log-odds of survival decrease by 0.21 units, 
-* If a passenger is male, the log-odds decrase by 2.64 units. 
+* If a passenger is male, the log-odds of survival decrease by 2.64 units. 
 
 ```{r message=FALSE}
 glmnet_results$plot_coefficients_processed

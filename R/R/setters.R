@@ -5,8 +5,19 @@
 #' @family setters
 #' @export
 set_coefficients_boolean <- function(algorithm) {
-  # Add random_forest once feature importances are implemented?
   algorithms <- c("glmnet")
+  boolean <- algorithm %in% algorithms
+  boolean
+}
+
+#' Set variable importances boolean.
+#'
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
+#' @return A logical vector of length one; whether variable importances should be replicated for this analyis or not.
+#' @family setters
+#' @export
+set_variable_importances_boolean <- function(algorithm) {
+  algorithms <- c("random_forest")
   boolean <- algorithm %in% algorithms
   boolean
 }

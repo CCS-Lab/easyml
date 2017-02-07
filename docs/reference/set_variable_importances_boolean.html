@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot mean squared error metrics. — plot_metrics_gaussian_mean_squared_error • easyml</title>
+<title>Set variable importances boolean. — set_variable_importances_boolean • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,33 +77,45 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot mean squared error metrics.</h1>
+    <h1>Set variable importances boolean.</h1>
     </div>
 
     
-    <p>Plot mean squared error metrics.</p>
+    <p>Set variable importances boolean.</p>
     
 
-    <pre><span class='fu'>plot_metrics_gaussian_mean_squared_error</span>(<span class='no'>mses</span>)</pre>
+    <pre><span class='fu'>set_variable_importances_boolean</span>(<span class='no'>algorithm</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>mses</dt>
-      <dd>TO BE EDITED.</dd>
+      <dt>algorithm</dt>
+      <dd>A character vector of length one; the algorithm to run on the data. Choices are one of c(&quot;glmnet&quot;, &quot;random_forest&quot;, &quot;support_vector_machine&quot;).</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TO BE EDITED.</p>
+    <p>A logical vector of length one; whether variable importances should be replicated for this analyis or not.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other plot: <code><a href='plot_coefficients_processed.html'>plot_coefficients_processed</a></code>,
-  <code><a href='plot_metrics_binomial_area_under_curve.html'>plot_metrics_binomial_area_under_curve</a></code>,
-  <code><a href='plot_metrics_gaussian_r2_score.html'>plot_metrics_gaussian_r2_score</a></code>,
-  <code><a href='plot_predictions_binomial.html'>plot_predictions_binomial</a></code>,
-  <code><a href='plot_predictions_gaussian.html'>plot_predictions_gaussian</a></code>,
-  <code><a href='plot_variable_importances.html'>plot_variable_importances</a></code></p>
+    <p>Other setters: <code><a href='set_categorical_variables.html'>set_categorical_variables</a></code>,
+  <code><a href='set_coefficients_boolean.html'>set_coefficients_boolean</a></code>,
+  <code><a href='set_column_names.html'>set_column_names</a></code>, <code><a href='set_cores.html'>set_cores</a></code>,
+  <code><a href='set_dependent_variable.html'>set_dependent_variable</a></code>,
+  <code><a href='set_extract_coefficients.html'>set_extract_coefficients</a></code>,
+  <code><a href='set_fit_model.html'>set_fit_model</a></code>,
+  <code><a href='set_independent_variables.html'>set_independent_variables</a></code>,
+  <code><a href='set_looper_.html'>set_looper_</a></code>, <code><a href='set_looper.html'>set_looper</a></code>,
+  <code><a href='set_measure.html'>set_measure</a></code>,
+  <code><a href='set_metrics_boolean.html'>set_metrics_boolean</a></code>,
+  <code><a href='set_parallel.html'>set_parallel</a></code>,
+  <code><a href='set_plot_metrics.html'>set_plot_metrics</a></code>,
+  <code><a href='set_plot_predictions.html'>set_plot_predictions</a></code>,
+  <code><a href='set_predict_model.html'>set_predict_model</a></code>,
+  <code><a href='set_predictions_boolean.html'>set_predictions_boolean</a></code>,
+  <code><a href='set_preprocess.html'>set_preprocess</a></code>,
+  <code><a href='set_random_state.html'>set_random_state</a></code>,
+  <code><a href='set_resample.html'>set_resample</a></code></p>
     
 
   </div>
