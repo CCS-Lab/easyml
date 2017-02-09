@@ -85,7 +85,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   output[["resample"]] <- resample
   
   # Set preprocess function
-  preprocess <- set_preprocess(preprocess)
+  preprocess <- set_preprocess(preprocess, algorithm)
   output[["preprocess"]] <- preprocess
   
   # Set measure function

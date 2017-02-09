@@ -38,8 +38,10 @@ test_that("Test set_categorical_variables.", {
 
 
 test_that("Test set_preprocess.", {
-  expect_equal(set_preprocess(NULL), preprocess_identity)
-  expect_equal(set_preprocess(identity), identity)
+  expect_equal(set_preprocess(NULL, "glmnet"), preprocess_scale)
+  expect_equal(set_preprocess(NULL, "random_forest"), preprocess_identity)
+  expect_equal(set_preprocess(NULL, "support_vector_machine"), preprocess_scale)
+  expect_equal(set_preprocess(identity, ""), identity)
 })
 
 test_that("Test set_random_state.", {
