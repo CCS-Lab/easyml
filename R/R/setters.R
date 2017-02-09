@@ -206,13 +206,21 @@ set_resample <- function(resample = NULL, family = NULL) {
 #' Sets the function responsible for preprocessing the data.
 #'
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
 #' @return TO BE EDITED.
 #' @family setters
 #' @export
-set_preprocess <- function(preprocess = NULL) {
+set_preprocess <- function(preprocess = NULL, algorithm) {
   if (is.null(preprocess)) {
-    preprocess <- preprocess_identity
+    if (algorithm == "glmnet") {
+      preprocess <- preprocess_scale
+    } else if (algorithm == "random_forest") {
+      preprocess <- preprocess_identity
+    } else if (algorithm == "support_vector_machine") {
+      preprocess <- preprocess_scale
+    }
   }
+  
   preprocess
 }
 

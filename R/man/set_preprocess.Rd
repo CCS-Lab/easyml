@@ -4,10 +4,12 @@
 \alias{set_preprocess}
 \title{Set preprocess function.}
 \usage{
-set_preprocess(preprocess = NULL)
+set_preprocess(preprocess = NULL, algorithm)
 }
 \arguments{
 \item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
+
+\item{algorithm}{A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").}
 }
 \value{
 TO BE EDITED.

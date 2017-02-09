@@ -84,12 +84,14 @@
     <p>Sets the function responsible for preprocessing the data.</p>
     
 
-    <pre><span class='fu'>set_preprocess</span>(<span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>set_preprocess</span>(<span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>algorithm</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>preprocess</dt>
       <dd>A function; the function for preprocessing the data. Defaults to NULL.</dd>
+      <dt>algorithm</dt>
+      <dd>A character vector of length one; the algorithm to run on the data. Choices are one of c(&quot;glmnet&quot;, &quot;random_forest&quot;, &quot;support_vector_machine&quot;).</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
