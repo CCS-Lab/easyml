@@ -33,7 +33,7 @@ random_forest_fit_model_binomial <- function(X, y, ...) {
   
   # process kwargs
   kwargs[["x"]] <- as.matrix(X)
-  kwargs[["y"]] <- y
+  kwargs[["y"]] <- as.factor(y)
   
   # build model
   model <- do.call(randomForest::randomForest, kwargs)
