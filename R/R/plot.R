@@ -87,10 +87,9 @@ plot_predictions_binomial <- function(y_true, y_pred) {
     ggplot2::ggplot(df, ggplot2::aes_string(x = "one_minus_specificities", y = "sensitivities")) +
     ggplot2::geom_path(alpha = 1, size = 1) +
     ggplot2::geom_segment(ggplot2::aes(x = 0, y = 0, xend = 1, yend = 1) , linetype = "dashed") + 
-    ggplot2::annotate("text", label = auc_label, x = 0.85, y = 0.025, size = 8) + 
     ggplot2::scale_x_continuous("1 - Specificity") + 
     ggplot2::scale_y_continuous("Sensitivity") + 
-    ggplot2::ggtitle("ROC Curve") + 
+    ggplot2::ggtitle(paste0("ROC Curve (", auc_label, ")")) + 
     ggplot2::theme_bw()
   
   g
