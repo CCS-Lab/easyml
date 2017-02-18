@@ -56,13 +56,16 @@ plot_variable_importances <- function(variable_importances) {
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
+  r2_score <- scorer::r2_score(y_true, y_pred)
+  r2_score_label <- paste("R^2 Score = ", round(r2_score, digits = 3), sep = "")
   
   g <- 
     ggplot2::ggplot(df, ggplot2::aes(x = y_pred, y = y_true)) +
-    ggplot2::geom_point() +
+    ggplot2::geom_point() + 
+    ggplot2::geom_smooth(method = 'lm') + 
     ggplot2::scale_x_continuous("Predicted y values") + 
     ggplot2::scale_y_continuous("True y values") + 
-    ggplot2::ggtitle("Actual vs. Predicted y values") + 
+    ggplot2::ggtitle(paste0("Actual vs. Predicted y values (", r2_score_label, ")")) + 
     ggplot2::theme_bw()
   
   g
