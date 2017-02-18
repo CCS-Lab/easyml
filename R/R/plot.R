@@ -111,10 +111,9 @@ plot_metrics_gaussian_mean_squared_error <- function(mses) {
     ggplot2::ggplot(df, ggplot2::aes(x = mses)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_mse, linetype = "dotted") + 
-    ggplot2::annotate("text", label = mse_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("MSE") + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of MSEs") + 
+    ggplot2::ggtitle(paste0("Distribution of MSEs (", mse_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -135,10 +134,9 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
     ggplot2::ggplot(df, ggplot2::aes(x = r2_scores)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_r2_score, linetype = "dotted") + 
-    ggplot2::annotate("text", label = r2_score_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("R^2 Score", limits = c(0, 1)) + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of R^2 Scores") + 
+    ggplot2::ggtitle(paste0("Distribution of R^2 Scores (", r2_score_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -159,10 +157,9 @@ plot_metrics_binomial_area_under_curve <- function(aucs) {
     ggplot2::ggplot(df, ggplot2::aes(x = aucs)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_auc, linetype = "dotted") + 
-    ggplot2::annotate("text", label = auc_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("AUC", limits = c(0, 1)) + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of AUCs") + 
+    ggplot2::ggtitle(paste0("Distribution of AUCs (", auc_label, ")")) + 
     ggplot2::theme_bw()
   
   g
