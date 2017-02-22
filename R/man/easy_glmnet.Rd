@@ -6,7 +6,7 @@
 \usage{
 easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
   preprocess = NULL, measure = NULL, exclude_variables = NULL,
-  categorical_variables = NULL, train_size = 0.667,
+  categorical_variables = NULL, train_size = 0.667, foldid = NULL,
   survival_rate_cutoff = 0.05, n_samples = 1000, n_divisions = 1000,
   n_iterations = 10, random_state = NULL, progress_bar = TRUE,
   n_core = 1, ...)
@@ -29,6 +29,8 @@ easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
 \item{categorical_variables}{A character vector; the variables that are categorical. Defaults to NULL.}
 
 \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
+
+\item{foldid}{A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.}
 
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 

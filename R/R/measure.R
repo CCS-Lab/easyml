@@ -24,6 +24,18 @@ measure_mean_squared_error <- function(y_true, y_pred) {
 #' @export
 measure_r2_score <- scorer::r2_score
 
+#' Measure Correlation score.
+#' 
+#' Given the ground truth (correct) target values and the estimated target 
+#' values, calculates the correlation metric.
+#'
+#' @param y_true A numeric vector; the ground truth (correct) target values.
+#' @param y_pred A numeric vector; the estimated target values.
+#' @return A numeric vector of length one; the correlation metric.
+#' @family measure
+#' @export
+measure_cor_score <- stats::cor
+
 #' Measure area under the curve.
 #' 
 #' Given the ground truth (correct) target values and the estimated target 

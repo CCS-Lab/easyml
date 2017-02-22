@@ -7,9 +7,9 @@
 easy_random_forest(.data, dependent_variable, family = "gaussian",
   resample = NULL, preprocess = NULL, measure = NULL,
   exclude_variables = NULL, categorical_variables = NULL,
-  train_size = 0.667, n_samples = 1000, n_divisions = 1000,
-  n_iterations = 10, random_state = NULL, progress_bar = TRUE,
-  n_core = 1, ...)
+  train_size = 0.667, foldid = NULL, n_samples = 1000,
+  n_divisions = 1000, n_iterations = 10, random_state = NULL,
+  progress_bar = TRUE, n_core = 1, ...)
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}
@@ -29,6 +29,8 @@ easy_random_forest(.data, dependent_variable, family = "gaussian",
 \item{categorical_variables}{A character vector; the variables that are categorical. Defaults to NULL.}
 
 \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
+
+\item{foldid}{A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.}
 
 \item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
 

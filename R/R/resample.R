@@ -5,11 +5,12 @@
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param foldid Not currently supported in this function.
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @family resample
 #' @export
-resample_simple_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {
+resample_simple_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
   # Set random state
   set_random_state(random_state)
 
@@ -35,11 +36,12 @@ resample_simple_train_test_split <- function(X, y, train_size = 0.667, random_st
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param foldid Not currently supported in this function.
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @family resample
 #' @export
-resample_stratified_train_test_split <- function(X, y, train_size = 0.667, random_state = NULL) {
+resample_stratified_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
   # Set random state
   set_random_state(random_state)
   
@@ -74,4 +76,49 @@ resample_stratified_train_test_split <- function(X, y, train_size = 0.667, rando
   y_test <- y[!mask]
   
   list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
+}
+
+#' Sample with respect to an identification vector
+#'
+#' This will sample the training and test sets so that case identifiers (e.g. subject ID's) are not shared across training and test sets.
+#'
+#' @param X TO BE EDITED.
+#' @param y A numeric vector with two classes, 0 and 1.
+#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
+#' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
+#' @family resample
+#' @export
+resample_fold_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
+  # Catch error if foldid is not specified
+  if (is.null(foldid)) {
+    stop("'foldid' must be specified when calling 'resample_fold_train_test_split' !")
+  } else {
+    # Set random state
+    set_random_state(random_state)
+    
+    while (T) {
+      # Shuffle the unique values in the foldid vector
+      unique_foldid <- sample(unique(foldid), replace=F)
+      
+      # Transform unique_foldid indices to [0, 1] space
+      foldid_idx <- seq_along(unique_foldid) / (length(unique_foldid))
+      
+      # Select unique foldid values with indices less than or equal to train_size
+      train_ids <- unique_foldid[foldid_idx <= train_size]
+      
+      # Create mask with train_ids used to subset training samples
+      mask <- foldid %in% train_ids
+      
+      # Separate training and test sets, return y's separately
+      X_train <- X[mask,]
+      X_test  <- X[!mask,]
+      y_train <- y[mask]
+      y_test  <- y[!mask]
+      
+      # Return the split data
+      list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
+    }
+  }
 }

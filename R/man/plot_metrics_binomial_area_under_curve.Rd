@@ -17,6 +17,7 @@ Plot AUC metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
+  \code{\link{plot_metrics_gaussian_cor_score}},
   \code{\link{plot_metrics_gaussian_mean_squared_error}},
   \code{\link{plot_metrics_gaussian_r2_score}},
   \code{\link{plot_predictions_binomial}},

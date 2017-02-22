@@ -20,6 +20,7 @@ values, calculates the the R^2 metric.
 }
 \seealso{
 Other measure: \code{\link{measure_area_under_curve}},
+  \code{\link{measure_cor_score}},
   \code{\link{measure_mean_squared_error}}
 }
 
