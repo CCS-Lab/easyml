@@ -5,7 +5,7 @@
 \title{Sample in equal proportion.}
 \usage{
 resample_stratified_train_test_split(X, y, train_size = 0.667,
-  random_state = NULL)
+  foldid = NULL, random_state = NULL)
 }
 \arguments{
 \item{X}{TO BE EDITED.}
@@ -13,6 +13,8 @@ resample_stratified_train_test_split(X, y, train_size = 0.667,
 \item{y}{A numeric vector with two classes, 0 and 1.}
 
 \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
+
+\item{foldid}{Not currently supported in this function.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 }
@@ -23,6 +25,7 @@ A boolean vector of length n_obs where TRUE represents that observation should b
 This will sample in equal proportion.
 }
 \seealso{
-Other resample: \code{\link{resample_simple_train_test_split}}
+Other resample: \code{\link{resample_fold_train_test_split}},
+  \code{\link{resample_simple_train_test_split}}
 }
 

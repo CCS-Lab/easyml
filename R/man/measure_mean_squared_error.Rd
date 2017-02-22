@@ -20,6 +20,7 @@ values, calculates the mean squared error metric.
 }
 \seealso{
 Other measure: \code{\link{measure_area_under_curve}},
+  \code{\link{measure_cor_score}},
   \code{\link{measure_r2_score}}
 }
 

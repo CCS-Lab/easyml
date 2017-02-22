@@ -5,8 +5,9 @@
 \title{Replicate metrics.}
 \usage{
 replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
-  categorical_variables = NULL, n_divisions = 1000, n_iterations = 100,
-  progress_bar = TRUE, n_core = 1, ...)
+  train_size = train_size, categorical_variables = NULL,
+  n_divisions = 1000, n_iterations = 100, progress_bar = TRUE,
+  n_core = 1, foldid = NULL, ...)
 }
 \arguments{
 \item{fit_model}{TO BE EDITED.}
@@ -23,6 +24,8 @@ replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
 
 \item{y}{A vector; the dependent variable.}
 
+\item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
+
 \item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 
 \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
@@ -32,6 +35,8 @@ replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+
+\item{foldid}{A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.}
 
 \item{...}{The arguments to be passed to the algorithm specified.}
 }

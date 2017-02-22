@@ -12,6 +12,7 @@
 #' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
 #' @param categorical_variables A character vector; the variables that are categorical. Defaults to NULL.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 
 #' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
 #' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000. 
 #' @param n_divisions An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.
@@ -58,10 +59,9 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
                           preprocess = NULL, measure = NULL, 
                           exclude_variables = NULL, 
                           categorical_variables = NULL, train_size = 0.667, 
-                          survival_rate_cutoff = 0.05, n_samples = 1000, 
-                          n_divisions = 1000, n_iterations = 10, 
-                          random_state = NULL, progress_bar = TRUE, 
-                          n_core = 1, ...) {
+                          foldid = NULL, survival_rate_cutoff = 0.05, 
+                          n_samples = 1000, n_divisions = 1000, n_iterations = 10, 
+                          random_state = NULL, progress_bar = TRUE, n_core = 1, ...) {
   # Instantiate output
   output <- list()
   
@@ -135,7 +135,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   output[["X"]] <- X
   
   # Resample data
-  split_data <- resample(X, y, train_size = train_size)
+  split_data <- resample(X, y, train_size = train_size, foldid = foldid)
   output <- c(output, split_data)
   X_train <- split_data[["X_train"]]
   X_test <- split_data[["X_test"]]
@@ -177,8 +177,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   if (predictions_boolean) {
     # Replicate predictions
     predictions <- replicate_predictions(fit_model, predict_model, 
-                                         preprocess, 
-                                         X_train, y_train, X_test, 
+                                         preprocess, X_train, y_train, X_test,
                                          categorical_variables = categorical_variables, 
                                          n_samples = n_samples, 
                                          progress_bar = progress_bar, 
@@ -208,10 +207,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   if (metrics_boolean) {
     # Replicate metrics
     metrics <- replicate_metrics(fit_model, predict_model, 
-                                 resample, preprocess, measure, X, y, 
+                                 resample, preprocess, measure, X, y, train_size,
                                  categorical_variables = categorical_variables, 
                                  n_divisions = n_divisions, n_iterations = n_iterations, 
-                                 progress_bar = progress_bar, n_core = n_core, ...)
+                                 progress_bar = progress_bar, n_core = n_core, foldid = foldid, ...)
     output <- c(output, metrics)
     metrics_train_mean <- metrics[["metrics_train_mean"]]
     metrics_test_mean <- metrics[["metrics_test_mean"]]

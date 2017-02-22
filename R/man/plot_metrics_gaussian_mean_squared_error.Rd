@@ -18,6 +18,7 @@ Plot mean squared error metrics.
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
   \code{\link{plot_metrics_binomial_area_under_curve}},
+  \code{\link{plot_metrics_gaussian_cor_score}},
   \code{\link{plot_metrics_gaussian_r2_score}},
   \code{\link{plot_predictions_binomial}},
   \code{\link{plot_predictions_gaussian}},
