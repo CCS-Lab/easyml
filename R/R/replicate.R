@@ -30,7 +30,7 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 
   # Define closure
   replicate_coefficient <- function(i) {
-    model <- fit_model(X, y)
+    model <- fit_model(X, y, ...)
     coefficient <- extract_coefficients(model)
     coefficient
   }
