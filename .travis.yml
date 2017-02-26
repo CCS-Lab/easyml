@@ -35,4 +35,4 @@ install:
 # Code to run to install
 script:
   - chmod 755 tests/travis/run_test.sh
-  - source tests/travis/run_test.sh
+  - tests/travis/run_test.sh
