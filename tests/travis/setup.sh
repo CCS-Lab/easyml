@@ -27,19 +27,19 @@ fi
 
 if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     # update apt-get
-    apt-get update
+    sudo apt-get update
     
     if [ ${TASK} == "r_test" ]; then
     
     # Install R for linux
-    apt-get install r-base
+    sudo apt-get install r-base-core
     
     fi
     
     if [ ${TASK} == "python_test" ]; then
     
-    # Install Python for OSx
-    apt-get install python-pip python3-pip python3-dev python3-virtualenv python3-tk
+    # Install Python for linux
+    sudo apt-get install python-pip python3-pip python3-dev python3-virtualenv python3-tk
     pip3 install --upgrade pip
     
     fi
