@@ -1,3 +1,4 @@
+# Language - use cpp to enable both R and Python
 language: cpp
 
 # Be strict when checking our package
@@ -6,27 +7,32 @@ warnings_are_errors: true
 # Sudo is required
 sudo: required
 
-# Use trusty distribution of linnux
+# Use trusty distribution of linux
 dist: trusty
 
+# Use both linux and osx operating systems
 os:
   - linux
   - osx
 
+# Run Python and R as different tasks
 env:
   - TASK=python_test
   - TASK=r_test
 
+# Addons to install for apt
 addons:
   apt:
     packages:
       - libcurl4-openssl-dev
       - libxml2-dev
 
+# Code to run prior to installation
 install:
   - chmod 755 tests/travis/setup.sh
   - source tests/travis/setup.sh
 
+# Code to run to install
 script:
   - chmod 755 tests/travis/run_test.sh
-  - tests/travis/run_test.sh
+  - source tests/travis/run_test.sh
