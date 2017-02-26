@@ -92,31 +92,30 @@ resample_stratified_train_test_split <- function(X, y, train_size = 0.667, foldi
 #' @export
 resample_fold_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
   # Catch error if foldid is not specified
-  if (is.null(foldid)) {
-    stop("'foldid' must be specified when calling 'resample_fold_train_test_split' !")
-  } else {
-    # Set random state
-    set_random_state(random_state)
-    
-    # Shuffle the unique values in the foldid vector
-    unique_foldid <- sample(unique(foldid), replace=F)
-    
-    # Transform unique_foldid indices to [0, 1] space
-    foldid_idx <- seq_along(unique_foldid) / (length(unique_foldid))
-    
-    # Select unique foldid values with indices less than or equal to train_size
-    train_ids <- unique_foldid[foldid_idx <= train_size]
-    
-    # Create mask with train_ids used to subset training samples
-    mask <- foldid %in% train_ids
-    
-    # Separate training and test sets, return y's separately
-    X_train <- X[mask,]
-    X_test  <- X[!mask,]
-    y_train <- y[mask]
-    y_test  <- y[!mask]
-    
-    # Return the split data
-    list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
-  }
+  if (is.null(foldid))
+    stop("'foldid' must be specified when calling 'resample_fold_train_test_split'!")
+  
+  # Set random state
+  set_random_state(random_state)
+  
+  # Shuffle the unique values in the foldid vector
+  unique_foldid <- sample(unique(foldid), replace = FALSE)
+  
+  # Transform unique_foldid indices to [0, 1] space
+  foldid_idx <- seq_along(unique_foldid) / (length(unique_foldid))
+  
+  # Select unique foldid values with indices less than or equal to train_size
+  train_ids <- unique_foldid[foldid_idx <= train_size]
+  
+  # Create mask with train_ids used to subset training samples
+  mask <- foldid %in% train_ids
+  
+  # Separate training and test sets, return y's separately
+  X_train <- X[mask,]
+  X_test  <- X[!mask,]
+  y_train <- y[mask]
+  y_test  <- y[!mask]
+  
+  # Return the split data
+  list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
 }
