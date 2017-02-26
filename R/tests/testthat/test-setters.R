@@ -144,24 +144,26 @@ test_that("Test set_preprocess.", {
   expect_equal(set_resample(identity, "support_vector_machine"), identity)
 })
 
-# test_that("Test set_measure.", {
-#   expect_error(set_measure(NULL, NULL, NULL))
-#   expect_equal(set_measure(NULL, "glmnet", "gaussian"), F)
-#   expect_equal(set_measure(NULL, "glmnet", "binomial"), F)
-#   expect_equal(set_measure(NULL, "random_forest", "gaussian"), F)
-#   expect_equal(set_measure(NULL, "random_forest", "binomial"), F)
-#   expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), F)
-#   expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), F)
-#   expect_equal(set_measure(identity), identity)
-#   expect_equal(set_measure(identity, "", NULL), identity)
-#   expect_equal(set_measure(identity, NULL, ""), identity)
-#   expect_equal(set_measure(identity, "", ""), identity)
-# })
+test_that("Test set_measure.", {
+  expect_error(set_measure(NULL, NULL, NULL))
+  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_r2_score)
+  expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_area_under_curve)
+  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_r2_score)
+  expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_area_under_curve)
+  expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_mean_squared_error)
+  expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_area_under_curve)
+  expect_equal(set_measure(identity), identity)
+  expect_equal(set_measure(identity, "", NULL), identity)
+  expect_equal(set_measure(identity, NULL, ""), identity)
+  expect_equal(set_measure(identity, "", ""), identity)
+})
 
 test_that("Test set_fit_model.", {
 })
 
 test_that("Test set_extract_coefficients.", {
+  expect_equal(set_extract_coefficients("", ""), NULL)
+  expect_equal(set_extract_coefficients("glmnet", ""), glmnet_extract_coefficients)
 })
 
 test_that("Test set_predict_model.", {
