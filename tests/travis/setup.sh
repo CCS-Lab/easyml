@@ -11,14 +11,9 @@ if [ ${TRAVIS_OS_NAME} == "osx" ]; then
     
     if [ ${TASK} == "python_test" ]; then
     
-    # Update and upgrade brew
-    brew update
-    
-    # Reinstall gcc (since it doesn't work for some reason)
-    brew reinstall gcc
-
-    
     # Install Python for OSx
+    brew update
+    brew reinstall gcc
     brew tap homebrew/science
     brew install python3
     
@@ -31,6 +26,7 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     
     if [ ${TASK} == "r_test" ]; then
     
+    # Install R for linux
     sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list'
     gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
     gpg -a --export E084DAB9 | sudo apt-key add -
