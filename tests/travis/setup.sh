@@ -35,8 +35,6 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
     gpg -a --export E084DAB9 | sudo apt-key add -
     sudo apt-get update
-    sudo apt-get -y install r-base
-    sudo apt-get -y install r-base-core
     sudo apt-get install r-base-core
     sudo apt-get install libssl-dev
     
@@ -48,8 +46,8 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     sudo apt-get install gfortran
     sudo apt-get install python3-setuptools
     sudo easy_install3 pip
-    sudo apt-get install python3-tk
     pip3 install --upgrade pip
+    sudo apt-get install python3-tk
     
     fi
 fi
