@@ -7,10 +7,6 @@ if [ ${TASK} == "r_test" ]; then
     # Not sure what this export does
     export _R_CHECK_TIMINGS_=0
     
-    # Install R for OSx
-    wget https://cran.rstudio.com/bin/macosx/R-latest.pkg  -O /tmp/R-latest.pkg
-    sudo installer -pkg "/tmp/R-latest.pkg" -target /
-    
     # Install devtools and roxygen2
     Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.rstudio.com')"
     
@@ -36,16 +32,6 @@ if [ ${TASK} == "r_test" ]; then
 fi
 
 if [ ${TASK} == "python_test" ]; then
-    # Update and upgrade brew
-    brew update
-    
-    # Reinstall gcc (since it doesn't work for some reason)
-    brew reinstall gcc
-    
-    # Install Python for OSx
-    brew tap homebrew/science
-    brew install python3
-    
     # Install package
     cd Python/
     pip3 install .

@@ -7,7 +7,7 @@ warnings_are_errors: true
 sudo: required
 
 os:
-  # - linux
+  - linux
   - osx
 
 env:
