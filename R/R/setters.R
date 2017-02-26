@@ -1,3 +1,18 @@
+#' Set random state.
+#' 
+#' Sets the random state to a specific seed. Please note this function affects global state.
+#'
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
+#' @return TO BE EDITED.
+#' @family setters
+#' @export
+set_random_state <- function(random_state = NULL) {
+  if (!is.null(random_state)) {
+    set.seed(random_state)
+  }
+  invisible()
+}
+
 #' Set coefficients boolean.
 #'
 #' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
@@ -166,19 +181,28 @@ set_categorical_variables <- function(column_names, categorical_variables = NULL
   categorical_variables
 }
 
-#' Set random state.
-#' 
-#' Sets the random state to a specific seed. Please note this function affects global state.
+#' Set dependent variable.
 #'
-#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
+#' @param .data A data.frame; the data to be analyzed.
+#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
 #' @return TO BE EDITED.
 #' @family setters
 #' @export
-set_random_state <- function(random_state = NULL) {
-  if (!is.null(random_state)) {
-    set.seed(random_state)
-  }
-  invisible()
+set_dependent_variable <- function(.data, dependent_variable) {
+  y <- as.vector(.data[, dependent_variable, drop = TRUE])
+  y
+}
+
+#' Set independent variablex.
+#'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
+#' @return TO BE EDITED.
+#' @family setters
+#' @export
+set_independent_variables <- function(.data, dependent_variable) {
+  .data <- remove_variables(.data, dependent_variable)
+  .data
 }
 
 #' Set resample function.
@@ -248,30 +272,6 @@ set_measure <- function(measure = NULL, algorithm, family) {
   }
 
   measure
-}
-
-#' Set dependent variable.
-#'
-#' @param .data A data.frame; the data to be analyzed.
-#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
-#' @return TO BE EDITED.
-#' @family setters
-#' @export
-set_dependent_variable <- function(.data, dependent_variable) {
-  y <- as.vector(.data[, dependent_variable, drop = TRUE])
-  y
-}
-
-#' Set independent variablex.
-#'
-#' @param .data A data.frame; the data to be analyzed.
-#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
-#' @return TO BE EDITED.
-#' @family setters
-#' @export
-set_independent_variables <- function(.data, dependent_variable) {
-  .data <- remove_variables(.data, dependent_variable)
-  .data
 }
 
 #' Set fit model function.
