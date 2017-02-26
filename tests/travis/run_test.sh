@@ -47,3 +47,6 @@ if [ ${TASK} == "python_test" ]; then
     # code 0 (sucess).
     exit 0
 fi
+
+# Work around due to weird bug with Mac OSX
+set +e
