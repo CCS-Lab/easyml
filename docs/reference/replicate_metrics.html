@@ -85,8 +85,9 @@
     
 
     <pre><span class='fu'>replicate_metrics</span>(<span class='no'>fit_model</span>, <span class='no'>predict_model</span>, <span class='no'>resample</span>, <span class='no'>preprocess</span>, <span class='no'>measure</span>, <span class='no'>X</span>, <span class='no'>y</span>,
-  <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='no'>train_size</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -104,6 +105,8 @@
       <dd>A matrix; the independent variables.</dd>
       <dt>y</dt>
       <dd>A vector; the dependent variable.</dd>
+      <dt>train_size</dt>
+      <dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</dd>
       <dt>categorical_variables</dt>
       <dd>A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.</dd>
       <dt>n_divisions</dt>
@@ -114,6 +117,8 @@
       <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
       <dt>n_core</dt>
       <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.</dd>
+      <dt>foldid</dt>
+      <dd>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</dd>
       <dt>...</dt>
       <dd>The arguments to be passed to the algorithm specified.</dd>
     </dl>
