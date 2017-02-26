@@ -6,6 +6,9 @@ warnings_are_errors: true
 # Sudo is required
 sudo: required
 
+# Use trusty distribution of linnux
+dist: trusty
+
 os:
   - linux
   - osx
