@@ -1,6 +1,5 @@
 library(easyml)
 context("glmnet")
 
-test_that("Produces the correct output.", {
-  expect_equal(1, 1)
+test_that("Test easy_glmnet.", {
 })

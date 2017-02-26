@@ -1,9 +1,27 @@
 library(easyml)
 context("setters")
 
+test_that("Test set_coefficients_boolean.", {
+})
+
+test_that("Test set_predictions_boolean.", {
+})
+
+test_that("Test set_variable_importances_boolean.", {
+})
+
+test_that("Test set_metrics_boolean.", {
+})
+
 test_that("Test set_parallel.", {
   expect_equal(set_parallel(1), FALSE)
   expect_equal(set_parallel(2), TRUE)
+})
+
+test_that("Test set_cores.", {
+})
+
+test_that("Test set_looper.", {
 })
 
 test_that("Test set_looper_.", {
@@ -33,9 +51,14 @@ test_that("Test set_column_names.", {
                c("x1", "x2", "x3"))
 })
 
+test_that("Test set_column_names.", {
+})
+
 test_that("Test set_categorical_variables.", {
 })
 
+test_that("Test set_random_state.", {
+})
 
 test_that("Test set_preprocess.", {
   expect_equal(set_preprocess(NULL, "glmnet"), preprocess_scale)
@@ -54,8 +77,29 @@ test_that("Test set_resample.", {
   expect_equal(set_resample(identity), identity)
 })
 
+test_that("Test set_preprocess.", {
+})
+
+test_that("Test set_measure.", {
+})
+
 test_that("Test set_dependent_variable.", {
 })
 
 test_that("Test set_independent_variables.", {
+})
+
+test_that("Test set_fit_model.", {
+})
+
+test_that("Test set_extract_coefficients.", {
+})
+
+test_that("Test set_predict_model.", {
+})
+
+test_that("Test set_plot_predictions.", {
+})
+
+test_that("Test set_plot_metrics.", {
 })

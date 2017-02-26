@@ -49,4 +49,6 @@ test_that("Test preprocess_scale.", {
   expected <- list(X_train = cbind(mtcars[1:25, 11, drop = FALSE], data.frame(X_train)), 
                    X_test = cbind(mtcars[26:32, 11, drop = FALSE], data.frame(X_test)))
   expect_equal(actual, expected)
+  
+  expect_error(preprocess_scale(list(X = 1, Y = 2, Z = 3)))
 })

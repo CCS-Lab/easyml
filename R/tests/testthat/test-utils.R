@@ -8,4 +8,5 @@ test_that("Test reduce_cores.", {
 })
 
 test_that("Test remove_variables.", {
+  expect_equal(remove_variables(mtcars, "mpg"), mtcars[, -1])
 })

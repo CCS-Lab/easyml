@@ -32,7 +32,9 @@ measure_r2_score <- scorer::r2_score
 #' @return A numeric vector of length one; the correlation metric.
 #' @family measure
 #' @export
-measure_cor_score <- stats::cor
+measure_cor_score <- function(y_true, y_pred) {
+  stats::cor(y_true, y_pred)
+}
 
 #' Measure area under the curve.
 #' 

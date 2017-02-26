@@ -87,7 +87,6 @@ replicate_variable_importances <- function(fit_model, preprocess, X, y,
 #' @param X_train A matrix; the independent variables sampled to a training set.
 #' @param y_train A vector; the dependent variable sampled to a training set.
 #' @param X_test A matrix; the independent variables sampled to a testing set.
-#' @param resample A function; the function for resampling the data. Defaults to NULL.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
 #' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
