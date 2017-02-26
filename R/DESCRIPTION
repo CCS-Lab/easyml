@@ -31,4 +31,3 @@ Suggests:
 URL: https://github.com/CCS-Lab/easyml
 BugReports: https://github.com/CCS-Lab/easyml/issues
 RoxygenNote: 5.0.1
-VignetteBuilder: knitr

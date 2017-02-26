@@ -56,13 +56,16 @@ plot_variable_importances <- function(variable_importances) {
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
+  r2_score <- scorer::r2_score(y_true, y_pred)
+  r2_score_label <- paste("R^2 Score = ", round(r2_score, digits = 3), sep = "")
   
   g <- 
     ggplot2::ggplot(df, ggplot2::aes(x = y_pred, y = y_true)) +
-    ggplot2::geom_point() +
+    ggplot2::geom_point() + 
+    ggplot2::geom_smooth(method = 'lm') + 
     ggplot2::scale_x_continuous("Predicted y values") + 
     ggplot2::scale_y_continuous("True y values") + 
-    ggplot2::ggtitle("Actual vs. Predicted y values") + 
+    ggplot2::ggtitle(paste0("Actual vs. Predicted y values (", r2_score_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -87,10 +90,9 @@ plot_predictions_binomial <- function(y_true, y_pred) {
     ggplot2::ggplot(df, ggplot2::aes_string(x = "one_minus_specificities", y = "sensitivities")) +
     ggplot2::geom_path(alpha = 1, size = 1) +
     ggplot2::geom_segment(ggplot2::aes(x = 0, y = 0, xend = 1, yend = 1) , linetype = "dashed") + 
-    ggplot2::annotate("text", label = auc_label, x = 0.85, y = 0.025, size = 8) + 
     ggplot2::scale_x_continuous("1 - Specificity") + 
     ggplot2::scale_y_continuous("Sensitivity") + 
-    ggplot2::ggtitle("ROC Curve") + 
+    ggplot2::ggtitle(paste0("ROC Curve (", auc_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -111,10 +113,9 @@ plot_metrics_gaussian_mean_squared_error <- function(mses) {
     ggplot2::ggplot(df, ggplot2::aes(x = mses)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_mse, linetype = "dotted") + 
-    ggplot2::annotate("text", label = mse_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("MSE") + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of MSEs") + 
+    ggplot2::ggtitle(paste0("Distribution of MSEs (", mse_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -135,10 +136,9 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
     ggplot2::ggplot(df, ggplot2::aes(x = r2_scores)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_r2_score, linetype = "dotted") + 
-    ggplot2::annotate("text", label = r2_score_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("R^2 Score", limits = c(0, 1)) + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of R^2 Scores") + 
+    ggplot2::ggtitle(paste0("Distribution of R^2 Scores (", r2_score_label, ")")) + 
     ggplot2::theme_bw()
   
   g
@@ -183,10 +183,9 @@ plot_metrics_binomial_area_under_curve <- function(aucs) {
     ggplot2::ggplot(df, ggplot2::aes(x = aucs)) +
     ggplot2::geom_histogram(binwidth = 0.02) + 
     ggplot2::geom_vline(xintercept = mean_auc, linetype = "dotted") + 
-    ggplot2::annotate("text", label = auc_label, x = 0.2, y = 0.2, size = 8) + 
     ggplot2::scale_x_continuous("AUC", limits = c(0, 1)) + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of AUCs") + 
+    ggplot2::ggtitle(paste0("Distribution of AUCs (", auc_label, ")")) + 
     ggplot2::theme_bw()
   
   g

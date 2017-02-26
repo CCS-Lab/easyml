@@ -8,9 +8,7 @@
 #' @return A numeric vector of length one; the mean squared error metric.
 #' @family measure
 #' @export
-measure_mean_squared_error <- function(y_true, y_pred) {
-  scorer::mean_squared_error(y_true, y_pred)
-}
+measure_mean_squared_error <- scorer::mean_squared_error
 
 #' Measure R^2 score.
 #' 
