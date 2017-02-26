@@ -8,7 +8,13 @@ if [ ${TASK} == "r_test" ]; then
     export _R_CHECK_TIMINGS_=0
     
     # Install devtools and roxygen2
-    sudo Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.rstudio.com')"
+    if [ ${TRAVIS_OS_NAME} == "osx" ]; then
+        sudo Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.rstudio.com')"
+    fi
+    
+    if [ ${TRAVIS_OS_NAME} == "linux" ]; then
+        sudo Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.r-project.org/bin/linux/ubuntu')"
+    fi
     
     # Install package dependencies
     cd R/
