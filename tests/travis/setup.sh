@@ -39,10 +39,13 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     if [ ${TASK} == "python_test" ]; then
     
     # Install Python for linux
+    echo 'start: installing setuptools'
+    # sudo apt-get install python35
     sudo apt-get install python3-setuptools
-    sudo easy_install3 pip
-    sudo apt-get install python3-tk
-    pip3 install --upgrade pip
+    echo 'end: installing setuptools'
+    # sudo easy_install3 pip
+    # sudo apt-get install python3-tk
+    # pip3 install --upgrade pip
     
     fi
 fi
