@@ -385,6 +385,8 @@ set_plot_metrics <- function(measure) {
     plot_metrics <- plot_metrics_gaussian_mean_squared_error
   } else if (identical(measure, measure_area_under_curve)) {
     plot_metrics <- plot_metrics_binomial_area_under_curve
+  } else if (identical(measure, measure_cor_score)) {
+    plot_metrics <- plot_metrics_gaussian_cor_score
   }
   
   if (is.null(plot_metrics)) 

@@ -4,7 +4,7 @@
 \alias{support_vector_machine_predict_model}
 \title{Predict values for a support vector machine regression model.}
 \usage{
-support_vector_machine_predict_model(results, newx)
+support_vector_machine_predict_model(results, newx = NULL)
 }
 \arguments{
 \item{results}{TO BE EDITED.}

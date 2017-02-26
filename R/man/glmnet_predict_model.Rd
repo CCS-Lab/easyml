@@ -4,7 +4,7 @@
 \alias{glmnet_predict_model}
 \title{Predict values for a penalized regression model.}
 \usage{
-glmnet_predict_model(results, newx)
+glmnet_predict_model(results, newx = NULL)
 }
 \arguments{
 \item{results}{TO BE EDITED.}

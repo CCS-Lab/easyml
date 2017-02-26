@@ -48,8 +48,13 @@ random_forest_fit_model_binomial <- function(X, y, ...) {
 #' @param newx TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-random_forest_predict_model <- function(results, newx) {
-  as.numeric(stats::predict(results, newdata = newx))
+random_forest_predict_model <- function(results, newx = NULL) {
+  # If newx == NULL (i.e. for training data prediction), do not pass new data
+  if (is.null(newx)) {
+    as.numeric(stats::predict(results))
+  } else {
+    as.numeric(stats::predict(results, newdata = newx))
+  }
 }
 
 #' Easily build and evaluate a random forest regression model.
@@ -110,7 +115,7 @@ random_forest_predict_model <- function(results, newx) {
 easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
                                resample = NULL, preprocess = NULL, measure = NULL, 
                                exclude_variables = NULL, categorical_variables = NULL, 
-                               train_size = 0.667, 
+                               train_size = 0.667, foldid = NULL, 
                                n_samples = 1000, n_divisions = 1000, 
                                n_iterations = 10, random_state = NULL, 
                                progress_bar = TRUE, n_core = 1, ...) {
@@ -119,7 +124,7 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
                 preprocess = preprocess, measure = measure, 
                 exclude_variables = exclude_variables, 
                 categorical_variables = categorical_variables,  
-                train_size = train_size, 
+                train_size = train_size, foldid = foldid,  
                 n_samples = n_samples, n_divisions = n_divisions, 
                 n_iterations = n_iterations, random_state = random_state, 
                 progress_bar = progress_bar, n_core = n_core, ...)

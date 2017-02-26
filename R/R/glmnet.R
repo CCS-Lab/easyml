@@ -74,7 +74,7 @@ glmnet_extract_coefficients <- function(results) {
 #' @param newx TO BE EDITED.
 #' @return TO BE EDITED.
 #' @export
-glmnet_predict_model <- function(results, newx) {
+glmnet_predict_model <- function(results, newx = NULL) {
   newx <- as.matrix(newx)
   model <- results[["model"]]
   cv_model <- results[["cv_model"]]
@@ -141,7 +141,8 @@ glmnet_predict_model <- function(results, newx) {
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
                         resample = NULL, preprocess = NULL, measure = NULL, 
                         exclude_variables = NULL, categorical_variables = NULL, 
-                        train_size = 0.667, survival_rate_cutoff = 0.05, 
+                        train_size = 0.667, foldid = NULL, 
+                        survival_rate_cutoff = 0.05, 
                         n_samples = 1000, n_divisions = 1000, 
                         n_iterations = 10, random_state = NULL, 
                         progress_bar = TRUE, n_core = 1, ...) {
@@ -150,7 +151,7 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                 preprocess = preprocess, measure = measure, 
                 exclude_variables = exclude_variables, 
                 categorical_variables = categorical_variables,  
-                train_size = train_size, 
+                train_size = train_size, foldid = foldid,  
                 survival_rate_cutoff = survival_rate_cutoff, 
                 n_samples = n_samples, n_divisions = n_divisions, 
                 n_iterations = n_iterations, random_state = random_state, 

@@ -144,6 +144,30 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
   g
 }
 
+#' Plot Correlation metrics.
+#'
+#' @param cor_scores TO BE EDITED.
+#' @return TO BE EDITED.
+#' @family plot
+#' @export
+plot_metrics_gaussian_cor_score <- function(cor_scores) {
+  mean_cor_score <- mean(cor_scores)
+  cor_score_label <- paste("Mean Correlation Score = ", round(mean_cor_score, digits = 3), sep = "")
+  df <- data.frame(cor_scores = cor_scores, stringsAsFactors = FALSE)
+  
+  g <- 
+    ggplot2::ggplot(df, ggplot2::aes(x = cor_scores)) +
+    ggplot2::geom_histogram(binwidth = 0.02) + 
+    ggplot2::geom_vline(xintercept = mean_cor_score, linetype = "dotted") + 
+    ggplot2::annotate("text", label = cor_score_label, x = 0.2, y = 0.2, size = 8) + 
+    ggplot2::scale_x_continuous("Correlation Score", limits = c(0, 1)) + 
+    ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
+    ggplot2::ggtitle("Distribution of Correlation Scores") + 
+    ggplot2::theme_bw()
+  
+  g
+}
+
 #' Plot AUC metrics.
 #'
 #' @param aucs TO BE EDITED.
