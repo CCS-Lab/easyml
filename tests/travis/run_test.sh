@@ -13,7 +13,7 @@ if [ ${TASK} == "r_test" ]; then
     fi
     
     if [ ${TRAVIS_OS_NAME} == "linux" ]; then
-        sudo Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.r-project.org/bin/linux/ubuntu')"
+        sudo Rscript -e "install.packages(c('roxygen2', 'devtools'), repo = 'https://cran.rstudio.com')"
     fi
     
     # Install package dependencies
