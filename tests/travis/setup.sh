@@ -39,7 +39,9 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     if [ ${TASK} == "python_test" ]; then
     
     # Install Python for linux
-    sudo apt-get install python-pip python3-pip python3-dev python3-virtualenv python3-tk
+    sudo apt-get install python3-setuptools
+    sudo easy_install3 pip
+    sudo apt-get install python3-tk
     pip3 install --upgrade pip
     
     fi
