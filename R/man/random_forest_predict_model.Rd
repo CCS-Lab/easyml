@@ -4,7 +4,7 @@
 \alias{random_forest_predict_model}
 \title{Predict values for a random forest regression model.}
 \usage{
-random_forest_predict_model(results, newx)
+random_forest_predict_model(results, newx = NULL)
 }
 \arguments{
 \item{results}{TO BE EDITED.}
