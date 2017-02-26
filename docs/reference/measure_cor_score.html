@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot binomial predictions. — plot_predictions_binomial • easyml</title>
+<title>Measure Correlation score. — measure_cor_score • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,36 +77,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot binomial predictions.</h1>
+    <h1>Measure Correlation score.</h1>
     </div>
 
     
-    <p>Plot binomial predictions.</p>
+    <p>Given the ground truth (correct) target values and the estimated target 
+values, calculates the correlation metric.</p>
     
 
-    <pre><span class='fu'>plot_predictions_binomial</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)</pre>
+    <pre><span class='fu'>measure_cor_score</span>(<span class='no'>y_true</span>, <span class='no'>y_pred</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>y_true</dt>
-      <dd>Ground truth (correct) target values.</dd>
+      <dd>A numeric vector; the ground truth (correct) target values.</dd>
       <dt>y_pred</dt>
-      <dd>Estimated target values.</dd>
+      <dd>A numeric vector; the estimated target values.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TO BE EDITED.</p>
+    <p>A numeric vector of length one; the correlation metric.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other plot: <code><a href='plot_coefficients_processed.html'>plot_coefficients_processed</a></code>,
-  <code><a href='plot_metrics_binomial_area_under_curve.html'>plot_metrics_binomial_area_under_curve</a></code>,
-  <code><a href='plot_metrics_gaussian_cor_score.html'>plot_metrics_gaussian_cor_score</a></code>,
-  <code><a href='plot_metrics_gaussian_mean_squared_error.html'>plot_metrics_gaussian_mean_squared_error</a></code>,
-  <code><a href='plot_metrics_gaussian_r2_score.html'>plot_metrics_gaussian_r2_score</a></code>,
-  <code><a href='plot_predictions_gaussian.html'>plot_predictions_gaussian</a></code>,
-  <code><a href='plot_variable_importances.html'>plot_variable_importances</a></code></p>
+    <p>Other measure: <code><a href='measure_area_under_curve.html'>measure_area_under_curve</a></code>,
+  <code><a href='measure_mean_squared_error.html'>measure_mean_squared_error</a></code>,
+  <code><a href='measure_r2_score.html'>measure_r2_score</a></code></p>
     
 
   </div>

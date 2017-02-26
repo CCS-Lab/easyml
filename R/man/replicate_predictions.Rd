@@ -30,8 +30,6 @@ replicate_predictions(fit_model, predict_model, preprocess, X_train, y_train,
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 
 \item{...}{The arguments to be passed to the algorithm specified.}
-
-\item{resample}{A function; the function for resampling the data. Defaults to NULL.}
 }
 \value{
 TO BE EDITED.

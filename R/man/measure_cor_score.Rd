@@ -4,8 +4,7 @@
 \alias{measure_cor_score}
 \title{Measure Correlation score.}
 \usage{
-measure_cor_score(x, y = NULL, use = "everything", method = c("pearson",
-  "kendall", "spearman"))
+measure_cor_score(y_true, y_pred)
 }
 \arguments{
 \item{y_true}{A numeric vector; the ground truth (correct) target values.}

@@ -87,9 +87,9 @@
     <pre><span class='fu'>easy_analysis</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='no'>algorithm</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>,
   <span class='kw'>resample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -113,6 +113,8 @@
       <dd>A character vector; the variables that are categorical. Defaults to NULL.</dd>
       <dt>train_size</dt>
       <dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</dd>
+      <dt>foldid</dt>
+      <dd>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</dd>
       <dt>survival_rate_cutoff</dt>
       <dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</dd>
       <dt>n_samples</dt>

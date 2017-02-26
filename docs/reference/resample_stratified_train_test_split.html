@@ -85,7 +85,7 @@
     
 
     <pre><span class='fu'>resample_stratified_train_test_split</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>,
-  <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -95,6 +95,8 @@
       <dd>A numeric vector with two classes, 0 and 1.</dd>
       <dt>train_size</dt>
       <dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</dd>
+      <dt>foldid</dt>
+      <dd>Not currently supported in this function.</dd>
       <dt>random_state</dt>
       <dd>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</dd>
     </dl>
@@ -105,7 +107,8 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other resample: <code><a href='resample_simple_train_test_split.html'>resample_simple_train_test_split</a></code></p>
+    <p>Other resample: <code><a href='resample_fold_train_test_split.html'>resample_fold_train_test_split</a></code>,
+  <code><a href='resample_simple_train_test_split.html'>resample_simple_train_test_split</a></code></p>
     
 
   </div>
