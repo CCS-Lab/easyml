@@ -284,6 +284,7 @@ set_measure <- function(measure = NULL, algorithm, family) {
 #' @family setters
 #' @export
 set_fit_model <- function(algorithm, family) {
+  fit_model <- NULL
   if (algorithm == "glmnet") {
     if (family == "gaussian") {
       fit_model <- glmnet_fit_model_gaussian
@@ -303,6 +304,9 @@ set_fit_model <- function(algorithm, family) {
       fit_model <-support_vector_machine_fit_model_binomial
     }
   }
+  
+  if (is.null(fit_model))
+    stop("Value error!")
 
   fit_model
 }
@@ -335,6 +339,7 @@ set_extract_coefficients <- function(algorithm, family) {
 #' @family setters
 #' @export
 set_predict_model <- function(algorithm, family) {
+  predict_model <- NULL
   if (algorithm == "glmnet") {
     predict_model <- glmnet_predict_model
   } else if (algorithm == "random_forest") {
@@ -342,6 +347,9 @@ set_predict_model <- function(algorithm, family) {
   } else if (algorithm == "support_vector_machine") {
     predict_model <- support_vector_machine_predict_model
   }
+  
+  if (is.null(predict_model)) 
+    stop("Value error!")
   
   predict_model
 }
