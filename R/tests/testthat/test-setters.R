@@ -39,6 +39,7 @@ test_that("Test set_metrics_boolean.", {
 test_that("Test set_parallel.", {
   expect_equal(set_parallel(1), FALSE)
   expect_equal(set_parallel(2), TRUE)
+  expect_error(set_parallel(0))
 })
 
 test_that("Test set_cores.", {
