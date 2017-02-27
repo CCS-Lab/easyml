@@ -7,23 +7,10 @@
 #' @family setters
 #' @export
 set_random_state <- function(random_state = NULL) {
-  set_random_state_(random_state)
-  invisible()
-}
-
-#' Set random state.
-#' 
-#' Sets the random state to a specific seed. Please note this function affects global state.
-#'
-#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
-#' @return TO BE EDITED.
-#' @family setters
-#' @export
-set_random_state_ <- function(random_state = NULL) {
   if (!is.null(random_state)) {
     set.seed(random_state)
   }
-  random_state
+  invisible()
 }
 
 #' Set coefficients boolean.

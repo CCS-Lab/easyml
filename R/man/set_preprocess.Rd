@@ -33,7 +33,6 @@ Other setters: \code{\link{set_categorical_variables}},
   \code{\link{set_plot_predictions}},
   \code{\link{set_predict_model}},
   \code{\link{set_predictions_boolean}},
-  \code{\link{set_random_state_}},
   \code{\link{set_random_state}},
   \code{\link{set_resample}},
   \code{\link{set_variable_importances_boolean}}
