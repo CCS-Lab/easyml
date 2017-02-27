@@ -3,7 +3,13 @@ library(withr)
 context("setters")
 
 test_that("Test set_random_state.", {
-  expect_equal(set_random_state(), NULL)
+  expect_equal(set_random_state(NULL), NULL)
+  expect_equal(set_random_state(12345), NULL)
+})
+
+test_that("Test set_random_state_.", {
+  expect_equal(set_random_state_(NULL), NULL)
+  expect_equal(set_random_state_(12345), 12345)
 })
 
 test_that("Test set_coefficients_boolean.", {
