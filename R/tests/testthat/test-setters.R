@@ -3,7 +3,20 @@ library(withr)
 context("setters")
 
 test_that("Test set_random_state.", {
-  expect_equal(set_random_state(), NULL)
+  expect_equal(set_random_state(NULL), NULL)
+  expect_equal(set_random_state(12345), NULL)
+  
+  set_random_state(12345)
+  a <- .Random.seed
+  set_random_state(123456)
+  b <- .Random.seed
+  set_random_state(12345)
+  c <- .Random.seed
+  set_random_state(123456)
+  d <- .Random.seed
+  
+  expect_equal(a, c)
+  expect_equal(b, d)
 })
 
 test_that("Test set_coefficients_boolean.", {
@@ -33,6 +46,7 @@ test_that("Test set_metrics_boolean.", {
 test_that("Test set_parallel.", {
   expect_equal(set_parallel(1), FALSE)
   expect_equal(set_parallel(2), TRUE)
+  expect_error(set_parallel(0))
 })
 
 test_that("Test set_cores.", {
@@ -116,12 +130,18 @@ test_that("Test set_column_names.", {
 })
 
 test_that("Test set_categorical_variables.", {
+  letters <- c("a", "b", "c")
+  expect_equal(set_categorical_variables(letters, categorical_variables = NULL), NULL)
+  expect_equal(set_categorical_variables(letters, categorical_variables = "c"), 
+               c(FALSE, FALSE, TRUE))
 })
 
 test_that("Test set_dependent_variable.", {
+  expect_equal(set_dependent_variable(mtcars, "mpg"), mtcars[, "mpg"])
 })
 
 test_that("Test set_independent_variables.", {
+  expect_equal(set_independent_variables(mtcars, "mpg"), mtcars[, -1])
 })
 
 test_that("Test set_resample.", {
@@ -159,6 +179,13 @@ test_that("Test set_measure.", {
 })
 
 test_that("Test set_fit_model.", {
+  expect_error(set_fit_model("", ""))
+  expect_equal(set_fit_model("glmnet", "gaussian"), glmnet_fit_model_gaussian)
+  expect_equal(set_fit_model("glmnet", "binomial"), glmnet_fit_model_binomial)
+  expect_equal(set_fit_model("random_forest", "gaussian"), random_forest_fit_model_gaussian)
+  expect_equal(set_fit_model("random_forest", "binomial"), random_forest_fit_model_binomial)
+  expect_equal(set_fit_model("support_vector_machine", "gaussian"), support_vector_machine_fit_model_gaussian)
+  expect_equal(set_fit_model("support_vector_machine", "binomial"), support_vector_machine_fit_model_binomial)
 })
 
 test_that("Test set_extract_coefficients.", {
@@ -167,10 +194,29 @@ test_that("Test set_extract_coefficients.", {
 })
 
 test_that("Test set_predict_model.", {
+  expect_error(set_predict_model("", ""))
+  expect_equal(set_predict_model("glmnet", "gaussian"), glmnet_predict_model)
+  expect_equal(set_predict_model("glmnet", "binomial"), glmnet_predict_model)
+  expect_equal(set_predict_model("random_forest", "gaussian"), random_forest_predict_model)
+  expect_equal(set_predict_model("random_forest", "binomial"), random_forest_predict_model)
+  expect_equal(set_predict_model("support_vector_machine", "gaussian"), support_vector_machine_predict_model)
+  expect_equal(set_predict_model("support_vector_machine", "binomial"), support_vector_machine_predict_model)
 })
 
 test_that("Test set_plot_predictions.", {
+  expect_error(set_plot_predictions("", ""))
+  expect_equal(set_plot_predictions("glmnet", "gaussian"), plot_predictions_gaussian)
+  expect_equal(set_plot_predictions("glmnet", "binomial"), plot_predictions_binomial)
+  expect_equal(set_plot_predictions("random_forest", "gaussian"), plot_predictions_gaussian)
+  expect_equal(set_plot_predictions("random_forest", "binomial"), plot_predictions_binomial)
+  expect_equal(set_plot_predictions("support_vector_machine", "gaussian"), plot_predictions_gaussian)
+  expect_equal(set_plot_predictions("support_vector_machine", "binomial"), plot_predictions_binomial)
 })
 
 test_that("Test set_plot_metrics.", {
+  expect_error(set_plot_metrics(""))
+  expect_equal(set_plot_metrics(measure_r2_score), plot_metrics_gaussian_r2_score)
+  expect_equal(set_plot_metrics(measure_mean_squared_error), plot_metrics_gaussian_mean_squared_error)
+  expect_equal(set_plot_metrics(measure_area_under_curve), plot_metrics_binomial_area_under_curve)
+  expect_equal(set_plot_metrics(measure_cor_score), plot_metrics_gaussian_cor_score)
 })
