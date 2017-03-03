@@ -147,7 +147,7 @@ test_that("Test set_independent_variables.", {
 test_that("Test set_resample.", {
   expect_error(set_resample(NULL, NULL))
   expect_equal(set_resample(NULL, "gaussian"), resample_simple_train_test_split)
-  expect_equal(set_resample(NULL, "binomial"), resample_stratified_train_test_split)
+  expect_equal(set_resample(NULL, "binomial"), resample_stratified_class_train_test_split)
   expect_equal(set_resample(identity, NULL), identity)
   expect_equal(set_resample(identity, "gaussian"), identity)
   expect_equal(set_resample(identity, "binomial"), identity)

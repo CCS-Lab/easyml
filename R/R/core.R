@@ -134,6 +134,9 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   X <- X[, column_names]
   output[["X"]] <- X
   
+  # Set class
+  # output
+  
   # Assess if coefficients should be replicated for this algorithm
   if (coefficients_boolean) {
     # Replicate coefficients
@@ -168,7 +171,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Assess if predictions should be replicated for this algorithm
   if (predictions_boolean) {
     # Resample data
-    split_data <- resample(X, y, train_size = train_size)
+    split_data <- resample(X, y, train_size = train_size, foldid = foldid)
     output <- c(output, split_data)
     X_train <- split_data[["X_train"]]
     X_test <- split_data[["X_test"]]

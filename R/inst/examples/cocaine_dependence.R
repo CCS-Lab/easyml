@@ -10,8 +10,11 @@ data("cocaine_dependence", package = "easyml")
 
 # Analyze data
 glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis", 
-                              family = "binomial", exclude_variables = c("subject"), 
-                              categorical_variables = c("male"), preprocess = preprocess_scale, 
+                              family = "binomial", 
+                              resample = resample_stratified_class_train_test_split, 
+                              preprocess = preprocess_scale, 
+                              exclude_variables = c("subject"), 
+                              categorical_variables = c("male"), 
                               n_samples = .n_samples, n_divisions = .n_divisions, 
                               n_iterations = .n_iterations, random_state = 12345, n_core = 8, 
                               alpha = 1, nlambda = 200)

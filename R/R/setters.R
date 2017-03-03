@@ -219,7 +219,7 @@ set_resample <- function(resample = NULL, family = NULL) {
     if (family == "gaussian") {
       resample <- resample_simple_train_test_split
     } else if (family == "binomial") {
-      resample <- resample_stratified_train_test_split
+      resample <- resample_stratified_class_train_test_split
     }
   }
   resample
