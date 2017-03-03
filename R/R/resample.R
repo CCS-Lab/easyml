@@ -14,9 +14,11 @@ resample_simple_train_test_split <- function(X, y, train_size = 0.667, foldid = 
   # Set random state
   set_random_state(random_state)
   
+  # Calculate number of observations
+  n_obs <- length(y)
+  
   # return a boolean vector of length n_obs where TRUE represents
   # that observation should be in the train set
-  n_obs <- length(y)
   index <- sample(1:n_obs, floor(n_obs * train_size))
   mask <- 1:n_obs %in% index
   
@@ -36,12 +38,51 @@ resample_simple_train_test_split <- function(X, y, train_size = 0.667, foldid = 
 #' @param X TO BE EDITED.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+#' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 
+#' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
+#' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
+#' @family resample
+#' @export
+resample_stratified_simple_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
+  # Set random state
+  set_random_state(random_state)
+  
+  # Calculate number of observations
+  n_obs <- length(y)
+  
+  # Split data into list of X_train, X_test, y_train, y_test by stratum/foldid
+  foldid <- factor(foldid)
+  X_split_list <- split(X, foldid)
+  y_split_list <- split(y, foldid)
+  train_test_split_list <- Map(resample_simple_train_test_split, 
+                               X_split_list, y_split_list)
+  
+  # Create X_train and X_test
+  X_train <- lapply(train_test_split_list, function(x) x$X_train)
+  X_train <- data.frame(do.call(rbind, X_train))
+  X_test <- lapply(train_test_split_list, function(x) x$X_test)
+  X_test <- data.frame(do.call(rbind, X_test))
+  
+  # Create y_train and y_test
+  y_train <- Reduce(c, lapply(train_test_split_list, function(x) x$y_train))
+  y_test <- Reduce(c, lapply(train_test_split_list, function(x) x$y_test))
+  
+  list(X_train = X_train, X_test = X_test, y_train = y_train, y_test = y_test)
+}
+
+#' Sample in equal proportion.
+#'
+#' This will sample in equal proportion.
+#'
+#' @param X TO BE EDITED.
+#' @param y A numeric vector with two classes, 0 and 1.
+#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid Not currently supported in this function.
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @return A boolean vector of length n_obs where TRUE represents that observation should be in the train set.
 #' @family resample
 #' @export
-resample_stratified_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
+resample_stratified_class_train_test_split <- function(X, y, train_size = 0.667, foldid = NULL, random_state = NULL) {
   # Set random state
   set_random_state(random_state)
   

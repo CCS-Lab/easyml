@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Train test split. — resample_simple_train_test_split • easyml</title>
+<title>Sample in equal proportion. — resample_stratified_class_train_test_split • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,15 +77,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Train test split.</h1>
+    <h1>Sample in equal proportion.</h1>
     </div>
 
     
-    <p>This will split the data into train and test.</p>
+    <p>This will sample in equal proportion.</p>
     
 
-    <pre><span class='fu'>resample_simple_train_test_split</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>resample_stratified_class_train_test_split</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>,
+  <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -108,7 +108,7 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other resample: <code><a href='resample_fold_train_test_split.html'>resample_fold_train_test_split</a></code>,
-  <code><a href='resample_stratified_class_train_test_split.html'>resample_stratified_class_train_test_split</a></code>,
+  <code><a href='resample_simple_train_test_split.html'>resample_simple_train_test_split</a></code>,
   <code><a href='resample_stratified_simple_train_test_split.html'>resample_stratified_simple_train_test_split</a></code></p>
     
 

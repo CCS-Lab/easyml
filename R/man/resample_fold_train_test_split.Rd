@@ -26,6 +26,7 @@ This will sample the training and test sets so that case identifiers (e.g. subje
 }
 \seealso{
 Other resample: \code{\link{resample_simple_train_test_split}},
-  \code{\link{resample_stratified_train_test_split}}
+  \code{\link{resample_stratified_class_train_test_split}},
+  \code{\link{resample_stratified_simple_train_test_split}}
 }
 
