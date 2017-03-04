@@ -3,6 +3,7 @@ context("plot")
 
 # Load data
 data("cocaine_dependence", package = "easyml")
+cocaine_dependence <- cocaine_dependence
 
 # Settings
 .n_samples <- 10
