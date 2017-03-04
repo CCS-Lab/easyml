@@ -8,6 +8,8 @@ test_that("Test plot_variable_importances.", {
 })
 
 test_that("Test plot_predictions_gaussian.", {
+  g <- plot_predictions_gaussian(rnorm(100, 0, 1), rnorm(100, 0, 1))
+  expect_equal(class(g), c("gg", "ggplot"))
 })
 
 test_that("Test plot_predictions_binomial.", {
