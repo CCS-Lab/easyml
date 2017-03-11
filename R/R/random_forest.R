@@ -42,6 +42,18 @@ random_forest_fit_model_binomial <- function(X, y, ...) {
   model
 }
 
+#' Extract variable importance scores from a random forest model.
+#' 
+#' @param results The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_gaussian}}.
+#' @return A data.frame of replicated random forest variable importance scores.
+#' @export
+random_forest_extract_variable_importances <- function(results) {
+  importance <- randomForest::importance(results)
+  .data <- data.frame(t(importance))
+  rownames(.data) <- NULL
+  .data
+}
+
 #' Predict values for a random forest regression model.
 #' 
 #' @param results The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_binomial}}.

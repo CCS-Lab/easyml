@@ -21,6 +21,7 @@ See here for source: \url{http://www.sthda.com/english/wiki/visualize-correlatio
 }
 \seealso{
 Other utils: \code{\link{process_coefficients}},
+  \code{\link{process_variable_importances}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}
 }

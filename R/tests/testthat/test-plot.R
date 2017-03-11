@@ -33,8 +33,8 @@ random_forest_results <- easy_random_forest(cocaine_dependence, "diagnosis",
                                             n_samples = .n_samples, n_divisions = .n_divisions, 
                                             n_iterations = .n_iterations, random_state = 1, n_core = 1)
 
-test_that("Test plot_variable_importances.", {
-  g <- plot_variable_importances(random_forest_results$variable_importances)
+test_that("Test plot_variable_importances_processed.", {
+  g <- plot_variable_importances_processed(random_forest_results$variable_importances_processed)
   expect_equal(class(g), c("gg", "ggplot"))
 })
 

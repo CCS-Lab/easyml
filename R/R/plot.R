@@ -19,7 +19,6 @@ plot_coefficients_processed <- function(coefficients_processed) {
   g <- 
     ggplot2::ggplot(coefficients_processed, ggplot2::aes_string(x = "predictor", y = "mean", colour = "dot_color")) +
     ggplot2::geom_errorbar(ggplot2::aes_string(ymin = "lower_bound", ymax = "upper_bound"), width = 0.1) + 
-    ggplot2::geom_line() +
     ggplot2::geom_point() +
     ggplot2::scale_x_discrete("Predictors") +
     ggplot2::scale_y_continuous("Coefficient estimates") + 
@@ -34,7 +33,10 @@ plot_coefficients_processed <- function(coefficients_processed) {
 
 #' Plot random forest variable importances scores.
 #' 
-#' Importance scores for each predictor were estimated using the increase in 
+#' When calling \code{\link{easy_random_forest}}, variable importances scores from the 
+#' \code{\link{replicate_variable_importances}} output are processed by the 
+#' \code{\link{process_variable_importances}}  function and generated into 
+#' a plot. Importance scores for each predictor were estimated using the increase in 
 #' node impurity. Node impuirty measures the change in residual squared error 
 #' that is attributable to the predictor across all trees. Unlike the 
 #' \code{\link{easy_glmnet}} coefficients, random forest importance scores 
@@ -44,18 +46,19 @@ plot_coefficients_processed <- function(coefficients_processed) {
 #' method with datasets containing more than 20 variables as the plot 
 #' may not render as nicely.
 #'
-#' @param variable_importances A data.frame, the output of the function \code{\link{replicate_variable_importances}}.
+#' @param variable_importances_processed A data.frame, the output of the function \code{\link{process_variable_importances}}.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_variable_importances <- function(variable_importances) {
-  if (nrow(variable_importances) > 20) 
+plot_variable_importances_processed <- function(variable_importances_processed) {
+  if (nrow(variable_importances_processed) > 20) 
     warning("Number of variables exceeds 20; plot may not render as nicely.")
   
   g <- 
-    ggplot2::ggplot(variable_importances, 
-                    ggplot2::aes_string(x = "variable", y = "mean_decrease_gini")) +
+    ggplot2::ggplot(variable_importances_processed, 
+                    ggplot2::aes_string(x = "predictor", y = "mean")) +
     ggplot2::geom_bar(stat = "identity") + 
+    ggplot2::geom_errorbar(ggplot2::aes_string(ymin = "lower_bound", ymax = "upper_bound"), width = 0.1) + 
     ggplot2::scale_x_discrete("Predictors") +
     ggplot2::scale_y_continuous("Variable Importance (Mean Decrease in Gini Index)") + 
     ggplot2::ggtitle("Variable Importance") + 
