@@ -8,7 +8,7 @@ replicate_variable_importances(fit_model, preprocess, X, y,
   categorical_variables = NULL, ...)
 }
 \arguments{
-\item{fit_model}{TO BE EDITED.}
+\item{fit_model}{A function; the function for fitting a model to the data.}
 
 \item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
 
@@ -21,7 +21,7 @@ replicate_variable_importances(fit_model, preprocess, X, y,
 \item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
-TO BE EDITED.
+A data.frame, the replicated variable importance scores.
 }
 \description{
 Replicate variable importances.

@@ -12,7 +12,7 @@ set_fit_model(algorithm, family)
 \item{family}{A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".}
 }
 \value{
-TO BE EDITED.
+A function; the function for fitting a model to the data.
 }
 \description{
 Sets the function responsible for fitting a model to the data.

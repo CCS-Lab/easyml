@@ -3,7 +3,7 @@
 #' @param X a data frame or a matrix of predictors, or a formula describing the model to be fitted (for the print method, an randomForest object).
 #' @param y A response vector. If a factor, classification is assumed, otherwise regression is assumed. If omitted, randomForest will run in unsupervised mode.
 #' @param ... Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return The fitted model.
 #' @export
 random_forest_fit_model_gaussian <- function(X, y, ...) {
   # capture additional arguments
@@ -25,7 +25,7 @@ random_forest_fit_model_gaussian <- function(X, y, ...) {
 #' @param X a data frame or a matrix of predictors, or a formula describing the model to be fitted (for the print method, an randomForest object).
 #' @param y A response vector. If a factor, classification is assumed, otherwise regression is assumed. If omitted, randomForest will run in unsupervised mode.
 #' @param ... Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return The fitted model.
 #' @export
 random_forest_fit_model_binomial <- function(X, y, ...) {
   # capture additional arguments
@@ -44,9 +44,9 @@ random_forest_fit_model_binomial <- function(X, y, ...) {
 
 #' Predict values for a random forest regression model.
 #' 
-#' @param results TO BE EDITED.
-#' @param newx TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param results The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_binomial}}.
+#' @param newx A data.frame, the new data to use for predictions.
+#' @return A vector, the predicted values for a random_forest regression model using the new data.
 #' @export
 random_forest_predict_model <- function(results, newx = NULL) {
   # If newx == NULL (i.e. for training data prediction), do not pass new data

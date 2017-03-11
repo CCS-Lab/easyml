@@ -12,7 +12,7 @@ reduce_cores(n_core, cpu_count = NULL)
 \item{cpu_count}{An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 }
 \value{
-TO BE EDITED.
+An integer vector of length one; specifies the number of cores to use for this analysis.
 }
 \description{
 Reduce number of cores.

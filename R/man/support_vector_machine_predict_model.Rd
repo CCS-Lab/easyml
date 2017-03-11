@@ -7,12 +7,12 @@
 support_vector_machine_predict_model(results, newx = NULL)
 }
 \arguments{
-\item{results}{TO BE EDITED.}
+\item{results}{The results of \code{\link{support_vector_machine_fit_model_gaussian}} or \code{\link{support_vector_machine_fit_model_binomial}}.}
 
-\item{newx}{TO BE EDITED.}
+\item{newx}{A data.frame, the new data to use for predictions.}
 }
 \value{
-TO BE EDITED.
+A vector, the predicted values for a support_vector_machine regression model using the new data.
 }
 \description{
 Predict values for a support vector machine regression model.

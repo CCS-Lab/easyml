@@ -14,7 +14,7 @@ random_forest_fit_model_binomial(X, y, ...)
 \item{...}{Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.}
 }
 \value{
-TO BE EDITED.
+The fitted model.
 }
 \description{
 Fit random forest binomial regression model.

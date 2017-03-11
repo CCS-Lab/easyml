@@ -12,7 +12,7 @@ set_looper(progress_bar = FALSE, n_core = 1)
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 }
 \value{
-TO BE EDITED.
+The looper to use depending on progress bar and whether to run in parallel or not.
 }
 \description{
 This function decides which looper (a functional like lapply) to run. Please note this affects global state and sets the number of cores by ultimately running \code{options(mc.cores = n_core)}.

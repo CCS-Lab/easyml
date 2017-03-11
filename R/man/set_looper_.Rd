@@ -12,7 +12,7 @@ set_looper_(progress_bar = FALSE, parallel = FALSE)
 \item{parallel}{A logical vector of length one; specifies whether to run calculations in parallel. Defaults to FALSE.}
 }
 \value{
-TO BE EDITED.
+The looper to use depending on progress bar and whether to run in parallel or not.
 }
 \description{
 This function decides which looper (a functional like lapply) to run. This function does not affect global state.

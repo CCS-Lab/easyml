@@ -12,7 +12,7 @@ set_categorical_variables(column_names, categorical_variables = NULL)
 \item{categorical_variables}{A character vector; the variables that are categorical. Defaults to NULL.}
 }
 \value{
-TO BE EDITED.
+NULL, or if \code{categorical_variables} is not NULL, then a logical vector of length \code{length(column_names} where TRUE represents that column is a categorical variable.
 }
 \description{
 Set categorical variables.

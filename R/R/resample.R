@@ -2,7 +2,7 @@
 #'
 #' This will split the data into train and test.
 #'
-#' @param X TO BE EDITED.
+#' @param X A data.frame, the data to be resampled.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid Not currently supported in this function.
@@ -35,7 +35,7 @@ resample_simple_train_test_split <- function(X, y, train_size = 0.667, foldid = 
 #'
 #' This will sample in equal proportion.
 #'
-#' @param X TO BE EDITED.
+#' @param X A data.frame, the data to be resampled.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 
@@ -74,7 +74,7 @@ resample_stratified_simple_train_test_split <- function(X, y, train_size = 0.667
 #'
 #' This will sample in equal proportion.
 #'
-#' @param X TO BE EDITED.
+#' @param X A data.frame, the data to be resampled.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid Not currently supported in this function.
@@ -123,7 +123,7 @@ resample_stratified_class_train_test_split <- function(X, y, train_size = 0.667,
 #'
 #' This will sample the training and test sets so that case identifiers (e.g. subject ID's) are not shared across training and test sets.
 #'
-#' @param X TO BE EDITED.
+#' @param X A data.frame, the data to be resampled.
 #' @param y A numeric vector with two classes, 0 and 1.
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 

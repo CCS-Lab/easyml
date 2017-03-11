@@ -7,10 +7,10 @@
 glmnet_extract_coefficients(results)
 }
 \arguments{
-\item{results}{TO BE EDITED.}
+\item{results}{The results of \code{\link{glmnet_fit_model_gaussian}} or \code{\link{glmnet_fit_model_binomial}}.}
 }
 \value{
-TO BE EDITED.
+A data.frame of replicated penalized regression coefficients.
 }
 \description{
 Extract coefficients from a penalized regression model.

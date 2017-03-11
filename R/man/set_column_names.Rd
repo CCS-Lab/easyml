@@ -19,7 +19,7 @@ set_column_names(column_names, dependent_variable, preprocess = NULL,
 \item{categorical_variables}{A character vector; the variables that are categorical. Defaults to NULL.}
 }
 \value{
-TO BE EDITED.
+The updated columns, in the correct order for preprocessing.
 }
 \description{
 Set column names.

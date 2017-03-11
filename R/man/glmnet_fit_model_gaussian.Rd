@@ -14,7 +14,7 @@ glmnet_fit_model_gaussian(X, y, ...)
 \item{...}{Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.}
 }
 \value{
-TO BE EDITED.
+A list, the model and the cross validated model.
 }
 \description{
 Fit penalized gaussian regression model.

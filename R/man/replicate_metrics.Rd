@@ -10,9 +10,9 @@ replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
   n_core = 1, foldid = NULL, ...)
 }
 \arguments{
-\item{fit_model}{TO BE EDITED.}
+\item{fit_model}{A function; the function for fitting a model to the data.}
 
-\item{predict_model}{TO BE EDITED.}
+\item{predict_model}{A function; the function for generating predictions from a fitted model.}
 
 \item{resample}{A function; the function for resampling the data. Defaults to NULL.}
 
@@ -41,7 +41,7 @@ replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
 \item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
-TO BE EDITED.
+A list of matrixes, the replicated metrics.
 }
 \description{
 Replicate metrics.

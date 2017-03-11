@@ -14,7 +14,7 @@ support_vector_machine_fit_model_binomial(X, y, ...)
 \item{...}{Arguments to be passed to \code{\link[e1071]{svm}}. See that function's documentation for more details.}
 }
 \value{
-TO BE EDITED.
+The fitted model.
 }
 \description{
 Fit support vector machine binomial regression model.

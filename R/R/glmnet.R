@@ -3,7 +3,7 @@
 #' @param X input matrix, of dimension nobs x nvars; each row is an observation vector. Can be in sparse matrix format (inherit from class "sparseMatrix" as in package Matrix; not yet available for family="cox")
 #' @param y response variable. Quantitative for family="gaussian", or family="poisson" (non-negative counts). For family="binomial" should be either a factor with two levels, or a two-column matrix of counts or proportions (the second column is treated as the target class; for a factor, the last level in alphabetical order is the target class). For family="multinomial", can be a nc>=2 level factor, or a matrix with nc columns of counts or proportions. For either "binomial" or "multinomial", if y is presented as a vector, it will be coerced into a factor. For family="cox", y should be a two-column matrix with columns named 'time' and 'status'. The latter is a binary variable, with '1' indicating death, and '0' indicating right censored. The function Surv() in package survival produces such a matrix. For family="mgaussian", y is a matrix of quantitative responses.
 #' @param ... Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return A list, the model and the cross validated model.
 #' @export
 glmnet_fit_model_gaussian <- function(X, y, ...) {
   # capture additional arguments
@@ -31,7 +31,7 @@ glmnet_fit_model_gaussian <- function(X, y, ...) {
 #' @param X input matrix, of dimension nobs x nvars; each row is an observation vector. Can be in sparse matrix format (inherit from class "sparseMatrix" as in package Matrix; not yet available for family="cox")
 #' @param y response variable. Quantitative for family="gaussian", or family="poisson" (non-negative counts). For family="binomial" should be either a factor with two levels, or a two-column matrix of counts or proportions (the second column is treated as the target class; for a factor, the last level in alphabetical order is the target class). For family="multinomial", can be a nc>=2 level factor, or a matrix with nc columns of counts or proportions. For either "binomial" or "multinomial", if y is presented as a vector, it will be coerced into a factor. For family="cox", y should be a two-column matrix with columns named 'time' and 'status'. The latter is a binary variable, with '1' indicating death, and '0' indicating right censored. The function Surv() in package survival produces such a matrix. For family="mgaussian", y is a matrix of quantitative responses.
 #' @param ... Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return A list, the model and the cross validated model.
 #' @export
 glmnet_fit_model_binomial <- function(X, y, ...) {
   # capture additional arguments
@@ -56,8 +56,8 @@ glmnet_fit_model_binomial <- function(X, y, ...) {
 
 #' Extract coefficients from a penalized regression model.
 #' 
-#' @param results TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param results The results of \code{\link{glmnet_fit_model_gaussian}} or \code{\link{glmnet_fit_model_binomial}}.
+#' @return A data.frame of replicated penalized regression coefficients.
 #' @export
 glmnet_extract_coefficients <- function(results) {
   model <- results[["model"]]
@@ -70,9 +70,9 @@ glmnet_extract_coefficients <- function(results) {
 
 #' Predict values for a penalized regression model.
 #' 
-#' @param results TO BE EDITED.
-#' @param newx TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param results The results of \code{\link{glmnet_fit_model_gaussian}} or \code{\link{glmnet_fit_model_binomial}}.
+#' @param newx A data.frame, the new data to use for predictions.
+#' @return A vector, the predicted values for a penalized regression model using the new data.
 #' @export
 glmnet_predict_model <- function(results, newx = NULL) {
   newx <- as.matrix(newx)

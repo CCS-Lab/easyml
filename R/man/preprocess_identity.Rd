@@ -12,7 +12,7 @@ preprocess_identity(.data, categorical_variables = NULL)
 \item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
 }
 \value{
-TO BE EDITED.
+A list, containing one or two data.frames.
 }
 \description{
 Preprocess data by leaving it exactly the way it is.

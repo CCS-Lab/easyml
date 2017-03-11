@@ -12,7 +12,7 @@ set_dependent_variable(.data, dependent_variable)
 \item{dependent_variable}{A character vector of length one; the dependent variable for this analysis.}
 }
 \value{
-TO BE EDITED.
+A vector, the dependent variable of the analysis.
 }
 \description{
 Set dependent variable.

@@ -3,7 +3,7 @@
 #' @param X a data matrix, a vector, or a sparse matrix (object of class Matrix provided by the Matrix package, or of class matrix.csr provided by the SparseM package, or of class simple_triplet_matrix provided by the slam package).
 #' @param y a response vector with one label for each row/component of x. Can be either a factor (for classification tasks) or a numeric vector (for regression).
 #' @param ... Arguments to be passed to \code{\link[e1071]{svm}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return The fitted model.
 #' @export
 support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
   # capture additional arguments
@@ -27,7 +27,7 @@ support_vector_machine_fit_model_gaussian <- function(X, y, ...) {
 #' @param X a data matrix, a vector, or a sparse matrix (object of class Matrix provided by the Matrix package, or of class matrix.csr provided by the SparseM package, or of class simple_triplet_matrix provided by the slam package).
 #' @param y a response vector with one label for each row/component of x. Can be either a factor (for classification tasks) or a numeric vector (for regression).
 #' @param ... Arguments to be passed to \code{\link[e1071]{svm}}. See that function's documentation for more details.
-#' @return TO BE EDITED.
+#' @return The fitted model.
 #' @export
 support_vector_machine_fit_model_binomial <- function(X, y, ...) {
   # capture additional arguments
@@ -48,9 +48,9 @@ support_vector_machine_fit_model_binomial <- function(X, y, ...) {
 
 #' Predict values for a support vector machine regression model.
 #' 
-#' @param results TO BE EDITED.
-#' @param newx TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param results The results of \code{\link{support_vector_machine_fit_model_gaussian}} or \code{\link{support_vector_machine_fit_model_binomial}}.
+#' @param newx A data.frame, the new data to use for predictions.
+#' @return A vector, the predicted values for a support_vector_machine regression model using the new data.
 #' @export
 support_vector_machine_predict_model <- function(results, newx = NULL) {
   # If newx == NULL (i.e. for training data prediction), do not pass new data
