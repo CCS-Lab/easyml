@@ -166,9 +166,9 @@ test_that("Test set_preprocess.", {
 
 test_that("Test set_measure.", {
   expect_error(set_measure(NULL, NULL, NULL))
-  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_r2_score)
+  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_cor_score)
   expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_area_under_curve)
-  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_r2_score)
+  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_cor_score)
   expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_area_under_curve)
   expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_mean_squared_error)
   expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_area_under_curve)

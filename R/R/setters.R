@@ -262,7 +262,7 @@ set_measure <- function(measure = NULL, algorithm, family) {
   if (is.null(measure)) {
     if (family == "gaussian") {
       if (algorithm %in% c("glmnet", "random_forest")) {
-        measure <- measure_r2_score
+        measure <- measure_cor_score
       } else {
         measure <- measure_mean_squared_error
       }
