@@ -35,11 +35,11 @@ plot_coefficients_processed <- function(coefficients_processed) {
 #' Plot random forest variable importances scores.
 #' 
 #' Importance scores for each predictor were estimated using the increase in 
-#' node impurity – a measure of the change in residual squared error (i.e. 
-#' increase in prediction accuracy) that is attributable to the predictor 
-#' across all trees. Unlike the \code{\link{easy_glmnet}} coefficients, 
-#' random forest importance scores do not indicate directional effects, 
-#' but instead represent the magnitude of the effect that the predictor has 
+#' node impurity. Node impuirty measures the change in residual squared error 
+#' that is attributable to the predictor across all trees. Unlike the 
+#' \code{\link{easy_glmnet}} coefficients, random forest importance scores 
+#' do not indicate directional effects, but instead represent the magnitude 
+#' of the effect that the predictor has 
 #' on overall prediction accuracy. Be careful using this plotting
 #' method with datasets containing more than 20 variables as the plot 
 #' may not render as nicely.

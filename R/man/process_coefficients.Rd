@@ -12,7 +12,7 @@ process_coefficients(coefs, survival_rate_cutoff = 0.05)
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 }
 \value{
-TO BE EDITED.
+A data.frame; the replicated coefficients processed for easy plotting.
 }
 \description{
 Process coefficients.

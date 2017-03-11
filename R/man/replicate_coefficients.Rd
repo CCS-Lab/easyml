@@ -9,9 +9,9 @@ replicate_coefficients(fit_model, extract_coefficients, preprocess, X, y,
   n_core = 1, ...)
 }
 \arguments{
-\item{fit_model}{TO BE EDITED.}
+\item{fit_model}{A function; the function for fitting a model to the data.}
 
-\item{extract_coefficients}{TO BE EDITED.}
+\item{extract_coefficients}{A function; the function for extracting coefficients from a model.}
 
 \item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
 
@@ -30,7 +30,7 @@ replicate_coefficients(fit_model, extract_coefficients, preprocess, X, y,
 \item{...}{The arguments to be passed to the algorithm specified.}
 }
 \value{
-TO BE EDITED.
+A data.frame, the replicated penalized regression model coefficients.
 }
 \description{
 Replicate coefficients.

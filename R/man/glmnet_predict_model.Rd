@@ -7,12 +7,12 @@
 glmnet_predict_model(results, newx = NULL)
 }
 \arguments{
-\item{results}{TO BE EDITED.}
+\item{results}{The results of \code{\link{glmnet_fit_model_gaussian}} or \code{\link{glmnet_fit_model_binomial}}.}
 
-\item{newx}{TO BE EDITED.}
+\item{newx}{A data.frame, the new data to use for predictions.}
 }
 \value{
-TO BE EDITED.
+A vector, the predicted values for a penalized regression model using the new data.
 }
 \description{
 Predict values for a penalized regression model.

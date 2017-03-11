@@ -2,7 +2,7 @@
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @return TO BE EDITED.
+#' @return A list, containing one or two data.frames.
 #' @family preprocess
 #' @export
 preprocess_identity <- function(.data, categorical_variables = NULL) {
@@ -13,7 +13,7 @@ preprocess_identity <- function(.data, categorical_variables = NULL) {
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @return TO BE EDITED.
+#' @return A list, containing one or two data.frames.
 #' @family preprocess
 #' @export
 preprocess_scale <- function(.data, categorical_variables = NULL) {

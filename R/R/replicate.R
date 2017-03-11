@@ -1,7 +1,7 @@
 #' Replicate coefficients.
 #'
-#' @param fit_model TO BE EDITED.
-#' @param extract_coefficients TO BE EDITED.
+#' @param fit_model A function; the function for fitting a model to the data.
+#' @param extract_coefficients A function; the function for extracting coefficients from a model.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @param X A matrix; the independent variables.
 #' @param y A vector; the dependent variable.
@@ -10,7 +10,7 @@
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
-#' @return TO BE EDITED.
+#' @return A data.frame, the replicated penalized regression model coefficients.
 #' @family replicate
 #' @export
 replicate_coefficients <- function(fit_model, extract_coefficients, 
@@ -49,13 +49,13 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 
 #' Replicate variable importances.
 #'
-#' @param fit_model TO BE EDITED.
+#' @param fit_model A function; the function for fitting a model to the data.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @param X A matrix; the independent variables.
 #' @param y A vector; the dependent variable.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
 #' @param ... The arguments to be passed to the algorithm specified.
-#' @return TO BE EDITED.
+#' @return A data.frame, the replicated variable importance scores.
 #' @family replicate
 #' @export
 replicate_variable_importances <- function(fit_model, preprocess, X, y, 
@@ -81,8 +81,8 @@ replicate_variable_importances <- function(fit_model, preprocess, X, y,
 
 #' Replicate predictions.
 #'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
+#' @param fit_model A function; the function for fitting a model to the data.
+#' @param predict_model A function; the function for generating predictions from a fitted model.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @param X_train A matrix; the independent variables sampled to a training set.
 #' @param y_train A vector; the dependent variable sampled to a training set.
@@ -92,7 +92,7 @@ replicate_variable_importances <- function(fit_model, preprocess, X, y,
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
-#' @return TO BE EDITED.
+#' @return A list of matrixes, the replicated predictions.
 #' @family replicate
 #' @export
 replicate_predictions <- function(fit_model, predict_model, preprocess, 
@@ -148,8 +148,8 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
 
 #' Replicate metrics.
 #'
-#' @param fit_model TO BE EDITED.
-#' @param predict_model TO BE EDITED.
+#' @param fit_model A function; the function for fitting a model to the data.
+#' @param predict_model A function; the function for generating predictions from a fitted model.
 #' @param resample A function; the function for resampling the data. Defaults to NULL.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @param measure A function; the function for measuring the results. Defaults to NULL.
@@ -163,7 +163,7 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.
 #' @param ... The arguments to be passed to the algorithm specified.
-#' @return TO BE EDITED.
+#' @return A list of matrixes, the replicated metrics.
 #' @family replicate
 #' @export
 replicate_metrics <- function(fit_model, predict_model, resample, preprocess, 

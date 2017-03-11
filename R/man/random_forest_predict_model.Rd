@@ -7,12 +7,12 @@
 random_forest_predict_model(results, newx = NULL)
 }
 \arguments{
-\item{results}{TO BE EDITED.}
+\item{results}{The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_binomial}}.}
 
-\item{newx}{TO BE EDITED.}
+\item{newx}{A data.frame, the new data to use for predictions.}
 }
 \value{
-TO BE EDITED.
+A vector, the predicted values for a random_forest regression model using the new data.
 }
 \description{
 Predict values for a random forest regression model.

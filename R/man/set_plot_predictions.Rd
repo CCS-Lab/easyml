@@ -12,7 +12,7 @@ set_plot_predictions(algorithm, family)
 \item{family}{A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".}
 }
 \value{
-TO BE EDITED.
+A function; the function for plotting the predictions generated from a fitted model.
 }
 \description{
 Sets the function responsible for plotting the predictions generated from a fitted model.

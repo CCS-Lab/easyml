@@ -10,7 +10,7 @@ set_random_state(random_state = NULL)
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 }
 \value{
-TO BE EDITED.
+NULL.
 }
 \description{
 Sets the random state to a specific seed. Please note this function affects global state.
