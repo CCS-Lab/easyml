@@ -56,7 +56,7 @@ plot_variable_importances <- function(variable_importances) {
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
-  r2_score <- scorer::r2_score(y_true, y_pred)
+  r2_score <- measure_r2_score(y_true, y_pred)
   r2_score_label <- paste("R^2 Score = ", round(r2_score, digits = 3), sep = "")
   
   g <- 
