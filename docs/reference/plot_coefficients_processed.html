@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot processed coefficients. — plot_coefficients_processed • easyml</title>
+<title>Plot penalized regression coefficients. — plot_coefficients_processed • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,11 +77,17 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot processed coefficients.</h1>
+    <h1>Plot penalized regression coefficients.</h1>
     </div>
 
     
-    <p>Plot processed coefficients.</p>
+    <p>When calling <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, coefficients from the 
+<code><a href='replicate_coefficients.html'>replicate_coefficients</a></code> output are processed by the 
+<code><a href='process_coefficients.html'>process_coefficients</a></code>  function and generated into 
+a plot. This plot tells us the direction, magitude, and statistical
+significance of each coefficient. Be careful using this plotting
+method with datasets containing more than 20 variables as the plot 
+may not render as nicely.</p>
     
 
     <pre><span class='fu'>plot_coefficients_processed</span>(<span class='no'>coefficients_processed</span>)</pre>
@@ -89,12 +95,12 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>coefficients_processed</dt>
-      <dd>TO BE EDITED.</dd>
+      <dd>A data.frame, the output of the function <code><a href='process_coefficients.html'>process_coefficients</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TO BE EDITED.</p>
+    <p>A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

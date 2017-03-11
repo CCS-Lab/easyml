@@ -2,18 +2,18 @@
 % Please edit documentation in R/plot.R
 \name{plot_metrics_gaussian_r2_score}
 \alias{plot_metrics_gaussian_r2_score}
-\title{Plot R^2 metrics.}
+\title{Plot coefficient of determination (R^2) metrics.}
 \usage{
 plot_metrics_gaussian_r2_score(r2_scores)
 }
 \arguments{
-\item{r2_scores}{TO BE EDITED.}
+\item{r2_scores}{A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.}
 }
 \value{
-TO BE EDITED.
+A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot R^2 metrics.
+Plot coefficient of determination (R^2) metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

@@ -1,7 +1,15 @@
-#' Plot processed coefficients.
-#'
-#' @param coefficients_processed TO BE EDITED.
-#' @return TO BE EDITED.
+#' Plot penalized regression coefficients.
+#' 
+#' When calling \code{\link{easy_glmnet}}, coefficients from the 
+#' \code{\link{replicate_coefficients}} output are processed by the 
+#' \code{\link{process_coefficients}}  function and generated into 
+#' a plot. This plot tells us the direction, magitude, and statistical
+#' significance of each coefficient. Be careful using this plotting
+#' method with datasets containing more than 20 variables as the plot 
+#' may not render as nicely.
+#' 
+#' @param coefficients_processed A data.frame, the output of the function \code{\link{process_coefficients}}.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_coefficients_processed <- function(coefficients_processed) {
@@ -14,7 +22,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
     ggplot2::geom_line() +
     ggplot2::geom_point() +
     ggplot2::scale_x_discrete("Predictors") +
-    ggplot2::scale_y_continuous("Beta estimates") + 
+    ggplot2::scale_y_continuous("Coefficient estimates") + 
     ggplot2::scale_color_manual("", values = c("0" = "grey", "2" = "black"), 
                                 labels = c("0" = "Insignificant", "2" = "Significant")) + 
     ggplot2::ggtitle("Estimates of weights") + 
@@ -24,10 +32,20 @@ plot_coefficients_processed <- function(coefficients_processed) {
   g
 }
 
-#' Plot variable importances.
+#' Plot random forest variable importances scores.
+#' 
+#' Importance scores for each predictor were estimated using the increase in 
+#' node impurity – a measure of the change in residual squared error (i.e. 
+#' increase in prediction accuracy) that is attributable to the predictor 
+#' across all trees. Unlike the \code{\link{easy_glmnet}} coefficients, 
+#' random forest importance scores do not indicate directional effects, 
+#' but instead represent the magnitude of the effect that the predictor has 
+#' on overall prediction accuracy. Be careful using this plotting
+#' method with datasets containing more than 20 variables as the plot 
+#' may not render as nicely.
 #'
-#' @param variable_importances TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param variable_importances A data.frame, the output of the function \code{\link{replicate_variable_importances}}.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_variable_importances <- function(variable_importances) {
@@ -51,7 +69,7 @@ plot_variable_importances <- function(variable_importances) {
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
-#' @return TO BE EDITED.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
@@ -75,7 +93,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
-#' @return TO BE EDITED.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_predictions_binomial <- function(y_true, y_pred) {
@@ -100,8 +118,8 @@ plot_predictions_binomial <- function(y_true, y_pred) {
 
 #' Plot mean squared error metrics.
 #'
-#' @param mses TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param mses A vector, the mean squared error metrics to be plotted as a histogram.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_metrics_gaussian_mean_squared_error <- function(mses) {
@@ -121,10 +139,10 @@ plot_metrics_gaussian_mean_squared_error <- function(mses) {
   g
 }
 
-#' Plot R^2 metrics.
+#' Plot coefficient of determination (R^2) metrics.
 #'
-#' @param r2_scores TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param r2_scores A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_metrics_gaussian_r2_score <- function(r2_scores) {
@@ -144,10 +162,10 @@ plot_metrics_gaussian_r2_score <- function(r2_scores) {
   g
 }
 
-#' Plot Correlation metrics.
+#' Plot correlation coefficient metrics.
 #'
-#' @param cor_scores TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param cor_scores A vector, the correlation coefficient metrics to be plotted as a histogram.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_metrics_gaussian_cor_score <- function(cor_scores) {
@@ -168,10 +186,10 @@ plot_metrics_gaussian_cor_score <- function(cor_scores) {
   g
 }
 
-#' Plot AUC metrics.
+#' Plot area under the curve (AUC) metrics.
 #'
-#' @param aucs TO BE EDITED.
-#' @return TO BE EDITED.
+#' @param aucs A vector, the area under the curve (AUC) metrics to be plotted as a histogram.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
 plot_metrics_binomial_area_under_curve <- function(aucs) {

@@ -2,18 +2,26 @@
 % Please edit documentation in R/plot.R
 \name{plot_variable_importances}
 \alias{plot_variable_importances}
-\title{Plot variable importances.}
+\title{Plot random forest variable importances scores.}
 \usage{
 plot_variable_importances(variable_importances)
 }
 \arguments{
-\item{variable_importances}{TO BE EDITED.}
+\item{variable_importances}{A data.frame, the output of the function \code{\link{replicate_variable_importances}}.}
 }
 \value{
-TO BE EDITED.
+A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot variable importances.
+Importance scores for each predictor were estimated using the increase in 
+node impurity – a measure of the change in residual squared error (i.e. 
+increase in prediction accuracy) that is attributable to the predictor 
+across all trees. Unlike the \code{\link{easy_glmnet}} coefficients, 
+random forest importance scores do not indicate directional effects, 
+but instead represent the magnitude of the effect that the predictor has 
+on overall prediction accuracy. Be careful using this plotting
+method with datasets containing more than 20 variables as the plot 
+may not render as nicely.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

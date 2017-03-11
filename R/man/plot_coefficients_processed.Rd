@@ -2,18 +2,24 @@
 % Please edit documentation in R/plot.R
 \name{plot_coefficients_processed}
 \alias{plot_coefficients_processed}
-\title{Plot processed coefficients.}
+\title{Plot penalized regression coefficients.}
 \usage{
 plot_coefficients_processed(coefficients_processed)
 }
 \arguments{
-\item{coefficients_processed}{TO BE EDITED.}
+\item{coefficients_processed}{A data.frame, the output of the function \code{\link{process_coefficients}}.}
 }
 \value{
-TO BE EDITED.
+A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot processed coefficients.
+When calling \code{\link{easy_glmnet}}, coefficients from the 
+\code{\link{replicate_coefficients}} output are processed by the 
+\code{\link{process_coefficients}}  function and generated into 
+a plot. This plot tells us the direction, magitude, and statistical
+significance of each coefficient. Be careful using this plotting
+method with datasets containing more than 20 variables as the plot 
+may not render as nicely.
 }
 \seealso{
 Other plot: \code{\link{plot_metrics_binomial_area_under_curve}},

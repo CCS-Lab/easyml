@@ -12,7 +12,7 @@ plot_predictions_gaussian(y_true, y_pred)
 \item{y_pred}{Estimated target values.}
 }
 \value{
-TO BE EDITED.
+A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
 Plot gaussian predictions.
