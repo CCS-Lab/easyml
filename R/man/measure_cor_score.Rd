@@ -2,7 +2,7 @@
 % Please edit documentation in R/measure.R
 \name{measure_cor_score}
 \alias{measure_cor_score}
-\title{Measure Correlation score.}
+\title{Measure Pearsons Correlation Coefficient.}
 \usage{
 measure_cor_score(y_true, y_pred)
 }
@@ -17,6 +17,9 @@ A numeric vector of length one; the correlation metric.
 \description{
 Given the ground truth (correct) target values and the estimated target 
 values, calculates the correlation metric.
+}
+\details{
+See here for more information: \url{https://en.wikipedia.org/wiki/Pearson_correlation_coefficient}
 }
 \seealso{
 Other measure: \code{\link{measure_area_under_curve}},

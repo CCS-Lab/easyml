@@ -2,7 +2,7 @@
 % Please edit documentation in R/measure.R
 \name{measure_r2_score}
 \alias{measure_r2_score}
-\title{Measure R^2 score.}
+\title{Measure Coefficient of Determination (R^2 Score).}
 \usage{
 measure_r2_score(y_true, y_pred)
 }
@@ -17,6 +17,9 @@ A numeric vector of length one; the R^2 metric.
 \description{
 Given the ground truth (correct) target values and the estimated target 
 values, calculates the the R^2 metric.
+}
+\details{
+See here for more information: \url{https://en.wikipedia.org/wiki/Coefficient_of_determination}
 }
 \seealso{
 Other measure: \code{\link{measure_area_under_curve}},
