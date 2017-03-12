@@ -329,6 +329,24 @@ set_extract_coefficients <- function(algorithm, family) {
   extract_coefficients
 }
 
+#' Set extract variable importances function.
+#' 
+#' Sets the function responsible for extracting variable importances from a model.
+#'
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
+#' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
+#' @return A function; the function for extracting variable importances from a model.
+#' @family setters
+#' @export
+set_extract_variable_importances <- function(algorithm, family) {
+  extract_variable_importances <- NULL
+  if (algorithm == "random_forest") {
+    extract_variable_importances <- random_forest_extract_variable_importances
+  }
+  
+  extract_variable_importances
+}
+
 #' Set predict model function.
 #' 
 #' Sets the function responsible for generating predictions from a fitted model.

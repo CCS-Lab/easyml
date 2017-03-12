@@ -100,6 +100,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   extract_coefficients <- set_extract_coefficients(algorithm, family)
   output[["extract_coefficients"]] <- extract_coefficients
   
+  # Set extract_coefficients function
+  extract_variable_importances <- set_extract_variable_importances(algorithm, family)
+  output[["extract_variable_importances"]] <- extract_variable_importances
+  
   # Set predict_model function
   predict_model <- set_predict_model(algorithm, family)
   output[["predict_model"]] <- predict_model
@@ -159,13 +163,20 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Assess if variable importances should be replicated for this algorithm
   if (variable_importances_boolean) {
     # Replicate variable importances
-    variable_importances <- replicate_variable_importances(fit_model, preprocess, X, y, 
+    variable_importances <- replicate_variable_importances(fit_model, extract_variable_importances, 
+                                                           preprocess, X, y, 
                                                            categorical_variables = categorical_variables, 
-                                                           ...)
+                                                           n_samples = n_samples, 
+                                                           progress_bar = progress_bar, 
+                                                           n_core = n_core, ...)
     output[["variable_importances"]] <- variable_importances
     
+    # Process variable_importances
+    variable_importances_processed <- process_variable_importances(variable_importances)
+    output[["variable_importances_processed"]] <- variable_importances_processed
+    
     # Save variable importances plot
-    output[["plot_variable_importances"]] <- plot_variable_importances(variable_importances)
+    output[["plot_variable_importances_processed"]] <- plot_variable_importances_processed(variable_importances_processed)
   }
   
   # Assess if predictions should be replicated for this algorithm

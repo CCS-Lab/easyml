@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set looper. — set_looper • easyml</title>
+<title>Set extract variable importances function. — set_extract_variable_importances • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,26 +77,26 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set looper.</h1>
+    <h1>Set extract variable importances function.</h1>
     </div>
 
     
-    <p>This function decides which looper (a functional like lapply) to run. Please note this affects global state and sets the number of cores by ultimately running <code>options(mc.cores = n_core)</code>.</p>
+    <p>Sets the function responsible for extracting variable importances from a model.</p>
     
 
-    <pre><span class='fu'>set_looper</span>(<span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre><span class='fu'>set_extract_variable_importances</span>(<span class='no'>algorithm</span>, <span class='no'>family</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>progress_bar</dt>
-      <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
-      <dt>n_core</dt>
-      <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.</dd>
+      <dt>algorithm</dt>
+      <dd>A character vector of length one; the algorithm to run on the data. Choices are one of c(&quot;glmnet&quot;, &quot;random_forest&quot;, &quot;support_vector_machine&quot;).</dd>
+      <dt>family</dt>
+      <dd>A character vector of length one; the type of regression to run on the data. Choices are one of c(&quot;gaussian&quot;, &quot;binomial&quot;). Defaults to &quot;gaussian&quot;.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The looper to use depending on progress bar and whether to run in parallel or not.</p>
+    <p>A function; the function for extracting variable importances from a model.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -105,10 +105,10 @@
   <code><a href='set_column_names.html'>set_column_names</a></code>, <code><a href='set_cores.html'>set_cores</a></code>,
   <code><a href='set_dependent_variable.html'>set_dependent_variable</a></code>,
   <code><a href='set_extract_coefficients.html'>set_extract_coefficients</a></code>,
-  <code><a href='set_extract_variable_importances.html'>set_extract_variable_importances</a></code>,
   <code><a href='set_fit_model.html'>set_fit_model</a></code>,
   <code><a href='set_independent_variables.html'>set_independent_variables</a></code>,
-  <code><a href='set_looper_.html'>set_looper_</a></code>, <code><a href='set_measure.html'>set_measure</a></code>,
+  <code><a href='set_looper_.html'>set_looper_</a></code>, <code><a href='set_looper.html'>set_looper</a></code>,
+  <code><a href='set_measure.html'>set_measure</a></code>,
   <code><a href='set_metrics_boolean.html'>set_metrics_boolean</a></code>,
   <code><a href='set_parallel.html'>set_parallel</a></code>,
   <code><a href='set_plot_metrics.html'>set_plot_metrics</a></code>,

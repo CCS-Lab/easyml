@@ -50,32 +50,49 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 #' Replicate variable importances.
 #'
 #' @param fit_model A function; the function for fitting a model to the data.
+#' @param extract_variable_importances A function; the function for extracting variable importances from a model.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
 #' @param X A matrix; the independent variables.
 #' @param y A vector; the dependent variable.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
+#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
+#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param ... The arguments to be passed to the algorithm specified.
 #' @return A data.frame, the replicated variable importance scores.
 #' @family replicate
 #' @export
-replicate_variable_importances <- function(fit_model, preprocess, X, y, 
-                                           categorical_variables = NULL, ...) {
+replicate_variable_importances <- function(fit_model, extract_variable_importances, 
+                                           preprocess, X, y, 
+                                           categorical_variables = NULL, 
+                                           n_samples = 1000, progress_bar = TRUE, 
+                                           n_core = 1, ...) {
   # Print an informative message
-  print(paste0("Replicating variable importances:"))
-
+  if (progress_bar) {
+    parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
+    print(paste0("Replicating variable importances", parallel_string))
+  }
+  
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
   X <- result[["X"]]
   
-  # Fit model
-  model <- fit_model(X, y, ...)
+  # Define closure
+  replicate_variable_importance <- function(i) {
+    model <- fit_model(X, y, ...)
+    variable_importance <- extract_variable_importances(model)
+    variable_importance
+  }
   
-  # Extract variable importances
-  importances <- randomForest::importance(model)
-  variable_importances <- data.frame(variable = rownames(importances),
-                                     mean_decrease_gini = as.numeric(importances), 
-                                     stringsAsFactors = FALSE)
+  # Set which looping mechanism to use
+  looper <- set_looper(progress_bar, n_core)
   
+  # Loop over number of iterations
+  variable_importances <- looper(1:n_samples, replicate_variable_importance)
+  
+  # Combine list of data.frames into one data.frame; 
+  # structure should be a data.frame of n_samples by ncol(X)
+  variable_importances <- do.call(rbind, variable_importances)
   variable_importances
 }
 

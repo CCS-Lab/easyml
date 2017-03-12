@@ -20,6 +20,7 @@ Reduce number of cores.
 \seealso{
 Other utils: \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
+  \code{\link{process_variable_importances}},
   \code{\link{remove_variables}}
 }
 
