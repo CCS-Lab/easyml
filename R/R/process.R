@@ -35,9 +35,10 @@ process_coefficients <- function(coefficients, survival_rate_cutoff = 0.05) {
 #' @family utils
 #' @export
 process_variable_importances <- function(variable_importances) {
+  column_names <- colnames(variable_importances)
   means <- vapply(variable_importances, mean, numeric(1))
   sds <- vapply(variable_importances, stats::sd, numeric(1))
-  variable_importances_processed <- data.frame(variable_importances = colnames(variable_importances), 
+  variable_importances_processed <- data.frame(predictor = column_names, 
                                                stringsAsFactors = FALSE)
   variable_importances_processed[, "mean"] <- means
   variable_importances_processed[, "sd"] <- sds
