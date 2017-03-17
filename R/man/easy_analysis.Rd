@@ -9,7 +9,9 @@ easy_analysis(.data, dependent_variable, algorithm, family = "gaussian",
   exclude_variables = NULL, categorical_variables = NULL,
   train_size = 0.667, foldid = NULL, survival_rate_cutoff = 0.05,
   n_samples = 1000, n_divisions = 1000, n_iterations = 10,
-  random_state = NULL, progress_bar = TRUE, n_core = 1, ...)
+  random_state = NULL, progress_bar = TRUE, n_core = 1,
+  coefficients = NULL, variable_importances = NULL, predictions = NULL,
+  metrics = NULL, ...)
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}

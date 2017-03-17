@@ -1,50 +1,48 @@
 #' Replicate coefficients.
 #'
-#' @param fit_model A function; the function for fitting a model to the data.
-#' @param extract_coefficients A function; the function for extracting coefficients from a model.
-#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
-#' @param X A matrix; the independent variables.
-#' @param y A vector; the dependent variable.
-#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
-#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @param ... The arguments to be passed to the algorithm specified.
+#' @param object TO BE EDITED.
 #' @return A data.frame, the replicated penalized regression model coefficients.
 #' @family replicate
 #' @export
-replicate_coefficients <- function(fit_model, extract_coefficients, 
-                                   preprocess, X, y, 
-                                   categorical_variables = NULL, 
-                                   n_samples = 1000, progress_bar = TRUE, 
-                                   n_core = 1, ...) {
+replicate_coefficients <- function(object) {
+  # Extract attributes from object
+  X <- object[["X"]]
+  y <- object[["y"]]
+  categorical_variables <- object[["categorical_variables"]]
+  n_samples <- object[["n_samples"]]
+  progress_bar <- object[["progress_bar"]]
+  n_core <- object[["n_core"]]
+  
   # Print an informative message
   if (progress_bar) {
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
     print(paste0("Replicating coefficients", parallel_string))
   }
   
+  # Set preprocess function
+  preprocess <- object[["preprocess"]]
+  
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
   X <- result[["X"]]
-
+  
   # Define closure
   replicate_coefficient <- function(i) {
-    model <- fit_model(X, y, ...)
-    coefficient <- extract_coefficients(model)
-    coefficient
+    results <- fit_model(object)
+    coef <- extract_coefficients(results)
+    coef
   }
   
   # Set which looping mechanism to use
   looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
-  coefficients <- looper(1:n_samples, replicate_coefficient)
+  coefs <- looper(1:n_samples, replicate_coefficient)
   
   # Combine list of data.frames into one data.frame; 
   # structure should be a data.frame of n_samples by ncol(X)
-  coefficients <- do.call(rbind, coefficients)
-  coefficients
+  coefs <- do.call(rbind, coefs)
+  coefs
 }
 
 #' Replicate variable importances.
@@ -62,16 +60,21 @@ replicate_coefficients <- function(fit_model, extract_coefficients,
 #' @return A data.frame, the replicated variable importance scores.
 #' @family replicate
 #' @export
-replicate_variable_importances <- function(fit_model, extract_variable_importances, 
-                                           preprocess, X, y, 
-                                           categorical_variables = NULL, 
-                                           n_samples = 1000, progress_bar = TRUE, 
-                                           n_core = 1, ...) {
+replicate_variable_importances <- function(object) {
+  # fit_model, extract_variable_importances, 
+  # preprocess, X, y, 
+  # categorical_variables = NULL, 
+  # n_samples = 1000, progress_bar = TRUE, 
+  # n_core = 1, ...
   # Print an informative message
   if (progress_bar) {
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
     print(paste0("Replicating variable importances", parallel_string))
   }
+  
+  # Set preprocess function
+  preprocess <- set_preprocess(preprocess, algorithm)
+  object[["preprocess"]] <- preprocess
   
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
@@ -112,16 +115,21 @@ replicate_variable_importances <- function(fit_model, extract_variable_importanc
 #' @return A list of matrixes, the replicated predictions.
 #' @family replicate
 #' @export
-replicate_predictions <- function(fit_model, predict_model, preprocess, 
-                                  X_train, y_train, X_test, 
-                                  categorical_variables = NULL, 
-                                  n_samples = 1000, progress_bar = TRUE, 
-                                  n_core = 1, ...) {
+replicate_predictions <- function(object) {
+  # fit_model, predict_model, preprocess, 
+  # X_train, y_train, X_test, 
+  # categorical_variables = NULL, 
+  # n_samples = 1000, progress_bar = TRUE, 
+  # n_core = 1, ...
   # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
+  # Set preprocess function
+  preprocess <- set_preprocess(preprocess, algorithm)
+  object[["preprocess"]] <- preprocess
+
   # Preprocess data
   result <- preprocess(list(X_train = X_train, X_test = X_test), 
                          categorical_variables = categorical_variables)
@@ -183,15 +191,28 @@ replicate_predictions <- function(fit_model, predict_model, preprocess,
 #' @return A list of matrixes, the replicated metrics.
 #' @family replicate
 #' @export
-replicate_metrics <- function(fit_model, predict_model, resample, preprocess, 
-                              measure, X, y, train_size = train_size, 
-                              categorical_variables = NULL, 
-                              n_divisions = 1000, n_iterations = 100, 
-                              progress_bar = TRUE, n_core = 1, foldid = NULL, ...) {
+replicate_metrics <- function(object) {
+  # fit_model, predict_model, resample, preprocess, 
+  # measure, X, y, train_size = train_size, 
+  # categorical_variables = NULL, 
+  # n_divisions = 1000, n_iterations = 100, 
+  # progress_bar = TRUE, n_core = 1, foldid = NULL, ...
   # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
+  
+  # Set resample function
+  resample <- set_resample(resample, family)
+  object[["resample"]] <- resample
+  
+  # Set preprocess function
+  preprocess <- set_preprocess(preprocess, algorithm)
+  object[["preprocess"]] <- preprocess
+  
+  # Set measure function
+  measure <- set_measure(measure, algorithm, family)
+  object[["measure"]] <- measure
   
   # Set which looping mechanism to use
   looper <- set_looper(progress_bar, n_core)

@@ -4,10 +4,7 @@
 \alias{replicate_metrics}
 \title{Replicate metrics.}
 \usage{
-replicate_metrics(fit_model, predict_model, resample, preprocess, measure, X, y,
-  train_size = train_size, categorical_variables = NULL,
-  n_divisions = 1000, n_iterations = 100, progress_bar = TRUE,
-  n_core = 1, foldid = NULL, ...)
+replicate_metrics(object)
 }
 \arguments{
 \item{fit_model}{A function; the function for fitting a model to the data.}

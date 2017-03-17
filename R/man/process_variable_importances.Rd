@@ -16,7 +16,8 @@ A data.frame; the replicated variable importances processed for easy plotting.
 Process variable importances.
 }
 \seealso{
-Other utils: \code{\link{correlation_test}},
+Other utils: \code{\link{check_arguments}},
+  \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}

@@ -4,9 +4,7 @@
 \alias{replicate_predictions}
 \title{Replicate predictions.}
 \usage{
-replicate_predictions(fit_model, predict_model, preprocess, X_train, y_train,
-  X_test, categorical_variables = NULL, n_samples = 1000,
-  progress_bar = TRUE, n_core = 1, ...)
+replicate_predictions(object)
 }
 \arguments{
 \item{fit_model}{A function; the function for fitting a model to the data.}

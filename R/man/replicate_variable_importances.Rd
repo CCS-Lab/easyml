@@ -4,9 +4,7 @@
 \alias{replicate_variable_importances}
 \title{Replicate variable importances.}
 \usage{
-replicate_variable_importances(fit_model, extract_variable_importances,
-  preprocess, X, y, categorical_variables = NULL, n_samples = 1000,
-  progress_bar = TRUE, n_core = 1, ...)
+replicate_variable_importances(object)
 }
 \arguments{
 \item{fit_model}{A function; the function for fitting a model to the data.}
