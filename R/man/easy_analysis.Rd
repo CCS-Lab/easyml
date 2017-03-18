@@ -89,7 +89,8 @@ A list with the following values:
 This recipe is the workhorse behind all of the easy_* functions.
 }
 \seealso{
-Other recipes: \code{\link{easy_glmnet}},
+Other recipes: \code{\link{easy_glinternet}},
+  \code{\link{easy_glmnet}},
   \code{\link{easy_random_forest}},
   \code{\link{easy_support_vector_machine}}
 }

@@ -9,38 +9,17 @@ fit_model <- function(object) {
   UseMethod("fit_model")
 }
 
-fit_model.default <- function(object) {
-  msg <- paste0("Error: fit_model not implemented for class ", class(object))
-  stop(msg)
-}
-
 extract_coefficients <- function(object) {
   UseMethod("extract_coefficients")
-}
-
-extract_coefficients.default <- function(object) {
-  msg <- paste0("Error: extract_coefficients not implemented for class ", class(object))
-  stop(msg)
 }
 
 extract_variable_importances <- function(object) {
   UseMethod("extract_variable_importances")
 }
 
-extract_variable_importances.default <- function(object) {
-  msg <- paste0("Error: extract_variable_importances not implemented for class ", class(object))
-  stop(msg)
-}
-
 predict_model <- function(object, newx = NULL) {
   UseMethod("predict_model")
 }
-
-predict_model.default <- function(object, newx = NULL) {
-  msg <- paste0("Error: predict_model not implemented for class ", class(object))
-  stop(msg)
-}
-
 
 #' The core reciple of easyml.
 #' 
@@ -130,13 +109,16 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Capture family
   object[["family"]] <- family
   
-  # Capture resample
+  # Set and capture resample
+  resample <- set_resample(resample, family)
   object[["resample"]] <- resample
   
-  # Capture preprocess
+  # Set and capture preprocess
+  preprocess <- set_preprocess(preprocess, algorithm)
   object[["preprocess"]] <- preprocess
   
-  # Capture measure
+  # Set and capture measure
+  measure <- set_measure(measure, algorithm, family)
   object[["measure"]] <- measure
   
   # Capture exclude variables
@@ -185,27 +167,27 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Capture model arguments
   object[["model_args"]] <- model_args
   
-  # Set column names
-  column_names <- set_column_names(colnames(.data), dependent_variable, 
+  # Set and capture column names
+  column_names <- colnames(.data)
+  column_names <- set_column_names(column_names, dependent_variable, 
                                    preprocess = preprocess, 
                                    exclude_variables = exclude_variables, 
                                    categorical_variables = categorical_variables)
+  object[["column_names"]] <- column_names
   
-  # Set categorical variables
+  # Set and capture categorical variables
   categorical_variables <- set_categorical_variables(column_names, categorical_variables)
-  
-  # Capture categorical variables
   object[["categorical_variables"]] <- categorical_variables
   
-  # Remove variables
+  # Remove variables and capture data
   .data <- remove_variables(.data, exclude_variables)
   object[["data"]] <- .data
   
-  # Set dependent variable
+  # Set and capture dependent variable
   y <- set_dependent_variable(.data, dependent_variable)
   object[["y"]] <- y
   
-  # Set independent variables
+  # Set and capture independent variables
   X <- set_independent_variables(.data, dependent_variable)
   X <- X[, column_names]
   object[["X"]] <- X
@@ -219,11 +201,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     coefs <- replicate_coefficients(object)
     object[["coefficients"]] <- coefs
     
-    # Process coefficients
+    # Process and capture coefficients
     coefs_processed <- process_coefficients(coefs, survival_rate_cutoff)
     object[["coefficients_processed"]] <- coefs_processed
     
-    # Save coefficients plots
+    # Create and capture coefficients plots
     g <- plot_coefficients_processed(coefs_processed)
     object[["plot_coefficients_processed"]] <- g
   }
@@ -234,18 +216,18 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     variable_imps <- replicate_variable_importances(object)
     object[["variable_importances"]] <- variable_imps
     
-    # Process variable_importances
+    # Process and capture variable_importances
     variable_imps_processed <- process_variable_importances(variable_imps)
     object[["variable_importances_processed"]] <- variable_imps_processed
     
-    # Save variable importances plot
+    # Create and capture variable importances plot
     g <- plot_variable_importances_processed(variable_imps_processed)
     object[["plot_variable_importances_processed"]] <- g
   }
   
   # Assess if predictions should be replicated for this algorithm
   if (predictions) {
-    # Resample data
+    # Resample and capture data
     split_data <- resample(X, y, train_size = train_size, foldid = foldid)
     object[["X_train"]] <- split_data[["X_train"]]
     object[["X_test"]] <- split_data[["X_test"]]
@@ -259,17 +241,17 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     predictions_test <- preds[["predictions_test"]]
     object[["predictions_test"]] <- predictions_test
     
-    # Process predictions
+    # Process and capture predictions
     predictions_train_mean <- apply(predictions_train, 1, mean)
     predictions_test_mean <- apply(predictions_test, 1, mean)
     object[["predictions_train_mean"]] <- predictions_train_mean
     object[["predictions_test_mean"]] <- predictions_test_mean
     
-    # Set plot_predictions function
+    # Set and capture plot_predictions function
     plot_predictions <- set_plot_predictions(algorithm, family)
     object[["plot_predictions"]] <- plot_predictions
     
-    # Save predictions plots
+    # Create and capture predictions plots
     plot_predictions_train_mean <- 
       plot_predictions(y_train, predictions_train_mean) + 
       ggplot2::labs(subtitle = "Train Predictions")
@@ -282,18 +264,18 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Assess if metrics should be replicated for this algorithm
   if (metrics) {
-    # Replicate metrics
+    # Replicate and capture metrics
     mets <- replicate_metrics(object)
     metrics_train_mean <- mets[["metrics_train_mean"]]
     object[["metrics_train_mean"]] <- metrics_train_mean
     metrics_test_mean <- mets[["metrics_test_mean"]]
     object[["metrics_test_mean"]] <- metrics_test_mean
     
-    # Set plot_metrics function
+    # Set and capture plot_metrics function
     plot_metrics <- set_plot_metrics(measure)
     object[["plot_metrics"]] <- plot_metrics
     
-    # Save metrics plots
+    # Create and capture metrics plots
     plot_metrics_train_mean <- 
       plot_metrics(metrics_train_mean) + 
       ggplot2::labs(subtitle = "Train Metrics")

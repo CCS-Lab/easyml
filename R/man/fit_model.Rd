@@ -4,7 +4,7 @@
 \alias{fit_model}
 \title{Fit model.}
 \usage{
-fit_model(X, y, ...)
+fit_model(object)
 }
 \arguments{
 \item{X}{input matrix, of dimension nobs x nvars; each row is an observation vector. Can be in sparse matrix format (inherit from class "sparseMatrix" as in package Matrix; not yet available for family="cox")}

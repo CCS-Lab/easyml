@@ -24,7 +24,7 @@ fit_model.easy_glmnet <- function(object) {
   model_args[["nfolds"]] <- NULL
   model <- do.call(glmnet::glmnet, model_args)
   object[["model_args"]] <- model_args
-  object[["model"]] <- cv_model
+  object[["model"]] <- model
 
   # write output
   object
@@ -115,7 +115,8 @@ predict_model.easy_glmnet <- function(object, newx = NULL) {
 #'                        n_core = 1, alpha = 1.0)
 #' @export
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
-                        resample = NULL, preprocess = NULL, measure = measure_r2_score, 
+                        resample = NULL, preprocess = preprocess_scale, 
+                        measure = measure_r2_score, 
                         exclude_variables = NULL, categorical_variables = NULL, 
                         train_size = 0.667, foldid = NULL, 
                         survival_rate_cutoff = 0.05, 
@@ -123,7 +124,8 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                         n_iterations = 10, random_state = NULL, 
                         progress_bar = TRUE, n_core = 1, 
                         coefficients = TRUE, variable_importances = FALSE, 
-                        predictions = TRUE, metrics = TRUE, ...) {
+                        predictions = TRUE, metrics = TRUE, 
+                        model_args = list()) {
   easy_analysis(.data, dependent_variable, algorithm = "glmnet", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 
@@ -136,5 +138,6 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                 progress_bar = progress_bar, n_core = n_core, 
                 coefficients = coefficients, 
                 variable_importances = variable_importances, 
-                predictions = predictions, metrics = metrics, ...)
+                predictions = predictions, metrics = metrics, 
+                model_args = model_args)
 }
