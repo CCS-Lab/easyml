@@ -4,36 +4,40 @@
 #' @return A list, the model and the cross validated model.
 #' @export
 fit_model.easy_glmnet <- function(object) {
-  # set keyword arguments
-  kwargs <- object[["kwargs"]]
+  # set model arguments
+  model_args <- object[["model_args"]]
 
-  # process kwargs
-  kwargs[["family"]] <- object[["family"]]
-  if (!is.null(kwargs[["standardize"]])) {
-    kwargs[["standardize"]] <- FALSE
+  # process model_args
+  model_args[["family"]] <- object[["family"]]
+  if (!is.null(model_args[["standardize"]])) {
+    model_args[["standardize"]] <- FALSE
   }
-  kwargs[["x"]] <- as.matrix(object[["X"]])
-  kwargs[["y"]] <- object[["y"]]
+  model_args[["x"]] <- as.matrix(object[["X"]])
+  model_args[["y"]] <- object[["y"]]
 
   # build cv_model
-  cv_model <- do.call(glmnet::cv.glmnet, kwargs)
+  cv_model <- do.call(glmnet::cv.glmnet, model_args)
+  object[["cv_model_args"]] <- model_args
+  object[["cv_model"]] <- cv_model
 
   # build model
-  kwargs[["nfolds"]] <- NULL
-  model <- do.call(glmnet::glmnet, kwargs)
+  model_args[["nfolds"]] <- NULL
+  model <- do.call(glmnet::glmnet, model_args)
+  object[["model_args"]] <- model_args
+  object[["model"]] <- cv_model
 
   # write output
-  list(model = model, cv_model = cv_model)
+  object
 }
 
 #' Extract coefficients from a penalized regression model.
 #' 
-#' @param results The results of \code{\link{fit_model}}.
+#' @param object TO BE EDITED.
 #' @return A data.frame of replicated penalized regression coefficients.
 #' @export
-extract_coefficients.easy_glmnet <- function(results) {
-  model <- results[["model"]]
-  cv_model <- results[["cv_model"]]
+extract_coefficients.easy_glmnet <- function(object) {
+  model <- object[["model"]]
+  cv_model <- object[["cv_model"]]
   coefs <- stats::coef(model, s = cv_model$lambda.min)
   .data <- data.frame(t(as.matrix(as.numeric(coefs), nrow = 1)))
   colnames(.data) <- rownames(coefs)
@@ -46,10 +50,10 @@ extract_coefficients.easy_glmnet <- function(results) {
 #' @param newx A data.frame, the new data to use for predictions.
 #' @return A vector, the predicted values for a penalized regression model using the new data.
 #' @export
-predict_model.easy_glmnet <- function(results, newx = NULL) {
+predict_model.easy_glmnet <- function(object, newx = NULL) {
   newx <- as.matrix(newx)
-  model <- results[["model"]]
-  cv_model <- results[["cv_model"]]
+  model <- object[["model"]]
+  cv_model <- object[["cv_model"]]
   stats::predict(model, newx = newx, s = cv_model$lambda.min, type = "response")
 }
 
@@ -111,7 +115,7 @@ predict_model.easy_glmnet <- function(results, newx = NULL) {
 #'                        n_core = 1, alpha = 1.0)
 #' @export
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
-                        resample = NULL, preprocess = NULL, measure = NULL, 
+                        resample = NULL, preprocess = NULL, measure = measure_r2_score, 
                         exclude_variables = NULL, categorical_variables = NULL, 
                         train_size = 0.667, foldid = NULL, 
                         survival_rate_cutoff = 0.05, 

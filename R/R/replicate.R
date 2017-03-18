@@ -9,6 +9,7 @@ replicate_coefficients <- function(object) {
   X <- object[["X"]]
   y <- object[["y"]]
   categorical_variables <- object[["categorical_variables"]]
+  preprocess <- object[["preprocess"]]
   n_samples <- object[["n_samples"]]
   progress_bar <- object[["progress_bar"]]
   n_core <- object[["n_core"]]
@@ -19,12 +20,9 @@ replicate_coefficients <- function(object) {
     print(paste0("Replicating coefficients", parallel_string))
   }
   
-  # Set preprocess function
-  preprocess <- object[["preprocess"]]
-  
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
-  X <- result[["X"]]
+  object[["X"]] <- result[["X"]]
   
   # Define closure
   replicate_coefficient <- function(i) {
@@ -32,6 +30,7 @@ replicate_coefficients <- function(object) {
     coef <- extract_coefficients(results)
     coef
   }
+  replicate_coefficient()
   
   # Set which looping mechanism to use
   looper <- set_looper(progress_bar, n_core)
@@ -61,28 +60,27 @@ replicate_coefficients <- function(object) {
 #' @family replicate
 #' @export
 replicate_variable_importances <- function(object) {
-  # fit_model, extract_variable_importances, 
-  # preprocess, X, y, 
-  # categorical_variables = NULL, 
-  # n_samples = 1000, progress_bar = TRUE, 
-  # n_core = 1, ...
-  # Print an informative message
+  # Extract attributes from object
+  X <- object[["X"]]
+  y <- object[["y"]]
+  categorical_variables <- object[["categorical_variables"]]
+  preprocess <- object[["preprocess"]]
+  n_samples <- object[["n_samples"]]
+  progress_bar <- object[["progress_bar"]]
+  n_core <- object[["n_core"]]
+  
   if (progress_bar) {
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
     print(paste0("Replicating variable importances", parallel_string))
   }
-  
-  # Set preprocess function
-  preprocess <- set_preprocess(preprocess, algorithm)
-  object[["preprocess"]] <- preprocess
-  
+
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
   X <- result[["X"]]
   
   # Define closure
   replicate_variable_importance <- function(i) {
-    model <- fit_model(X, y, ...)
+    model <- fit_model(object)
     variable_importance <- extract_variable_importances(model)
     variable_importance
   }
@@ -116,41 +114,39 @@ replicate_variable_importances <- function(object) {
 #' @family replicate
 #' @export
 replicate_predictions <- function(object) {
-  # fit_model, predict_model, preprocess, 
-  # X_train, y_train, X_test, 
-  # categorical_variables = NULL, 
-  # n_samples = 1000, progress_bar = TRUE, 
-  # n_core = 1, ...
+  # Extract attributes from object
+  X_train <- object[["X_train"]]
+  X_test <- object[["X_test"]]
+  y_train <- object[["y_train"]]
+  categorical_variables <- object[["categorical_variables"]]
+  preprocess <- object[["preprocess"]]
+  n_samples <- object[["n_samples"]]
+  progress_bar <- object[["progress_bar"]]
+  n_core <- object[["n_core"]]
+
   # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
-  # Set preprocess function
-  preprocess <- set_preprocess(preprocess, algorithm)
-  object[["preprocess"]] <- preprocess
-
   # Preprocess data
   result <- preprocess(list(X_train = X_train, X_test = X_test), 
                          categorical_variables = categorical_variables)
-  X_train <- result[["X_train"]]
-  X_test <- result[["X_test"]]
+  object[["X_train"]] <- result[["X_train"]]
+  object[["X_test"]] <- result[["X_test"]]
   
   # Define closure
   replicate_prediction <- function(i) {
     # Fit model with the training set
-    results <- fit_model(X_train, y_train, ...)
+    results <- fit_model(object)
     
-    # Train data set to NULL for training predictions (except glmnet)
-    if (identical(predict_model, glmnet_predict_model)) {
-      tmp_train <- X_train
-    } else {
-      tmp_train <- NULL
-    }
+    # Generate predictions
+    prediction_train = predict_model(results, newx = X_train)
+    prediction_test = predict_model(results, newx = X_test)
     
     # Save predictions 
-    list(prediction_train = predict_model(results, newx = tmp_train), 
-         prediction_test = predict_model(results, newx = X_test))
+    list(prediction_train = prediction_train, 
+         prediction_test = prediction_test)
   }
   
   # Set which looping mechanism to use
@@ -192,27 +188,24 @@ replicate_predictions <- function(object) {
 #' @family replicate
 #' @export
 replicate_metrics <- function(object) {
-  # fit_model, predict_model, resample, preprocess, 
-  # measure, X, y, train_size = train_size, 
-  # categorical_variables = NULL, 
-  # n_divisions = 1000, n_iterations = 100, 
-  # progress_bar = TRUE, n_core = 1, foldid = NULL, ...
+  # Extract attributes from object
+  X <- object[["X"]]
+  y <- object[["y"]]
+  categorical_variables <- object[["categorical_variables"]]
+  train_size <- object[["train_size"]]
+  foldid <- object[["foldid"]]
+  resample <- object[["resample"]]
+  preprocess <- object[["preprocess"]]
+  measure <- object[["measure"]]
+  n_divisions <- object[["n_divisions"]]
+  n_iterations <- object[["n_iterations"]]
+  progress_bar <- object[["progress_bar"]]
+  n_core <- object[["n_core"]]
+
   # Print an informative message
   if (progress_bar) {
     print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
-  
-  # Set resample function
-  resample <- set_resample(resample, family)
-  object[["resample"]] <- resample
-  
-  # Set preprocess function
-  preprocess <- set_preprocess(preprocess, algorithm)
-  object[["preprocess"]] <- preprocess
-  
-  # Set measure function
-  measure <- set_measure(measure, algorithm, family)
-  object[["measure"]] <- measure
   
   # Set which looping mechanism to use
   looper <- set_looper(progress_bar, n_core)
@@ -221,16 +214,16 @@ replicate_metrics <- function(object) {
   replicate_metric <- function(i) {
     # Split data
     split_data <- resample(X, y, foldid = foldid, train_size = train_size)
-    X_train <- split_data[["X_train"]]
-    X_test <- split_data[["X_test"]]
-    y_train <- split_data[["y_train"]]
-    y_test <- split_data[["y_test"]]
+    X_train <- object[["X_train"]] <- split_data[["X_train"]]
+    X_test <- object[["X_test"]] <- split_data[["X_test"]]
+    y_train <- object[["y_train"]] <- split_data[["y_train"]]
+    y_test <- object[["y_test"]] <- split_data[["y_test"]]
     
     # Preprocess data
     result <- preprocess(list(X_train = X_train, X_test = X_test), 
                            categorical_variables = categorical_variables)
-    X_train <- result[["X_train"]]
-    X_test <- result[["X_test"]]
+    object[["X_train"]] <- result[["X_train"]]
+    object[["X_test"]] <- result[["X_test"]]
     
     # Create temporary containers
     metric_train <- numeric()
@@ -239,16 +232,10 @@ replicate_metrics <- function(object) {
     # Loop over number of iterations
     output_iterations <- lapply(1:n_iterations, function(i) {
       # Fit estimator with the training set
-      results <- fit_model(X_train, y_train, ...)
+      results <- fit_model(object)
       
-      # Train data set to NULL for training predictions (except glmnet)
-      if (identical(predict_model, glmnet_predict_model)) {
-        tmp_train <- X_train
-      } else {
-        tmp_train <- NULL
-      }
-      
-      predictions_train <- predict_model(results, newx = tmp_train)
+      # Generate predictions
+      predictions_train <- predict_model(results, newx = X_train)
       predictions_test <- predict_model(results, newx = X_test)
       
       # Save metrics
@@ -265,7 +252,7 @@ replicate_metrics <- function(object) {
     list(metrics_train_mean = mean(metrics_train), 
          metrics_test_mean = mean(metrics_test))
   }
-  
+
   # Loop over number of divisions
   output_divisions <- looper(1:n_divisions, replicate_metric)
   

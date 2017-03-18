@@ -5,39 +5,39 @@
 #' @param ... Arguments to be passed to \code{\link[glmnet]{glmnet}}. See that function's documentation for more details.
 #' @return A list, the model and the cross validated model.
 #' @export
-fit_model <- function(X, y, ...) {
+fit_model <- function(object) {
   UseMethod("fit_model")
 }
 
-fit_model.default <- function(X, y, ...) {
-  msg <- paste0("Error: fit_model not implemented for class ", class(foo))
+fit_model.default <- function(object) {
+  msg <- paste0("Error: fit_model not implemented for class ", class(object))
   stop(msg)
 }
 
-extract_coefficients <- function(foo) {
+extract_coefficients <- function(object) {
   UseMethod("extract_coefficients")
 }
 
-extract_coefficients.default <- function(foo) {
-  msg <- paste0("Error: extract_coefficients not implemented for class ", class(foo))
+extract_coefficients.default <- function(object) {
+  msg <- paste0("Error: extract_coefficients not implemented for class ", class(object))
   stop(msg)
 }
 
-extract_variable_importances <- function(foo) {
+extract_variable_importances <- function(object) {
   UseMethod("extract_variable_importances")
 }
 
-extract_variable_importances.default <- function(foo) {
-  msg <- paste0("Error: extract_variable_importances not implemented for class ", class(foo))
+extract_variable_importances.default <- function(object) {
+  msg <- paste0("Error: extract_variable_importances not implemented for class ", class(object))
   stop(msg)
 }
 
-predict_model <- function(foo) {
+predict_model <- function(object, newx = NULL) {
   UseMethod("predict_model")
 }
 
-predict_model.default <- function(foo) {
-  msg <- paste0("Error: predict_model not implemented for class ", class(foo))
+predict_model.default <- function(object, newx = NULL) {
+  msg <- paste0("Error: predict_model not implemented for class ", class(object))
   stop(msg)
 }
 
@@ -107,7 +107,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
                           n_samples = 1000, n_divisions = 1000, n_iterations = 10, 
                           random_state = NULL, progress_bar = TRUE, n_core = 1, 
                           coefficients = NULL, variable_importances = NULL, 
-                          predictions = NULL, metrics = NULL, ...) {
+                          predictions = NULL, metrics = NULL, model_args = list()) {
   # Check positional arguments for validity
   check_arguments(.data, dependent_variable, algorithm)
   
@@ -142,36 +142,24 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Capture exclude variables
   object[["exclude_variables"]] <- exclude_variables
   
-  # Capture categorical variables
-  object[["categorical_variables"]] <- categorical_variables
+  # Capture
+  object[["train_size"]] <- train_size
   
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  # 
-  # # Capture 
-  # object[[""]] <- ""
-  
+  # Capture
+  object[["foldid"]] <- foldid
+
+  # Capture
+  object[["survival_rate_cutoff"]] <- survival_rate_cutoff
+
+  # Capture
+  object[["n_samples"]] <- n_samples
+
+  # Capture
+  object[["n_divisions"]] <- n_divisions
+
+  # Capture
+  object[["n_iterations"]] <- n_iterations
+
   # Capture random state
   set_random_state(random_state)
   object[["random_state"]] <- random_state
@@ -183,23 +171,19 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   object[["n_core"]] <- n_core
   
   # Capture coefficients
-  object[["coefficients"]] <- coefficients
+  object[["replicate_coefficients"]] <- coefficients
   
   # Capture variable importances
-  object[["variable_importances"]] <- variable_importances
+  object[["replicate_variable_importances"]] <- variable_importances
   
   # Capture predictions
-  object[["predictions"]] <- predictions
+  object[["replicate_predictions"]] <- predictions
   
   # Capture metrics
-  object[["metrics"]] <- metrics
-  
-  # Capture
-  object[[""]] <- ""
+  object[["replicate_metrics"]] <- metrics
 
-  # Capture keyword arguments
-  kwargs <- list(...)
-  object[["kwargs"]] <- kwargs
+  # Capture model arguments
+  object[["model_args"]] <- model_args
   
   # Set column names
   column_names <- set_column_names(colnames(.data), dependent_variable, 
@@ -209,6 +193,9 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Set categorical variables
   categorical_variables <- set_categorical_variables(column_names, categorical_variables)
+  
+  # Capture categorical variables
+  object[["categorical_variables"]] <- categorical_variables
   
   # Remove variables
   .data <- remove_variables(.data, exclude_variables)
@@ -257,20 +244,20 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   }
   
   # Assess if predictions should be replicated for this algorithm
-  if (prediction) {
+  if (predictions) {
     # Resample data
     split_data <- resample(X, y, train_size = train_size, foldid = foldid)
-    object <- c(object, split_data)
-    X_train <- split_data[["X_train"]]
-    X_test <- split_data[["X_test"]]
-    y_train <- split_data[["y_train"]]
-    y_test <- split_data[["y_test"]]
+    object[["X_train"]] <- split_data[["X_train"]]
+    object[["X_test"]] <- split_data[["X_test"]]
+    y_train <- object[["y_train"]] <- split_data[["y_train"]]
+    y_test <- object[["y_test"]] <- split_data[["y_test"]]
     
     # Replicate predictions
-    predictions <- replicate_predictions(object)
-    object <- c(object, predictions)
-    predictions_train <- predictions[["predictions_train"]]
-    predictions_test <- predictions[["predictions_test"]]
+    preds <- replicate_predictions(object)
+    predictions_train <- preds[["predictions_train"]]
+    object[["predictions_train"]] <- predictions_train
+    predictions_test <- preds[["predictions_test"]]
+    object[["predictions_test"]] <- predictions_test
     
     # Process predictions
     predictions_train_mean <- apply(predictions_train, 1, mean)
@@ -294,12 +281,13 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   }
   
   # Assess if metrics should be replicated for this algorithm
-  if (metrics_boolean) {
+  if (metrics) {
     # Replicate metrics
-    metrics <- replicate_metrics(object)
-    object <- c(object, metrics)
-    metrics_train_mean <- metrics[["metrics_train_mean"]]
-    metrics_test_mean <- metrics[["metrics_test_mean"]]
+    mets <- replicate_metrics(object)
+    metrics_train_mean <- mets[["metrics_train_mean"]]
+    object[["metrics_train_mean"]] <- metrics_train_mean
+    metrics_test_mean <- mets[["metrics_test_mean"]]
+    object[["metrics_test_mean"]] <- metrics_test_mean
     
     # Set plot_metrics function
     plot_metrics <- set_plot_metrics(measure)
@@ -319,15 +307,3 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Return object
   object
 }
-
-# # Set coefficients boolean
-# coefficients_boolean <- set_coefficients_boolean(algorithm)
-# 
-# # Set variable importances boolean
-# variable_importances_boolean <- set_variable_importances_boolean(algorithm)
-# 
-# # Set predictions boolean
-# predictions_boolean <- set_predictions_boolean(algorithm)
-# 
-# # Set metrics boolean
-# metrics_boolean <- set_metrics_boolean(algorithm)

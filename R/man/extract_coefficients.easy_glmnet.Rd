@@ -4,10 +4,10 @@
 \alias{extract_coefficients.easy_glmnet}
 \title{Extract coefficients from a penalized regression model.}
 \usage{
-\method{extract_coefficients}{easy_glmnet}(results)
+\method{extract_coefficients}{easy_glmnet}(object)
 }
 \arguments{
-\item{results}{The results of \code{\link{fit_model}}.}
+\item{object}{TO BE EDITED.}
 }
 \value{
 A data.frame of replicated penalized regression coefficients.

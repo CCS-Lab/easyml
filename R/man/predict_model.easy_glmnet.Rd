@@ -4,12 +4,12 @@
 \alias{predict_model.easy_glmnet}
 \title{Predict values for a penalized regression model.}
 \usage{
-\method{predict_model}{easy_glmnet}(results, newx = NULL)
+\method{predict_model}{easy_glmnet}(object, newx = NULL)
 }
 \arguments{
-\item{results}{The results of \code{\link{fit_model}}.}
-
 \item{newx}{A data.frame, the new data to use for predictions.}
+
+\item{results}{The results of \code{\link{fit_model}}.}
 }
 \value{
 A vector, the predicted values for a penalized regression model using the new data.

@@ -17,7 +17,7 @@ glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis",
                               categorical_variables = c("male"),
                               n_samples = .n_samples, n_divisions = .n_divisions,
                               n_iterations = .n_iterations, random_state = 12345, n_core = 8,
-                              alpha = 1, nlambda = 200)
+                              model_args = list(alpha = 1, nlambda = 200))
 
 glinternet_results <- easy_glinternet(cocaine_dependence, "diagnosis",
                                       family = "binomial",
