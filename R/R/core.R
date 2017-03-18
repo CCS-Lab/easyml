@@ -124,22 +124,22 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Capture exclude variables
   object[["exclude_variables"]] <- exclude_variables
   
-  # Capture
+  # Capture train size
   object[["train_size"]] <- train_size
   
-  # Capture
+  # Capture foldid
   object[["foldid"]] <- foldid
 
-  # Capture
+  # Capture survival rate cutoff
   object[["survival_rate_cutoff"]] <- survival_rate_cutoff
 
-  # Capture
+  # Capture n samples
   object[["n_samples"]] <- n_samples
 
-  # Capture
+  # Capture n divisions
   object[["n_divisions"]] <- n_divisions
 
-  # Capture
+  # Capture n iterations
   object[["n_iterations"]] <- n_iterations
 
   # Capture random state
