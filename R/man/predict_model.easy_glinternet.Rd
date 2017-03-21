@@ -2,19 +2,19 @@
 % Please edit documentation in R/glinternet.R
 \name{predict_model.easy_glinternet}
 \alias{predict_model.easy_glinternet}
-\title{Predict values for a penalized regression model.}
+\title{Predict values for a penalized regression model with interactions.}
 \usage{
 \method{predict_model}{easy_glinternet}(object, newx = NULL)
 }
 \arguments{
-\item{newx}{A data.frame, the new data to use for predictions.}
+\item{object}{A list of class \code{easy_glinternet}.}
 
-\item{results}{The results of \code{\link{fit_model}}.}
+\item{newx}{A data.frame, the new data to use for predictions.}
 }
 \value{
-A vector, the predicted values for a penalized regression model using the new data.
+A vector, the predicted values using the new data.
 }
 \description{
-Predict values for a penalized regression model.
+Predict values for a penalized regression model with interactions.
 }
 

@@ -2,17 +2,17 @@
 % Please edit documentation in R/glinternet.R
 \name{fit_model.easy_glinternet}
 \alias{fit_model.easy_glinternet}
-\title{Fit penalized regression model.}
+\title{Fit a penalized regression model with interactions.}
 \usage{
 \method{fit_model}{easy_glinternet}(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_glinternet}.}
 }
 \value{
-A list, the model and the cross validated model.
+A list of class \code{easy_glinternet}.
 }
 \description{
-Fit penalized regression model.
+Fit a penalized regression model with interactions.
 }
 

@@ -2,17 +2,17 @@
 % Please edit documentation in R/glmnet.R
 \name{fit_model.easy_glmnet}
 \alias{fit_model.easy_glmnet}
-\title{Fit penalized regression model.}
+\title{Fit a penalized regression model.}
 \usage{
 \method{fit_model}{easy_glmnet}(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_glmnet}.}
 }
 \value{
-A list, the model and the cross validated model.
+A list of class \code{easy_glmnet}.
 }
 \description{
-Fit penalized regression model.
+Fit a penalized regression model.
 }
 

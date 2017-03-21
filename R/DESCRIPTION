@@ -12,13 +12,17 @@ Depends:
     R (>= 3.3.1)
 Imports:
     corrplot, 
+    darch, 
+    dummies, 
     e1071, 
     ggplot2, 
+    glinternet, 
     glmnet, 
     parallel,
     pbapply,
     pbmcapply, 
     pROC, 
+    nnet, 
     randomForest, 
     scales, 
     scorer

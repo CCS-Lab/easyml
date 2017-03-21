@@ -2,17 +2,17 @@
 % Please edit documentation in R/glinternet.R
 \name{extract_coefficients.easy_glinternet}
 \alias{extract_coefficients.easy_glinternet}
-\title{Extract coefficients from a penalized regression model.}
+\title{Extract coefficients from a penalized regression model with interactions.}
 \usage{
 \method{extract_coefficients}{easy_glinternet}(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_glinternet}.}
 }
 \value{
-A data.frame of replicated penalized regression coefficients.
+A data.frame, the replicated penalized regression with interactions coefficients.
 }
 \description{
-Extract coefficients from a penalized regression model.
+Extract coefficients from a penalized regression model with interactions.
 }
 

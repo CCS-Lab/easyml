@@ -7,10 +7,10 @@
 \method{extract_coefficients}{easy_glmnet}(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_glmnet}.}
 }
 \value{
-A data.frame of replicated penalized regression coefficients.
+A data.frame, the replicated penalized regression coefficients.
 }
 \description{
 Extract coefficients from a penalized regression model.

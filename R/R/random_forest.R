@@ -1,108 +1,62 @@
-#' Fit random forest gaussian regression model.
+#' Fit a random forest model.
 #' 
-#' @param X a data frame or a matrix of predictors, or a formula describing the model to be fitted (for the print method, an randomForest object).
-#' @param y A response vector. If a factor, classification is assumed, otherwise regression is assumed. If omitted, randomForest will run in unsupervised mode.
-#' @param ... Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.
-#' @return The fitted model.
+#' @param object A list of class \code{easy_random_forest}.
+#' @return A list of class \code{easy_random_forest}.
 #' @export
-random_forest_fit_model_gaussian <- function(X, y, ...) {
-  # capture additional arguments
-  kwargs <- list(...)
+fit_model.easy_random_forest <- function(object) {
+  # set model arguments
+  model_args <- object[["model_args"]]
   
-  # process kwargs
-  kwargs[["x"]] <- as.matrix(X)
-  kwargs[["y"]] <- y
-  
-  # build model
-  model <- do.call(randomForest::randomForest, kwargs)
-  
-  # write output
-  model
-}
+  # process model_args
+  model_args[["x"]] <- as.matrix(object[["X"]])
+  model_args[["y"]] <- object[["y"]]
 
-#' Fit random forest binomial regression model.
-#' 
-#' @param X a data frame or a matrix of predictors, or a formula describing the model to be fitted (for the print method, an randomForest object).
-#' @param y A response vector. If a factor, classification is assumed, otherwise regression is assumed. If omitted, randomForest will run in unsupervised mode.
-#' @param ... Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.
-#' @return The fitted model.
-#' @export
-random_forest_fit_model_binomial <- function(X, y, ...) {
-  # capture additional arguments
-  kwargs <- list(...)
-  
-  # process kwargs
-  kwargs[["x"]] <- as.matrix(X)
-  kwargs[["y"]] <- as.factor(y)
-  
   # build model
-  model <- do.call(randomForest::randomForest, kwargs)
+  model <- do.call(randomForest::randomForest, model_args)
+  object[["model_args"]] <- model_args
+  object[["model"]] <- model
   
   # write output
-  model
+  object
 }
 
 #' Extract variable importance scores from a random forest model.
 #' 
-#' @param results The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_gaussian}}.
-#' @return A data.frame of replicated random forest variable importance scores.
+#' @param object A list of class \code{easy_random_forest}.
+#' @return A data.frame, the replicated random forest variable importance scores.
 #' @export
-random_forest_extract_variable_importances <- function(results) {
-  importance <- randomForest::importance(results)
-  .data <- data.frame(t(importance))
-  rownames(.data) <- NULL
-  .data
+extract_variable_importances.easy_random_forest <- function(object) {
+  model <- object[["model"]]
+  importance <- randomForest::importance(model)
+  importance_df <- data.frame(t(importance))
+  rownames(importance_df) <- NULL
+  importance_df
 }
 
 #' Predict values for a random forest regression model.
 #' 
-#' @param results The results of \code{\link{random_forest_fit_model_gaussian}} or \code{\link{random_forest_fit_model_binomial}}.
+#' @param object A list of class \code{easy_random_forest}.
 #' @param newx A data.frame, the new data to use for predictions.
-#' @return A vector, the predicted values for a random_forest regression model using the new data.
+#' @return A vector, the predicted values using the new data.
 #' @export
-random_forest_predict_model <- function(results, newx = NULL) {
+predict_model.easy_random_forest <- function(object, newx = NULL) {
+  model <- object[["model"]]
   # If newx == NULL (i.e. for training data prediction), do not pass new data
   if (is.null(newx)) {
-    as.numeric(stats::predict(results))
+    preds <- as.numeric(stats::predict(model))
   } else {
-    as.numeric(stats::predict(results, newdata = newx))
+    preds <- as.numeric(stats::predict(model, newdata = newx))
   }
+  preds
 }
 
 #' Easily build and evaluate a random forest regression model.
 #' 
-#' @param ... Arguments to be passed to \code{\link[randomForest]{randomForest}}. See that function's documentation for more details.
 #' @inheritParams easy_analysis
-#' @return A list with the following values:
-#' \describe{
-#' \item{resample}{A function; the function for resampling the data.}
-#' \item{preprocess}{A function; the function for preprocessing the data.}
-#' \item{measure}{A function; the function for measuring the results.}
-#' \item{fit_model}{A function; the function for fitting the model to the data.}
-#' \item{extract_coefficients}{A function; the function for extracting coefficients from the model.}
-#' \item{predict_model}{A function; the function for generating predictions on new data from the model.}
-#' \item{plot_predictions}{A function; the function for plotting predictions generated by the model.}
-#' \item{plot_metrics}{A function; the function for plotting metrics generated by scoring the model.}
-#' \item{data}{A data.frame; the original data.}
-#' \item{X}{A data.frame; the full dataset to be used for modeling.}
-#' \item{y}{A vector; the full response variable to be used for modeling.}
-#' \item{X_train}{A data.frame; the train dataset to be used for modeling.}
-#' \item{X_test}{A data.frame; the test dataset to be used for modeling.}
-#' \item{y_train}{A vector; the train response variable to be used for modeling.}
-#' \item{y_test}{A vector; the test response variable to be used for modeling.}
-#' \item{predictions_train}{A (nrow(X_train), n_samples) matrix; the train predictions.}
-#' \item{predictions_test}{A (nrow(X_test), n_samples) matrix; the test predictions.}
-#' \item{predictions_train_mean}{A vector; the mean train predictions.}
-#' \item{predictions_test_mean}{A vector; the mean test predictions.}
-#' \item{plot_predictions_train_mean}{A ggplot object; the plot of the mean train predictions.}
-#' \item{plot_predictions_test_mean}{A ggplot object; the plot of the mean test predictions.}
-#' \item{metrics_train_mean}{A vector of length n_divisions; the mean train metrics.}
-#' \item{metrics_test_mean}{A vector of length n_divisions; the mean test metrics.}
-#' \item{plot_metrics_train_mean}{A ggplot object; the plot of the mean train metrics.}
-#' \item{plot_metrics_test_mean}{A ggplot object; the plot of the mean test metrics.}
-#' }
+#' @return A list of class \code{easy_random_forest}.
 #' @family recipes
 #' @examples 
+#' \dontrun{
 #' library(easyml) # https://github.com/CCS-Lab/easyml
 #' 
 #' # Gaussian
@@ -123,14 +77,22 @@ random_forest_predict_model <- function(results, newx = NULL) {
 #'                               n_divisions = 10, 
 #'                               n_iterations = 2, 
 #'                               random_state = 12345, n_core = 1)
+#' }
 #' @export
-easy_random_forest <- function(.data, dependent_variable, family = "gaussian", 
-                               resample = NULL, preprocess = NULL, measure = NULL, 
-                               exclude_variables = NULL, categorical_variables = NULL, 
+easy_random_forest <- function(.data, dependent_variable, 
+                               family = "gaussian", resample = NULL, 
+                               preprocess = preprocess_identity, 
+                               measure = NULL, 
+                               exclude_variables = NULL, 
+                               categorical_variables = NULL, 
                                train_size = 0.667, foldid = NULL, 
                                n_samples = 1000, n_divisions = 1000, 
                                n_iterations = 10, random_state = NULL, 
-                               progress_bar = TRUE, n_core = 1, ...) {
+                               progress_bar = TRUE, n_core = 1, 
+                               coefficients = FALSE, 
+                               variable_importances = TRUE, 
+                               predictions = TRUE, metrics = TRUE, 
+                               model_args = list()) {
   easy_analysis(.data, dependent_variable, algorithm = "random_forest", 
                 family = family, resample = resample, 
                 preprocess = preprocess, measure = measure, 
@@ -139,5 +101,9 @@ easy_random_forest <- function(.data, dependent_variable, family = "gaussian",
                 train_size = train_size, foldid = foldid,  
                 n_samples = n_samples, n_divisions = n_divisions, 
                 n_iterations = n_iterations, random_state = random_state, 
-                progress_bar = progress_bar, n_core = n_core, ...)
+                progress_bar = progress_bar, n_core = n_core, 
+                coefficients = coefficients, 
+                variable_importances = variable_importances, 
+                predictions = predictions, metrics = metrics, 
+                model_args = model_args)
 }

@@ -46,16 +46,7 @@ replicate_coefficients <- function(object) {
 
 #' Replicate variable importances.
 #'
-#' @param fit_model A function; the function for fitting a model to the data.
-#' @param extract_variable_importances A function; the function for extracting variable importances from a model.
-#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
-#' @param X A matrix; the independent variables.
-#' @param y A vector; the dependent variable.
-#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
-#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @param ... The arguments to be passed to the algorithm specified.
+#' @param object TO BE EDITED.
 #' @return A data.frame, the replicated variable importance scores.
 #' @family replicate
 #' @export
@@ -76,7 +67,7 @@ replicate_variable_importances <- function(object) {
 
   # Preprocess data
   result <- preprocess(list(X = X), categorical_variables)
-  X <- result[["X"]]
+  object[["X"]] <- result[["X"]]
   
   # Define closure
   replicate_variable_importance <- function(i) {
@@ -99,17 +90,7 @@ replicate_variable_importances <- function(object) {
 
 #' Replicate predictions.
 #'
-#' @param fit_model A function; the function for fitting a model to the data.
-#' @param predict_model A function; the function for generating predictions from a fitted model.
-#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
-#' @param X_train A matrix; the independent variables sampled to a training set.
-#' @param y_train A vector; the dependent variable sampled to a training set.
-#' @param X_test A matrix; the independent variables sampled to a testing set.
-#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L. 
-#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @param ... The arguments to be passed to the algorithm specified.
+#' @param object TO BE EDITED.
 #' @return A list of matrixes, the replicated predictions.
 #' @family replicate
 #' @export
@@ -132,9 +113,9 @@ replicate_predictions <- function(object) {
   # Preprocess data
   result <- preprocess(list(X_train = X_train, X_test = X_test), 
                          categorical_variables = categorical_variables)
-  object[["X_train"]] <- result[["X_train"]]
-  object[["X_test"]] <- result[["X_test"]]
-  
+  object[["X"]] <- result[["X_train"]]
+  object[["y"]] <- y_train
+
   # Define closure
   replicate_prediction <- function(i) {
     # Fit model with the training set
@@ -169,21 +150,7 @@ replicate_predictions <- function(object) {
 
 #' Replicate metrics.
 #'
-#' @param fit_model A function; the function for fitting a model to the data.
-#' @param predict_model A function; the function for generating predictions from a fitted model.
-#' @param resample A function; the function for resampling the data. Defaults to NULL.
-#' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
-#' @param measure A function; the function for measuring the results. Defaults to NULL.
-#' @param X A matrix; the independent variables.
-#' @param y A vector; the dependent variable.
-#' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
-#' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
-#' @param n_divisions An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.
-#' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.
-#' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.
-#' @param ... The arguments to be passed to the algorithm specified.
+#' @param object TO BE EDITED.
 #' @return A list of matrixes, the replicated metrics.
 #' @family replicate
 #' @export
@@ -214,17 +181,17 @@ replicate_metrics <- function(object) {
   replicate_metric <- function(i) {
     # Split data
     split_data <- resample(X, y, foldid = foldid, train_size = train_size)
-    X_train <- object[["X_train"]] <- split_data[["X_train"]]
-    X_test <- object[["X_test"]] <- split_data[["X_test"]]
-    y_train <- object[["y_train"]] <- split_data[["y_train"]]
-    y_test <- object[["y_test"]] <- split_data[["y_test"]]
+    X_train <- split_data[["X_train"]]
+    X_test <- split_data[["X_test"]]
+    y_train <- object[["y"]] <- split_data[["y_train"]]
+    y_test <- split_data[["y_test"]]
     
     # Preprocess data
     result <- preprocess(list(X_train = X_train, X_test = X_test), 
-                           categorical_variables = categorical_variables)
-    object[["X_train"]] <- result[["X_train"]]
-    object[["X_test"]] <- result[["X_test"]]
-    
+                         categorical_variables = categorical_variables)
+    X_train <- object[["X"]] <- result[["X_train"]]
+    X_test <- result[["X_test"]]
+
     # Create temporary containers
     metric_train <- numeric()
     test_metrics <- numeric()

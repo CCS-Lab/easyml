@@ -7,35 +7,7 @@
 replicate_metrics(object)
 }
 \arguments{
-\item{fit_model}{A function; the function for fitting a model to the data.}
-
-\item{predict_model}{A function; the function for generating predictions from a fitted model.}
-
-\item{resample}{A function; the function for resampling the data. Defaults to NULL.}
-
-\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
-
-\item{measure}{A function; the function for measuring the results. Defaults to NULL.}
-
-\item{X}{A matrix; the independent variables.}
-
-\item{y}{A vector; the dependent variable.}
-
-\item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.}
-
-\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
-
-\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.}
-
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.}
-
-\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
-
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
-
-\item{foldid}{A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.}
-
-\item{...}{The arguments to be passed to the algorithm specified.}
+\item{object}{TO BE EDITED.}
 }
 \value{
 A list of matrixes, the replicated metrics.

@@ -178,31 +178,6 @@ test_that("Test set_measure.", {
   expect_equal(set_measure(identity, "", ""), identity)
 })
 
-test_that("Test set_fit_model.", {
-  expect_error(set_fit_model("", ""))
-  expect_equal(set_fit_model("glmnet", "gaussian"), glmnet_fit_model_gaussian)
-  expect_equal(set_fit_model("glmnet", "binomial"), glmnet_fit_model_binomial)
-  expect_equal(set_fit_model("random_forest", "gaussian"), random_forest_fit_model_gaussian)
-  expect_equal(set_fit_model("random_forest", "binomial"), random_forest_fit_model_binomial)
-  expect_equal(set_fit_model("support_vector_machine", "gaussian"), support_vector_machine_fit_model_gaussian)
-  expect_equal(set_fit_model("support_vector_machine", "binomial"), support_vector_machine_fit_model_binomial)
-})
-
-test_that("Test set_extract_coefficients.", {
-  expect_equal(set_extract_coefficients("", ""), NULL)
-  expect_equal(set_extract_coefficients("glmnet", ""), glmnet_extract_coefficients)
-})
-
-test_that("Test set_predict_model.", {
-  expect_error(set_predict_model("", ""))
-  expect_equal(set_predict_model("glmnet", "gaussian"), glmnet_predict_model)
-  expect_equal(set_predict_model("glmnet", "binomial"), glmnet_predict_model)
-  expect_equal(set_predict_model("random_forest", "gaussian"), random_forest_predict_model)
-  expect_equal(set_predict_model("random_forest", "binomial"), random_forest_predict_model)
-  expect_equal(set_predict_model("support_vector_machine", "gaussian"), support_vector_machine_predict_model)
-  expect_equal(set_predict_model("support_vector_machine", "binomial"), support_vector_machine_predict_model)
-})
-
 test_that("Test set_plot_predictions.", {
   expect_error(set_plot_predictions("", ""))
   expect_equal(set_plot_predictions("glmnet", "gaussian"), plot_predictions_gaussian)

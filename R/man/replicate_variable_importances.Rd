@@ -7,25 +7,7 @@
 replicate_variable_importances(object)
 }
 \arguments{
-\item{fit_model}{A function; the function for fitting a model to the data.}
-
-\item{extract_variable_importances}{A function; the function for extracting variable importances from a model.}
-
-\item{preprocess}{A function; the function for preprocessing the data. Defaults to NULL.}
-
-\item{X}{A matrix; the independent variables.}
-
-\item{y}{A vector; the dependent variable.}
-
-\item{categorical_variables}{A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.}
-
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000L.}
-
-\item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
-
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
-
-\item{...}{The arguments to be passed to the algorithm specified.}
+\item{object}{TO BE EDITED.}
 }
 \value{
 A data.frame, the replicated variable importance scores.
