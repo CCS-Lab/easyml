@@ -21,7 +21,12 @@ fit_model.easy_glinternet <- function(object) {
   model_args[["numLevels"]] <- numLevels
 
   # build model
-  model <- do.call(glinternet::glinternet.cv, model_args)
+  done <- FALSE
+  while (!done) {
+    model <- try(do.call(glinternet::glinternet.cv, model_args), silent = TRUE)
+    done <- class(model) != "try-error"
+  }
+  
   object[["model_args"]] <- model_args
   object[["model"]] <- model
   
@@ -69,7 +74,7 @@ predict_model.easy_glinternet <- function(object, newx = NULL) {
 #' results <- easy_glinternet(prostate, "lpsa", 
 #'                            n_samples = 10, n_divisions = 10, 
 #'                            n_iterations = 2, random_state = 12345, 
-#'                            n_core = 1, model_args = list(alpha = 1.0))
+#'                            n_core = 1)
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
@@ -80,7 +85,7 @@ predict_model.easy_glinternet <- function(object, newx = NULL) {
 #'                            preprocess = preprocess_scale, 
 #'                            n_samples = 10, n_divisions = 10, 
 #'                            n_iterations = 2, random_state = 12345, 
-#'                            n_core = 1, model_args = list(alpha = 1.0))
+#'                            n_core = 1)
 #' }
 #' @export
 easy_glinternet <- function(.data, dependent_variable, family = "gaussian", 

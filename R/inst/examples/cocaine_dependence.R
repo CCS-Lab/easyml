@@ -4,7 +4,7 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 data("cocaine_dependence", package = "easyml")
 
 # Settings
-.n_samples <- 5
+.n_samples <- 100
 .n_divisions <- 5
 .n_iterations <- 2
 .n_core <- 1
@@ -48,8 +48,9 @@ neural_network_results <- easy_neural_network(cocaine_dependence, "diagnosis",
                                               categorical_variables = c("male"),
                                               n_samples = .n_samples, n_divisions = .n_divisions,
                                               n_iterations = .n_iterations, random_state = 12345, n_core = .n_core, 
-                                              model_args = list(size = 10))
+                                              model_args = list(size = c(40)))
 
+library(darch)
 deep_neural_network_results <- easy_deep_neural_network(cocaine_dependence, "diagnosis",
                                                         family = "binomial", preprocess = preprocess_scale,
                                                         exclude_variables = c("subject"),
