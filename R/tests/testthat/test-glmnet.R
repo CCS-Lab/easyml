@@ -13,13 +13,13 @@ test_that("Test easy_glmnet.", {
   .n_core <- 1
   
   # Test binomial
-  results <- easy_glmnet(cocaine_dependence, "diagnosis",
-                         family = "binomial", preprocess = preprocess_scale,
-                         exclude_variables = c("subject"),
-                         categorical_variables = c("male"),
-                         n_samples = .n_samples, n_divisions = .n_divisions,
-                         n_iterations = .n_iterations, random_state = 12345, n_core = .n_core)
-  expect_equal(class(results), "easy_glmnet")
+  # results <- easy_glmnet(cocaine_dependence, "diagnosis",
+  #                        family = "binomial", preprocess = preprocess_scale,
+  #                        exclude_variables = c("subject"),
+  #                        categorical_variables = c("male"),
+  #                        n_samples = .n_samples, n_divisions = .n_divisions,
+  #                        n_iterations = .n_iterations, random_state = 12345, n_core = .n_core)
+  # expect_equal(class(results), "easy_glmnet")
   
   # Test gaussian
   results <- easy_glmnet(prostate, "lpsa", 
