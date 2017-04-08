@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prostate • easyml</title>
+<title>Prostate Cancer • easyml</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -57,7 +57,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Prostate</h1>
+      <h1>Prostate Cancer</h1>
                         <h4 class="author">Paul Hendricks</h4>
             
             <h4 class="date">2017-04-08</h4>
@@ -69,42 +69,148 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#overview" class="anchor"> </a></body></html>Overview</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>In this vignette, we demonstrate the power of <code>easyml</code> using a Prostate Cancer dataset.</p>
 </div>
 <div id="load-the-data" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#load-the-data" class="anchor"> </a></body></html>Load the data</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>First we load our libraries and the Prostate dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
 <span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(tidyr)
 <span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(purrr)</code></pre></div>
+
+<span class="kw">data</span>(<span class="st">"prostate"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
+knitr::<span class="kw">kable</span>(<span class="kw">head</span>(prostate))</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">lcavol</th>
+<th align="right">lweight</th>
+<th align="right">age</th>
+<th align="right">lbph</th>
+<th align="right">svi</th>
+<th align="right">lcp</th>
+<th align="right">gleason</th>
+<th align="right">pgg45</th>
+<th align="right">lpsa</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">-0.5798185</td>
+<td align="right">2.769459</td>
+<td align="right">50</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">-0.4307829</td>
+</tr>
+<tr class="even">
+<td align="right">-0.9942523</td>
+<td align="right">3.319626</td>
+<td align="right">58</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">-0.1625189</td>
+</tr>
+<tr class="odd">
+<td align="right">-0.5108256</td>
+<td align="right">2.691243</td>
+<td align="right">74</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">7</td>
+<td align="right">20</td>
+<td align="right">-0.1625189</td>
+</tr>
+<tr class="even">
+<td align="right">-1.2039728</td>
+<td align="right">3.282789</td>
+<td align="right">58</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">-0.1625189</td>
+</tr>
+<tr class="odd">
+<td align="right">0.7514161</td>
+<td align="right">3.432373</td>
+<td align="right">62</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0.3715636</td>
+</tr>
+<tr class="even">
+<td align="right">-1.0498221</td>
+<td align="right">3.228826</td>
+<td align="right">50</td>
+<td align="right">-1.386294</td>
+<td align="right">0</td>
+<td align="right">-1.386294</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0.7654678</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="tidy-the-data" class="section level2">
+<div id="train-a-support-vector-machine-model" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#tidy-the-data" class="anchor"> </a></body></html>Tidy the data</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<html><body><a href="#train-a-support-vector-machine-model" class="anchor"> </a></body></html>Train a support vector machine model</h2>
+<p>To run an <code>easy_support_vector_machine</code> model, we pass in the following parameters:</p>
+<ul>
+<li>the data set <code>prostate</code>,</li>
+<li>the name of the dependent variable e.g. <code>lpsa</code>,</li>
+<li>whether to run a <code>gaussian</code> or a <code>binomial</code> model,</li>
+<li>how to preprocess the data; in this case, we use <code>preprocess_scale</code> to scale the data,</li>
+<li>the random state,</li>
+<li>whether to display a progress bar,</li>
+<li>how many cores to run the analysis on in parallel.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/easy_support_vector_machine.html">easy_support_vector_machine</a></span>(prostate, <span class="st">"lpsa"</span>, 
+                                       <span class="dt">preprocess =</span> preprocess_scale, 
+                                       <span class="dt">n_samples =</span> <span class="dv">10</span>, <span class="dt">n_divisions =</span> <span class="dv">10</span>, 
+                                       <span class="dt">n_iterations =</span> <span class="dv">2</span>, <span class="dt">random_state =</span> <span class="dv">12345</span>, 
+                                       <span class="dt">n_core =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] "Generating predictions:"
+## [1] "Generating metrics:"</code></pre>
 </div>
-<div id="train-the-models" class="section level2">
+<div id="assess-results" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#train-the-models" class="anchor"> </a></body></html>Train the models</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<html><body><a href="#assess-results" class="anchor"> </a></body></html>Assess results</h2>
+<p>Now let’s assess the results of the <code>easy_support_vector_machine</code> model.</p>
+<div id="predictions-roc-curve" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
+<p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_train_mean</code></pre></div>
+<p><img src="prostate_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_test_mean</code></pre></div>
+<p><img src="prostate_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
 </div>
-<div id="compare-results" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#compare-results" class="anchor"> </a></body></html>Compare results</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div id="metrics-auc" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
+<p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_train_mean</code></pre></div>
+<p><img src="prostate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_test_mean</code></pre></div>
+<p><img src="prostate_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
-<div id="compare-run-times" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#compare-run-times" class="anchor"> </a></body></html>Compare run times</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div>
 <div id="discuss" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#discuss" class="anchor"> </a></body></html>Discuss</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>In this vignette we used <code>easyml</code> to easily build and evaluate a support vector machine model TO BE EDITED.</p>
 </div>
 </div>
   </div>
@@ -115,10 +221,8 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
       <li><a href="#load-the-data">Load the data</a></li>
-      <li><a href="#tidy-the-data">Tidy the data</a></li>
-      <li><a href="#train-the-models">Train the models</a></li>
-      <li><a href="#compare-results">Compare results</a></li>
-      <li><a href="#compare-run-times">Compare run times</a></li>
+      <li><a href="#train-a-support-vector-machine-model">Train a support vector machine model</a></li>
+      <li><a href="#assess-results">Assess results</a></li>
       <li><a href="#discuss">Discuss</a></li>
       </ul>
 </div>
