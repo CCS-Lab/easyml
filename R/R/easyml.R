@@ -6,5 +6,5 @@ NULL
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Loaded easyml 0.1.0. Also loading ggplot2.")
-  library(ggplot2)
+  requireNamespace("ggplot2")
 }

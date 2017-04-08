@@ -2,7 +2,7 @@
 easyml
 ======
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)[![DOI](https://zenodo.org/badge/71721801.svg)](https://zenodo.org/badge/latestdoi/71721801)[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ccs-lab.github.io/easyml/)[![Build Status](https://travis-ci.org/CCS-Lab/easyml.svg?branch=master)](https://travis-ci.org/CCS-Lab/easyml)[![Build status](https://ci.appveyor.com/api/projects/status/lugyfse962f41i1m?svg=true)](https://ci.appveyor.com/project/paulhendricks/easyml)[![codecov](https://codecov.io/gh/CCS-Lab/easyml/branch/master/graph/badge.svg)](https://codecov.io/gh/CCS-Lab/easyml)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)[![DOI](https://zenodo.org/badge/71721801.svg)](https://zenodo.org/badge/latestdoi/71721801)[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ccs-lab.github.io/easyml/)[![Build Status](https://travis-ci.org/CCS-Lab/easyml.svg?branch=master)](https://travis-ci.org/CCS-Lab/easyml)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/CCS-Lab/hBayesDM?branch=master&svg=true)](https://ci.appveyor.com/project/CCS-Lab/hBayesDM)[![codecov](https://codecov.io/gh/CCS-Lab/easyml/branch/master/graph/badge.svg)](https://codecov.io/gh/CCS-Lab/easyml)
 
 A toolkit for easily building and evaluating machine learning models.
 

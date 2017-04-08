@@ -1,4 +1,4 @@
-#' Replicate coefficients.
+#' Generate coefficients.
 #'
 #' @param object TO BE EDITED.
 #' @return A data.frame, the generated penalized regression model coefficients.
@@ -17,7 +17,7 @@ generate_coefficients <- function(object) {
   # Print an informative message
   if (progress_bar) {
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
-    print(paste0("Replicating coefficients", parallel_string))
+    print(paste0("Generating coefficients", parallel_string))
   }
   
   # Preprocess data
@@ -43,7 +43,7 @@ generate_coefficients <- function(object) {
   coefs
 }
 
-#' Replicate variable importances.
+#' Generate variable importances.
 #'
 #' @param object TO BE EDITED.
 #' @return A data.frame, the generated variable importance scores.
@@ -61,7 +61,7 @@ generate_variable_importances <- function(object) {
   
   if (progress_bar) {
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
-    print(paste0("Replicating variable importances", parallel_string))
+    print(paste0("Generating variable importances", parallel_string))
   }
 
   # Preprocess data
@@ -87,7 +87,7 @@ generate_variable_importances <- function(object) {
   variable_importances
 }
 
-#' Replicate predictions.
+#' Generate predictions.
 #'
 #' @param object TO BE EDITED.
 #' @return A list of matrixes, the generated predictions.
@@ -106,7 +106,7 @@ generate_predictions <- function(object) {
 
   # Print an informative message
   if (progress_bar) {
-    print(paste0("Replicating predictions", ifelse(n_core > 1, " in parallel:", ":")))
+    print(paste0("Generating predictions", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
   # Preprocess data
@@ -147,7 +147,7 @@ generate_predictions <- function(object) {
        predictions_test = predictions_test)
 }
 
-#' Replicate metrics.
+#' Generate metrics.
 #'
 #' @param object TO BE EDITED.
 #' @return A list of matrixes, the generated metrics.
@@ -170,7 +170,7 @@ generate_metrics <- function(object) {
 
   # Print an informative message
   if (progress_bar) {
-    print(paste0("Replicating metrics", ifelse(n_core > 1, " in parallel:", ":")))
+    print(paste0("Generating metrics", ifelse(n_core > 1, " in parallel:", ":")))
   }
   
   # Set which looping mechanism to use

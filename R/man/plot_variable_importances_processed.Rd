@@ -14,7 +14,7 @@ A ggplot object. This plot may be rendered by outputting it to the command line 
 }
 \description{
 When calling \code{\link{easy_random_forest}}, variable importances scores from the 
-\code{\link{replicate_variable_importances}} output are processed by the 
+\code{\link{generate_variable_importances}} output are processed by the 
 \code{\link{process_variable_importances}}  function and generated into 
 a plot. Importance scores for each predictor were estimated using the increase in 
 node impurity. Node impuirty measures the change in residual squared error 

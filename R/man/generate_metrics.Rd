@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_metrics}
 \alias{generate_metrics}
-\title{Replicate metrics.}
+\title{Generate metrics.}
 \usage{
 generate_metrics(object)
 }
@@ -13,7 +13,7 @@ generate_metrics(object)
 A list of matrixes, the generated metrics.
 }
 \description{
-Replicate metrics.
+Generate metrics.
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},
