@@ -18,7 +18,8 @@ A data.frame; the data to be analyzed.
 Remove variables from a dataset.
 }
 \seealso{
-Other utils: \code{\link{correlation_test}},
+Other utils: \code{\link{check_arguments}},
+  \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{process_variable_importances}},
   \code{\link{reduce_cores}}

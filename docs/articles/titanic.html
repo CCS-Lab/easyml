@@ -60,7 +60,7 @@
       <h1>Titanic</h1>
                         <h4 class="author">Paul Hendricks</h4>
             
-            <h4 class="date">2017-02-08</h4>
+            <h4 class="date">2017-04-08</h4>
           </div>
 
     
@@ -261,6 +261,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <th></th>
 <th align="left">predictor</th>
 <th align="right">mean</th>
+<th align="right">sd</th>
 <th align="right">lower_bound</th>
 <th align="right">upper_bound</th>
 <th align="right">survival</th>
@@ -273,9 +274,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="odd">
 <td>10</td>
 <td align="left">Fare</td>
-<td align="right">0.14</td>
-<td align="right">0.13</td>
-<td align="right">0.15</td>
+<td align="right">0.11</td>
+<td align="right">0.00</td>
+<td align="right">0.11</td>
+<td align="right">0.11</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -285,9 +287,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="even">
 <td>9</td>
 <td align="left">Age</td>
-<td align="right">-0.47</td>
-<td align="right">-0.48</td>
 <td align="right">-0.45</td>
+<td align="right">0.01</td>
+<td align="right">-0.47</td>
+<td align="right">-0.43</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -297,9 +300,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="odd">
 <td>8</td>
 <td align="left">Embarked_S</td>
-<td align="right">-0.40</td>
 <td align="right">-0.41</td>
-<td align="right">-0.38</td>
+<td align="right">0.00</td>
+<td align="right">-0.42</td>
+<td align="right">-0.40</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -312,6 +316,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
+<td align="right">0.00</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
@@ -321,9 +326,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="odd">
 <td>6</td>
 <td align="left">Pclass_3</td>
-<td align="right">-1.97</td>
-<td align="right">-2.03</td>
-<td align="right">-1.88</td>
+<td align="right">-1.99</td>
+<td align="right">0.03</td>
+<td align="right">-2.05</td>
+<td align="right">-1.92</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -333,9 +339,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="even">
 <td>5</td>
 <td align="left">Pclass_2</td>
-<td align="right">-0.75</td>
-<td align="right">-0.81</td>
-<td align="right">-0.67</td>
+<td align="right">-0.77</td>
+<td align="right">0.03</td>
+<td align="right">-0.83</td>
+<td align="right">-0.71</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -345,9 +352,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="odd">
 <td>4</td>
 <td align="left">Family_Size</td>
-<td align="right">-0.10</td>
-<td align="right">-0.10</td>
-<td align="right">-0.10</td>
+<td align="right">-0.08</td>
+<td align="right">0.00</td>
+<td align="right">-0.08</td>
+<td align="right">-0.07</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -357,6 +365,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="even">
 <td>3</td>
 <td align="left">Parch</td>
+<td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
@@ -370,6 +379,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td>2</td>
 <td align="left">SibSp</td>
 <td align="right">-0.20</td>
+<td align="right">0.00</td>
 <td align="right">-0.21</td>
 <td align="right">-0.19</td>
 <td align="right">1</td>
@@ -381,9 +391,10 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <tr class="even">
 <td>1</td>
 <td align="left">Sex</td>
-<td align="right">-2.63</td>
-<td align="right">-2.66</td>
-<td align="right">-2.59</td>
+<td align="right">-2.61</td>
+<td align="right">0.02</td>
+<td align="right">-2.65</td>
+<td align="right">-2.58</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>

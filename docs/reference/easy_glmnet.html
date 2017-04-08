@@ -85,11 +85,12 @@
     
 
     <pre><span class='fu'>easy_glmnet</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>, <span class='kw'>resample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='no'>preprocess_scale</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>coefficients</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>variable_importances</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>predictions</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -116,91 +117,65 @@
       <dt>survival_rate_cutoff</dt>
       <dd>A numeric vector of length one; for <code>easy_glmnet</code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</dd>
       <dt>n_samples</dt>
-      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.</dd>
+      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</dd>
       <dt>n_divisions</dt>
       <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.</dd>
       <dt>n_iterations</dt>
-      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.</dd>
+      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</dd>
       <dt>random_state</dt>
       <dd>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</dd>
       <dt>progress_bar</dt>
       <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
       <dt>n_core</dt>
       <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.</dd>
-      <dt>...</dt>
-      <dd>Arguments to be passed to <code><a href='http://www.rdocumentation.org/packages/glmnet/topics/glmnet'>glmnet</a></code> or <code><a href='http://www.rdocumentation.org/packages/glmnet/topics/cv.glmnet'>cv.glmnet</a></code>. See those functions&#39; documentation for more details on possible arguments and what they mean. Examples of applicable arguments are <code>alpha</code>, <code>nlambda</code>, <code>nlambda.min.ratio</code>, <code>lambda</code>, <code>standardize</code>, <code>intercept</code>, <code>thresh</code>, <code>dfmax</code>, <code>pmax</code>, <code>exclude</code>, <code>penalty.factor</code>, <code>lower.limits</code>, <code>upper.limits</code>, <code>maxit</code>, and <code>standardize.response</code> for <code><a href='http://www.rdocumentation.org/packages/glmnet/topics/glmnet'>glmnet</a></code> and <code>weights</code>, <code>offset</code>, <code>lambda</code>, <code>type.measure</code>, <code>nfolds</code>, <code>foldid</code>, <code>grouped</code>, <code>keep</code>, <code>parallel</code> for <code><a href='http://www.rdocumentation.org/packages/glmnet/topics/cv.glmnet'>cv.glmnet</a></code>.</dd>
+      <dt>coefficients</dt>
+      <dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
+      <dt>variable_importances</dt>
+      <dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
+      <dt>predictions</dt>
+      <dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
+      <dt>metrics</dt>
+      <dd>A logical vector of length one; whether or not to generate metrics for this analysis.</dd>
+      <dt>model_args</dt>
+      <dd>A list; the arguments to be passed to the algorithm specified.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with the following values:
-<dl class='dl-horizontal'>
-<dt>resample</dt><dd>A function; the function for resampling the data.</dd>
-<dt>preprocess</dt><dd>A function; the function for preprocessing the data.</dd>
-<dt>measure</dt><dd>A function; the function for measuring the results.</dd>
-<dt>fit_model</dt><dd>A function; the function for fitting the model to the data.</dd>
-<dt>extract_coefficients</dt><dd>A function; the function for extracting coefficients from the model.</dd>
-<dt>predict_model</dt><dd>A function; the function for generating predictions on new data from the model.</dd>
-<dt>plot_predictions</dt><dd>A function; the function for plotting predictions generated by the model.</dd>
-<dt>plot_metrics</dt><dd>A function; the function for plotting metrics generated by scoring the model.</dd>
-<dt>data</dt><dd>A data.frame; the original data.</dd>
-<dt>X</dt><dd>A data.frame; the full dataset to be used for modeling.</dd>
-<dt>y</dt><dd>A vector; the full response variable to be used for modeling.</dd>
-<dt>X_train</dt><dd>A data.frame; the train dataset to be used for modeling.</dd>
-<dt>X_test</dt><dd>A data.frame; the test dataset to be used for modeling.</dd>
-<dt>y_train</dt><dd>A vector; the train response variable to be used for modeling.</dd>
-<dt>y_test</dt><dd>A vector; the test response variable to be used for modeling.</dd>
-<dt>coefficients</dt><dd>A (n_variables, n_samples) matrix; the replicated coefficients.</dd>
-<dt>coefficients_processed</dt><dd>A data.frame; the coefficients after being processed.</dd>
-<dt>plot_coefficients_processed</dt><dd>A ggplot object; the plot of the processed coefficients.</dd>
-<dt>predictions_train</dt><dd>A (nrow(X_train), n_samples) matrix; the train predictions.</dd>
-<dt>predictions_test</dt><dd>A (nrow(X_test), n_samples) matrix; the test predictions.</dd>
-<dt>predictions_train_mean</dt><dd>A vector; the mean train predictions.</dd>
-<dt>predictions_test_mean</dt><dd>A vector; the mean test predictions.</dd>
-<dt>plot_predictions_train_mean</dt><dd>A ggplot object; the plot of the mean train predictions.</dd>
-<dt>plot_predictions_test_mean</dt><dd>A ggplot object; the plot of the mean test predictions.</dd>
-<dt>metrics_train_mean</dt><dd>A vector of length n_divisions; the mean train metrics.</dd>
-<dt>metrics_test_mean</dt><dd>A vector of length n_divisions; the mean test metrics.</dd>
-<dt>plot_metrics_train_mean</dt><dd>A ggplot object; the plot of the mean train metrics.</dd>
-<dt>plot_metrics_test_mean</dt><dd>A ggplot object; the plot of the mean test metrics.</dd>
-</dl></p>
+    <p>A list of class <code>easy_glmnet</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other recipes: <code><a href='easy_analysis.html'>easy_analysis</a></code>,
+  <code><a href='easy_deep_neural_network.html'>easy_deep_neural_network</a></code>,
+  <code><a href='easy_glinternet.html'>easy_glinternet</a></code>,
+  <code><a href='easy_neural_network.html'>easy_neural_network</a></code>,
   <code><a href='easy_random_forest.html'>easy_random_forest</a></code>,
   <code><a href='easy_support_vector_machine.html'>easy_support_vector_machine</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>easyml</span>) <span class='co'># https://github.com/CCS-Lab/easyml</span>
-
-<span class='co'># Gaussian</span>
-<span class='fu'>data</span>(<span class='st'>"prostate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_glmnet</span>(<span class='no'>prostate</span>, <span class='st'>"lpsa"</span>,
-                       <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-                       <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='fl'>12345</span>,
-                       <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.0</span>)</div><div class='output co'>#&gt; [1] &quot;Replicating coefficients:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~01s  |===============                                   | 30% elapsed =00s, remaining ~01s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =01s, remaining ~00s  |========================================         | 80% elapsed =01s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s
-#&gt; [1] &quot;Replicating predictions:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~01s  |===============                                   | 30% elapsed =00s, remaining ~00s  |====================                              | 40% elapsed =00s, remaining ~00s  |=========================                         | 50% elapsed =00s, remaining ~00s  |==============================                    | 60% elapsed =00s, remaining ~00s  |===================================               | 70% elapsed =00s, remaining ~00s  |========================================         | 80% elapsed =01s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s
-#&gt; [1] &quot;Replicating metrics:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~01s  |===============                                   | 30% elapsed =00s, remaining ~01s  |====================                              | 40% elapsed =01s, remaining ~01s  |=========================                         | 50% elapsed =01s, remaining ~01s  |==============================                    | 60% elapsed =01s, remaining ~01s  |===================================               | 70% elapsed =01s, remaining ~00s  |========================================         | 80% elapsed =01s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s</div><div class='input'>
-<span class='co'># Binomial</span>
-<span class='fu'>data</span>(<span class='st'>"cocaine_dependence"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"easyml"</span>)
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>easy_glmnet</span>(<span class='no'>cocaine_dependence</span>, <span class='st'>"diagnosis"</span>,
-                       <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>,
-                       <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"subject"</span>),
-                       <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"male"</span>),
-                       <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='no'>preprocess_scale</span>,
-                       <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-                       <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='fl'>12345</span>,
-                       <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1.0</span>)</div><div class='output co'>#&gt; [1] &quot;Replicating coefficients:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~02s  |==========                                        | 20% elapsed =00s, remaining ~02s  |===============                                   | 30% elapsed =01s, remaining ~02s  |====================                              | 40% elapsed =01s, remaining ~02s  |=========================                         | 50% elapsed =01s, remaining ~01s  |==============================                    | 60% elapsed =02s, remaining ~01s  |===================================               | 70% elapsed =02s, remaining ~01s  |========================================         | 80% elapsed =02s, remaining ~01s  |=============================================    | 90% elapsed =03s, remaining ~00s</div><div class='output co'>#&gt; <span class='warning'>Warning: from glmnet Fortran code (error code -99); Convergence for 99th lambda value not reached after maxit=100000 iterations; solutions for larger lambdas returned</span></div><div class='output co'>#&gt;   |==================================================| 100% elapsed =03s, remaining ~00s
-#&gt; [1] &quot;Replicating predictions:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~01s  |==========                                        | 20% elapsed =00s, remaining ~01s  |===============                                   | 30% elapsed =00s, remaining ~01s  |====================                              | 40% elapsed =00s, remaining ~01s  |=========================                         | 50% elapsed =01s, remaining ~01s  |==============================                    | 60% elapsed =01s, remaining ~00s  |===================================               | 70% elapsed =01s, remaining ~00s  |========================================         | 80% elapsed =01s, remaining ~00s  |=============================================    | 90% elapsed =01s, remaining ~00s  |==================================================| 100% elapsed =01s, remaining ~00s
-#&gt; [1] &quot;Replicating metrics:&quot;
-#&gt;   |=====                                             | 10% elapsed =00s, remaining ~02s  |==========                                        | 20% elapsed =00s, remaining ~01s  |===============                                   | 30% elapsed =01s, remaining ~01s  |====================                              | 40% elapsed =01s, remaining ~01s  |=========================                         | 50% elapsed =01s, remaining ~01s  |==============================                    | 60% elapsed =01s, remaining ~01s  |===================================               | 70% elapsed =01s, remaining ~01s  |========================================         | 80% elapsed =02s, remaining ~00s  |=============================================    | 90% elapsed =02s, remaining ~00s  |==================================================| 100% elapsed =02s, remaining ~00s</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># library(easyml) # https://github.com/CCS-Lab/easyml</span>
+<span class='co'># </span>
+<span class='co'># # Gaussian</span>
+<span class='co'># data("prostate", package = "easyml")</span>
+<span class='co'># results &lt;- easy_glmnet(prostate, "lpsa", </span>
+<span class='co'>#                        n_samples = 10, n_divisions = 10, </span>
+<span class='co'>#                        n_iterations = 2, random_state = 12345, </span>
+<span class='co'>#                        n_core = 1, alpha = 1.0)</span>
+<span class='co'># </span>
+<span class='co'># # Binomial</span>
+<span class='co'># data("cocaine_dependence", package = "easyml")</span>
+<span class='co'># results &lt;- easy_glmnet(cocaine_dependence, "diagnosis", </span>
+<span class='co'>#                        family = "binomial", </span>
+<span class='co'>#                        exclude_variables = c("subject"), </span>
+<span class='co'>#                        categorical_variables = c("male"), </span>
+<span class='co'>#                        preprocess = preprocess_scale, </span>
+<span class='co'>#                        n_samples = 10, n_divisions = 10, </span>
+<span class='co'>#                        n_iterations = 2, random_state = 12345, </span>
+<span class='co'>#                        n_core = 1, alpha = 1.0)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

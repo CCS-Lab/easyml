@@ -60,3 +60,15 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
        lower_bound = lower_bound, 
        upper_bound = upper_bound)
 }
+
+#' Check the positional arguments.
+#'
+#' @param .data A data.frame; the data to be analyzed.
+#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
+#' @return NULL.
+#' @family utils
+#' @export
+check_arguments <- function(.data, dependent_variable, algorithm) {
+  invisible()
+}

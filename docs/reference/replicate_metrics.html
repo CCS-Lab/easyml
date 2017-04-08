@@ -84,43 +84,12 @@
     <p>Replicate metrics.</p>
     
 
-    <pre><span class='fu'>replicate_metrics</span>(<span class='no'>fit_model</span>, <span class='no'>predict_model</span>, <span class='no'>resample</span>, <span class='no'>preprocess</span>, <span class='no'>measure</span>, <span class='no'>X</span>, <span class='no'>y</span>,
-  <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='no'>train_size</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre><span class='fu'>replicate_metrics</span>(<span class='no'>object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>fit_model</dt>
-      <dd>A function; the function for fitting a model to the data.</dd>
-      <dt>predict_model</dt>
-      <dd>A function; the function for generating predictions from a fitted model.</dd>
-      <dt>resample</dt>
-      <dd>A function; the function for resampling the data. Defaults to NULL.</dd>
-      <dt>preprocess</dt>
-      <dd>A function; the function for preprocessing the data. Defaults to NULL.</dd>
-      <dt>measure</dt>
-      <dd>A function; the function for measuring the results. Defaults to NULL.</dd>
-      <dt>X</dt>
-      <dd>A matrix; the independent variables.</dd>
-      <dt>y</dt>
-      <dd>A vector; the dependent variable.</dd>
-      <dt>train_size</dt>
-      <dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</dd>
-      <dt>categorical_variables</dt>
-      <dd>A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.</dd>
-      <dt>n_divisions</dt>
-      <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000L.</dd>
-      <dt>n_iterations</dt>
-      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10L.</dd>
-      <dt>progress_bar</dt>
-      <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
-      <dt>n_core</dt>
-      <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.</dd>
-      <dt>foldid</dt>
-      <dd>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</dd>
-      <dt>...</dt>
-      <dd>The arguments to be passed to the algorithm specified.</dd>
+      <dt>object</dt>
+      <dd>TO BE EDITED.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
