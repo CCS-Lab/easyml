@@ -72,7 +72,7 @@ data("prostate", package = "easyml")
 results <- easy_glmnet(prostate, "lpsa", 
                        n_samples = 10, n_divisions = 10, 
                        n_iterations = 2, random_state = 12345, 
-                       n_core = 1, alpha = 1.0)
+                       n_core = 1, model_args = list(alpha = 1.0))
 
 # Binomial
 data("cocaine_dependence", package = "easyml")
@@ -83,7 +83,7 @@ results <- easy_glmnet(cocaine_dependence, "diagnosis",
                        preprocess = preprocess_scale, 
                        n_samples = 10, n_divisions = 10, 
                        n_iterations = 2, random_state = 12345, 
-                       n_core = 1, alpha = 1.0)
+                       n_core = 1, model_args = list(alpha = 1.0))
 }
 }
 \seealso{

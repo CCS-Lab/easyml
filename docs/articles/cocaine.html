@@ -76,10 +76,22 @@
 <html><body><a href="#load-the-data" class="anchor"> </a></body></html>Load the data</h2>
 <p>First we load our libraries and the Cocaine Dependence dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggplot2)
-
-<span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
+<span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following object is masked from 'package:testthat':
+## 
+##     matches</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<pre><code>## Want to understand how all the pieces fit together? Buy the
+## ggplot2 book: http://ggplot2.org/book/</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_dependence))</code></pre></div>
 <table class="table">
 <thead><tr class="header">

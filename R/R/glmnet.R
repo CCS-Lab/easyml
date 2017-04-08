@@ -73,7 +73,7 @@ predict_model.easy_glmnet <- function(object, newx = NULL) {
 #' results <- easy_glmnet(prostate, "lpsa", 
 #'                        n_samples = 10, n_divisions = 10, 
 #'                        n_iterations = 2, random_state = 12345, 
-#'                        n_core = 1, alpha = 1.0)
+#'                        n_core = 1, model_args = list(alpha = 1.0))
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
@@ -84,7 +84,7 @@ predict_model.easy_glmnet <- function(object, newx = NULL) {
 #'                        preprocess = preprocess_scale, 
 #'                        n_samples = 10, n_divisions = 10, 
 #'                        n_iterations = 2, random_state = 12345, 
-#'                        n_core = 1, alpha = 1.0)
+#'                        n_core = 1, model_args = list(alpha = 1.0))
 #' }
 #' @export
 easy_glmnet <- function(.data, dependent_variable, family = "gaussian", 
