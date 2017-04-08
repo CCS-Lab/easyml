@@ -34,11 +34,11 @@ easy_random_forest(.data, dependent_variable, family = "gaussian",
 
 \item{foldid}{A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold.}
 
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.}
 
 \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
 
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 
@@ -46,13 +46,13 @@ easy_random_forest(.data, dependent_variable, family = "gaussian",
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
-\item{coefficients}{A logical vector of length one; whether or not to replicate coefficients for this analysis.}
+\item{coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
 
-\item{variable_importances}{A logical vector of length one; whether or not to replicate variable importances for this analysis.}
+\item{variable_importances}{A logical vector of length one; whether or not to generate variable importances for this analysis.}
 
-\item{predictions}{A logical vector of length one; whether or not to replicate predictions for this analysis.}
+\item{predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
 
-\item{metrics}{A logical vector of length one; whether or not to replicate metrics for this analysis.}
+\item{metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
 
 \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 }

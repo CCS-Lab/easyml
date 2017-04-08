@@ -36,11 +36,11 @@ easy_glinternet(.data, dependent_variable, family = "gaussian",
 
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.}
 
 \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
 
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 
@@ -48,13 +48,13 @@ easy_glinternet(.data, dependent_variable, family = "gaussian",
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
-\item{coefficients}{A logical vector of length one; whether or not to replicate coefficients for this analysis.}
+\item{coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
 
-\item{variable_importances}{A logical vector of length one; whether or not to replicate variable importances for this analysis.}
+\item{variable_importances}{A logical vector of length one; whether or not to generate variable importances for this analysis.}
 
-\item{predictions}{A logical vector of length one; whether or not to replicate predictions for this analysis.}
+\item{predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
 
-\item{metrics}{A logical vector of length one; whether or not to replicate metrics for this analysis.}
+\item{metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
 
 \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 }
@@ -73,7 +73,7 @@ data("prostate", package = "easyml")
 results <- easy_glinternet(prostate, "lpsa", 
                            n_samples = 10, n_divisions = 10, 
                            n_iterations = 2, random_state = 12345, 
-                           n_core = 1, model_args = list(alpha = 1.0))
+                           n_core = 1)
 
 # Binomial
 data("cocaine_dependence", package = "easyml")
@@ -84,7 +84,7 @@ results <- easy_glinternet(cocaine_dependence, "diagnosis",
                            preprocess = preprocess_scale, 
                            n_samples = 10, n_divisions = 10, 
                            n_iterations = 2, random_state = 12345, 
-                           n_core = 1, model_args = list(alpha = 1.0))
+                           n_core = 1)
 }
 }
 \seealso{

@@ -1,10 +1,10 @@
 #' Replicate coefficients.
 #'
 #' @param object TO BE EDITED.
-#' @return A data.frame, the replicated penalized regression model coefficients.
-#' @family replicate
+#' @return A data.frame, the generated penalized regression model coefficients.
+#' @family generate
 #' @export
-replicate_coefficients <- function(object) {
+generate_coefficients <- function(object) {
   # Extract attributes from object
   X <- object[["X"]]
   y <- object[["y"]]
@@ -25,18 +25,17 @@ replicate_coefficients <- function(object) {
   object[["X"]] <- result[["X"]]
   
   # Define closure
-  replicate_coefficient <- function(i) {
+  generate_coefficient <- function(i) {
     results <- fit_model(object)
     coef <- extract_coefficients(results)
     coef
   }
-  replicate_coefficient()
   
   # Set which looping mechanism to use
   looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
-  coefs <- looper(1:n_samples, replicate_coefficient)
+  coefs <- looper(1:n_samples, generate_coefficient)
   
   # Combine list of data.frames into one data.frame; 
   # structure should be a data.frame of n_samples by ncol(X)
@@ -47,10 +46,10 @@ replicate_coefficients <- function(object) {
 #' Replicate variable importances.
 #'
 #' @param object TO BE EDITED.
-#' @return A data.frame, the replicated variable importance scores.
-#' @family replicate
+#' @return A data.frame, the generated variable importance scores.
+#' @family generate
 #' @export
-replicate_variable_importances <- function(object) {
+generate_variable_importances <- function(object) {
   # Extract attributes from object
   X <- object[["X"]]
   y <- object[["y"]]
@@ -70,7 +69,7 @@ replicate_variable_importances <- function(object) {
   object[["X"]] <- result[["X"]]
   
   # Define closure
-  replicate_variable_importance <- function(i) {
+  generate_variable_importance <- function(i) {
     model <- fit_model(object)
     variable_importance <- extract_variable_importances(model)
     variable_importance
@@ -80,7 +79,7 @@ replicate_variable_importances <- function(object) {
   looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
-  variable_importances <- looper(1:n_samples, replicate_variable_importance)
+  variable_importances <- looper(1:n_samples, generate_variable_importance)
   
   # Combine list of data.frames into one data.frame; 
   # structure should be a data.frame of n_samples by ncol(X)
@@ -91,10 +90,10 @@ replicate_variable_importances <- function(object) {
 #' Replicate predictions.
 #'
 #' @param object TO BE EDITED.
-#' @return A list of matrixes, the replicated predictions.
-#' @family replicate
+#' @return A list of matrixes, the generated predictions.
+#' @family generate
 #' @export
-replicate_predictions <- function(object) {
+generate_predictions <- function(object) {
   # Extract attributes from object
   X_train <- object[["X_train"]]
   X_test <- object[["X_test"]]
@@ -117,7 +116,7 @@ replicate_predictions <- function(object) {
   object[["y"]] <- y_train
 
   # Define closure
-  replicate_prediction <- function(i) {
+  generate_prediction <- function(i) {
     # Fit model with the training set
     results <- fit_model(object)
     
@@ -134,7 +133,7 @@ replicate_predictions <- function(object) {
   looper <- set_looper(progress_bar, n_core)
   
   # Loop over number of iterations
-  output <- looper(1:n_samples, replicate_prediction)
+  output <- looper(1:n_samples, generate_prediction)
   
   predictions_train <- lapply(output, function(x) x$prediction_train)
   predictions_test <- lapply(output, function(x) x$prediction_test)
@@ -151,10 +150,10 @@ replicate_predictions <- function(object) {
 #' Replicate metrics.
 #'
 #' @param object TO BE EDITED.
-#' @return A list of matrixes, the replicated metrics.
-#' @family replicate
+#' @return A list of matrixes, the generated metrics.
+#' @family generate
 #' @export
-replicate_metrics <- function(object) {
+generate_metrics <- function(object) {
   # Extract attributes from object
   X <- object[["X"]]
   y <- object[["y"]]
@@ -178,7 +177,7 @@ replicate_metrics <- function(object) {
   looper <- set_looper(progress_bar, n_core)
   
   # Define closure
-  replicate_metric <- function(i) {
+  generate_metric <- function(i) {
     # Split data
     split_data <- resample(X, y, foldid = foldid, train_size = train_size)
     X_train <- split_data[["X_train"]]
@@ -221,7 +220,7 @@ replicate_metrics <- function(object) {
   }
 
   # Loop over number of divisions
-  output_divisions <- looper(1:n_divisions, replicate_metric)
+  output_divisions <- looper(1:n_divisions, generate_metric)
   
   metrics_train_mean <- unlist(lapply(output_divisions, function(x) x$metrics_train_mean))
   metrics_test_mean <- unlist(lapply(output_divisions, function(x) x$metrics_test_mean))

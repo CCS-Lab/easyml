@@ -38,11 +38,11 @@ easy_analysis(.data, dependent_variable, algorithm, family = "gaussian",
 
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.}
 
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.}
 
 \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
 
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.}
 
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.}
 
@@ -50,13 +50,13 @@ easy_analysis(.data, dependent_variable, algorithm, family = "gaussian",
 
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
-\item{coefficients}{A logical vector of length one; whether or not to replicate coefficients for this analysis.}
+\item{coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
 
-\item{variable_importances}{A logical vector of length one; whether or not to replicate variable importances for this analysis.}
+\item{variable_importances}{A logical vector of length one; whether or not to generate variable importances for this analysis.}
 
-\item{predictions}{A logical vector of length one; whether or not to replicate predictions for this analysis.}
+\item{predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
 
-\item{metrics}{A logical vector of length one; whether or not to replicate metrics for this analysis.}
+\item{metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
 
 \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 }
@@ -75,22 +75,22 @@ A list of class \code{easy_*}, where * is the name of the algorithm.
 \item{exclude_variables}{A character vector; the variables from the data set to exclude.}
 \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set.}
 \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples.}
-\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated.}
+\item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated.}
 \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics.}
-\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated.}
+\item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated.}
 \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis.}
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations.}
 \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis.}
-\item{replicate_coefficients}{A logical vector of length one; whether or not to replicate coefficients for this analysis.}
-\item{replicate_variable_importances}{A logical vector of length one; whether or not to replicate variable importances for this analysis.}
-\item{replicate_predictions}{A logical vector of length one; whether or not to replicate predictions for this analysis.}
-\item{replicate_metrics}{A logical vector of length one; whether or not to replicate metrics for this analysis.}
+\item{generate_coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
+\item{generate_variable_importances}{A logical vector of length one; whether or not to generate variable importances for this analysis.}
+\item{generate_predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
+\item{generate_metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
 \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 \item{column_names}{A character vector; the column names.}
 \item{categorical_variables}{A logical vector; the variables that are categorical.}
 \item{X}{A data.frame; the full dataset to be used for modeling.}
 \item{y}{A vector; the full response variable to be used for modeling.}
-\item{coefficients}{A (n_variables, n_samples) matrix; the replicated coefficients.}
+\item{coefficients}{A (n_variables, n_samples) matrix; the generated coefficients.}
 \item{coefficients_processed}{A data.frame; the coefficients after being processed.}
 \item{plot_coefficients_processed}{A ggplot object; the plot of the processed coefficients.}
 \item{X_train}{A data.frame; the train dataset to be used for modeling.}

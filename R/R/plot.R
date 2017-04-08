@@ -1,7 +1,7 @@
 #' Plot penalized regression coefficients.
 #' 
 #' When calling \code{\link{easy_glmnet}}, coefficients from the 
-#' \code{\link{replicate_coefficients}} output are processed by the 
+#' \code{\link{generate_coefficients}} output are processed by the 
 #' \code{\link{process_coefficients}}  function and generated into 
 #' a plot. This plot tells us the direction, magitude, and statistical
 #' significance of each coefficient. Be careful using this plotting
@@ -34,7 +34,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
 #' Plot random forest variable importances scores.
 #' 
 #' When calling \code{\link{easy_random_forest}}, variable importances scores from the 
-#' \code{\link{replicate_variable_importances}} output are processed by the 
+#' \code{\link{generate_variable_importances}} output are processed by the 
 #' \code{\link{process_variable_importances}}  function and generated into 
 #' a plot. Importance scores for each predictor were estimated using the increase in 
 #' node impurity. Node impuirty measures the change in residual squared error 

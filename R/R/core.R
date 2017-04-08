@@ -10,7 +10,7 @@ fit_model <- function(object) {
 #' Extract coefficients.
 #' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
-#' @return A data.frame, the replicated coefficients.
+#' @return A data.frame, the generated coefficients.
 #' @export
 extract_coefficients <- function(object) {
   UseMethod("extract_coefficients")
@@ -19,7 +19,7 @@ extract_coefficients <- function(object) {
 #' Extract variable importances.
 #' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
-#' @return A data.frame, the replicated random forest variable importance scores.
+#' @return A data.frame, the generated random forest variable importance scores.
 #' @export
 extract_variable_importances <- function(object) {
   UseMethod("extract_variable_importances")
@@ -51,16 +51,16 @@ predict_model <- function(object, newx = NULL) {
 #' @param train_size A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
 #' @param foldid A vector with length equal to \code{length(y)} which identifies cases belonging to the same fold. 
 #' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
-#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000. 
+#' @param n_samples An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000. 
 #' @param n_divisions An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.
-#' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.
+#' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.
-#' @param coefficients A logical vector of length one; whether or not to replicate coefficients for this analysis.
-#' @param variable_importances A logical vector of length one; whether or not to replicate variable importances for this analysis.
-#' @param predictions A logical vector of length one; whether or not to replicate predictions for this analysis.
-#' @param metrics A logical vector of length one; whether or not to replicate metrics for this analysis.
+#' @param coefficients A logical vector of length one; whether or not to generate coefficients for this analysis.
+#' @param variable_importances A logical vector of length one; whether or not to generate variable importances for this analysis.
+#' @param predictions A logical vector of length one; whether or not to generate predictions for this analysis.
+#' @param metrics A logical vector of length one; whether or not to generate metrics for this analysis.
 #' @param model_args A list; the arguments to be passed to the algorithm specified.
 #' @return A list of class \code{easy_*}, where * is the name of the algorithm.
 #' \describe{
@@ -76,22 +76,22 @@ predict_model <- function(object, newx = NULL) {
 #' \item{exclude_variables}{A character vector; the variables from the data set to exclude.}
 #' \item{train_size}{A numeric vector of length one; specifies what proportion of the data should be used for the training data set.}
 #' \item{survival_rate_cutoff}{A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples.}
-#' \item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated.}
+#' \item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated.}
 #' \item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics.}
-#' \item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be replicated.}
+#' \item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated.}
 #' \item{random_state}{An integer vector of length one; specifies the seed to be used for the analysis.}
 #' \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations.}
 #' \item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis.}
-#' \item{replicate_coefficients}{A logical vector of length one; whether or not to replicate coefficients for this analysis.}
-#' \item{replicate_variable_importances}{A logical vector of length one; whether or not to replicate variable importances for this analysis.}
-#' \item{replicate_predictions}{A logical vector of length one; whether or not to replicate predictions for this analysis.}
-#' \item{replicate_metrics}{A logical vector of length one; whether or not to replicate metrics for this analysis.}
+#' \item{generate_coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
+#' \item{generate_variable_importances}{A logical vector of length one; whether or not to generate variable importances for this analysis.}
+#' \item{generate_predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
+#' \item{generate_metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
 #' \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 #' \item{column_names}{A character vector; the column names.}
 #' \item{categorical_variables}{A logical vector; the variables that are categorical.}
 #' \item{X}{A data.frame; the full dataset to be used for modeling.}
 #' \item{y}{A vector; the full response variable to be used for modeling.}
-#' \item{coefficients}{A (n_variables, n_samples) matrix; the replicated coefficients.}
+#' \item{coefficients}{A (n_variables, n_samples) matrix; the generated coefficients.}
 #' \item{coefficients_processed}{A data.frame; the coefficients after being processed.}
 #' \item{plot_coefficients_processed}{A ggplot object; the plot of the processed coefficients.}
 #' \item{X_train}{A data.frame; the train dataset to be used for modeling.}
@@ -194,16 +194,16 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   object[["n_core"]] <- n_core
   
   # Capture coefficients
-  object[["replicate_coefficients"]] <- coefficients
+  object[["generate_coefficients"]] <- coefficients
   
   # Capture variable importances
-  object[["replicate_variable_importances"]] <- variable_importances
+  object[["generate_variable_importances"]] <- variable_importances
   
   # Capture predictions
-  object[["replicate_predictions"]] <- predictions
+  object[["generate_predictions"]] <- predictions
   
   # Capture metrics
-  object[["replicate_metrics"]] <- metrics
+  object[["generate_metrics"]] <- metrics
 
   # Capture model arguments
   object[["model_args"]] <- model_args
@@ -235,10 +235,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   # Set class of the object
   object <- structure(object, class = .class)
   
-  # Assess if coefficients should be replicated for this algorithm
+  # Assess if coefficients should be generated for this algorithm
   if (coefficients) {
     # Replicate coefficients
-    coefs <- replicate_coefficients(object)
+    coefs <- generate_coefficients(object)
     object[["coefficients"]] <- coefs
     
     # Process and capture coefficients
@@ -250,10 +250,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     object[["plot_coefficients_processed"]] <- g
   }
   
-  # Assess if variable importances should be replicated for this algorithm
+  # Assess if variable importances should be generated for this algorithm
   if (variable_importances) {
     # Replicate variable importances
-    variable_imps <- replicate_variable_importances(object)
+    variable_imps <- generate_variable_importances(object)
     object[["variable_importances"]] <- variable_imps
     
     # Process and capture variable_importances
@@ -265,7 +265,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     object[["plot_variable_importances_processed"]] <- g
   }
   
-  # Assess if predictions should be replicated for this algorithm
+  # Assess if predictions should be generated for this algorithm
   if (predictions) {
     # Resample and capture data
     split_data <- resample(X, y, train_size = train_size, foldid = foldid)
@@ -275,7 +275,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     y_test <- object[["y_test"]] <- split_data[["y_test"]]
     
     # Replicate predictions
-    preds <- replicate_predictions(object)
+    preds <- generate_predictions(object)
     predictions_train <- preds[["predictions_train"]]
     object[["predictions_train"]] <- predictions_train
     predictions_test <- preds[["predictions_test"]]
@@ -302,10 +302,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     object[["plot_predictions_test_mean"]] <- plot_predictions_test_mean
   }
   
-  # Assess if metrics should be replicated for this algorithm
+  # Assess if metrics should be generated for this algorithm
   if (metrics) {
     # Replicate and capture metrics
-    mets <- replicate_metrics(object)
+    mets <- generate_metrics(object)
     metrics_train_mean <- mets[["metrics_train_mean"]]
     object[["metrics_train_mean"]] <- metrics_train_mean
     metrics_test_mean <- mets[["metrics_test_mean"]]

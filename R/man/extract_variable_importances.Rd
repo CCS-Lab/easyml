@@ -10,7 +10,7 @@ extract_variable_importances(object)
 \item{object}{A list of class \code{easy_*}, where * is the name of the algorithm.}
 }
 \value{
-A data.frame, the replicated random forest variable importance scores.
+A data.frame, the generated random forest variable importance scores.
 }
 \description{
 Extract variable importances.

@@ -116,11 +116,11 @@
       <dt>foldid</dt>
       <dd>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</dd>
       <dt>n_samples</dt>
-      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.</dd>
+      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</dd>
       <dt>n_divisions</dt>
       <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.</dd>
       <dt>n_iterations</dt>
-      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.</dd>
+      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</dd>
       <dt>random_state</dt>
       <dd>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</dd>
       <dt>progress_bar</dt>
@@ -128,13 +128,13 @@
       <dt>n_core</dt>
       <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.</dd>
       <dt>coefficients</dt>
-      <dd>A logical vector of length one; whether or not to replicate coefficients for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
       <dt>variable_importances</dt>
-      <dd>A logical vector of length one; whether or not to replicate variable importances for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
       <dt>predictions</dt>
-      <dd>A logical vector of length one; whether or not to replicate predictions for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
       <dt>metrics</dt>
-      <dd>A logical vector of length one; whether or not to replicate metrics for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate metrics for this analysis.</dd>
       <dt>model_args</dt>
       <dd>A list; the arguments to be passed to the algorithm specified.</dd>
     </dl>

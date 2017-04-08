@@ -120,11 +120,11 @@
       <dt>survival_rate_cutoff</dt>
       <dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</dd>
       <dt>n_samples</dt>
-      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated. Defaults to 1000.</dd>
+      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</dd>
       <dt>n_divisions</dt>
       <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.</dd>
       <dt>n_iterations</dt>
-      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be replicated. Defaults to 10.</dd>
+      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</dd>
       <dt>random_state</dt>
       <dd>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</dd>
       <dt>progress_bar</dt>
@@ -132,13 +132,13 @@
       <dt>n_core</dt>
       <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.</dd>
       <dt>coefficients</dt>
-      <dd>A logical vector of length one; whether or not to replicate coefficients for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
       <dt>variable_importances</dt>
-      <dd>A logical vector of length one; whether or not to replicate variable importances for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
       <dt>predictions</dt>
-      <dd>A logical vector of length one; whether or not to replicate predictions for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
       <dt>metrics</dt>
-      <dd>A logical vector of length one; whether or not to replicate metrics for this analysis.</dd>
+      <dd>A logical vector of length one; whether or not to generate metrics for this analysis.</dd>
       <dt>model_args</dt>
       <dd>A list; the arguments to be passed to the algorithm specified.</dd>
     </dl>
@@ -159,22 +159,22 @@
 <dt>exclude_variables</dt><dd>A character vector; the variables from the data set to exclude.</dd>
 <dt>train_size</dt><dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set.</dd>
 <dt>survival_rate_cutoff</dt><dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples.</dd>
-<dt>n_samples</dt><dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be replicated.</dd>
+<dt>n_samples</dt><dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated.</dd>
 <dt>n_divisions</dt><dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics.</dd>
-<dt>n_iterations</dt><dd>An integer vector of length one; during each division, specifies the number of times the predictions should be replicated.</dd>
+<dt>n_iterations</dt><dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated.</dd>
 <dt>random_state</dt><dd>An integer vector of length one; specifies the seed to be used for the analysis.</dd>
 <dt>progress_bar</dt><dd>A logical vector of length one; specifies whether to display a progress bar during calculations.</dd>
 <dt>n_core</dt><dd>An integer vector of length one; specifies the number of cores to use for this analysis.</dd>
-<dt>replicate_coefficients</dt><dd>A logical vector of length one; whether or not to replicate coefficients for this analysis.</dd>
-<dt>replicate_variable_importances</dt><dd>A logical vector of length one; whether or not to replicate variable importances for this analysis.</dd>
-<dt>replicate_predictions</dt><dd>A logical vector of length one; whether or not to replicate predictions for this analysis.</dd>
-<dt>replicate_metrics</dt><dd>A logical vector of length one; whether or not to replicate metrics for this analysis.</dd>
+<dt>generate_coefficients</dt><dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
+<dt>generate_variable_importances</dt><dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
+<dt>generate_predictions</dt><dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
+<dt>generate_metrics</dt><dd>A logical vector of length one; whether or not to generate metrics for this analysis.</dd>
 <dt>model_args</dt><dd>A list; the arguments to be passed to the algorithm specified.</dd>
 <dt>column_names</dt><dd>A character vector; the column names.</dd>
 <dt>categorical_variables</dt><dd>A logical vector; the variables that are categorical.</dd>
 <dt>X</dt><dd>A data.frame; the full dataset to be used for modeling.</dd>
 <dt>y</dt><dd>A vector; the full response variable to be used for modeling.</dd>
-<dt>coefficients</dt><dd>A (n_variables, n_samples) matrix; the replicated coefficients.</dd>
+<dt>coefficients</dt><dd>A (n_variables, n_samples) matrix; the generated coefficients.</dd>
 <dt>coefficients_processed</dt><dd>A data.frame; the coefficients after being processed.</dd>
 <dt>plot_coefficients_processed</dt><dd>A ggplot object; the plot of the processed coefficients.</dd>
 <dt>X_train</dt><dd>A data.frame; the train dataset to be used for modeling.</dd>
