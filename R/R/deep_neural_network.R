@@ -10,6 +10,7 @@ fit_model.easy_deep_neural_network <- function(object) {
   # process model_args
   model_args[["x"]] <- as.matrix(object[["X"]])
   model_args[["y"]] <- object[["y"]]
+  model_args[["logLevel"]] <- futile.logger::ERROR
 
   # build model
   model <- do.call(darch::darch, model_args)

@@ -15,6 +15,7 @@ Imports:
     darch, 
     dummies, 
     e1071, 
+    futile.logger, 
     ggplot2, 
     glinternet, 
     glmnet, 
