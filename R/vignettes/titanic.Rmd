@@ -75,7 +75,8 @@ glmnet_results <- easy_glmnet(titanic_train_2, "Survived",
                               exclude_variables = .exclude_variables, 
                               categorical_variables = .categorical_variables, 
                               random_state = 12345, progress_bar = FALSE, 
-                              n_core = 8)
+                              n_samples = 100, n_divisions = 100, 
+                              n_iterations = 2, n_core = 1)
 ```
 
 ## Assess results
