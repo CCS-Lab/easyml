@@ -34,20 +34,6 @@ fit_model.easy_glinternet <- function(object) {
   object
 }
 
-#' Extract coefficients from a penalized regression model with interactions.
-#' 
-#' @param object A list of class \code{easy_glinternet}.
-#' @return A data.frame, the replicated penalized regression with interactions coefficients.
-#' @export
-extract_coefficients.easy_glinternet <- function(object) {
-  model <- object[["model"]]
-  coefs <- stats::coef(model, s = model$lambdaHat)
-  stop("Error: extract_coefficients not implemented.")
-  coefs_df <- data.frame(t(as.matrix(as.numeric(coefs), nrow = 1)))
-  colnames(coefs_df) <- rownames(coefs)
-  coefs_df
-}
-
 #' Predict values for a penalized regression model with interactions.
 #' 
 #' @param object A list of class \code{easy_glinternet}.
