@@ -1,6 +1,5 @@
 """Tests for utility functions.
 """
-import matplotlib as mpl; mpl.use('TkAgg')
 from sklearn.model_selection import train_test_split
 
 

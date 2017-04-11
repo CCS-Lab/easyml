@@ -1,45 +1,48 @@
 """Functions for glmnet analysis.
 """
 from glmnet import ElasticNet, LogitNet
+import numpy as np
 
-from . import core
-
-
-__all__ = ['easy_glmnet']
+from .core import EasyAnalysis
 
 
-def glmnet_fit_model(X, y, **kwargs):
-    model = ElasticNet(**kwargs)
-    return model.fit(X, y)
+__all__ = ['EasyGlmnet']
 
 
-def glmnet_extract_coefficients_gaussian(e):
-    return e.coef_
+class EasyGlmnet(EasyAnalysis):
+    def create_estimator(self):
+        if self.family == 'gaussian':
+            estimator = ElasticNet(alpha=1)
+        elif self.family == 'binomial':
+            estimator = LogitNet(alpha=1)
+        return estimator
 
+    def extract_coefficients(self, estimator):
+        if self.family == 'gaussian':
+            coefficient = estimator.coef_
+        elif self.family == 'binomial':
+            coefficient = estimator.coef_[0]
+        return coefficient
 
-def glmnet_extract_coefficients_binomial(e):
-    return e.coef_[0]
+    def process_coefficients(self, coefs, column_names, survival_rate_cutoff=0.05):
+        n = coefs.shape[0]
+        survived = 1 * (abs(coefs) > 0)
+        survival_rate = np.sum(survived, axis=0) / float(n)
+        mask = 1 * (survival_rate > survival_rate_cutoff)
+        coefs_updated = coefs * mask
+        betas = pd.DataFrame({'predictor': column_names})
+        betas['mean'] = np.mean(coefs_updated, axis=0)
+        betas['lb'] = np.percentile(coefs_updated, q=2.5, axis=0)
+        betas['ub'] = np.percentile(coefs_updated, q=97.5, axis=0)
+        betas['survival'] = mask
+        betas['sig'] = betas['survival']
+        betas['dotColor1'] = 1 * (betas['mean'] != 0)
+        betas['dotColor2'] = (1 * np.logical_and(betas['dotColor1'] > 0, betas['sig'] > 0)) + 1
+        betas['dotColor'] = betas['dotColor1'] * betas['dotColor2']
+        return betas
 
-
-def glmnet_predict_model_gaussian(e, X):
-    return e.predict(X)
-
-
-def glmnet_predict_model_binomial(e, X):
-    return e.predict_proba(X)[:, 1]
-
-
-def easy_glmnet(data, dependent_variable, family='gaussian',
-                resample=None, preprocess=None, measure=None,
-                exclude_variables=None, categorical_variables=None,
-                train_size=0.667, survival_rate_cutoff=0.05,
-                n_samples=1000, n_divisions=1000, n_iterations=10,
-                random_state=None, progress_bar=True, n_core=1, **kwargs):
-    output = core.easy_analysis(data=data, dependent_variable=dependent_variable,
-                                algorithm='glmnet', family=family,
-                                resample=resample, preprocess=preprocess, measure=measure,
-                                exclude_variables=exclude_variables, categorical_variables=categorical_variables,
-                                train_size=train_size, survival_rate_cutoff=survival_rate_cutoff,
-                                n_samples=n_samples, n_divisions=n_divisions, n_iterations=n_iterations,
-                                random_state=random_state, progress_bar=progress_bar, n_core=n_core, **kwargs)
-    return output
+    def predict_model(self):
+        predictions = self.estimator.predict_proba(self.X)
+        if self.family == 'binomial':
+            predictions = predictions[:, 1]
+        return predictions
