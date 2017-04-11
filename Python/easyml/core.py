@@ -1,6 +1,5 @@
 """Functions for basic analysis.
 """
-import concurrent.futures
 import numpy as np
 import progressbar
 
@@ -13,22 +12,21 @@ __all__ = ['EasyAnalysis']
 
 class EasyAnalysis:
     def __init__(self, data, dependent_variable,
-                  algorithm=None, family='gaussian',
-                  resample=None, preprocess=None, measure=None,
-                  exclude_variables=None, categorical_variables=None,
-                  train_size=0.667, survival_rate_cutoff=0.05,
-                  n_samples=1000, n_divisions=1000, n_iterations=10,
-                  random_state=None, progress_bar=True, n_core=1,
-                  generate_coefficients=True,
-                  model_args=None):
+                 algorithm=None, family='gaussian',
+                 resample=None, preprocess=None, measure=None,
+                 exclude_variables=None, categorical_variables=None,
+                 train_size=0.667, survival_rate_cutoff=0.05,
+                 n_samples=1000, n_divisions=1000, n_iterations=10,
+                 random_state=None, progress_bar=True, n_core=1,
+                 generate_coefficients=True,
+                 generate_variable_importances=None,
+                 generate_predictions=True, generate_metrics=True,
+                 model_args=None):
         # set attributes
         self.data = data
         self.dependent_variable = dependent_variable
         self.algorithm = algorithm
         self.family = family
-        self.resample = resample
-        self.preprocess = preprocess
-        self.measure = measure
         self.exclude_variables = exclude_variables
         self.categorical_variables = categorical_variables
         self.train_size = train_size
@@ -46,17 +44,25 @@ class EasyAnalysis:
         setters.set_random_state(self.random_state)
 
         # Set preprocess function
-        preprocess = setters.set_preprocess(self.preprocess)
+        preprocess = setters.set_preprocess(preprocess)
         self.preprocess = preprocess
 
+        # Set resample function
+        resample = setters.set_resample(resample, family)
+        self.resample = resample
+
+        # Set measure function
+        measure = setters.set_measure(measure)
+        self.measure = measure
+
         # Set column names
-        column_names = list(self.data.columns.values)
-        column_names = setters.set_column_names(column_names, self.dependent_variable,
-                                                self.exclude_variables, preprocess,
-                                                self.categorical_variables)
+        column_names = list(data.columns.values)
+        column_names = setters.set_column_names(column_names, dependent_variable,
+                                                exclude_variables, preprocess,
+                                                categorical_variables)
 
         # Remove variables
-        data = utils.remove_variables(self.data, self.exclude_variables)
+        data = utils.remove_variables(data, exclude_variables)
 
         # Set categorical variables
         categorical_variables = setters.set_categorical_variables(column_names, self.categorical_variables)
@@ -70,12 +76,28 @@ class EasyAnalysis:
         X = setters.set_independent_variables(data, self.dependent_variable)
         self.X = X
 
-        # Preprocess data
-        self.X_processed = self.preprocess(self.X, categorical_variables=self.categorical_variables)
+        # Preprocess X
+        self.X_preprocessed = self.preprocess(self.X, categorical_variables=self.categorical_variables)
 
-        # Replicate coefficients
+        # Split data
+        self.X_train, self.X_test, self.y_train, self.y_test = self.resample(self.X, self.y)
+
+        # Preprocess X_train, X_test
+        self.X_train_preprocessed, self.X_test_preprocessed = preprocess(self.X_train, self.X_test,
+                                                                         categorical_variables=categorical_variables)
+
+        # Generate coefficients
         if generate_coefficients:
             self.coefficients = self.generate_coefficients()
+
+        if generate_variable_importances:
+            print("Not implemented.")
+
+        if generate_predictions:
+            self.predictions = self.generate_predictions()
+
+        if generate_metrics:
+            self.metrics = self.generate_metrics()
 
     def create_estimator(self):
         raise NotImplementedError
@@ -100,7 +122,7 @@ class EasyAnalysis:
         estimator = self.create_estimator()
 
         # Fit estimator with the training set
-        model = estimator.fit(self.X_processed, self.y)
+        model = estimator.fit(self.X_preprocessed, self.y)
 
         # Extract coefficient
         coefficient = self.extract_coefficients(model)
@@ -117,48 +139,18 @@ class EasyAnalysis:
         # Initialize containers
         coefficients = []
 
-        if self.n_core > 1:
-            print('Parallel is currently disabled. Running sequentially.')
-            self.n_core = 1
+        # Run sequentially
+        print("Generating coefficients:")
 
-        # Evaluate parallelism
-        if self.n_core == 1:
-            # Run sequentially
-            print("Replicating coefficients:")
+        # Loop over number of iterations
+        for _ in range(self.n_samples):
+            coefficient = self.generate_coefficient()
+            coefficients.append(coefficient)
 
-            # Loop over number of iterations
-            for _ in range(self.n_samples):
-                coefficient = self.generate_coefficient()
-                coefficients.append(coefficient)
-
-                # Increment progress bar
-                if self.progress_bar:
-                    bar.update(i)
-                    i += 1
-        # elif self.n_core > 1:
-        #     # Run in parallel using n_core cores
-        #     print("Replicating coefficients in parallel:")
-        #
-        #     # Handle case where n_core > os.cpu_count()
-        #     n_core = utils.reduce_cores(self.n_core)
-        #
-        #     # Loop over number of iterations
-        #     indexes = range(self.n_samples)
-        #     with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-        #         futures = {executor.submit(self.generate_coefficient): ix for ix in indexes}
-        #         for future in concurrent.futures.as_completed(futures):
-        #             try:
-        #                 coefficient = future.result()
-        #                 coefficients.append(coefficient)
-        #             except:
-        #                 coefficients.append(None)
-        #
-        #             # increment progress bar
-        #             if self.progress_bar:
-        #                 bar.update(i)
-        #                 i += 1
-        # else:
-        #     raise ValueError
+            # Increment progress bar
+            if self.progress_bar:
+                bar.update(i)
+                i += 1
 
         # cast to np.ndarray
         coefficients = np.asarray(coefficients)
@@ -166,76 +158,43 @@ class EasyAnalysis:
         # return coefficients
         return coefficients
 
-    def generate_prediction(self, estimator, fit_model, predict_model, X_train, y_train, X_test):
+    def generate_prediction(self):
+        # Create estimator
+        estimator = self.create_estimator()
+
         # Fit estimator with the training set
-        estimator = fit_model(estimator, X_train, y_train)
+        model = estimator.fit(self.X_train_preprocessed, self.y_train)
 
         # Generate predictions for training and test sets
-        y_train_pred = predict_model(estimator, X_train)
-        y_test_pred = predict_model(estimator, X_test)
+        y_train_pred = self.predict_model(model, self.X_train_preprocessed)
+        y_test_pred = self.predict_model(model, self.X_test_preprocessed)
 
         # Save predictions
         return y_train_pred, y_test_pred
 
-    def generate_predictions(self, estimator, fit_model, predict_model, preprocessor, X_train, y_train, X_test,
-                             categorical_variables=None, n_samples=1000, progress_bar=True, n_core=1):
+    def generate_predictions(self):
         # Initialize progress bar (optional)
-        if progress_bar:
-            bar = progressbar.ProgressBar(max_value=n_samples)
+        if self.progress_bar:
+            bar = progressbar.ProgressBar(max_value=self.n_samples)
             i = 0
-
-        # Preprocess data
-        X_train, X_test = preprocessor(X_train, X_test, categorical_variables=categorical_variables)
 
         # Initialize containers
         y_train_preds = []
         y_test_preds = []
 
-        # Evaluate parallelism
-        if n_core == 1:
-            # Run sequentially
-            print("Replicating predictions:")
+        # Run sequentially
+        print("Generating predictions:")
 
-            # Loop over number of iterations
-            for _ in range(n_samples):
-                y_train_pred, y_test_pred = generate_prediction(estimator, fit_model, predict_model, X_train, y_train,
-                                                                X_test)
-                y_train_preds.append(y_train_pred)
-                y_test_preds.append(y_test_pred)
+        # Loop over number of iterations
+        for _ in range(self.n_samples):
+            y_train_pred, y_test_pred = self.generate_prediction()
+            y_train_preds.append(y_train_pred)
+            y_test_preds.append(y_test_pred)
 
-                # Increment progress bar
-                if progress_bar:
-                    bar.update(i)
-                    i += 1
-
-        elif n_core > 1:
-            # Run in parallel using n_core cores
-            print("Replicating predictions in parallel:")
-
-            # Handle case where n_core > os.cpu_count()
-            n_core = utils.reduce_cores(n_core)
-
-            # Loop over number of iterations
-            indexes = range(n_samples)
-            with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-                futures = {
-                executor.submit(generate_prediction, estimator, fit_model, predict_model, X_train, y_train, X_test): ix
-                for ix in indexes}
-                for future in concurrent.futures.as_completed(futures):
-                    try:
-                        y_train_pred, y_test_pred = future.result()
-                        y_train_preds.append(y_train_pred)
-                        y_test_preds.append(y_test_pred)
-                    except:
-                        y_train_preds.append(None)
-                        y_test_preds.append(None)
-
-                    # Increment progress bar
-                    if progress_bar:
-                        bar.update(i)
-                        i += 1
-        else:
-            raise ValueError
+            # Increment progress bar
+            if self.progress_bar:
+                bar.update(i)
+                i += 1
 
         # cast to np.ndarray
         y_train_preds = np.asarray(y_train_preds)
@@ -243,123 +202,72 @@ class EasyAnalysis:
 
         return y_train_preds, y_test_preds
 
-    def generate_metric(self, estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
-                        categorical_variables=None, n_iterations=100):
+    def generate_metric(self):
         # Split data
-        try:
-            X_train, X_test, y_train, y_test = sampler(X, y)
-        except Exception as e:
-            print('Sample Exception: {}'.format(e))
+        X_train, X_test, y_train, y_test = self.resample(self.X, self.y)
 
         # Preprocess data
-        X_train, X_test = preprocessor(X_train, X_test, categorical_variables=categorical_variables)
+        X_train_preprocessed, X_test_preprocessed = self.preprocess(X_train, X_test,
+                                                                    categorical_variables=self.categorical_variables)
 
         # Create temporary containers
         train_metrics = []
         test_metrics = []
 
         # Loop over number of iterations
-        for _ in range(n_iterations):
+        for _ in range(self.n_iterations):
+            # Create estimator
+            estimator = self.create_estimator()
+
             # Fit estimator with the training set
-            try:
-                results = fit_model(estimator, X_train, y_train)
-            except Exception as e:
-                print('Model Exception: {}'.format(e))
+            model = estimator.fit(self.X_train_preprocessed, self.y_train)
+
 
             # Generate predictions for training and test sets
-            try:
-                y_train_pred = predict_model(results, X_train)
-                y_test_pred = predict_model(results, X_test)
-            except Exception as e:
-                print('Predict Exception: {}'.format(e))
+            y_train_pred = self.predict_model(model, X_train)
+            y_test_pred = self.predict_model(model, X_test)
 
             # Calculate metric on training and test sets
-            try:
-                train_metric = measure(y_train, y_train_pred)
-                test_metric = measure(y_test, y_test_pred)
-            except Exception as e:
-                print('Measure Exception: {}'.format(e))
+            train_metric = self.measure(y_train, y_train_pred)
+            test_metric = self.measure(y_test, y_test_pred)
 
             # Save metrics
-            try:
-                train_metrics.append(train_metric)
-                test_metrics.append(test_metric)
-            except Exception as e:
-                print('Append Exception: {}'.format(e))
+            train_metrics.append(train_metric)
+            test_metrics.append(test_metric)
 
         # Take mean of metrics
-        try:
-            mean_train_metric = np.mean(np.asarray(train_metrics))
-            mean_test_metric = np.mean(np.asarray(test_metrics))
-        except Exception as e:
-            print('Mean Exception: {}'.format(e))
+        mean_train_metric = np.mean(np.asarray(train_metrics))
+        mean_test_metric = np.mean(np.asarray(test_metrics))
 
         # Save metrics
         return mean_train_metric, mean_test_metric
 
-    def generate_metrics(self, estimator, sampler, fit_model, predict_model, preprocessor, measure, X, y,
-                         categorical_variables=None, n_divisions=1000, n_iterations=100, progress_bar=True, n_core=1):
+    def generate_metrics(self):
         # Initialize progress bar (optional)
-        if progress_bar:
-            bar = progressbar.ProgressBar(max_value=n_divisions)
+        if self.progress_bar:
+            bar = progressbar.ProgressBar(max_value=self.n_divisions)
             i = 0
 
         # Create temporary containers
         mean_train_metrics = []
         mean_test_metrics = []
+        
+        # Run sequentially
+        print("Generating metrics:")
 
-        # Evaluate parallelism
-        if True:
-            # Run sequentially
-            print("Replicating metrics (parallelism is currently disabled for this function):")
+        # Loop over number of divisions
+        for _ in range(self.n_divisions):
+            # Bootstrap metric
+            mean_train_metric, mean_test_metric = self.generate_metric()
 
-            # Loop over number of divisions
-            for _ in range(n_divisions):
-                # Bootstrap metric
-                mean_train_metric, mean_test_metric = generate_metric(estimator, sampler, fit_model,
-                                                                      predict_model, preprocessor, measure, X, y,
-                                                                      categorical_variables, n_iterations)
+            # Process loop and save in temporary containers
+            mean_train_metrics.append(mean_train_metric)
+            mean_test_metrics.append(mean_test_metric)
 
-                # Process loop and save in temporary containers
-                mean_train_metrics.append(mean_train_metric)
-                mean_test_metrics.append(mean_test_metric)
-
-                # Increment progress bar
-                if progress_bar:
-                    bar.update(i)
-                    i += 1
-
-        elif False:
-            # Run in parallel using n_core cores
-            print("Replicating metrics in parallel:")
-
-            # Handle case where n_core > os.cpu_count()
-            n_core = utils.reduce_cores(n_core)
-
-            # Loop over number of iterations
-            indexes = range(n_divisions)
-            with concurrent.futures.ProcessPoolExecutor(max_workers=n_core) as executor:
-                futures = {executor.submit(generate_metric, estimator, sample, fit_model, predict_model, measure, X, y,
-                                           n_iterations): ix for ix in indexes}
-                for future in concurrent.futures.as_completed(futures):
-                    try:
-                        mean_train_metric, mean_test_metric = future.result()
-                    except Exception as e:
-                        print('Exception: {}'.format(e))
-                        mean_train_metric = None
-                        mean_test_metric = None
-
-                    # Save metrics
-                    # print(mean_train_metric, mean_test_metric)
-                    mean_train_metrics.append(mean_train_metric)
-                    mean_test_metrics.append(mean_test_metric)
-
-                    # Increment progress bar
-                    if progress_bar:
-                        bar.update(i)
-                        i += 1
-        else:
-            raise ValueError
+            # Increment progress bar
+            if self.progress_bar:
+                bar.update(i)
+                i += 1
 
         # cast to np.ndarray
         mean_train_metrics = np.asarray(mean_train_metrics)

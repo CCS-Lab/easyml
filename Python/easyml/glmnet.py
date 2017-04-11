@@ -2,6 +2,7 @@
 """
 from glmnet import ElasticNet, LogitNet
 import numpy as np
+import pandas as pd
 
 from .core import EasyAnalysis
 
@@ -41,8 +42,10 @@ class EasyGlmnet(EasyAnalysis):
         betas['dotColor'] = betas['dotColor1'] * betas['dotColor2']
         return betas
 
-    def predict_model(self):
-        predictions = self.estimator.predict_proba(self.X)
-        if self.family == 'binomial':
+    def predict_model(self, model, X):
+        if self.family == 'gaussian':
+            predictions = model.predict(X)
+        elif self.family == 'binomial':
+            predictions = model.predict_proba(X)
             predictions = predictions[:, 1]
         return predictions
