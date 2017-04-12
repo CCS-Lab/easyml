@@ -7,6 +7,13 @@ __all__ = []
 
 
 def reduce_cores(n_core, cpu_count=None):
+    """    
+    Reduces cores.
+    
+    :param n_core: foo
+    :param cpu_count: bar
+    :return: number
+    """
     if cpu_count is None:
         cpu_count = os.cpu_count()
     n_core = min(n_core, cpu_count)
