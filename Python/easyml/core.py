@@ -18,7 +18,7 @@ class EasyAnalysis:
                  train_size=0.667, survival_rate_cutoff=0.05,
                  n_samples=1000, n_divisions=1000, n_iterations=10,
                  random_state=None, progress_bar=True, n_core=1,
-                 generate_coefficients=True,
+                 generate_coefficients=False,
                  generate_variable_importances=None,
                  generate_predictions=True, generate_metrics=True,
                  model_args=None):

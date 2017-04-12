@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error
 
 from easyml.glmnet import EasyGlmnet
+from easyml.random_forest import EasyRandomForest
 
 
 # Set matplotlib settings
@@ -19,3 +20,10 @@ if __name__ == '__main__':
                         measure=mean_squared_error,
                         random_state=1, progress_bar=True, n_core=1,
                         n_samples=5, n_divisions=5, n_iterations=2)
+
+    # Analyze data
+    output = EasyRandomForest(prostate, 'lpsa',
+                              measure=mean_squared_error,
+                              random_state=1, progress_bar=True, n_core=1,
+                              n_samples=5, n_divisions=5, n_iterations=2)
+
