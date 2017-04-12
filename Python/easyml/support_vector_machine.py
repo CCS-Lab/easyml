@@ -1,19 +1,19 @@
 """Functions for glmnet analysis.
 """
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+from sklearn.svm import SVR, SVC
 
 from .core import EasyAnalysis
 
 
-__all__ = ['EasyRandomForest']
+__all__ = ['EasySupportVectorMachine']
 
 
-class EasyRandomForest(EasyAnalysis):
+class EasySupportVectorMachine(EasyAnalysis):
     def create_estimator(self):
         if self.family == 'gaussian':
-            estimator = RandomForestRegressor()
+            estimator = SVR()
         elif self.family == 'binomial':
-            estimator = RandomForestClassifier()
+            estimator = SVC(probability=True)
         return estimator
 
     def predict_model(self, model, X):
