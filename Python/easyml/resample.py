@@ -1,9 +1,28 @@
 """Functions for sampling data.
 """
 import numpy as np
+from sklearn.model_selection import train_test_split
 
 
 __all__ = []
+
+
+
+def resample_simple_train_test_split(X, y, train_size=0.667):
+    # train_test_split
+    return 1
+
+
+def resample_stratified_simple_train_test_split(X, y, train_size=0.667):
+    return 1
+
+
+def resample_stratified_class_train_test_split(X, y, train_size=0.667):
+    return 1
+
+
+def resample_fold_train_test_split(X, y, train_size=0.667):
+    return 1
 
 
 def resample_equal_proportion(X, y, train_size=0.667):
