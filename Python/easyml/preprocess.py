@@ -8,6 +8,15 @@ __all__ = []
 
 
 def preprocess_identity(*data, categorical_variables=None):
+    """    
+    An identify function for preprocessing.
+
+    Returns inputs without modifying them.
+
+    :param data: array(s).
+    :param categorical_variables: A list of strings representing the variables that are categorical.
+    :return: array(s).
+    """
     if len(data) == 1:
         output = data[0]
     elif len(data) == 2:
@@ -18,6 +27,15 @@ def preprocess_identity(*data, categorical_variables=None):
 
 
 def preprocess_scale(*data, categorical_variables=None):
+    """    
+    A function for scaling data.
+
+    Takes one or two arrays and scales them using a standard scaler.
+
+    :param data: array(s).
+    :param categorical_variables: A list of strings representing the variables that are categorical.
+    :return: array(s).
+    """
     sclr = StandardScaler()
     if len(data) == 1:
         X = data[0]
