@@ -9,17 +9,11 @@ __all__ = []
 def resample_equal_proportion(X, y, train_size=0.667):
     """Sample in equal proportion.
 
-    Parameters
-    ----------
-    :param y: array, shape (n_obs) Input data to be split
-    :param train_size: float, default: 0.667
-        Proportion to split into train and test
-    TODO figure out best practices for documenting Python functions
+    :param y: array, shape (n_obs) Input data to be split.
+    :param train_size: float, default: 0.667 Proportion to split into train and test.
 
-    Returns
-    -------
-    self: array, shape (n_obs)
-        A boolean array of length n_obs where True represents that observation should be in the train set.
+    :return: array, shape (n_obs) A boolean array of length n_obs where True represents .
+    that observation should be in the train set.
     """
 
     # calculate number of observations

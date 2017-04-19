@@ -17,7 +17,7 @@ def preprocess_identity(*data, categorical_variables=None):
     return output
 
 
-def preprocess_scaler(*data, categorical_variables=None):
+def preprocess_scale(*data, categorical_variables=None):
     sclr = StandardScaler()
     if len(data) == 1:
         X = data[0]
