@@ -21,6 +21,7 @@ def set_parallel(n_core):
         raise ValueError
     return parallel
 
+
 def set_column_names(column_names, dependent_variable,
                      exclude_variables=None, preprocess=None, categorical_variables=None):
     column_names = [c for c in column_names if c != dependent_variable]
@@ -34,8 +35,8 @@ def set_column_names(column_names, dependent_variable,
 
 def set_categorical_variables(column_names, categorical_variables=None):
     if categorical_variables:
-        categorical_variables = [True if c in categorical_variables else False for c in column_names]
-    return categorical_variables
+        mask = np.in1d(column_names, categorical_variables)
+    return mask
 
 
 def set_random_state(random_state=None):
