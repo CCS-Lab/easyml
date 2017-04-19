@@ -1,4 +1,5 @@
-"""Functions for glmnet analysis.
+"""
+Functions for glmnet analysis.
 """
 from glmnet import ElasticNet, LogitNet
 import numpy as np

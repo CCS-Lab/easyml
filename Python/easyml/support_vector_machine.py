@@ -1,4 +1,5 @@
-"""Functions for glmnet analysis.
+"""
+Functions for support vector machine analysis.
 """
 from sklearn.svm import SVR, SVC
 

@@ -1,4 +1,5 @@
-"""TO BE EDITED.
+"""
+Functions for measuring model performance.
 """
 
 

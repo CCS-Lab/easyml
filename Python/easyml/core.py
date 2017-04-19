@@ -1,4 +1,5 @@
-"""Functions for basic analysis.
+"""
+The core functionality of easyml.
 """
 import numpy as np
 import progressbar

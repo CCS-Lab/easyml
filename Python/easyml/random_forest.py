@@ -1,4 +1,5 @@
-"""Functions for glmnet analysis.
+"""
+Functions for random forest analysis.
 """
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 

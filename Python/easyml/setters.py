@@ -1,5 +1,6 @@
-'''TO BE EDITED.
-'''
+"""
+Functions for setting certain functions and parameters.
+"""
 import numpy as np
 from sklearn.model_selection import train_test_split
 
