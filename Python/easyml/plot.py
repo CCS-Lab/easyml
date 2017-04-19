@@ -8,6 +8,14 @@ from sklearn import metrics
 __all__ = []
 
 
+def plot_coefficients_processed():
+    return 1
+
+
+def plot_variable_importances_processed():
+    return 1
+
+
 def plot_auc_histogram(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
@@ -21,7 +29,7 @@ def plot_auc_histogram(x):
     plt.title('Distribution of AUCs')
 
 
-def plot_mse_histogram(x):
+def plot_metrics_gaussian_mean_squared_error(x):
     bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)
     plt.figure()
@@ -33,7 +41,15 @@ def plot_mse_histogram(x):
     plt.title('Distribution of MSEs')
 
 
-def plot_roc_curve(y_true, y_pred):
+def plot_metrics_gaussian_r2_score():
+    return 1
+
+
+def plot_metrics_binomial_area_under_curve():
+    return 1
+
+
+def plot_predictions_binomial(y_true, y_pred):
     # Compute ROC curve and ROC area for each class
     fpr = dict()
     tpr = dict()
@@ -55,7 +71,7 @@ def plot_roc_curve(y_true, y_pred):
     plt.legend(loc="lower right")
 
 
-def plot_gaussian_predictions(y_true, y_pred):
+def plot_predictions_gaussian(y_true, y_pred):
     plt.figure()
     plt.plot(y_pred, y_true, "o")
     plt.xlabel('Predicted y values')
