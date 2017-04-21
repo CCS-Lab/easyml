@@ -122,6 +122,10 @@ class EasyAnalysis:
         # Create estimator
         estimator = self.create_estimator()
 
+        # Configure the estimator with custom model arguments
+        if self.model_args:
+            estimator = estimator.set_params(**self.model_args)
+
         # Fit estimator with the training set
         model = estimator.fit(self.X_preprocessed, self.y)
 
@@ -162,6 +166,10 @@ class EasyAnalysis:
     def generate_prediction(self):
         # Create estimator
         estimator = self.create_estimator()
+
+        # Configure the estimator with custom model arguments
+        if self.model_args:
+            estimator = estimator.set_params(**self.model_args)
 
         # Fit estimator with the training set
         model = estimator.fit(self.X_train_preprocessed, self.y_train)
@@ -220,9 +228,12 @@ class EasyAnalysis:
             # Create estimator
             estimator = self.create_estimator()
 
+            # Configure the estimator with custom model arguments
+            if self.model_args:
+                estimator = estimator.set_params(**self.model_args)
+
             # Fit estimator with the training set
             model = estimator.fit(self.X_train_preprocessed, self.y_train)
-
 
             # Generate predictions for training and test sets
             y_train_pred = self.predict_model(model, X_train_preprocessed)
