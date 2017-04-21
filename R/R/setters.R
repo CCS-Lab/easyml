@@ -13,54 +13,6 @@ set_random_state <- function(random_state = NULL) {
   invisible()
 }
 
-#' Set coefficients boolean.
-#'
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
-#' @return A logical vector of length one; whether coefficients should be replicated for this analyis or not.
-#' @family setters
-#' @export
-set_coefficients_boolean <- function(algorithm) {
-  algorithms <- c("glmnet")
-  boolean <- algorithm %in% algorithms
-  boolean
-}
-
-#' Set variable importances boolean.
-#'
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
-#' @return A logical vector of length one; whether variable importances should be replicated for this analyis or not.
-#' @family setters
-#' @export
-set_variable_importances_boolean <- function(algorithm) {
-  algorithms <- c("random_forest")
-  boolean <- algorithm %in% algorithms
-  boolean
-}
-
-#' Set predictions boolean.
-#'
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
-#' @return A logical vector of length one; whether predictions should be replicated for this analyis or not.
-#' @family setters
-#' @export
-set_predictions_boolean <- function(algorithm) {
-  algorithms <- c("glmnet", "random_forest", "support_vector_machine")
-  boolean <- algorithm %in% algorithms
-  boolean
-}
-
-#' Set metrics boolean.
-#'
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
-#' @return A logical vector of length one; whether metrics should be replicated for this analyis or not.
-#' @family setters
-#' @export
-set_metrics_boolean <- function(algorithm) {
-  algorithms <- c("glmnet", "random_forest", "support_vector_machine")
-  boolean <- algorithm %in% algorithms
-  boolean
-}
-
 #' Set parallel.
 #' 
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.

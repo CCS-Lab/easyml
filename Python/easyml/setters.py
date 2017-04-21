@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 
 from . import measure as meas
 from . import preprocess as prep
+from . import plot as plt
 from . import resample as res
 
 
@@ -66,9 +67,9 @@ def set_preprocess(preprocess=None):
 def set_measure(measure=None, family=None):
     if not measure:
         if family == 'gaussian':
-            measure = 1
+            measure = meas.mean_squared_error
         elif family == 'binomial':
-            measure = 1
+            measure = meas.measure_area_under_curve
         else:
             raise ValueError
     return measure
@@ -84,11 +85,23 @@ def set_independent_variables(data, dependent_variable):
     return X
 
 
+def set_plot_predictions(family=None):
+    if family == 'gaussian':
+        plot_predictions = plt.plot_predictions_gaussian
+    elif family == 'binomial':
+        plot_predictions = plt.plot_predictions_gaussian
+    else:
+        raise ValueError
+    return plot_predictions
+
+
 def set_plot_metrics(measure):
-    if measure is 1:
-        plot_metrics = 1
-    elif measure is 2:
-        plot_metrics = 2
+    if measure is meas.mean_squared_error:
+        plot_metrics = plt.plot_metrics_gaussian_mean_squared_error
+    elif measure is meas.measure_r2_score:
+        plot_metrics = plt.plot_metrics_gaussian_r2_score
+    elif measure is meas.measure_area_under_curve:
+        plot_metrics = plt.plot_metrics_binomial_area_under_curve
     else:
         raise ValueError
     return plot_metrics

@@ -225,8 +225,8 @@ class EasyAnalysis:
 
 
             # Generate predictions for training and test sets
-            y_train_pred = self.predict_model(model, X_train)
-            y_test_pred = self.predict_model(model, X_test)
+            y_train_pred = self.predict_model(model, X_train_preprocessed)
+            y_test_pred = self.predict_model(model, X_test_preprocessed)
 
             # Calculate metric on training and test sets
             train_metric = self.measure(y_train, y_train_pred)
