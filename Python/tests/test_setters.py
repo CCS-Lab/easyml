@@ -38,31 +38,31 @@ def test_set_column_names():
                                    exclude_variables=['a'], categorical_variables=['c'])
     assert value == ['b', 'c']
     value = setters.set_column_names(['y', 'a', 'b', 'c'], 'y',
-                                   preprocess=preprocess.preprocess_scaler,
+                                   preprocess=preprocess.preprocess_scale,
                                    exclude_variables=None, categorical_variables=None)
     assert value == ['a', 'b', 'c']
     value = setters.set_column_names(['y', 'a', 'b', 'c'], 'y',
-                                   preprocess=preprocess.preprocess_scaler,
+                                   preprocess=preprocess.preprocess_scale,
                                    exclude_variables=['a'], categorical_variables=None)
     assert value == ['b', 'c']
     value = setters.set_column_names(['y', 'a', 'b', 'c'], 'y',
-                                   preprocess=preprocess.preprocess_scaler,
+                                   preprocess=preprocess.preprocess_scale,
                                    exclude_variables=None, categorical_variables=['c'])
     assert value == ['c', 'a', 'b']
     value = setters.set_column_names(['y', 'a', 'b', 'c'], 'y',
-                                   preprocess=preprocess.preprocess_scaler,
+                                   preprocess=preprocess.preprocess_scale,
                                    exclude_variables=['a'], categorical_variables=['c'])
     assert value == ['c', 'b']
 
 
-def test_set_categorical_variables():
-    assert setters.set_categorical_variables(['a', 'b', 'c']) is None
-    assert setters.set_categorical_variables(['a', 'b', 'c'], ['a']) == [True, False, False]
+# def test_set_categorical_variables():
+#     assert setters.set_categorical_variables(['a', 'b', 'c']) is None
+#     assert setters.set_categorical_variables(['a', 'b', 'c'], ['a']) is [True, False, False]
 
 
 def test_set_preprocess():
     assert setters.set_preprocess(preprocess=None) is preprocess.preprocess_identity
-    assert setters.set_preprocess(preprocess.preprocess_scaler) is preprocess.preprocess_scaler
+    assert setters.set_preprocess(preprocess.preprocess_scale) is preprocess.preprocess_scale
 
 
 # def test_set_resample():
