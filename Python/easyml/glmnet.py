@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from .core import EasyAnalysis
+from .preprocess import preprocess_scale
 
 
 __all__ = ['EasyGlmnet']
@@ -14,7 +15,7 @@ __all__ = ['EasyGlmnet']
 class EasyGlmnet(EasyAnalysis):
     def __init__(self, data, dependent_variable,
                  algorithm='glmnet', family='gaussian',
-                 resample=None, preprocess=None, measure=None,
+                 resample=None, preprocess=preprocess_scale, measure=None,
                  exclude_variables=None, categorical_variables=None,
                  train_size=0.667, survival_rate_cutoff=0.05,
                  n_samples=1000, n_divisions=1000, n_iterations=10,
