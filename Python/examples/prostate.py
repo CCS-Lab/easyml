@@ -20,13 +20,15 @@ if __name__ == '__main__':
     output = EasyGlmnet(prostate, 'lpsa',
                         measure=mean_squared_error,
                         random_state=1, progress_bar=True, n_core=1,
-                        n_samples=5, n_divisions=5, n_iterations=2)
+                        n_samples=5, n_divisions=5, n_iterations=2,
+                        model_args={'alpha': 1})
 
     # Analyze data
     output = EasyRandomForest(prostate, 'lpsa',
                               measure=mean_squared_error,
                               random_state=1, progress_bar=True, n_core=1,
-                              n_samples=5, n_divisions=5, n_iterations=2)
+                              n_samples=5, n_divisions=5, n_iterations=2,
+                              model_args={'n_estimators': 10})
 
     # Analyze data
     output = EasySupportVectorMachine(prostate, 'lpsa',
