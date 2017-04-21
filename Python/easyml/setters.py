@@ -2,7 +2,6 @@
 Functions for setting certain functions and parameters.
 """
 import numpy as np
-from sklearn.model_selection import train_test_split
 
 from . import measure as meas
 from . import preprocess as prep
@@ -50,9 +49,9 @@ def set_random_state(random_state=None):
 def set_resample(resample=None, family=None):
     if not resample:
         if family == 'gaussian':
-            resample = train_test_split
+            resample = res.resample_simple_train_test_split
         elif family == 'binomial':
-            resample = res.resample_equal_proportion
+            resample = res.resample_stratified_class_train_test_split
         else:
             raise ValueError
     return resample

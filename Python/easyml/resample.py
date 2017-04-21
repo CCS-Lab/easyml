@@ -10,8 +10,7 @@ __all__ = []
 
 
 def resample_simple_train_test_split(X, y, train_size=0.667):
-    # train_test_split
-    return 1
+    return train_test_split(X, y, train_size=train_size)
 
 
 def resample_stratified_simple_train_test_split(X, y, train_size=0.667):
@@ -19,14 +18,6 @@ def resample_stratified_simple_train_test_split(X, y, train_size=0.667):
 
 
 def resample_stratified_class_train_test_split(X, y, train_size=0.667):
-    return 1
-
-
-def resample_fold_train_test_split(X, y, train_size=0.667):
-    return 1
-
-
-def resample_equal_proportion(X, y, train_size=0.667):
     """Sample in equal proportion.
 
     :param y: array, shape (n_obs) Input data to be split.
@@ -67,3 +58,7 @@ def resample_equal_proportion(X, y, train_size=0.667):
     y_test = y[np.logical_not(mask)]
 
     return X_train, X_test, y_train, y_test
+
+
+def resample_fold_train_test_split(X, y, train_size=0.667):
+    return 1
