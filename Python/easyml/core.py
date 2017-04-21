@@ -19,9 +19,9 @@ class EasyAnalysis:
                  train_size=0.667, survival_rate_cutoff=0.05,
                  n_samples=1000, n_divisions=1000, n_iterations=10,
                  random_state=None, progress_bar=True, n_core=1,
-                 generate_coefficients=False,
+                 generate_coefficients=None,
                  generate_variable_importances=None,
-                 generate_predictions=True, generate_metrics=True,
+                 generate_predictions=None, generate_metrics=None,
                  model_args=None):
         # set attributes
         self.data = data

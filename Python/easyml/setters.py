@@ -36,8 +36,8 @@ def set_column_names(column_names, dependent_variable,
 
 def set_categorical_variables(column_names, categorical_variables=None):
     if categorical_variables:
-        mask = np.in1d(column_names, categorical_variables)
-    return mask
+        categorical_variables = np.in1d(column_names, categorical_variables)
+    return categorical_variables
 
 
 def set_random_state(random_state=None):
