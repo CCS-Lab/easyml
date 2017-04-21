@@ -19,30 +19,6 @@ test_that("Test set_random_state.", {
   expect_equal(b, d)
 })
 
-test_that("Test set_coefficients_boolean.", {
-  expect_equal(set_coefficients_boolean("glmnet"), TRUE)
-  expect_equal(set_coefficients_boolean("random_forest"), FALSE)
-  expect_equal(set_coefficients_boolean("support_vector_machine"), FALSE)
-})
-
-test_that("Test set_predictions_boolean.", {
-  expect_equal(set_predictions_boolean("glmnet"), TRUE)
-  expect_equal(set_predictions_boolean("random_forest"), TRUE)
-  expect_equal(set_predictions_boolean("support_vector_machine"), TRUE)
-})
-
-test_that("Test set_variable_importances_boolean.", {
-  expect_equal(set_variable_importances_boolean("glmnet"), FALSE)
-  expect_equal(set_variable_importances_boolean("random_forest"), TRUE)
-  expect_equal(set_variable_importances_boolean("support_vector_machine"), FALSE)
-})
-
-test_that("Test set_metrics_boolean.", {
-  expect_equal(set_metrics_boolean("glmnet"), TRUE)
-  expect_equal(set_metrics_boolean("random_forest"), TRUE)
-  expect_equal(set_metrics_boolean("support_vector_machine"), TRUE)
-})
-
 test_that("Test set_parallel.", {
   expect_equal(set_parallel(1), FALSE)
   expect_equal(set_parallel(2), TRUE)
