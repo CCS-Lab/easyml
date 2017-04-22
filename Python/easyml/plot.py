@@ -11,7 +11,15 @@ __all__ = []
 
 
 def plot_coefficients_processed(coefficients):
-    return coefficients
+    n = coefficients.shape[1]
+    coefficients_mean = np.mean(coefficients, axis=0)
+    coefficients_std = np.std(coefficients, axis=0)
+    fig = plt.figure()
+    ax = plt.gca()
+    ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
+                color='black', ecolor='black')
+    ax.set_title('Coefficients')
+    return fig
 
 
 def plot_variable_importances_processed(importances):

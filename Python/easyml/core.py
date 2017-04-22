@@ -94,7 +94,7 @@ class EasyAnalysis:
             self.coefficients = self.generate_coefficients()
             self.coefficients_processed = self.process_coefficients(self.coefficients, self.column_names,
                                                                     survival_rate_cutoff=self.survival_rate_cutoff)
-            self.plot_coefficients_processed = plot.plot_coefficients_processed(self.coefficients_processed)
+            self.plot_coefficients_processed = plot.plot_coefficients_processed(self.coefficients)
 
         if generate_variable_importances:
             self.variable_importances = self.generate_variable_importances()
