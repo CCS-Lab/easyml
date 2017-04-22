@@ -11,7 +11,7 @@ __all__ = []
 
 
 
-def resample_simple_train_test_split(X, y, train_size=0.667, random_state=None):
+def resample_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
     return train_test_split(X, y, train_size=train_size, random_state=random_state)
 
 
@@ -37,7 +37,7 @@ def resample_stratified_simple_train_test_split(X, y, train_size=0.667, foldid=N
     return X_train, X_test, y_train, y_test
 
 
-def resample_stratified_class_train_test_split(X, y, train_size=0.667, random_state=None):
+def resample_stratified_class_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
     """Sample in equal proportion.
 
     :param y: array, shape (n_obs) Input data to be split.
@@ -84,5 +84,16 @@ def resample_stratified_class_train_test_split(X, y, train_size=0.667, random_st
     return X_train, X_test, y_train, y_test
 
 
-def resample_fold_train_test_split(X, y, train_size=0.667):
-    return 1
+def resample_fold_train_test_split(X, y, foldid=None, train_size=0.667, random_state=None):
+    unique_foldids = np.unique(foldid)
+    arrays = train_test_split(unique_foldids, train_size=train_size, random_state=random_state)
+    unique_foldids_train, _ = arrays
+    mask = np.in1d(foldid, unique_foldids_train)
+
+    # Create train and test splits
+    X_train = X[mask, :]
+    X_test = X[np.logical_not(mask), :]
+    y_train = y[mask]
+    y_test = y[np.logical_not(mask)]
+
+    return X_train, X_test, y_train, y_test
