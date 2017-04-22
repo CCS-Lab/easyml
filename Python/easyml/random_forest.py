@@ -40,6 +40,12 @@ class EasyRandomForest(EasyAnalysis):
             estimator = RandomForestClassifier()
         return estimator
 
+    def extract_variable_importances(self, estimator):
+        return estimator.feature_importances_
+
+    def process_variable_importances(self, variable_importances):
+        return variable_importances
+
     def predict_model(self, model, X):
         if self.family == 'gaussian':
             predictions = model.predict(X)

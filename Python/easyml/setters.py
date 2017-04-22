@@ -88,18 +88,18 @@ def set_plot_predictions(family=None):
     if family == 'gaussian':
         plot_predictions = plt.plot_predictions_gaussian
     elif family == 'binomial':
-        plot_predictions = plt.plot_predictions_gaussian
+        plot_predictions = plt.plot_predictions_binomial
     else:
         raise ValueError
     return plot_predictions
 
 
 def set_plot_metrics(measure):
-    if measure is meas.mean_squared_error:
+    if measure == meas.mean_squared_error:
         plot_metrics = plt.plot_metrics_gaussian_mean_squared_error
-    elif measure is meas.measure_r2_score:
+    elif measure == meas.measure_r2_score:
         plot_metrics = plt.plot_metrics_gaussian_r2_score
-    elif measure is meas.measure_area_under_curve:
+    elif measure == meas.measure_area_under_curve:
         plot_metrics = plt.plot_metrics_binomial_area_under_curve
     else:
         raise ValueError

@@ -4,6 +4,7 @@ The core functionality of easyml.
 import numpy as np
 import progressbar
 
+from . import plot
 from . import setters
 from . import utils
 
@@ -53,7 +54,7 @@ class EasyAnalysis:
         self.resample = resample
 
         # Set measure function
-        measure = setters.set_measure(measure)
+        measure = setters.set_measure(measure, self.family)
         self.measure = measure
 
         # Set column names
@@ -61,6 +62,7 @@ class EasyAnalysis:
         column_names = setters.set_column_names(column_names, dependent_variable,
                                                 exclude_variables, preprocess,
                                                 categorical_variables)
+        self.column_names = column_names
 
         # Remove variables
         data = utils.remove_variables(data, exclude_variables)
@@ -90,15 +92,46 @@ class EasyAnalysis:
         # Generate coefficients
         if generate_coefficients:
             self.coefficients = self.generate_coefficients()
+            self.coefficients_processed = self.process_coefficients(self.coefficients, self.column_names,
+                                                                    survival_rate_cutoff=self.survival_rate_cutoff)
+            self.plot_coefficients_processed = plot.plot_coefficients_processed(self.coefficients_processed)
 
         if generate_variable_importances:
-            print("Not implemented.")
+            self.variable_importances = self.generate_variable_importances()
+            self.variable_importances_processed = self.process_variable_importances(self.variable_importances)
+            self.plot_variable_importances_processed = plot.plot_variable_importances_processed(self.variable_importances_processed)
 
         if generate_predictions:
+            # generate predictions
             self.predictions = self.generate_predictions()
 
+            # upack train and test predictions
+            self.predictions_train, self.predictions_test = self.predictions
+
+            # take average of predictions
+            self.predictions_train_mean = np.mean(self.predictions_train, axis=0)
+            self.predictions_test_mean = np.mean(self.predictions_test, axis=0)
+
+            # set plot predictions function
+            self.plot_predictions = setters.set_plot_predictions(self.family)
+
+            # plot train and test predictions
+            self.plot_predictions_train_mean = self.plot_predictions(self.y_train, self.predictions_train_mean)
+            self.plot_predictions_test_mean = self.plot_predictions(self.y_test, self.predictions_test_mean)
+
         if generate_metrics:
+            # generate metrics
             self.metrics = self.generate_metrics()
+
+            # unpack train and test metrics
+            self.metrics_train, self.metrics_test = self.metrics
+
+            # set plot metrics function
+            self.plot_metrics = setters.set_plot_metrics(self.measure)
+
+            # plot train and test metrics
+            self.plot_metrics_train = self.plot_metrics(self.metrics_train)
+            self.plot_metrics_test = self.plot_metrics(self.metrics_test)
 
     def create_estimator(self):
         raise NotImplementedError
@@ -162,6 +195,51 @@ class EasyAnalysis:
 
         # return coefficients
         return coefficients
+
+    def generate_variable_importance(self):
+        # Create estimator
+        estimator = self.create_estimator()
+
+        # Configure the estimator with custom model arguments
+        if self.model_args:
+            estimator = estimator.set_params(**self.model_args)
+
+        # Fit estimator with the training set
+        model = estimator.fit(self.X_preprocessed, self.y)
+
+        # Extract variable_importance
+        variable_importance = self.extract_variable_importances(model)
+
+        # Save variable_importance
+        return variable_importance
+
+    def generate_variable_importances(self):
+        # Initialize progress bar (optional)
+        if self.progress_bar:
+            bar = progressbar.ProgressBar(max_value=self.n_samples)
+            i = 0
+
+        # Initialize containers
+        variable_importances = []
+
+        # Run sequentially
+        print("Generating variable_importances:")
+
+        # Loop over number of iterations
+        for _ in range(self.n_samples):
+            variable_importance = self.generate_variable_importance()
+            variable_importances.append(variable_importance)
+
+            # Increment progress bar
+            if self.progress_bar:
+                bar.update(i)
+                i += 1
+
+        # cast to np.ndarray
+        variable_importances = np.asarray(variable_importances)
+
+        # return variable_importances
+        return variable_importances
 
     def generate_prediction(self):
         # Create estimator

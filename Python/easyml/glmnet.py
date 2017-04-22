@@ -50,16 +50,16 @@ class EasyGlmnet(EasyAnalysis):
             coefficient = estimator.coef_[0]
         return coefficient
 
-    def process_coefficients(self, coefs, column_names, survival_rate_cutoff=0.05):
-        n = coefs.shape[0]
-        survived = 1 * (abs(coefs) > 0)
+    def process_coefficients(self, coefficients, column_names, survival_rate_cutoff=0.05):
+        n = coefficients.shape[0]
+        survived = 1 * (abs(coefficients) > 0)
         survival_rate = np.sum(survived, axis=0) / float(n)
         mask = 1 * (survival_rate > survival_rate_cutoff)
-        coefs_updated = coefs * mask
+        coefficients_updated = coefficients * mask
         betas = pd.DataFrame({'predictor': column_names})
-        betas['mean'] = np.mean(coefs_updated, axis=0)
-        betas['lb'] = np.percentile(coefs_updated, q=2.5, axis=0)
-        betas['ub'] = np.percentile(coefs_updated, q=97.5, axis=0)
+        betas['mean'] = np.mean(coefficients_updated, axis=0)
+        betas['lb'] = np.percentile(coefficients_updated, q=2.5, axis=0)
+        betas['ub'] = np.percentile(coefficients_updated, q=97.5, axis=0)
         betas['survival'] = mask
         betas['sig'] = betas['survival']
         betas['dotColor1'] = 1 * (betas['mean'] != 0)
