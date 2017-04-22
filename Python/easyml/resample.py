@@ -86,8 +86,7 @@ def resample_stratified_class_train_test_split(X, y, train_size=0.667, foldid=No
 
 def resample_fold_train_test_split(X, y, foldid=None, train_size=0.667, random_state=None):
     unique_foldids = np.unique(foldid)
-    arrays = train_test_split(unique_foldids, train_size=train_size, random_state=random_state)
-    unique_foldids_train, _ = arrays
+    unique_foldids_train, _ = train_test_split(unique_foldids, train_size=train_size, random_state=random_state)
     mask = np.in1d(foldid, unique_foldids_train)
 
     # Create train and test splits
