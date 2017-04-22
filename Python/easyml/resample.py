@@ -4,20 +4,40 @@ Functions for resampling data.
 import numpy as np
 from sklearn.model_selection import train_test_split
 
+from . import setters
+
 
 __all__ = []
 
 
 
-def resample_simple_train_test_split(X, y, train_size=0.667):
-    return train_test_split(X, y, train_size=train_size)
+def resample_simple_train_test_split(X, y, train_size=0.667, random_state=None):
+    return train_test_split(X, y, train_size=train_size, random_state=random_state)
 
 
-def resample_stratified_simple_train_test_split(X, y, train_size=0.667):
-    return 1
+def resample_stratified_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
+    unique_foldids = np.unique(foldid)
+    for i, unique_foldid in enumerate(unique_foldids):
+        mask = foldid == unique_foldid
+        X_subset = X[mask]
+        y_subset = y[mask]
+        arrays = train_test_split(X_subset, y_subset, train_size=train_size, random_state=random_state)
+        X_subset_train, X_subset_test, y_subset_train, y_subset_test = arrays
+        if i == 0:
+            X_train = X_subset_train
+            X_test = X_subset_test
+            y_train = y_subset_train
+            y_test = y_subset_test
+        else:
+            X_train = np.concatenate((X_train, X_subset_train))
+            X_test = np.concatenate((X_test, X_subset_test))
+            y_train = np.concatenate((y_train, y_subset_train))
+            y_test = np.concatenate((y_test, y_subset_test))
+
+    return X_train, X_test, y_train, y_test
 
 
-def resample_stratified_class_train_test_split(X, y, train_size=0.667):
+def resample_stratified_class_train_test_split(X, y, train_size=0.667, random_state=None):
     """Sample in equal proportion.
 
     :param y: array, shape (n_obs) Input data to be split.
@@ -41,6 +61,10 @@ def resample_stratified_class_train_test_split(X, y, train_size=0.667):
     # calculate number of class1 and class2 observations in the train set
     n_class1_train = int(np.round(n_class1 * train_size))
     n_class2_train = int(np.round(n_class2 * train_size))
+
+    # if random state is passed, set random state
+    if random_state:
+        setters.set_random_state(random_state)
 
     # generate indices for class1 and class2 observations in the train set
     index_class1_train = np.random.choice(index_class1, size=n_class1_train, replace=False)
