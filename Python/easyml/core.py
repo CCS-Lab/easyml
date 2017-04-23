@@ -4,7 +4,6 @@ The core functionality of easyml.
 import numpy as np
 import progressbar
 
-from . import plot
 from . import setters
 from . import utils
 
@@ -94,12 +93,10 @@ class EasyAnalysis:
             self.coefficients = self.generate_coefficients()
             self.coefficients_processed = self.process_coefficients(self.coefficients, self.column_names,
                                                                     survival_rate_cutoff=self.survival_rate_cutoff)
-            self.plot_coefficients_processed = plot.plot_coefficients_processed(self.coefficients)
 
         if generate_variable_importances:
             self.variable_importances = self.generate_variable_importances()
             self.variable_importances_processed = self.process_variable_importances(self.variable_importances)
-            self.plot_variable_importances_processed = plot.plot_variable_importances_processed(self.variable_importances_processed)
 
         if generate_predictions:
             # generate predictions
@@ -112,26 +109,12 @@ class EasyAnalysis:
             self.predictions_train_mean = np.mean(self.predictions_train, axis=0)
             self.predictions_test_mean = np.mean(self.predictions_test, axis=0)
 
-            # set plot predictions function
-            self.plot_predictions = setters.set_plot_predictions(self.family)
-
-            # plot train and test predictions
-            self.plot_predictions_train_mean = self.plot_predictions(self.y_train, self.predictions_train_mean)
-            self.plot_predictions_test_mean = self.plot_predictions(self.y_test, self.predictions_test_mean)
-
         if generate_metrics:
             # generate metrics
             self.metrics = self.generate_metrics()
 
             # unpack train and test metrics
             self.metrics_train, self.metrics_test = self.metrics
-
-            # set plot metrics function
-            self.plot_metrics = setters.set_plot_metrics(self.measure)
-
-            # plot train and test metrics
-            self.plot_metrics_train = self.plot_metrics(self.metrics_train)
-            self.plot_metrics_test = self.plot_metrics(self.metrics_test)
 
     def create_estimator(self):
         raise NotImplementedError
