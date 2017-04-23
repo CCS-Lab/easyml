@@ -40,7 +40,8 @@ class EasyAnalysis:
         self.n_core = n_core
         self.model_args = model_args
         self.estimator = self.create_estimator()
-        self.estimator.set_params(**self.model_args)
+        if self.model_args is not None:
+            self.estimator.set_params(**self.model_args)
 
         # Set random state
         setters.set_random_state(self.random_state)
