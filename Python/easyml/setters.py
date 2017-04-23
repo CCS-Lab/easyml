@@ -58,7 +58,8 @@ def set_measure(measure=None, family=None):
 
 
 def set_column_names(column_names, dependent_variable,
-                     exclude_variables=None, preprocess=None, categorical_variables=None):
+                     exclude_variables=None, preprocess=None,
+                     categorical_variables=None):
     column_names = [c for c in column_names if c != dependent_variable]
     if exclude_variables:
         column_names = [c for c in column_names if c not in exclude_variables]

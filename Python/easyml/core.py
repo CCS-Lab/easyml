@@ -40,6 +40,7 @@ class EasyAnalysis:
         self.n_core = n_core
         self.model_args = model_args
         self.estimator = self.create_estimator()
+        self.estimator.set_params(**self.model_args)
 
         # Set random state
         setters.set_random_state(self.random_state)
@@ -67,7 +68,7 @@ class EasyAnalysis:
         data = utils.remove_variables(data, exclude_variables)
 
         # Set categorical variables
-        categorical_variables = setters.set_categorical_variables(column_names, self.categorical_variables)
+        categorical_variables = setters.set_categorical_variables(self.column_names, self.categorical_variables)
         self.categorical_variables = categorical_variables
 
         # Set dependent variable
@@ -75,6 +76,7 @@ class EasyAnalysis:
         self.y = y
 
         # Set independent variables
+        data = data[[self.dependent_variable] + column_names]
         X = setters.set_independent_variables(data, self.dependent_variable)
         self.X = X
 

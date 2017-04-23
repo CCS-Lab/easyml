@@ -38,9 +38,9 @@ class EasyGlmnet(EasyAnalysis):
 
     def create_estimator(self):
         if self.family == 'gaussian':
-            estimator = ElasticNet(alpha=1)
+            estimator = ElasticNet(standardize=False)
         elif self.family == 'binomial':
-            estimator = LogitNet(alpha=1)
+            estimator = LogitNet(standardize=False)
         return estimator
 
     def extract_coefficients(self, estimator):
