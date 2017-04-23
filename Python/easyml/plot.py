@@ -14,8 +14,7 @@ def plot_coefficients_processed(coefficients):
     n = coefficients.shape[1]
     coefficients_mean = np.mean(coefficients, axis=0)
     coefficients_std = np.std(coefficients, axis=0)
-    fig = plt.figure()
-    ax = plt.gca()
+    fig, ax = plt.figure(), plt.gca()
     ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
                 color='black', ecolor='black')
     ax.set_title('Coefficients')
@@ -27,70 +26,74 @@ def plot_variable_importances_processed(importances):
     importances_mean = np.mean(importances, axis=0)
     importances_std = np.std(importances, axis=0)
     n = importances.shape[1]
-    fig = plt.figure()
-    plt.title('Feature importances')
-    plt.bar(range(n), importances_mean, color='grey', ecolor='black',
+    fig, ax = plt.figure(), plt.gca()
+    ax.bar(range(n), importances_mean, color='grey', ecolor='black',
             yerr=importances_std, align='center')
+    ax.set_title('Feature importances')
     return fig
 
 def plot_metrics_gaussian_mean_squared_error(x):
     bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)
-    fig = plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlabel('MSE')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of MSEs')
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlabel('MSE')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of MSEs')
     return fig
 
 
 def plot_metrics_gaussian_cor_score(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
-    plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean Correlation Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlim([0.0, 1.0])
-    plt.xlabel('Correlation Score')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of Correlation Scores')
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean Correlation Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('Correlation Score')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of Correlation Scores')
+    return fig
 
 
 def plot_metrics_gaussian_r2_score(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
-    plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean R^2 Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlim([0.0, 1.0])
-    plt.xlabel('R^2')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of R^2 scores')
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean R^2 Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('R^2')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of R^2 scores')
+    return fig
 
 
 def plot_metrics_binomial_area_under_curve(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
-    plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean AUC = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlim([0.0, 1.0])
-    plt.xlabel('AUC')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of AUCs')
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean AUC = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('AUC')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of AUCs')
+    return fig
 
 
 def plot_predictions_gaussian(y_true, y_pred):
-    plt.figure()
-    plt.plot(y_pred, y_true, "o")
-    plt.xlabel('Predicted y values')
-    plt.ylabel('True y values')
-    plt.title('')
+    fig, ax = plt.figure(), plt.gca()
+    ax.scatter(y_pred, y_true, color='black')
+    ax.set_xlabel('Predicted y values')
+    ax.set_ylabel('True y values')
+    ax.set_title('')
+    return fig
 
 
 def plot_predictions_binomial(y_true, y_pred):
