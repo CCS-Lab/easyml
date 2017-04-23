@@ -55,7 +55,7 @@
 <p>Functions for glmnet analysis.</p>
 <dl class="class">
 <dt id="easyml.glmnet.EasyGlmnet">
-<em class="property">class </em><code class="descclassname">easyml.glmnet.</code><code class="descname">EasyGlmnet</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm=None</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=None</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.glmnet.EasyGlmnet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">easyml.glmnet.</code><code class="descname">EasyGlmnet</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm='glmnet'</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=&lt;function preprocess_scale&gt;</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=True</em>, <em>generate_variable_importances=False</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.glmnet.EasyGlmnet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="modules/core.html#easyml.core.EasyAnalysis" title="easyml.core.EasyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">easyml.core.EasyAnalysis</span></code></a></p>
 <dl class="method">
 <dt id="easyml.glmnet.EasyGlmnet.create_estimator">
@@ -74,7 +74,7 @@
 
 <dl class="method">
 <dt id="easyml.glmnet.EasyGlmnet.process_coefficients">
-<code class="descname">process_coefficients</code><span class="sig-paren">(</span><em>coefs</em>, <em>column_names</em>, <em>survival_rate_cutoff=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.glmnet.EasyGlmnet.process_coefficients" title="Permalink to this definition">¶</a></dt>
+<code class="descname">process_coefficients</code><span class="sig-paren">(</span><em>coefficients</em>, <em>column_names</em>, <em>survival_rate_cutoff=0.05</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.glmnet.EasyGlmnet.process_coefficients" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -82,7 +82,7 @@
 </div>
 <div class="section" id="module-easyml.measure">
 <span id="easyml-measure-module"></span><h2>easyml.measure module<a class="headerlink" href="#module-easyml.measure" title="Permalink to this headline">¶</a></h2>
-<p>TO BE EDITED.</p>
+<p>Functions for measuring model performance.</p>
 </div>
 <div class="section" id="module-easyml.plot">
 <span id="easyml-plot-module"></span><h2>easyml.plot module<a class="headerlink" href="#module-easyml.plot" title="Permalink to this headline">¶</a></h2>
@@ -94,10 +94,10 @@
 </div>
 <div class="section" id="module-easyml.random_forest">
 <span id="easyml-random-forest-module"></span><h2>easyml.random_forest module<a class="headerlink" href="#module-easyml.random_forest" title="Permalink to this headline">¶</a></h2>
-<p>Functions for glmnet analysis.</p>
+<p>Functions for random forest analysis.</p>
 <dl class="class">
 <dt id="easyml.random_forest.EasyRandomForest">
-<em class="property">class </em><code class="descclassname">easyml.random_forest.</code><code class="descname">EasyRandomForest</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm=None</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=None</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.random_forest.EasyRandomForest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">easyml.random_forest.</code><code class="descname">EasyRandomForest</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm='random_forest'</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=True</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.random_forest.EasyRandomForest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="modules/core.html#easyml.core.EasyAnalysis" title="easyml.core.EasyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">easyml.core.EasyAnalysis</span></code></a></p>
 <dl class="method">
 <dt id="easyml.random_forest.EasyRandomForest.create_estimator">
@@ -105,8 +105,18 @@
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="easyml.random_forest.EasyRandomForest.extract_variable_importances">
+<code class="descname">extract_variable_importances</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.random_forest.EasyRandomForest.extract_variable_importances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="easyml.random_forest.EasyRandomForest.predict_model">
 <code class="descname">predict_model</code><span class="sig-paren">(</span><em>model</em>, <em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.random_forest.EasyRandomForest.predict_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="easyml.random_forest.EasyRandomForest.process_variable_importances">
+<code class="descname">process_variable_importances</code><span class="sig-paren">(</span><em>variable_importances</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.random_forest.EasyRandomForest.process_variable_importances" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -114,18 +124,18 @@
 </div>
 <div class="section" id="module-easyml.resample">
 <span id="easyml-resample-module"></span><h2>easyml.resample module<a class="headerlink" href="#module-easyml.resample" title="Permalink to this headline">¶</a></h2>
-<p>Functions for sampling data.</p>
+<p>Functions for resampling data.</p>
 </div>
 <div class="section" id="module-easyml.setters">
 <span id="easyml-setters-module"></span><h2>easyml.setters module<a class="headerlink" href="#module-easyml.setters" title="Permalink to this headline">¶</a></h2>
-<p>TO BE EDITED.</p>
+<p>Functions for setting certain functions and parameters.</p>
 </div>
 <div class="section" id="module-easyml.support_vector_machine">
 <span id="easyml-support-vector-machine-module"></span><h2>easyml.support_vector_machine module<a class="headerlink" href="#module-easyml.support_vector_machine" title="Permalink to this headline">¶</a></h2>
-<p>Functions for glmnet analysis.</p>
+<p>Functions for support vector machine analysis.</p>
 <dl class="class">
 <dt id="easyml.support_vector_machine.EasySupportVectorMachine">
-<em class="property">class </em><code class="descclassname">easyml.support_vector_machine.</code><code class="descname">EasySupportVectorMachine</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm=None</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=None</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.support_vector_machine.EasySupportVectorMachine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">easyml.support_vector_machine.</code><code class="descname">EasySupportVectorMachine</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm='support_vector_machine'</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=&lt;function preprocess_scale&gt;</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=False</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.support_vector_machine.EasySupportVectorMachine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="modules/core.html#easyml.core.EasyAnalysis" title="easyml.core.EasyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">easyml.core.EasyAnalysis</span></code></a></p>
 <dl class="method">
 <dt id="easyml.support_vector_machine.EasySupportVectorMachine.create_estimator">

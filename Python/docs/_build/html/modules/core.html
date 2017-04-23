@@ -43,10 +43,10 @@
             
   <div class="section" id="module-easyml.core">
 <span id="easyml-core-module"></span><h1>easyml.core module<a class="headerlink" href="#module-easyml.core" title="Permalink to this headline">¶</a></h1>
-<p>Functions for basic analysis.</p>
+<p>The core functionality of easyml.</p>
 <dl class="class">
 <dt id="easyml.core.EasyAnalysis">
-<em class="property">class </em><code class="descclassname">easyml.core.</code><code class="descname">EasyAnalysis</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm=None</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=False</em>, <em>generate_variable_importances=None</em>, <em>generate_predictions=True</em>, <em>generate_metrics=True</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.core.EasyAnalysis" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">easyml.core.</code><code class="descname">EasyAnalysis</code><span class="sig-paren">(</span><em>data</em>, <em>dependent_variable</em>, <em>algorithm=None</em>, <em>family='gaussian'</em>, <em>resample=None</em>, <em>preprocess=None</em>, <em>measure=None</em>, <em>exclude_variables=None</em>, <em>categorical_variables=None</em>, <em>train_size=0.667</em>, <em>survival_rate_cutoff=0.05</em>, <em>n_samples=1000</em>, <em>n_divisions=1000</em>, <em>n_iterations=10</em>, <em>random_state=None</em>, <em>progress_bar=True</em>, <em>n_core=1</em>, <em>generate_coefficients=None</em>, <em>generate_variable_importances=None</em>, <em>generate_predictions=None</em>, <em>generate_metrics=None</em>, <em>model_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#easyml.core.EasyAnalysis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="easyml.core.EasyAnalysis.create_estimator">
@@ -91,6 +91,16 @@
 <dl class="method">
 <dt id="easyml.core.EasyAnalysis.generate_predictions">
 <code class="descname">generate_predictions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#easyml.core.EasyAnalysis.generate_predictions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="easyml.core.EasyAnalysis.generate_variable_importance">
+<code class="descname">generate_variable_importance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#easyml.core.EasyAnalysis.generate_variable_importance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="easyml.core.EasyAnalysis.generate_variable_importances">
+<code class="descname">generate_variable_importances</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#easyml.core.EasyAnalysis.generate_variable_importances" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
