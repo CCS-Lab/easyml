@@ -44,13 +44,13 @@ class EasyAnalysis:
         # Set random state
         setters.set_random_state(self.random_state)
 
-        # Set preprocess function
-        preprocess = setters.set_preprocess(preprocess)
-        self.preprocess = preprocess
-
         # Set resample function
         resample = setters.set_resample(resample, family)
         self.resample = resample
+
+        # Set preprocess function
+        preprocess = setters.set_preprocess(preprocess)
+        self.preprocess = preprocess
 
         # Set measure function
         measure = setters.set_measure(measure, self.family)

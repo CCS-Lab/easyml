@@ -12,6 +12,12 @@ from . import resample as res
 __all__ = []
 
 
+def set_random_state(random_state=None):
+    if random_state:
+        np.random.seed(random_state)
+    return None
+
+
 def set_parallel(n_core):
     n_core = int(n_core)
     if n_core == 1:
@@ -21,29 +27,6 @@ def set_parallel(n_core):
     else:
         raise ValueError
     return parallel
-
-
-def set_column_names(column_names, dependent_variable,
-                     exclude_variables=None, preprocess=None, categorical_variables=None):
-    column_names = [c for c in column_names if c != dependent_variable]
-    if exclude_variables:
-        column_names = [c for c in column_names if c not in exclude_variables]
-    if categorical_variables and preprocess is prep.preprocess_scale:
-        column_names = [c for c in column_names if c not in categorical_variables]
-        column_names = categorical_variables + column_names
-    return column_names
-
-
-def set_categorical_variables(column_names, categorical_variables=None):
-    if categorical_variables:
-        categorical_variables = np.in1d(column_names, categorical_variables)
-    return categorical_variables
-
-
-def set_random_state(random_state=None):
-    if random_state:
-        np.random.seed(random_state)
-    return None
 
 
 def set_resample(resample=None, family=None):
@@ -74,6 +57,23 @@ def set_measure(measure=None, family=None):
     return measure
 
 
+def set_column_names(column_names, dependent_variable,
+                     exclude_variables=None, preprocess=None, categorical_variables=None):
+    column_names = [c for c in column_names if c != dependent_variable]
+    if exclude_variables:
+        column_names = [c for c in column_names if c not in exclude_variables]
+    if categorical_variables and preprocess is prep.preprocess_scale:
+        column_names = [c for c in column_names if c not in categorical_variables]
+        column_names = categorical_variables + column_names
+    return column_names
+
+
+def set_categorical_variables(column_names, categorical_variables=None):
+    if categorical_variables:
+        categorical_variables = np.in1d(column_names, categorical_variables)
+    return categorical_variables
+
+
 def set_dependent_variable(data, dependent_variable):
     y = data[dependent_variable].values
     return y
@@ -97,6 +97,8 @@ def set_plot_predictions(family=None):
 def set_plot_metrics(measure):
     if measure == meas.mean_squared_error:
         plot_metrics = plt.plot_metrics_gaussian_mean_squared_error
+    elif measure == meas.measure_cor_score:
+        plot_metrics = plt.plot_metrics_gaussian_cor_score
     elif measure == meas.measure_r2_score:
         plot_metrics = plt.plot_metrics_gaussian_r2_score
     elif measure == meas.measure_area_under_curve:
