@@ -15,7 +15,7 @@ You can install the latest development version from github with:
 if (packageVersion("devtools") < 1.6) {
   install.packages("devtools")
 }
-devtools::install_github("CCS-Lab/easyml", subdir = "R")
+devtools::install_github("CCS-Lab/easyml", subdir = "R", ref="dev")
 ```
 
 If you encounter a clear bug, please file a [minimal reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on [github](https://github.com/CCS-Lab/easyml/issues).
