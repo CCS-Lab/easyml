@@ -121,8 +121,8 @@ generate_predictions <- function(object) {
     results <- fit_model(object)
     
     # Generate predictions
-    prediction_train = predict_model(results, newx = X_train)
-    prediction_test = predict_model(results, newx = X_test)
+    prediction_train = predict_model(results, newx = result[["X_train"]])
+    prediction_test = predict_model(results, newx = result[["X_test"]])
     
     # Save predictions 
     list(prediction_train = prediction_train, 
