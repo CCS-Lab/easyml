@@ -8,10 +8,10 @@ from . import setters
 from . import utils
 
 
-__all__ = ['EasyAnalysis']
+__all__ = ['easy_analysis']
 
 
-class EasyAnalysis:
+class easy_analysis:
     def __init__(self, data, dependent_variable,
                  algorithm=None, family='gaussian',
                  resample=None, preprocess=None, measure=None,

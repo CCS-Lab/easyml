@@ -3,13 +3,13 @@ Functions for random forest analysis.
 """
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 
-from .core import EasyAnalysis
+from .core import easy_analysis
 
 
-__all__ = ['EasyRandomForest']
+__all__ = ['easy_random_forest']
 
 
-class EasyRandomForest(EasyAnalysis):
+class easy_random_forest(easy_analysis):
     def __init__(self, data, dependent_variable,
                  algorithm='random_forest', family='gaussian',
                  resample=None, preprocess=None, measure=None,

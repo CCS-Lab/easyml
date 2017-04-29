@@ -5,14 +5,14 @@ from glmnet import ElasticNet, LogitNet
 import numpy as np
 import pandas as pd
 
-from .core import EasyAnalysis
+from .core import easy_analysis
 from .preprocess import preprocess_scale
 
 
-__all__ = ['EasyGlmnet']
+__all__ = ['easy_glmnet']
 
 
-class EasyGlmnet(EasyAnalysis):
+class easy_glmnet(easy_analysis):
     def __init__(self, data, dependent_variable,
                  algorithm='glmnet', family='gaussian',
                  resample=None, preprocess=preprocess_scale, measure=None,

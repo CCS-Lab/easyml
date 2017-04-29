@@ -3,14 +3,14 @@ Functions for support vector machine analysis.
 """
 from sklearn.svm import SVR, SVC
 
-from .core import EasyAnalysis
+from .core import easy_analysis
 from .preprocess import preprocess_scale
 
 
-__all__ = ['EasySupportVectorMachine']
+__all__ = ['easy_support_vector_machine']
 
 
-class EasySupportVectorMachine(EasyAnalysis):
+class easy_support_vector_machine(easy_analysis):
     def __init__(self, data, dependent_variable,
                  algorithm='support_vector_machine', family='gaussian',
                  resample=None, preprocess=preprocess_scale, measure=None,
