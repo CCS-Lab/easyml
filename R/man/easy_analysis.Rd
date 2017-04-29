@@ -115,7 +115,8 @@ A list of class \code{easy_*}, where * is the name of the algorithm.
 This recipe is the workhorse behind all of the easy_* functions.
 }
 \seealso{
-Other recipes: \code{\link{easy_deep_neural_network}},
+Other recipes: \code{\link{easy_avNNet}},
+  \code{\link{easy_deep_neural_network}},
   \code{\link{easy_glinternet}}, \code{\link{easy_glmnet}},
   \code{\link{easy_neural_network}},
   \code{\link{easy_random_forest}},

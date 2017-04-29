@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Easily build and evaluate a penalized regression model with interactions. — easy_glinternet • easyml</title>
+<title>Easily build and evaluate a neural network. — easy_avNNet • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,21 +77,20 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Easily build and evaluate a penalized regression model with interactions.</h1>
+    <h1>Easily build and evaluate a neural network.</h1>
     </div>
 
     
-    <p>Easily build and evaluate a penalized regression model with interactions.</p>
+    <p>Easily build and evaluate a neural network.</p>
     
 
-    <pre><span class='fu'>easy_glinternet</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>,
-  <span class='kw'>resample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='no'>preprocess_scale</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>coefficients</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>variable_importances</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>predictions</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
+    <pre><span class='fu'>easy_avNNet</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>, <span class='kw'>resample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='no'>preprocess_scale</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>coefficients</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>variable_importances</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>predictions</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -143,14 +142,13 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of class <code>easy_glinternet</code>.</p>
+    <p>A list of class <code>easy_avNNet</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>Other recipes: <code><a href='easy_analysis.html'>easy_analysis</a></code>,
-  <code><a href='easy_avNNet.html'>easy_avNNet</a></code>,
   <code><a href='easy_deep_neural_network.html'>easy_deep_neural_network</a></code>,
-  <code><a href='easy_glmnet.html'>easy_glmnet</a></code>,
+  <code><a href='easy_glinternet.html'>easy_glinternet</a></code>, <code><a href='easy_glmnet.html'>easy_glmnet</a></code>,
   <code><a href='easy_neural_network.html'>easy_neural_network</a></code>,
   <code><a href='easy_random_forest.html'>easy_random_forest</a></code>,
   <code><a href='easy_support_vector_machine.html'>easy_support_vector_machine</a></code></p>
@@ -162,21 +160,21 @@
 <span class='co'># </span>
 <span class='co'># # Gaussian</span>
 <span class='co'># data("prostate", package = "easyml")</span>
-<span class='co'># results &lt;- easy_glinternet(prostate, "lpsa", </span>
-<span class='co'>#                            n_samples = 10, n_divisions = 10, </span>
-<span class='co'>#                            n_iterations = 2, random_state = 12345, </span>
-<span class='co'>#                            n_core = 1)</span>
+<span class='co'># results &lt;- easy_avNNet(prostate, "lpsa", </span>
+<span class='co'>#                        n_samples = 10, n_divisions = 10, </span>
+<span class='co'>#                        n_iterations = 2, random_state = 12345, </span>
+<span class='co'>#                        n_core = 1)</span>
 <span class='co'># </span>
 <span class='co'># # Binomial</span>
 <span class='co'># data("cocaine_dependence", package = "easyml")</span>
-<span class='co'># results &lt;- easy_glinternet(cocaine_dependence, "diagnosis", </span>
-<span class='co'>#                            family = "binomial", </span>
-<span class='co'>#                            exclude_variables = c("subject"), </span>
-<span class='co'>#                            categorical_variables = c("male"), </span>
-<span class='co'>#                            preprocess = preprocess_scale, </span>
-<span class='co'>#                            n_samples = 10, n_divisions = 10, </span>
-<span class='co'>#                            n_iterations = 2, random_state = 12345, </span>
-<span class='co'>#                            n_core = 1)</span>
+<span class='co'># results &lt;- easy_avNNet(cocaine_dependence, "diagnosis", </span>
+<span class='co'>#                        family = "binomial", </span>
+<span class='co'>#                        exclude_variables = c("subject"), </span>
+<span class='co'>#                        categorical_variables = c("male"), </span>
+<span class='co'>#                        preprocess = preprocess_scale, </span>
+<span class='co'>#                        n_samples = 10, n_divisions = 10, </span>
+<span class='co'>#                        n_iterations = 2, random_state = 12345, </span>
+<span class='co'>#                        n_core = 1)</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

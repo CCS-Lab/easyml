@@ -11,6 +11,7 @@ LazyData: true
 Depends:
     R (>= 3.3.1)
 Imports:
+    caret, 
     corrplot, 
     darch, 
     dummies, 

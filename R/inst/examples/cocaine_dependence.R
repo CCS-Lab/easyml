@@ -57,3 +57,13 @@ deep_neural_network_results <- easy_deep_neural_network(cocaine_dependence, "dia
                                                         categorical_variables = c("male"),
                                                         n_samples = .n_samples, n_divisions = .n_divisions,
                                                         n_iterations = .n_iterations, random_state = 12345, n_core = .n_core)
+
+model_args <- list(size = 5, linout = TRUE, trace = FALSE)
+b <- easy_avNNet(cocaine_dependence, "diagnosis", 
+                 family = "binomial", 
+                 preprocess = preprocess_scale, 
+                 exclude_variables = c("subject"),
+                 categorical_variables = c("male"),
+                 n_samples = 10,  n_divisions = 10, 
+                 n_iterations = 10, random_state = 12345, 
+                 n_core = 1, model_args = model_args)

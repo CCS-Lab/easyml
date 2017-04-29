@@ -40,3 +40,11 @@ deep_neural_network_results <- easy_deep_neural_network(prostate, "lpsa",
                                                         measure = measure_r2_score, 
                                                         n_samples = .n_samples, n_divisions = .n_divisions, 
                                                         n_iterations = .n_iterations, random_state = 1, n_core = .n_core)
+
+model_args <- list(size = 5, linout = TRUE, trace = FALSE)
+g <- easy_avNNet(prostate, "lpsa", 
+                 preprocess = preprocess_scale,
+                 n_samples = 10,  n_divisions = 10, 
+                 n_iterations = 10, 
+                 random_state = 12345, n_core = 1, 
+                 model_args = model_args)
