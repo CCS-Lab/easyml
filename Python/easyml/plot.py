@@ -6,8 +6,10 @@ import numpy as np
 import scikitplot.plotters as skplt
 
 
-
 __all__ = []
+
+# Settings
+plt.style.use('ggplot')
 
 
 def plot_coefficients_processed(coefficients):
