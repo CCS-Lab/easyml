@@ -252,7 +252,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     
     # Create and capture coefficients plots
     g <- plot_coefficients_processed(coefs_processed)
-    object[["plot_coefficients_processed"]] <- g
+    object[["plot_coefficients"]] <- g
   }
   
   # Assess if variable importances should be generated for this algorithm
@@ -272,7 +272,7 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     
     # Create and capture variable importances plot
     g <- plot_variable_importances_processed(variable_imps_processed)
-    object[["plot_variable_importances_processed"]] <- g
+    object[["plot_variable_importances"]] <- g
   }
   
   # Assess if predictions should be generated for this algorithm
@@ -292,29 +292,25 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     # Replicate predictions
     preds <- generate_predictions(object)
     predictions_train <- preds[["predictions_train"]]
-    object[["predictions_train"]] <- predictions_train
     predictions_test <- preds[["predictions_test"]]
-    object[["predictions_test"]] <- predictions_test
-    
+
     # Process and capture predictions
-    predictions_train_mean <- apply(predictions_train, 1, mean)
-    predictions_test_mean <- apply(predictions_test, 1, mean)
-    object[["predictions_train_mean"]] <- predictions_train_mean
-    object[["predictions_test_mean"]] <- predictions_test_mean
+    predictions_train <- apply(predictions_train, 1, mean)
+    predictions_test <- apply(predictions_test, 1, mean)
+    object[["predictions_train"]] <- predictions_train
+    object[["predictions_test"]] <- predictions_test
     
     # Set and capture plot_predictions function
     plot_predictions <- set_plot_predictions(algorithm, family)
     object[["plot_predictions"]] <- plot_predictions
     
     # Create and capture predictions plots
-    plot_predictions_train_mean <- 
-      plot_predictions(y_train, predictions_train_mean) + 
+    plot_predictions_train <- plot_predictions(y_train, predictions_train) + 
       ggplot2::labs(subtitle = "Train Predictions")
-    object[["plot_predictions_train_mean"]] <- plot_predictions_train_mean
-    plot_predictions_test_mean <- 
-      plot_predictions(y_test, predictions_test_mean) + 
+    object[["plot_predictions_train"]] <- plot_predictions_train
+    plot_predictions_test <- plot_predictions(y_test, predictions_test) + 
       ggplot2::labs(subtitle = "Test Predictions")
-    object[["plot_predictions_test_mean"]] <- plot_predictions_test_mean
+    object[["plot_predictions_test"]] <- plot_predictions_test
   }
   
   # Assess if metrics should be generated for this algorithm
@@ -326,24 +322,22 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     
     # Replicate and capture metrics
     mets <- generate_metrics(object)
-    metrics_train_mean <- mets[["metrics_train_mean"]]
-    object[["metrics_train_mean"]] <- metrics_train_mean
-    metrics_test_mean <- mets[["metrics_test_mean"]]
-    object[["metrics_test_mean"]] <- metrics_test_mean
+    metrics_train <- mets[["metrics_train_mean"]]
+    object[["metrics_train"]] <- metrics_train
+    metrics_test <- mets[["metrics_test_mean"]]
+    object[["metrics_test"]] <- metrics_test
     
     # Set and capture plot_metrics function
     plot_metrics <- set_plot_metrics(measure)
     object[["plot_metrics"]] <- plot_metrics
     
     # Create and capture metrics plots
-    plot_metrics_train_mean <- 
-      plot_metrics(metrics_train_mean) + 
+    plot_metrics_train <- plot_metrics(metrics_train) + 
       ggplot2::labs(subtitle = "Train Metrics")
-    object[["plot_metrics_train_mean"]] <- plot_metrics_train_mean
-    plot_metrics_test_mean <- 
-      plot_metrics(metrics_test_mean) + 
+    object[["plot_metrics_train"]] <- plot_metrics_train
+    plot_metrics_test <- plot_metrics(metrics_test) + 
       ggplot2::labs(subtitle = "Test Metrics")
-    object[["plot_metrics_test_mean"]] <- plot_metrics_test_mean
+    object[["plot_metrics_test"]] <- plot_metrics_test
   }
   
   # Return object
