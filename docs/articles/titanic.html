@@ -254,7 +254,7 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eas
 <li>If a passenger is male, the log-odds of survival decrease by 2.64 units.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_coefficients_processed</code></pre></div>
-<p><img src="titanic_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$coefficients_processed
 knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output):<span class="dv">1</span>, ], <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
@@ -397,18 +397,18 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
 <p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_train_mean</code></pre></div>
-<p><img src="titanic_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_test_mean</code></pre></div>
-<p><img src="titanic_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 <div id="metrics-auc" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
 <p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_train_mean</code></pre></div>
-<p><img src="titanic_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_test_mean</code></pre></div>
-<p><img src="titanic_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 </div>
 <div id="discuss" class="section level2">

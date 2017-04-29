@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot penalized regression coefficients. — plot_coefficients_processed • easyml</title>
+<title>Plot area under the curve (AUC) metrics. — plot_metrics_binomial_auc_score • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,25 +77,19 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot penalized regression coefficients.</h1>
+    <h1>Plot area under the curve (AUC) metrics.</h1>
     </div>
 
     
-    <p>When calling <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, coefficients from the 
-<code><a href='generate_coefficients.html'>generate_coefficients</a></code> output are processed by the 
-<code><a href='process_coefficients.html'>process_coefficients</a></code>  function and generated into 
-a plot. This plot tells us the direction, magitude, and statistical
-significance of each coefficient. Be careful using this plotting
-method with datasets containing more than 20 variables as the plot 
-may not render as nicely.</p>
+    <p>Plot area under the curve (AUC) metrics.</p>
     
 
-    <pre><span class='fu'>plot_coefficients_processed</span>(<span class='no'>coefficients_processed</span>)</pre>
+    <pre><span class='fu'>plot_metrics_binomial_auc_score</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>coefficients_processed</dt>
-      <dd>A data.frame, the output of the function <code><a href='process_coefficients.html'>process_coefficients</a></code>.</dd>
+      <dt>x</dt>
+      <dd>A vector, the area under the curve (AUC) metrics to be plotted as a histogram.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -104,7 +98,7 @@ may not render as nicely.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other plot: <code><a href='plot_metrics_binomial_auc_score.html'>plot_metrics_binomial_auc_score</a></code>,
+    <p>Other plot: <code><a href='plot_coefficients_processed.html'>plot_coefficients_processed</a></code>,
   <code><a href='plot_metrics_gaussian_correlation_score.html'>plot_metrics_gaussian_correlation_score</a></code>,
   <code><a href='plot_metrics_gaussian_mse_score.html'>plot_metrics_gaussian_mse_score</a></code>,
   <code><a href='plot_metrics_gaussian_r2_score.html'>plot_metrics_gaussian_r2_score</a></code>,

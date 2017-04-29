@@ -76,17 +76,18 @@ plot_variable_importances_processed <- function(variable_importances_processed) 
 #' @family plot
 #' @export
 plot_predictions_gaussian <- function(y_true, y_pred) {
-  df <- data.frame(y_true = y_true, y_pred = y_pred, stringsAsFactors = FALSE)
-  cor_score <- measure_cor_score(y_true, y_pred)
-  cor_score_label <- paste("Correlation Score = ", round(cor_score, digits = 3), sep = "")
-  
+  df <- data.frame(y_true = y_true, y_pred = y_pred, 
+                   stringsAsFactors = FALSE)
+  cor_score <- round(measure_correlation_score(y_true, y_pred), 3)
+  msg <- "Actual vs. Predicted y values (Correlation Score = "
+  .title <- paste0(msg, cor_score, ")")
   g <- 
     ggplot2::ggplot(df, ggplot2::aes(x = y_pred, y = y_true)) +
     ggplot2::geom_point() + 
     ggplot2::geom_smooth(method = 'lm') + 
     ggplot2::scale_x_continuous("Predicted y values") + 
     ggplot2::scale_y_continuous("True y values") + 
-    ggplot2::ggtitle(paste0("Actual vs. Predicted y values (", cor_score_label, ")")) + 
+    ggplot2::ggtitle(.title) + 
     ggplot2::theme_bw()
   
   g
@@ -102,8 +103,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 plot_predictions_binomial <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, 
                    stringsAsFactors = FALSE)
-  
-  cor_score <- round(cor(y_true, y_pred), 3)
+  cor_score <- round(measure_correlation_score(y_true, y_pred), 3)
   msg <- "Actual vs. Predicted y values (Correlation Score = "
   .title <- paste0(msg, cor_score, ")")
   g <- 
@@ -115,7 +115,6 @@ plot_predictions_binomial <- function(y_true, y_pred) {
     ggplot2::scale_y_continuous("True y values", limits = c(0, 1), 
                        breaks = seq(0, 1, 0.05), minor_breaks = seq(0, 1, 0.01)) + 
     ggplot2::ggtitle(.title) + 
-    ggplot2::labs(subtitle = "Train Predictions") + 
     ggplot2::theme_bw()
   
   g

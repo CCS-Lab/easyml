@@ -177,12 +177,11 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(prostate))</co
 <li>how many cores to run the analysis on in parallel.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/easy_support_vector_machine.html">easy_support_vector_machine</a></span>(prostate, <span class="st">"lpsa"</span>, 
-                                       <span class="dt">preprocess =</span> preprocess_scale, 
                                        <span class="dt">n_samples =</span> <span class="dv">10</span>, <span class="dt">n_divisions =</span> <span class="dv">10</span>, 
                                        <span class="dt">n_iterations =</span> <span class="dv">2</span>, <span class="dt">random_state =</span> <span class="dv">12345</span>, 
                                        <span class="dt">n_core =</span> <span class="dv">1</span>)</code></pre></div>
-<pre><code>## [1] "Generating predictions:"
-## [1] "Generating metrics:"</code></pre>
+<pre><code>## [1] "Generating predictions for a single train test split:"
+## [1] "Generating metrics assessing model performance over multiple train test splits:"</code></pre>
 </div>
 <div id="assess-results" class="section level2">
 <h2 class="hasAnchor">
@@ -193,18 +192,18 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(prostate))</co
 <html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
 <p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_train_mean</code></pre></div>
-<p><img src="prostate_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_test_mean</code></pre></div>
-<p><img src="prostate_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 <div id="metrics-auc" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
 <p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_train_mean</code></pre></div>
-<p><img src="prostate_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_test_mean</code></pre></div>
-<p><img src="prostate_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 </div>
 <div id="discuss" class="section level2">

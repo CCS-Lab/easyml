@@ -76,22 +76,10 @@
 <html><body><a href="#load-the-data" class="anchor"> </a></body></html>Load the data</h2>
 <p>First we load our libraries and the Cocaine Dependence dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
-<span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following object is masked from 'package:testthat':
-## 
-##     matches</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
-<pre><code>## Want to understand how all the pieces fit together? Buy the
-## ggplot2 book: http://ggplot2.org/book/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+
+<span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_dependence))</code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -262,7 +250,7 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_depend
 <html><body><a href="#estimates-of-variable-importances" class="anchor"> </a></body></html>Estimates of variable importances</h3>
 <p>TO BE EDITED.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_variable_importances_processed</code></pre></div>
-<p><img src="cocaine_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$variable_importances_processed
 knitr::<span class="kw">kable</span>(output, <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
@@ -387,18 +375,18 @@ knitr::<span class="kw">kable</span>(output, <span class="dt">digits  =</span> <
 <html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
 <p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_train_mean</code></pre></div>
-<p><img src="cocaine_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_test_mean</code></pre></div>
-<p><img src="cocaine_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 <div id="metrics-auc" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
 <p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_train_mean</code></pre></div>
-<p><img src="cocaine_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_test_mean</code></pre></div>
-<p><img src="cocaine_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+<pre><code>## NULL</code></pre>
 </div>
 </div>
 <div id="discuss" class="section level2">
