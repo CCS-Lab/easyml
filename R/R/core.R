@@ -237,6 +237,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Assess if coefficients should be generated for this algorithm
   if (coefficients) {
+    # Set random state
+    if (!is.null(random_state)) {
+      set_random_state(random_state)
+    }
+    
     # Replicate coefficients
     coefs <- generate_coefficients(object)
     object[["coefficients"]] <- coefs
@@ -252,6 +257,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Assess if variable importances should be generated for this algorithm
   if (variable_importances) {
+    # Set random state
+    if (!is.null(random_state)) {
+      set_random_state(random_state)
+    }
+    
     # Replicate variable importances
     variable_imps <- generate_variable_importances(object)
     object[["variable_importances"]] <- variable_imps
@@ -267,6 +277,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Assess if predictions should be generated for this algorithm
   if (predictions) {
+    # Set random state
+    if (!is.null(random_state)) {
+      set_random_state(random_state)
+    }
+    
     # Resample and capture data
     split_data <- resample(X, y, train_size = train_size, foldid = foldid)
     object[["X_train"]] <- split_data[["X_train"]]
@@ -304,6 +319,11 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   
   # Assess if metrics should be generated for this algorithm
   if (metrics) {
+    # Set random state
+    if (!is.null(random_state)) {
+      set_random_state(random_state)
+    }
+    
     # Replicate and capture metrics
     mets <- generate_metrics(object)
     metrics_train_mean <- mets[["metrics_train_mean"]]

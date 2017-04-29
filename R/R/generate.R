@@ -111,7 +111,7 @@ generate_predictions <- function(object) {
   
   # Preprocess data
   result <- preprocess(list(X_train = X_train, X_test = X_test), 
-                         categorical_variables = categorical_variables)
+                       categorical_variables = categorical_variables)
   object[["X"]] <- result[["X_train"]]
   object[["y"]] <- y_train
 
