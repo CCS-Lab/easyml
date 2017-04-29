@@ -275,7 +275,8 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     object[["plot_variable_importances"]] <- g
   }
   
-  # Assess if predictions should be generated for this algorithm
+  # Assess if predictions for a single train-test split 
+  # should be generated for this algorithm.
   if (predictions) {
     # Set random state
     if (!is.null(random_state)) {
@@ -305,15 +306,26 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     object[["plot_predictions"]] <- plot_predictions
     
     # Create and capture predictions plots
-    plot_predictions_train <- plot_predictions(y_train, predictions_train) + 
+    p_train <- plot_predictions(y_train, predictions_train) + 
       ggplot2::labs(subtitle = "Train Predictions")
-    object[["plot_predictions_train"]] <- plot_predictions_train
-    plot_predictions_test <- plot_predictions(y_test, predictions_test) + 
+    object[["plot_predictions_single_train_test_split_train"]] <- p_train
+    p_test <- plot_predictions(y_test, predictions_test) + 
       ggplot2::labs(subtitle = "Test Predictions")
-    object[["plot_predictions_test"]] <- plot_predictions_test
+    object[["plot_predictions_single_train_test_split_test"]] <- p_test
+    
+    if (family == "binomial") {
+      # Create and capture predictions plots
+      p_train <- plot_roc_curve(y_train, predictions_train) + 
+        ggplot2::labs(subtitle = "Train Predictions")
+      object[["plot_roc_single_train_test_split_train"]] <- p_train
+      p_test <- plot_roc_curve(y_test, predictions_test) + 
+        ggplot2::labs(subtitle = "Test Predictions")
+      object[["plot_roc_single_train_test_split_test"]] <- p_test
+    }
   }
   
-  # Assess if metrics should be generated for this algorithm
+  # Assess if metrics for multiple train-test splits
+  # should be generated for this algorithm
   if (metrics) {
     # Set random state
     if (!is.null(random_state)) {
@@ -334,10 +346,10 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
     # Create and capture metrics plots
     plot_metrics_train <- plot_metrics(metrics_train) + 
       ggplot2::labs(subtitle = "Train Metrics")
-    object[["plot_metrics_train"]] <- plot_metrics_train
+    object[["plot_model_performance_train"]] <- plot_metrics_train
     plot_metrics_test <- plot_metrics(metrics_test) + 
       ggplot2::labs(subtitle = "Test Metrics")
-    object[["plot_metrics_test"]] <- plot_metrics_test
+    object[["plot_model_performance_test"]] <- plot_metrics_test
   }
   
   # Return object

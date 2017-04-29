@@ -213,9 +213,9 @@ set_preprocess <- function(preprocess = NULL, algorithm) {
 set_measure <- function(measure = NULL, algorithm, family) {
   if (is.null(measure)) {
     if (family == "gaussian") {
-      measure <- measure_cor_score
+      measure <- measure_correlation_score
     } else if (family == "binomial") {
-      measure <- measure_area_under_curve
+      measure <- measure_auc_score
     }
   }
 
@@ -257,12 +257,12 @@ set_plot_metrics <- function(measure) {
   plot_metrics <- NULL
   if (identical(measure, measure_r2_score)) {
     plot_metrics <- plot_metrics_gaussian_r2_score
-  } else if (identical(measure, measure_mean_squared_error)) {
-    plot_metrics <- plot_metrics_gaussian_mean_squared_error
-  } else if (identical(measure, measure_area_under_curve)) {
-    plot_metrics <- plot_metrics_binomial_area_under_curve
-  } else if (identical(measure, measure_cor_score)) {
-    plot_metrics <- plot_metrics_gaussian_cor_score
+  } else if (identical(measure, measure_mse_score)) {
+    plot_metrics <- plot_metrics_gaussian_mse_score
+  } else if (identical(measure, measure_auc_score)) {
+    plot_metrics <- plot_metrics_binomial_auc_score
+  } else if (identical(measure, measure_correlation_score)) {
+    plot_metrics <- plot_metrics_gaussian_correlation_score
   }
   
   if (is.null(plot_metrics)) 

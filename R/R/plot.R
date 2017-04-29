@@ -24,7 +24,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
     ggplot2::scale_y_continuous("Coefficient estimates") + 
     ggplot2::scale_color_manual("", values = c("0" = "grey", "2" = "black"), 
                                 labels = c("0" = "Insignificant", "2" = "Significant")) + 
-    ggplot2::ggtitle("Estimates of weights") + 
+    ggplot2::ggtitle("Estimates of coefficients") + 
     ggplot2::theme_bw() + 
     ggplot2::coord_flip()
   
@@ -100,6 +100,35 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 #' @family plot
 #' @export
 plot_predictions_binomial <- function(y_true, y_pred) {
+  df <- data.frame(y_true = y_true, y_pred = y_pred, 
+                   stringsAsFactors = FALSE)
+  
+  cor_score <- round(cor(y_true, y_pred), 3)
+  msg <- "Actual vs. Predicted y values (Correlation Score = "
+  .title <- paste0(msg, cor_score, ")")
+  g <- 
+    ggplot2::ggplot(df, aes(x = y_pred, y = y_true)) + 
+    ggplot2::geom_point() + 
+    ggplot2::stat_smooth(method="glm", method.args = list(family = "binomial"), se=FALSE) + 
+    ggplot2::scale_x_continuous("Predicted y values", limits = c(0, 1), 
+                       breaks = seq(0, 1, 0.05), minor_breaks = seq(0, 1, 0.01)) + 
+    ggplot2::scale_y_continuous("True y values", limits = c(0, 1), 
+                       breaks = seq(0, 1, 0.05), minor_breaks = seq(0, 1, 0.01)) + 
+    ggplot2::ggtitle(.title) + 
+    ggplot2::labs(subtitle = "Train Predictions") + 
+    ggplot2::theme_bw()
+  
+  g
+}
+
+#' Plot ROC Curve.
+#'
+#' @param y_true Ground truth (correct) target values.
+#' @param y_pred Estimated target values.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
+#' @family plot
+#' @export
+plot_roc_curve <- function(y_true, y_pred) {
   results <- pROC::roc(y_true, y_pred)
   auc <- as.numeric(results$auc)
   auc_label <- paste("AUC = ", round(auc, digits = 3), sep = "")
@@ -121,101 +150,91 @@ plot_predictions_binomial <- function(y_true, y_pred) {
   g
 }
 
-#' Plot mean squared error metrics.
+#' Plot histogram of metrics.
 #'
 #' @param mses A vector, the mean squared error metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_mean_squared_error <- function(mses) {
-  mean_mse <- mean(mses)
-  mse_label <- paste("Mean MSE = ", round(mean_mse, digits = 3), sep = "")
-  df <- data.frame(mses = mses, stringsAsFactors = FALSE)
+plot_metrics_histogram <- function(x, name) {
+  mean_x <- round(mean(x), digits = 3)
+  label <- paste0("Mean ", name, " Score = ", mean_x)
+  .title <- paste0("Distribution of ", name, " Scores (", label, ")")
+  df <- data.frame(x = x, stringsAsFactors = FALSE)
   
   g <- 
-    ggplot2::ggplot(df, ggplot2::aes(x = mses)) +
-    ggplot2::geom_histogram(binwidth = 0.01) + 
-    ggplot2::geom_vline(xintercept = mean_mse, linetype = "dotted") + 
-    ggplot2::scale_x_continuous("MSE") + 
+    ggplot2::ggplot(df, ggplot2::aes(x = x)) +
+    ggplot2::geom_histogram(binwidth = 0.01, boundary = 0) + 
+    ggplot2::geom_vline(xintercept = mean_x, linetype = "dotted") + 
     ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle(paste0("Distribution of MSEs (", mse_label, ")")) + 
+    ggplot2::ggtitle(.title) + 
     ggplot2::theme_bw()
   
   g
 }
 
-#' Plot coefficient of determination (R^2) metrics.
+#' Plot mean squared error metrics.
 #'
-#' @param r2_scores A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.
+#' @param x A vector, the mean squared error metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_r2_score <- function(r2_scores) {
-  mean_r2_score <- mean(r2_scores)
-  r2_score_label <- paste("Mean R^2 Score = ", round(mean_r2_score, digits = 3), sep = "")
-  df <- data.frame(r2_scores = r2_scores, stringsAsFactors = FALSE)
-  
+plot_metrics_gaussian_mse_score <- function(x) {
+  name <- "MSE"
   g <- 
-    ggplot2::ggplot(df, ggplot2::aes(x = r2_scores)) +
-    ggplot2::geom_histogram(binwidth = 0.02) + 
-    ggplot2::geom_vline(xintercept = mean_r2_score, linetype = "dotted") + 
-    ggplot2::scale_x_continuous("R^2 Score", limits = c(0, 1), 
-                                breaks = seq(0, 1, 0.05), 
-                                minor_breaks = seq(0, 1, 0.01)) + 
-    ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle(paste0("Distribution of R^2 Scores (", r2_score_label, ")")) + 
-    ggplot2::theme_bw()
+    plot_metrics_histogram(x, name) + 
+    ggplot2::scale_x_continuous(paste0(name, " Score"))
   
   g
 }
 
 #' Plot correlation coefficient metrics.
 #'
-#' @param cor_scores A vector, the correlation coefficient metrics to be plotted as a histogram.
+#' @param x A vector, the correlation coefficient metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_cor_score <- function(cor_scores) {
-  mean_cor_score <- mean(cor_scores)
-  cor_score_label <- paste("Mean Correlation Score = ", round(mean_cor_score, digits = 3), sep = "")
-  df <- data.frame(cor_scores = cor_scores, stringsAsFactors = FALSE)
-  
+plot_metrics_gaussian_correlation_score <- function(x) {
+  name <- "Correlation"
   g <- 
-    ggplot2::ggplot(df, ggplot2::aes(x = cor_scores)) +
-    ggplot2::geom_histogram(binwidth = 0.01, boundary = 0) + 
-    ggplot2::geom_vline(xintercept = mean_cor_score, linetype = "dotted") + 
-    ggplot2::annotate("text", label = cor_score_label, x = 0.2, y = 0.2, size = 8) + 
-    ggplot2::scale_x_continuous("Correlation Score", limits = c(0, 1), 
+    plot_metrics_histogram(x, name) + 
+    ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
                                 breaks = seq(0, 1, 0.05), 
-                                minor_breaks = seq(0, 1, 0.01)) + 
-    ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle("Distribution of Correlation Scores") + 
-    ggplot2::theme_bw()
+                                minor_breaks = seq(0, 1, 0.01))
+  
+  g
+}
+
+#' Plot coefficient of determination (R^2) metrics.
+#'
+#' @param x A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.
+#' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
+#' @family plot
+#' @export
+plot_metrics_gaussian_r2_score <- function(x) {
+  name <- "R^2"
+  g <- 
+    plot_metrics_histogram(x, name) + 
+    ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
+                                breaks = seq(0, 1, 0.05), 
+                                minor_breaks = seq(0, 1, 0.01))
   
   g
 }
 
 #' Plot area under the curve (AUC) metrics.
 #'
-#' @param aucs A vector, the area under the curve (AUC) metrics to be plotted as a histogram.
+#' @param x A vector, the area under the curve (AUC) metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_binomial_area_under_curve <- function(aucs) {
-  mean_auc <- mean(aucs)
-  auc_label <- paste("Mean AUC = ", round(mean_auc, digits = 3), sep = "")
-  df <- data.frame(aucs = aucs, stringsAsFactors = FALSE)
-  
+plot_metrics_binomial_auc_score <- function(x) {
+  name <- "AUC"
   g <- 
-    ggplot2::ggplot(df, ggplot2::aes(x = aucs)) +
-    ggplot2::geom_histogram(binwidth = 0.01, boundary = 0) + 
-    ggplot2::geom_vline(xintercept = mean_auc, linetype = "dotted") + 
-    ggplot2::scale_x_continuous("AUC", limits = c(0, 1), 
+    plot_metrics_histogram(x, name) + 
+    ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
                                 breaks = seq(0, 1, 0.05), 
-                                minor_breaks = seq(0, 1, 0.01)) + 
-    ggplot2::scale_y_continuous("Frequency", label = scales::comma) + 
-    ggplot2::ggtitle(paste0("Distribution of AUCs (", auc_label, ")")) + 
-    ggplot2::theme_bw()
+                                minor_breaks = seq(0, 1, 0.01))
   
   g
 }

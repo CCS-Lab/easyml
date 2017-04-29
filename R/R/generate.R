@@ -16,8 +16,9 @@ generate_coefficients <- function(object) {
   
   # Print an informative message
   if (progress_bar) {
+    msg <- "Generating coefficients from multiple model builds"
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
-    print(paste0("Generating coefficients", parallel_string))
+    print(paste0(msg, parallel_string))
   }
   
   # Preprocess data
@@ -60,8 +61,9 @@ generate_variable_importances <- function(object) {
   n_core <- object[["n_core"]]
   
   if (progress_bar) {
+    msg <- "Generating variable importances from multiple model builds"
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
-    print(paste0("Generating variable importances", parallel_string))
+    print(paste0(msg, parallel_string))
   }
 
   # Preprocess data
@@ -106,7 +108,9 @@ generate_predictions <- function(object) {
 
   # Print an informative message
   if (progress_bar) {
-    print(paste0("Generating predictions", ifelse(n_core > 1, " in parallel:", ":")))
+    msg <- "Generating predictions for a single train test split"
+    parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
+    print(paste0(msg, parallel_string))
   }
   
   # Preprocess data
@@ -170,7 +174,11 @@ generate_metrics <- function(object) {
 
   # Print an informative message
   if (progress_bar) {
-    print(paste0("Generating metrics", ifelse(n_core > 1, " in parallel:", ":")))
+    msg1 <- "Generating metrics assessing model performance"
+    msg2 <- " over multiple train test splits"
+    msg <- paste0(msg1, msg2)
+    parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
+    print(paste0(msg, parallel_string))
   }
   
   # Set which looping mechanism to use

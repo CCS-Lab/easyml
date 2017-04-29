@@ -4,10 +4,10 @@
 \alias{plot_metrics_gaussian_r2_score}
 \title{Plot coefficient of determination (R^2) metrics.}
 \usage{
-plot_metrics_gaussian_r2_score(r2_scores)
+plot_metrics_gaussian_r2_score(x)
 }
 \arguments{
-\item{r2_scores}{A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.}
+\item{x}{A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.}
 }
 \value{
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
@@ -17,11 +17,13 @@ Plot coefficient of determination (R^2) metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
-  \code{\link{plot_metrics_binomial_area_under_curve}},
-  \code{\link{plot_metrics_gaussian_cor_score}},
-  \code{\link{plot_metrics_gaussian_mean_squared_error}},
+  \code{\link{plot_metrics_binomial_auc_score}},
+  \code{\link{plot_metrics_gaussian_correlation_score}},
+  \code{\link{plot_metrics_gaussian_mse_score}},
+  \code{\link{plot_metrics_histogram}},
   \code{\link{plot_predictions_binomial}},
   \code{\link{plot_predictions_gaussian}},
+  \code{\link{plot_roc_curve}},
   \code{\link{plot_variable_importances_processed}}
 }
 

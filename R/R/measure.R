@@ -8,7 +8,7 @@
 #' @return A numeric vector of length one; the mean squared error metric.
 #' @family measure
 #' @export
-measure_mean_squared_error <- scorer::mean_squared_error
+measure_mse_score <- scorer::mean_squared_error
 
 #' Measure Coefficient of Determination (R^2 Score).
 #' 
@@ -39,7 +39,7 @@ measure_r2_score <- function(y_true, y_pred) {
 #' @return A numeric vector of length one; the correlation metric.
 #' @family measure
 #' @export
-measure_cor_score <- function(y_true, y_pred) {
+measure_correlation_score <- function(y_true, y_pred) {
   stats::cor(y_true, y_pred)
 }
 
@@ -53,6 +53,6 @@ measure_cor_score <- function(y_true, y_pred) {
 #' @return A numeric vector of length one; the AUC metric.
 #' @family measure
 #' @export
-measure_area_under_curve <- function(y_true, y_pred) {
+measure_auc_score <- function(y_true, y_pred) {
   as.numeric(pROC::roc(as.numeric(y_true), as.numeric(y_pred))$auc)
 }
