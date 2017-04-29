@@ -213,11 +213,7 @@ set_preprocess <- function(preprocess = NULL, algorithm) {
 set_measure <- function(measure = NULL, algorithm, family) {
   if (is.null(measure)) {
     if (family == "gaussian") {
-      if (algorithm %in% c("glmnet", "random_forest")) {
-        measure <- measure_cor_score
-      } else {
-        measure <- measure_mean_squared_error
-      }
+      measure <- measure_cor_score
     } else if (family == "binomial") {
       measure <- measure_area_under_curve
     }
