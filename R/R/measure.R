@@ -24,7 +24,7 @@ measure_mse_score <- scorer::mean_squared_error
 #' @family measure
 #' @export
 measure_r2_score <- function(y_true, y_pred) {
-  measure_cor_score(y_true, y_pred) ^ 2
+  measure_correlation_score(y_true, y_pred) ^ 2
 }
 
 #' Measure Pearsons Correlation Coefficient.
