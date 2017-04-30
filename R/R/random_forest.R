@@ -9,7 +9,12 @@ fit_model.easy_random_forest <- function(object) {
   
   # process model_args
   model_args[["x"]] <- as.matrix(object[["X"]])
-  model_args[["y"]] <- object[["y"]]
+  
+  if (object[["family"]] == "binomial") {
+    model_args[["y"]] <- factor(object[["y"]])
+  } else {
+    model_args[["y"]] <- object[["y"]]
+  }
 
   # build model
   model <- do.call(randomForest::randomForest, model_args)
@@ -43,9 +48,10 @@ predict_model.easy_random_forest <- function(object, newx = NULL) {
   model <- object[["model"]]
   # If newx == NULL (i.e. for training data prediction), do not pass new data
   if (is.null(newx)) {
-    preds <- as.numeric(stats::predict(model))
+    preds <- as.numeric(stats::predict(model, type = "prob"))
   } else {
-    preds <- as.numeric(stats::predict(model, newdata = newx))
+    preds <- as.numeric(stats::predict(model, newdata = newx, type = "prob"))
+    preds <- matrix(preds, ncol = 2)[, 2]
   }
   preds
 }
