@@ -61,7 +61,7 @@ plot_variable_importances_processed <- function(variable_importances_processed) 
     ggplot2::geom_errorbar(ggplot2::aes_string(ymin = "lower_bound", ymax = "upper_bound"), width = 0.1) + 
     ggplot2::scale_x_discrete("Predictors") +
     ggplot2::scale_y_continuous("Variable Importance (Mean Decrease in Gini Index)") + 
-    ggplot2::ggtitle("Variable Importance") + 
+    ggplot2::ggtitle("Variable Importances") + 
     ggplot2::theme_bw() + 
     ggplot2::coord_flip()
   
@@ -107,7 +107,7 @@ plot_predictions_binomial <- function(y_true, y_pred) {
   msg <- "Actual vs. Predicted y values (Correlation Score = "
   .title <- paste0(msg, cor_score, ")")
   g <- 
-    ggplot2::ggplot(df, aes(x = y_pred, y = y_true)) + 
+    ggplot2::ggplot(df, ggplot2::aes(x = y_pred, y = y_true)) + 
     ggplot2::geom_point() + 
     ggplot2::stat_smooth(method="glm", method.args = list(family = "binomial"), se=FALSE) + 
     ggplot2::scale_x_continuous("Predicted y values", limits = c(0, 1), 
