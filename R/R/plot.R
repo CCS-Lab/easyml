@@ -151,7 +151,8 @@ plot_roc_curve <- function(y_true, y_pred) {
 
 #' Plot histogram of metrics.
 #'
-#' @param mses A vector, the mean squared error metrics to be plotted as a histogram.
+#' @param x A vector, the mean squared error metrics to be plotted as a histogram.
+#' @param name A character vector of length one, the name of the metric.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
