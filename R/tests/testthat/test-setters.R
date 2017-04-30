@@ -142,12 +142,12 @@ test_that("Test set_preprocess.", {
 
 test_that("Test set_measure.", {
   expect_error(set_measure(NULL, NULL, NULL))
-  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_cor_score)
-  expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_area_under_curve)
-  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_cor_score)
-  expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_area_under_curve)
-  expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_cor_score)
-  expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_area_under_curve)
+  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_auc_score)
+  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_auc_score)
+  expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_auc_score)
   expect_equal(set_measure(identity), identity)
   expect_equal(set_measure(identity, "", NULL), identity)
   expect_equal(set_measure(identity, NULL, ""), identity)
@@ -166,8 +166,8 @@ test_that("Test set_plot_predictions.", {
 
 test_that("Test set_plot_metrics.", {
   expect_error(set_plot_metrics(""))
+  expect_equal(set_plot_metrics(measure_mse_score), plot_metrics_gaussian_mse_score)
+  expect_equal(set_plot_metrics(measure_correlation_score), plot_metrics_gaussian_correlation_score)
   expect_equal(set_plot_metrics(measure_r2_score), plot_metrics_gaussian_r2_score)
-  expect_equal(set_plot_metrics(measure_mean_squared_error), plot_metrics_gaussian_mean_squared_error)
-  expect_equal(set_plot_metrics(measure_area_under_curve), plot_metrics_binomial_area_under_curve)
-  expect_equal(set_plot_metrics(measure_cor_score), plot_metrics_gaussian_cor_score)
+  expect_equal(set_plot_metrics(measure_auc_score), plot_metrics_binomial_auc_score)
 })
