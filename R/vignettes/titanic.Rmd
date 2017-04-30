@@ -97,7 +97,7 @@ We can interpret the weights in the following way:
 * If a passenger is male, the log-odds of survival decrease by 2.64 units. 
 
 ```{r message=FALSE}
-results$plot_coefficients_processed
+results$plot_coefficients
 output <- results$coefficients_processed
 knitr::kable(output[nrow(output):1, ], digits  = 2)
 ```
@@ -107,8 +107,8 @@ knitr::kable(output[nrow(output):1, ], digits  = 2)
 We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.
 
 ```{r}
-results$plot_predictions_train_mean
-results$plot_predictions_test_mean
+results$plot_predictions_single_train_test_split_train
+results$plot_predictions_single_train_test_split_test
 ```
 
 ### Metrics: AUC
@@ -116,8 +116,8 @@ results$plot_predictions_test_mean
 We can examine both the in-sample and out-of-sample AUC metrics for `n_divisions` train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.
 
 ```{r}
-results$plot_metrics_train_mean
-results$plot_metrics_test_mean
+results$plot_model_performance_train
+results$plot_model_performance_test
 ```
 
 ## Discuss

@@ -4,9 +4,9 @@ library(easyml) # https://github.com/CCS-Lab/easyml
 data("cocaine_dependence", package = "easyml")
 
 # Settings
-.n_samples <- 1
+.n_samples <- 15
 .n_divisions <- 5
-.n_iterations <- 1
+.n_iterations <- 2
 .n_core <- 1
 
 # Analyze data

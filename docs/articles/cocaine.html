@@ -76,10 +76,19 @@
 <html><body><a href="#load-the-data" class="anchor"> </a></body></html>Load the data</h2>
 <p>First we load our libraries and the Cocaine Dependence dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggplot2)
-
-<span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
+<span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<pre><code>## Want to understand how all the pieces fit together? Buy the
+## ggplot2 book: http://ggplot2.org/book/</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
 knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_dependence))</code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -249,8 +258,8 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_depend
 <h3 class="hasAnchor">
 <html><body><a href="#estimates-of-variable-importances" class="anchor"> </a></body></html>Estimates of variable importances</h3>
 <p>TO BE EDITED.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_variable_importances_processed</code></pre></div>
-<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_variable_importances</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$variable_importances_processed
 knitr::<span class="kw">kable</span>(output, <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
@@ -264,129 +273,139 @@ knitr::<span class="kw">kable</span>(output, <span class="dt">digits  =</span> <
 <tbody>
 <tr class="odd">
 <td align="left">age</td>
-<td align="right">1.61</td>
-<td align="right">0.09</td>
-<td align="right">1.51</td>
-<td align="right">1.70</td>
+<td align="right">2.87</td>
+<td align="right">0.14</td>
+<td align="right">2.73</td>
+<td align="right">3.01</td>
 </tr>
 <tr class="even">
 <td align="left">male</td>
+<td align="right">0.15</td>
 <td align="right">0.03</td>
-<td align="right">0.01</td>
-<td align="right">0.02</td>
-<td align="right">0.04</td>
+<td align="right">0.12</td>
+<td align="right">0.18</td>
 </tr>
 <tr class="odd">
 <td align="left">edu_yrs</td>
-<td align="right">1.32</td>
-<td align="right">0.07</td>
-<td align="right">1.25</td>
-<td align="right">1.39</td>
+<td align="right">2.46</td>
+<td align="right">0.13</td>
+<td align="right">2.33</td>
+<td align="right">2.59</td>
 </tr>
 <tr class="even">
 <td align="left">imt_comm_errors</td>
-<td align="right">0.56</td>
-<td align="right">0.05</td>
-<td align="right">0.51</td>
-<td align="right">0.61</td>
+<td align="right">1.44</td>
+<td align="right">0.11</td>
+<td align="right">1.33</td>
+<td align="right">1.55</td>
 </tr>
 <tr class="odd">
 <td align="left">imt_omis_errors</td>
-<td align="right">0.25</td>
-<td align="right">0.03</td>
-<td align="right">0.21</td>
-<td align="right">0.28</td>
+<td align="right">0.79</td>
+<td align="right">0.05</td>
+<td align="right">0.74</td>
+<td align="right">0.84</td>
 </tr>
 <tr class="even">
 <td align="left">a_imt</td>
-<td align="right">0.82</td>
-<td align="right">0.05</td>
-<td align="right">0.77</td>
-<td align="right">0.87</td>
+<td align="right">1.71</td>
+<td align="right">0.12</td>
+<td align="right">1.60</td>
+<td align="right">1.83</td>
 </tr>
 <tr class="odd">
 <td align="left">b_d_imt</td>
-<td align="right">0.53</td>
-<td align="right">0.05</td>
-<td align="right">0.48</td>
-<td align="right">0.58</td>
+<td align="right">1.36</td>
+<td align="right">0.10</td>
+<td align="right">1.26</td>
+<td align="right">1.45</td>
 </tr>
 <tr class="even">
 <td align="left">stop_ssrt</td>
-<td align="right">0.29</td>
-<td align="right">0.04</td>
-<td align="right">0.25</td>
-<td align="right">0.33</td>
+<td align="right">0.80</td>
+<td align="right">0.05</td>
+<td align="right">0.75</td>
+<td align="right">0.85</td>
 </tr>
 <tr class="odd">
 <td align="left">lnk_adjdd</td>
-<td align="right">1.17</td>
-<td align="right">0.10</td>
-<td align="right">1.07</td>
-<td align="right">1.27</td>
+<td align="right">2.47</td>
+<td align="right">0.17</td>
+<td align="right">2.30</td>
+<td align="right">2.64</td>
 </tr>
 <tr class="even">
 <td align="left">lkhat_kirby</td>
-<td align="right">0.28</td>
-<td align="right">0.02</td>
-<td align="right">0.26</td>
-<td align="right">0.30</td>
+<td align="right">0.89</td>
+<td align="right">0.09</td>
+<td align="right">0.81</td>
+<td align="right">0.98</td>
 </tr>
 <tr class="odd">
 <td align="left">revlr_per_errors</td>
-<td align="right">0.76</td>
-<td align="right">0.07</td>
-<td align="right">0.69</td>
-<td align="right">0.83</td>
+<td align="right">1.80</td>
+<td align="right">0.15</td>
+<td align="right">1.65</td>
+<td align="right">1.94</td>
 </tr>
 <tr class="even">
 <td align="left">bis_attention</td>
-<td align="right">0.60</td>
-<td align="right">0.04</td>
-<td align="right">0.56</td>
-<td align="right">0.63</td>
+<td align="right">1.44</td>
+<td align="right">0.11</td>
+<td align="right">1.33</td>
+<td align="right">1.55</td>
 </tr>
 <tr class="odd">
 <td align="left">bis_motor</td>
-<td align="right">1.23</td>
-<td align="right">0.08</td>
-<td align="right">1.16</td>
-<td align="right">1.31</td>
+<td align="right">2.35</td>
+<td align="right">0.16</td>
+<td align="right">2.19</td>
+<td align="right">2.52</td>
 </tr>
 <tr class="even">
 <td align="left">bis_nonpl</td>
-<td align="right">1.72</td>
-<td align="right">0.10</td>
-<td align="right">1.62</td>
-<td align="right">1.82</td>
+<td align="right">3.20</td>
+<td align="right">0.20</td>
+<td align="right">3.00</td>
+<td align="right">3.40</td>
 </tr>
 <tr class="odd">
 <td align="left">igt_total</td>
-<td align="right">1.10</td>
-<td align="right">0.05</td>
-<td align="right">1.05</td>
-<td align="right">1.14</td>
+<td align="right">2.16</td>
+<td align="right">0.13</td>
+<td align="right">2.03</td>
+<td align="right">2.29</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="predictions-roc-curve" class="section level3">
+<div id="predictions" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
+<html><body><a href="#predictions" class="anchor"> </a></body></html>Predictions</h3>
 <p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_train_mean</code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_test_mean</code></pre></div>
-<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_train</code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
-<div id="metrics-auc" class="section level3">
+<div id="roc-curve" class="section level3">
 <h3 class="hasAnchor">
-<html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
+<html><body><a href="#roc-curve" class="anchor"> </a></body></html>ROC Curve</h3>
+<p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_roc_single_train_test_split_train</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_roc_single_train_test_split_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+</div>
+<div id="model-performance" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#model-performance" class="anchor"> </a></body></html>Model Performance</h3>
 <p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_train_mean</code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_metrics_test_mean</code></pre></div>
-<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_train</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
 </div>
 </div>
 <div id="discuss" class="section level2">
