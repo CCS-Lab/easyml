@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_metrics}
 \alias{generate_metrics}
-\title{Generate metrics.}
+\title{Generate model performance metrics.}
 \usage{
 generate_metrics(object)
 }
@@ -10,10 +10,10 @@ generate_metrics(object)
 \item{object}{TO BE EDITED.}
 }
 \value{
-A list of matrixes, the generated metrics.
+A list of matrixes, the generated model performance metrics.
 }
 \description{
-Generate metrics.
+Generate model performance metrics.
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},

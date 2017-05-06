@@ -240,5 +240,5 @@ generate_metrics <- function(object) {
   metrics_train <- unlist(lapply(output_divisions, function(x) x$metric_train))
   metrics_test <- unlist(lapply(output_divisions, function(x) x$metric_test))
   
-  list(metrics_train = metrics_train, metrics_test = metrics_test)
+  list(model_performance_train = metrics_train, model_performance_test = metrics_test)
 }

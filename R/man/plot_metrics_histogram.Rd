@@ -7,7 +7,9 @@
 plot_metrics_histogram(x, name)
 }
 \arguments{
-\item{mses}{A vector, the mean squared error metrics to be plotted as a histogram.}
+\item{x}{A vector, the mean squared error metrics to be plotted as a histogram.}
+
+\item{name}{A character vector of length one, the name of the metric.}
 }
 \value{
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
