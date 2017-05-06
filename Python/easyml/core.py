@@ -4,6 +4,7 @@ The core functionality of easyml.
 import numpy as np
 import progressbar
 
+from . import plot
 from . import setters
 from . import utils
 
@@ -128,10 +129,16 @@ class easy_analysis:
     def process_coefficients(self):
         raise NotImplementedError
 
+    def plot_coefficients_processed(self):
+        raise NotImplementedError
+
     def extract_variable_importances(self, estimator):
         raise NotImplementedError
 
     def process_variable_importances(self):
+        raise NotImplementedError
+
+    def plot_variable_importances_processed(self):
         raise NotImplementedError
 
     def predict_model(self):
@@ -164,7 +171,7 @@ class easy_analysis:
         coefficients = []
 
         # Run sequentially
-        print("Generating coefficients:")
+        print('Generating coefficients from multiple model builds:')
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
@@ -209,7 +216,7 @@ class easy_analysis:
         variable_importances = []
 
         # Run sequentially
-        print("Generating variable_importances:")
+        print('Generating variable importances from multiple model builds:')
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
@@ -256,7 +263,7 @@ class easy_analysis:
         y_test_preds = []
 
         # Run sequentially
-        print("Generating predictions:")
+        print('Generating predictions for a single train test split:')
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
@@ -284,8 +291,8 @@ class easy_analysis:
                                                                     categorical_variables=self.categorical_variables)
 
         # Create temporary containers
-        train_metrics = []
-        test_metrics = []
+        y_train_preds = []
+        y_test_preds = []
 
         # Loop over number of iterations
         for _ in range(self.n_iterations):
@@ -303,20 +310,21 @@ class easy_analysis:
             y_train_pred = self.predict_model(model, X_train_preprocessed)
             y_test_pred = self.predict_model(model, X_test_preprocessed)
 
-            # Calculate metric on training and test sets
-            train_metric = self.measure(y_train, y_train_pred)
-            test_metric = self.measure(y_test, y_test_pred)
-
             # Save metrics
-            train_metrics.append(train_metric)
-            test_metrics.append(test_metric)
+            y_train_preds.append(y_train_pred)
+            y_test_preds.append(y_test_pred)
 
         # Take mean of metrics
-        mean_train_metric = np.mean(np.asarray(train_metrics))
-        mean_test_metric = np.mean(np.asarray(test_metrics))
+        # import pdb; pdb.set_trace()
+        predictions_train = np.mean(np.asarray(y_train_preds), axis=0)
+        predictions_test = np.mean(np.asarray(y_test_preds), axis=0)
+
+        # Create metrics
+        metric_train = self.measure(y_train, predictions_train)
+        metric_test = self.measure(y_test, predictions_test)
 
         # Save metrics
-        return mean_train_metric, mean_test_metric
+        return metric_train, metric_test
 
     def generate_metrics(self):
         # Initialize progress bar (optional)
@@ -325,20 +333,20 @@ class easy_analysis:
             i = 0
 
         # Create temporary containers
-        mean_train_metrics = []
-        mean_test_metrics = []
+        metrics_train = []
+        metrics_test = []
         
         # Run sequentially
-        print("Generating metrics:")
+        print('Generating metrics assessing model performance over multiple train test splits:')
 
         # Loop over number of divisions
         for _ in range(self.n_divisions):
             # Bootstrap metric
-            mean_train_metric, mean_test_metric = self.generate_metric()
+            metric_train, metric_test = self.generate_metric()
 
             # Process loop and save in temporary containers
-            mean_train_metrics.append(mean_train_metric)
-            mean_test_metrics.append(mean_test_metric)
+            metrics_train.append(metric_train)
+            metrics_test.append(metric_test)
 
             # Increment progress bar
             if self.progress_bar:
@@ -346,7 +354,25 @@ class easy_analysis:
                 i += 1
 
         # cast to np.ndarray
-        mean_train_metrics = np.asarray(mean_train_metrics)
-        mean_test_metrics = np.asarray(mean_test_metrics)
+        metrics_train = np.asarray(metrics_train)
+        metrics_test = np.asarray(metrics_test)
 
-        return mean_train_metrics, mean_test_metrics
+        return metrics_train, metrics_test
+
+    def plot_predictions_train(self):
+        return 1
+
+    def plot_predictions_test(self):
+        return 1
+
+    def plot_roc_curve_train(self):
+        return 1
+
+    def plot_roc_curve_test(self):
+        return 1
+
+    def plot_metrics_train(self):
+        return 1
+
+    def plot_metrics_test(self):
+        return 1

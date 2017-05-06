@@ -12,28 +12,6 @@ __all__ = []
 plt.style.use('ggplot')
 
 
-def plot_coefficients_processed(coefficients):
-    n = coefficients.shape[1]
-    coefficients_mean = np.mean(coefficients, axis=0)
-    coefficients_std = np.std(coefficients, axis=0)
-    fig, ax = plt.figure(), plt.gca()
-    ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
-                color='black', ecolor='black')
-    ax.set_title('Coefficients')
-    return fig
-
-
-def plot_variable_importances_processed(importances):
-    # Plot the feature importances of the forest
-    importances_mean = np.mean(importances, axis=0)
-    importances_std = np.std(importances, axis=0)
-    n = importances.shape[1]
-    fig, ax = plt.figure(), plt.gca()
-    ax.bar(range(n), importances_mean, color='grey', ecolor='black',
-            yerr=importances_std, align='center')
-    ax.set_title('Feature importances')
-    return fig
-
 def plot_metrics_gaussian_mean_squared_error(x):
     bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)

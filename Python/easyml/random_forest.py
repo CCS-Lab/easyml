@@ -1,6 +1,8 @@
 """
 Functions for random forest analysis.
 """
+import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 
 from .core import easy_analysis
@@ -53,3 +55,14 @@ class easy_random_forest(easy_analysis):
             predictions = model.predict_proba(X)
             predictions = predictions[:, 1]
         return predictions
+
+    def plot_variable_importances_processed(importances):
+        # Plot the feature importances of the forest
+        importances_mean = np.mean(importances, axis=0)
+        importances_std = np.std(importances, axis=0)
+        n = importances.shape[1]
+        fig, ax = plt.figure(), plt.gca()
+        ax.bar(range(n), importances_mean, color='grey', ecolor='black',
+               yerr=importances_std, align='center')
+        ax.set_title('Feature importances')
+        return fig

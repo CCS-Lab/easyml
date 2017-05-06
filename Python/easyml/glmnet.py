@@ -2,6 +2,7 @@
 Functions for glmnet analysis.
 """
 from glmnet import ElasticNet, LogitNet
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -74,3 +75,14 @@ class easy_glmnet(easy_analysis):
             predictions = model.predict_proba(X)
             predictions = predictions[:, 1]
         return predictions
+
+    def plot_coefficients_processed(coefficients):
+        n = coefficients.shape[1]
+        coefficients_mean = np.mean(coefficients, axis=0)
+        coefficients_std = np.std(coefficients, axis=0)
+        fig, ax = plt.figure(), plt.gca()
+        ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
+                    color='black', ecolor='black')
+        ax.set_title('Coefficients')
+        return fig
+
