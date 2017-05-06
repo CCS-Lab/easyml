@@ -151,10 +151,10 @@ generate_predictions <- function(object) {
        predictions_test = predictions_test)
 }
 
-#' Generate metrics.
+#' Generate model performance metrics.
 #'
 #' @param object TO BE EDITED.
-#' @return A list of matrixes, the generated metrics.
+#' @return A list of matrixes, the generated model performance metrics.
 #' @family generate
 #' @export
 generate_metrics <- function(object) {
@@ -213,26 +213,32 @@ generate_metrics <- function(object) {
       predictions_test <- predict_model(results, newx = X_test)
       
       # Save metrics
-      metric_train <- measure(y_train, predictions_train)
-      metric_test <- measure(y_test, predictions_test)
-      list(metric_train = metric_train, metric_test = metric_test)
+      list(predictions_train = predictions_train, 
+           predictions_test = predictions_test)
     })
     
-    # Take average of metrics
-    metrics_train <- unlist(lapply(output_iterations, function(x) x$metric_train))
-    metrics_test <- unlist(lapply(output_iterations, function(x) x$metric_test))
+    # Take average of predicitons
+    predictions_train <- lapply(output_iterations, function(x) x$predictions_train)
+    predictions_train <- matrix(unlist(predictions_train), ncol = n_iterations)
+    predictions_test <- lapply(output_iterations, function(x) x$predictions_test)
+    predictions_test <- matrix(unlist(predictions_test), ncol = n_iterations)
     
-    # Save mean of metrics
-    list(metrics_train_mean = mean(metrics_train), 
-         metrics_test_mean = mean(metrics_test))
+    # Save mean of predictions
+    predictions_train <- apply(predictions_train, 1, mean)
+    predictions_test <- apply(predictions_test, 1, mean)
+    
+    # Create metrics
+    metric_train <- measure(y_train, predictions_train)
+    metric_test <- measure(y_test, predictions_test)
+    
+    list(metric_train = metric_train, metric_test = metric_test)
   }
 
   # Loop over number of divisions
   output_divisions <- looper(1:n_divisions, generate_metric)
   
-  metrics_train_mean <- unlist(lapply(output_divisions, function(x) x$metrics_train_mean))
-  metrics_test_mean <- unlist(lapply(output_divisions, function(x) x$metrics_test_mean))
+  metrics_train <- unlist(lapply(output_divisions, function(x) x$metric_train))
+  metrics_test <- unlist(lapply(output_divisions, function(x) x$metric_test))
   
-  list(metrics_train_mean = metrics_train_mean, 
-       metrics_test_mean = metrics_test_mean)
+  list(metrics_train = metrics_train, metrics_test = metrics_test)
 }
