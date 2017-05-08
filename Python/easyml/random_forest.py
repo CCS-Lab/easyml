@@ -21,7 +21,7 @@ class easy_random_forest(easy_analysis):
                  random_state=None, progress_bar=True, n_core=1,
                  generate_coefficients=False,
                  generate_variable_importances=True,
-                 generate_predictions=True, generate_metrics=True,
+                 generate_predictions=True, generate_model_performance=True,
                  model_args=None):
         super().__init__(data, dependent_variable,
                          algorithm=algorithm, family=family,
@@ -32,7 +32,8 @@ class easy_random_forest(easy_analysis):
                          random_state=random_state, progress_bar=progress_bar, n_core=n_core,
                          generate_coefficients=generate_coefficients,
                          generate_variable_importances=generate_variable_importances,
-                         generate_predictions=generate_predictions, generate_metrics=generate_metrics,
+                         generate_predictions=generate_predictions,
+                         generate_model_performance=generate_model_performance,
                          model_args=model_args)
 
     def create_estimator(self):
@@ -56,11 +57,10 @@ class easy_random_forest(easy_analysis):
             predictions = predictions[:, 1]
         return predictions
 
-    def plot_variable_importances_processed(importances):
-        # Plot the feature importances of the forest
-        importances_mean = np.mean(importances, axis=0)
-        importances_std = np.std(importances, axis=0)
-        n = importances.shape[1]
+    def plot_variable_importances(self):
+        n = self.importances.shape[1]
+        importances_mean = np.mean(self.importances, axis=0)
+        importances_std = np.std(self.importances, axis=0)
         fig, ax = plt.figure(), plt.gca()
         ax.bar(range(n), importances_mean, color='grey', ecolor='black',
                yerr=importances_std, align='center')

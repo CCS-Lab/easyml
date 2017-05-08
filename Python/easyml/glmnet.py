@@ -23,7 +23,7 @@ class easy_glmnet(easy_analysis):
                  random_state=None, progress_bar=True, n_core=1,
                  generate_coefficients=True,
                  generate_variable_importances=False,
-                 generate_predictions=True, generate_metrics=True,
+                 generate_predictions=True, generate_model_performance=True,
                  model_args=None):
         super().__init__(data, dependent_variable,
                          algorithm=algorithm, family=family,
@@ -34,7 +34,8 @@ class easy_glmnet(easy_analysis):
                          random_state=random_state, progress_bar=progress_bar, n_core=n_core,
                          generate_coefficients=generate_coefficients,
                          generate_variable_importances=generate_variable_importances,
-                         generate_predictions=generate_predictions, generate_metrics=generate_metrics,
+                         generate_predictions=generate_predictions,
+                         generate_model_performance=generate_model_performance,
                          model_args=model_args)
 
     def create_estimator(self):
@@ -76,13 +77,12 @@ class easy_glmnet(easy_analysis):
             predictions = predictions[:, 1]
         return predictions
 
-    def plot_coefficients_processed(coefficients):
-        n = coefficients.shape[1]
-        coefficients_mean = np.mean(coefficients, axis=0)
-        coefficients_std = np.std(coefficients, axis=0)
-        fig, ax = plt.figure(), plt.gca()
+    def plot_coefficients(self):
+        n = self.coefficients.shape[1]
+        coefficients_mean = np.mean(self.coefficients, axis=0)
+        coefficients_std = np.std(self.coefficients, axis=0)
+        fig, ax = plt.subplots()
         ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
                     color='black', ecolor='black')
         ax.set_title('Coefficients')
         return fig
-

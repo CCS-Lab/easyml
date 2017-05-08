@@ -25,7 +25,7 @@ def plot_metrics_gaussian_mean_squared_error(x):
     return fig
 
 
-def plot_metrics_gaussian_cor_score(x):
+def plot_model_performance_gaussian_cor_score(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
@@ -39,7 +39,7 @@ def plot_metrics_gaussian_cor_score(x):
     return fig
 
 
-def plot_metrics_gaussian_r2_score(x):
+def plot_model_performance_gaussian_r2_score(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
@@ -53,7 +53,7 @@ def plot_metrics_gaussian_r2_score(x):
     return fig
 
 
-def plot_metrics_binomial_area_under_curve(x):
+def plot_model_performance_binomial_area_under_curve(x):
     bins = np.arange(0, 1, 0.02)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()

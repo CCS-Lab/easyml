@@ -20,7 +20,7 @@ class easy_support_vector_machine(easy_analysis):
                  random_state=None, progress_bar=True, n_core=1,
                  generate_coefficients=False,
                  generate_variable_importances=False,
-                 generate_predictions=True, generate_metrics=True,
+                 generate_predictions=True, generate_model_performance=True,
                  model_args=None):
         super().__init__(data, dependent_variable,
                          algorithm=algorithm, family=family,
@@ -31,7 +31,8 @@ class easy_support_vector_machine(easy_analysis):
                          random_state=random_state, progress_bar=progress_bar, n_core=n_core,
                          generate_coefficients=generate_coefficients,
                          generate_variable_importances=generate_variable_importances,
-                         generate_predictions=generate_predictions, generate_metrics=generate_metrics,
+                         generate_predictions=generate_predictions,
+                         generate_model_performance=generate_model_performance,
                          model_args=model_args)
 
     def create_estimator(self):

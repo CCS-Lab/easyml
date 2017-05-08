@@ -22,7 +22,7 @@ class easy_analysis:
                  random_state=None, progress_bar=True, n_core=1,
                  generate_coefficients=None,
                  generate_variable_importances=None,
-                 generate_predictions=None, generate_metrics=None,
+                 generate_predictions=None, generate_model_performance=None,
                  model_args=None):
         # set attributes
         self.data = data
@@ -113,12 +113,12 @@ class easy_analysis:
             self.predictions_train_mean = np.mean(self.predictions_train, axis=0)
             self.predictions_test_mean = np.mean(self.predictions_test, axis=0)
 
-        if generate_metrics:
-            # generate metrics
-            self.metrics = self.generate_metrics()
+        if generate_model_performance:
+            # generate measures of model performance
+            self.model_performance = self.generate_model_performance()
 
-            # unpack train and test metrics
-            self.metrics_train, self.metrics_test = self.metrics
+            # unpack train and test measures of model performance
+            self.model_performance_train, self.model_performance_test = self.model_performance
 
     def create_estimator(self):
         raise NotImplementedError
@@ -144,7 +144,7 @@ class easy_analysis:
     def predict_model(self):
         raise NotImplementedError
 
-    def generate_coefficient(self):
+    def generate_coefficients_(self):
         # Create estimator
         estimator = self.create_estimator()
 
@@ -175,7 +175,7 @@ class easy_analysis:
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
-            coefficient = self.generate_coefficient()
+            coefficient = self.generate_coefficients_()
             coefficients.append(coefficient)
 
             # Increment progress bar
@@ -189,7 +189,7 @@ class easy_analysis:
         # return coefficients
         return coefficients
 
-    def generate_variable_importance(self):
+    def generate_variable_importances_(self):
         # Create estimator
         estimator = self.create_estimator()
 
@@ -220,7 +220,7 @@ class easy_analysis:
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
-            variable_importance = self.generate_variable_importance()
+            variable_importance = self.generate_variable_importances_()
             variable_importances.append(variable_importance)
 
             # Increment progress bar
@@ -234,7 +234,7 @@ class easy_analysis:
         # return variable_importances
         return variable_importances
 
-    def generate_prediction(self):
+    def generate_predictions_(self):
         # Create estimator
         estimator = self.create_estimator()
 
@@ -267,7 +267,7 @@ class easy_analysis:
 
         # Loop over number of iterations
         for _ in range(self.n_samples):
-            y_train_pred, y_test_pred = self.generate_prediction()
+            y_train_pred, y_test_pred = self.generate_predictions_()
             y_train_preds.append(y_train_pred)
             y_test_preds.append(y_test_pred)
 
@@ -282,7 +282,7 @@ class easy_analysis:
 
         return y_train_preds, y_test_preds
 
-    def generate_metric(self):
+    def generate_model_performance_(self):
         # Split data
         X_train, X_test, y_train, y_test = self.resample(self.X, self.y)
 
@@ -310,43 +310,43 @@ class easy_analysis:
             y_train_pred = self.predict_model(model, X_train_preprocessed)
             y_test_pred = self.predict_model(model, X_test_preprocessed)
 
-            # Save metrics
+            # Save measures of model performance
             y_train_preds.append(y_train_pred)
             y_test_preds.append(y_test_pred)
 
-        # Take mean of metrics
+        # Take mean of measures of model performance
         # import pdb; pdb.set_trace()
         predictions_train = np.mean(np.asarray(y_train_preds), axis=0)
         predictions_test = np.mean(np.asarray(y_test_preds), axis=0)
 
-        # Create metrics
-        metric_train = self.measure(y_train, predictions_train)
-        metric_test = self.measure(y_test, predictions_test)
+        # Create measures of model performance
+        model_performance_train = self.measure(y_train, predictions_train)
+        model_performance_test = self.measure(y_test, predictions_test)
 
-        # Save metrics
-        return metric_train, metric_test
+        # Save model_performances
+        return model_performance_train, model_performance_test
 
-    def generate_metrics(self):
+    def generate_model_performance(self):
         # Initialize progress bar (optional)
         if self.progress_bar:
             bar = progressbar.ProgressBar(max_value=self.n_divisions)
             i = 0
 
         # Create temporary containers
-        metrics_train = []
-        metrics_test = []
+        model_performance_train_all = []
+        model_performance_test_all = []
         
         # Run sequentially
-        print('Generating metrics assessing model performance over multiple train test splits:')
+        print('Generating measures of model performance over multiple train test splits:')
 
         # Loop over number of divisions
         for _ in range(self.n_divisions):
             # Bootstrap metric
-            metric_train, metric_test = self.generate_metric()
+            model_performance_train, model_performance_test = self.generate_model_performance_()
 
             # Process loop and save in temporary containers
-            metrics_train.append(metric_train)
-            metrics_test.append(metric_test)
+            model_performance_train_all.append(model_performance_train)
+            model_performance_test_all.append(model_performance_test)
 
             # Increment progress bar
             if self.progress_bar:
@@ -354,10 +354,10 @@ class easy_analysis:
                 i += 1
 
         # cast to np.ndarray
-        metrics_train = np.asarray(metrics_train)
-        metrics_test = np.asarray(metrics_test)
+        model_performance_train = np.asarray(model_performance_train_all)
+        model_performance_test = np.asarray(model_performance_test_all)
 
-        return metrics_train, metrics_test
+        return model_performance_train, model_performance_test
 
     def plot_predictions_train(self):
         return 1
@@ -371,8 +371,8 @@ class easy_analysis:
     def plot_roc_curve_test(self):
         return 1
 
-    def plot_metrics_train(self):
+    def plot_model_performance_train(self):
         return 1
 
-    def plot_metrics_test(self):
+    def plot_model_performance_test(self):
         return 1
