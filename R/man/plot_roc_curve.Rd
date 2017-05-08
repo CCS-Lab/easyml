@@ -19,11 +19,11 @@ Plot ROC Curve.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
-  \code{\link{plot_metrics_binomial_auc_score}},
-  \code{\link{plot_metrics_gaussian_correlation_score}},
-  \code{\link{plot_metrics_gaussian_mse_score}},
-  \code{\link{plot_metrics_gaussian_r2_score}},
-  \code{\link{plot_metrics_histogram}},
+  \code{\link{plot_model_performance_binomial_auc_score}},
+  \code{\link{plot_model_performance_gaussian_correlation_score}},
+  \code{\link{plot_model_performance_gaussian_mse_score}},
+  \code{\link{plot_model_performance_gaussian_r2_score}},
+  \code{\link{plot_model_performance_histogram}},
   \code{\link{plot_predictions_binomial}},
   \code{\link{plot_predictions_gaussian}},
   \code{\link{plot_variable_importances_processed}}

@@ -110,7 +110,7 @@ easy_random_forest <- function(.data, dependent_variable,
                                progress_bar = TRUE, n_core = 1, 
                                coefficients = FALSE, 
                                variable_importances = TRUE, 
-                               predictions = TRUE, metrics = TRUE, 
+                               predictions = TRUE, model_performance = TRUE, 
                                model_args = list()) {
   easy_analysis(.data, dependent_variable, algorithm = "random_forest", 
                 family = family, resample = resample, 
@@ -123,6 +123,6 @@ easy_random_forest <- function(.data, dependent_variable,
                 progress_bar = progress_bar, n_core = n_core, 
                 coefficients = coefficients, 
                 variable_importances = variable_importances, 
-                predictions = predictions, metrics = metrics, 
+                predictions = predictions, model_performance = model_performance, 
                 model_args = model_args)
 }

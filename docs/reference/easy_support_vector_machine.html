@@ -90,8 +90,8 @@
   <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_samples</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>n_divisions</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>n_iterations</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>random_state</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>coefficients</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>variable_importances</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>predictions</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
+  <span class='kw'>variable_importances</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>predictions</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>model_performance</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -118,7 +118,7 @@
       <dt>n_samples</dt>
       <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</dd>
       <dt>n_divisions</dt>
-      <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.</dd>
+      <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the measures of model performance. Defaults to 1000.</dd>
       <dt>n_iterations</dt>
       <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</dd>
       <dt>random_state</dt>
@@ -133,8 +133,8 @@
       <dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
       <dt>predictions</dt>
       <dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
-      <dt>metrics</dt>
-      <dd>A logical vector of length one; whether or not to generate metrics for this analysis.</dd>
+      <dt>model_performance</dt>
+      <dd>A logical vector of length one; whether or not to generate measures of model performance for this analysis.</dd>
       <dt>model_args</dt>
       <dd>A list; the arguments to be passed to the algorithm specified.</dd>
     </dl>

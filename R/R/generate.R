@@ -151,13 +151,13 @@ generate_predictions <- function(object) {
        predictions_test = predictions_test)
 }
 
-#' Generate model performance metrics.
+#' Generate measures of model performance.
 #'
 #' @param object TO BE EDITED.
-#' @return A list of matrixes, the generated model performance metrics.
+#' @return A list of matrixes, the generated measures of model performance.
 #' @family generate
 #' @export
-generate_metrics <- function(object) {
+generate_model_performance <- function(object) {
   # Extract attributes from object
   X <- object[["X"]]
   y <- object[["y"]]
@@ -174,7 +174,7 @@ generate_metrics <- function(object) {
 
   # Print an informative message
   if (progress_bar) {
-    msg1 <- "Generating metrics assessing model performance"
+    msg1 <- "Generating measures of model performance"
     msg2 <- " over multiple train test splits"
     msg <- paste0(msg1, msg2)
     parallel_string <- ifelse(n_core > 1, " in parallel:", ":")
@@ -200,8 +200,8 @@ generate_metrics <- function(object) {
     X_test <- result[["X_test"]]
 
     # Create temporary containers
-    metric_train <- numeric()
-    test_metrics <- numeric()
+    model_performance_train <- numeric()
+    model_performance_test <- numeric()
     
     # Loop over number of iterations
     output_iterations <- lapply(1:n_iterations, function(i) {
@@ -212,33 +212,40 @@ generate_metrics <- function(object) {
       predictions_train <- predict_model(results, newx = X_train)
       predictions_test <- predict_model(results, newx = X_test)
       
-      # Save metrics
+      # Save measures of model performance
       list(predictions_train = predictions_train, 
            predictions_test = predictions_test)
     })
     
     # Take average of predicitons
-    predictions_train <- lapply(output_iterations, function(x) x$predictions_train)
+    predictions_train <- lapply(output_iterations, 
+                                function(x) x$predictions_train)
     predictions_train <- matrix(unlist(predictions_train), ncol = n_iterations)
-    predictions_test <- lapply(output_iterations, function(x) x$predictions_test)
+    predictions_test <- lapply(output_iterations, 
+                               function(x) x$predictions_test)
     predictions_test <- matrix(unlist(predictions_test), ncol = n_iterations)
     
     # Save mean of predictions
     predictions_train <- apply(predictions_train, 1, mean)
     predictions_test <- apply(predictions_test, 1, mean)
     
-    # Create metrics
-    metric_train <- measure(y_train, predictions_train)
-    metric_test <- measure(y_test, predictions_test)
+    # Create measures of model performance
+    model_performance_train <- measure(y_train, predictions_train)
+    model_performance_test <- measure(y_test, predictions_test)
     
-    list(metric_train = metric_train, metric_test = metric_test)
+    list(model_performance_train = model_performance_train, 
+         model_performance_test = model_performance_test)
   }
 
   # Loop over number of divisions
   output_divisions <- looper(1:n_divisions, generate_metric)
+  model_performance_train <- lapply(output_divisions, 
+                                    function(x) x$model_performance_train)
+  model_performance_train <- unlist(model_performance_train)
+  model_performance_test <- lapply(output_divisions, 
+                                   function(x) x$model_performance_test)
+  model_performance_test <- unlist(model_performance_test)
   
-  metrics_train <- unlist(lapply(output_divisions, function(x) x$metric_train))
-  metrics_test <- unlist(lapply(output_divisions, function(x) x$metric_test))
-  
-  list(model_performance_train = metrics_train, model_performance_test = metrics_test)
+  list(model_performance_train = model_performance_train, 
+       model_performance_test = model_performance_test)
 }

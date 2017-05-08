@@ -88,7 +88,7 @@ easy_support_vector_machine <- function(.data, dependent_variable,
                                         progress_bar = TRUE, n_core = 1, 
                                         coefficients = FALSE, 
                                         variable_importances = FALSE, 
-                                        predictions = TRUE, metrics = TRUE, 
+                                        predictions = TRUE, model_performance = TRUE, 
                                         model_args = list()) {
   easy_analysis(.data, dependent_variable, 
                 algorithm = "support_vector_machine", 
@@ -102,6 +102,6 @@ easy_support_vector_machine <- function(.data, dependent_variable,
                 progress_bar = progress_bar, n_core = n_core, 
                 coefficients = coefficients, 
                 variable_importances = variable_importances, 
-                predictions = predictions, metrics = metrics, 
+                predictions = predictions, model_performance = model_performance, 
                 model_args = model_args)
 }

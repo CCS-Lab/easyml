@@ -16,7 +16,7 @@ A data.frame, the generated penalized regression model coefficients.
 Generate coefficients.
 }
 \seealso{
-Other generate: \code{\link{generate_metrics}},
+Other generate: \code{\link{generate_model_performance}},
   \code{\link{generate_predictions}},
   \code{\link{generate_variable_importances}}
 }

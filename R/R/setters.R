@@ -245,28 +245,28 @@ set_plot_predictions <- function(algorithm, family) {
   plot_predictions
 }
 
-#' Set plot metrics function.
+#' Set plot model performance function.
 #' 
-#' Sets the function responsible for plotting the metrics generated from the predictions generated from a fitted model.
+#' Sets the function responsible for plotting the measures of model performance generated from the predictions generated from a fitted model.
 #'
 #' @param measure A function; the function for measuring the results. Defaults to NULL.
-#' @return TA function; the function for plotting the metrics generated from the predictions generated from a fitted model.
+#' @return TA function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.
 #' @family setters
 #' @export
-set_plot_metrics <- function(measure) {
-  plot_metrics <- NULL
+set_plot_model_performance <- function(measure) {
+  plot_model_performance <- NULL
   if (identical(measure, measure_r2_score)) {
-    plot_metrics <- plot_metrics_gaussian_r2_score
+    plot_model_performance <- plot_model_performance_gaussian_r2_score
   } else if (identical(measure, measure_mse_score)) {
-    plot_metrics <- plot_metrics_gaussian_mse_score
+    plot_model_performance <- plot_model_performance_gaussian_mse_score
   } else if (identical(measure, measure_auc_score)) {
-    plot_metrics <- plot_metrics_binomial_auc_score
+    plot_model_performance <- plot_model_performance_binomial_auc_score
   } else if (identical(measure, measure_correlation_score)) {
-    plot_metrics <- plot_metrics_gaussian_correlation_score
+    plot_model_performance <- plot_model_performance_gaussian_correlation_score
   }
   
-  if (is.null(plot_metrics)) 
+  if (is.null(plot_model_performance)) 
     stop("Value error!")
   
-  plot_metrics
+  plot_model_performance
 }

@@ -149,14 +149,14 @@ plot_roc_curve <- function(y_true, y_pred) {
   g
 }
 
-#' Plot histogram of metrics.
+#' Plot histogram of measures of model performance.
 #'
 #' @param x A vector, the mean squared error metrics to be plotted as a histogram.
 #' @param name A character vector of length one, the name of the metric.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_histogram <- function(x, name) {
+plot_model_performance_histogram <- function(x, name) {
   mean_x <- round(mean(x), digits = 3)
   label <- paste0("Mean ", name, " Score = ", mean_x)
   .title <- paste0("Distribution of ", name, " Scores (", label, ")")
@@ -179,10 +179,10 @@ plot_metrics_histogram <- function(x, name) {
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_mse_score <- function(x) {
+plot_model_performance_gaussian_mse_score <- function(x) {
   name <- "MSE"
   g <- 
-    plot_metrics_histogram(x, name) + 
+    plot_model_performance_histogram(x, name) + 
     ggplot2::scale_x_continuous(paste0(name, " Score"))
   
   g
@@ -194,10 +194,10 @@ plot_metrics_gaussian_mse_score <- function(x) {
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_correlation_score <- function(x) {
+plot_model_performance_gaussian_correlation_score <- function(x) {
   name <- "Correlation"
   g <- 
-    plot_metrics_histogram(x, name) + 
+    plot_model_performance_histogram(x, name) + 
     ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
                                 breaks = seq(0, 1, 0.05), 
                                 minor_breaks = seq(0, 1, 0.01))
@@ -211,10 +211,10 @@ plot_metrics_gaussian_correlation_score <- function(x) {
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_gaussian_r2_score <- function(x) {
+plot_model_performance_gaussian_r2_score <- function(x) {
   name <- "R^2"
   g <- 
-    plot_metrics_histogram(x, name) + 
+    plot_model_performance_histogram(x, name) + 
     ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
                                 breaks = seq(0, 1, 0.05), 
                                 minor_breaks = seq(0, 1, 0.01))
@@ -228,10 +228,10 @@ plot_metrics_gaussian_r2_score <- function(x) {
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 #' @family plot
 #' @export
-plot_metrics_binomial_auc_score <- function(x) {
+plot_model_performance_binomial_auc_score <- function(x) {
   name <- "AUC"
   g <- 
-    plot_metrics_histogram(x, name) + 
+    plot_model_performance_histogram(x, name) + 
     ggplot2::scale_x_continuous(paste0(name, " Score"), limits = c(0, 1), 
                                 breaks = seq(0, 1, 0.05), 
                                 minor_breaks = seq(0, 1, 0.01))

@@ -97,7 +97,7 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                         n_iterations = 10, random_state = NULL, 
                         progress_bar = TRUE, n_core = 1, 
                         coefficients = TRUE, variable_importances = FALSE, 
-                        predictions = TRUE, metrics = TRUE, 
+                        predictions = TRUE, model_performance = TRUE, 
                         model_args = list()) {
   easy_analysis(.data, dependent_variable, algorithm = "glmnet", 
                 family = family, resample = resample, 
@@ -111,6 +111,6 @@ easy_glmnet <- function(.data, dependent_variable, family = "gaussian",
                 progress_bar = progress_bar, n_core = n_core, 
                 coefficients = coefficients, 
                 variable_importances = variable_importances, 
-                predictions = predictions, metrics = metrics, 
+                predictions = predictions, model_performance = model_performance, 
                 model_args = model_args)
 }

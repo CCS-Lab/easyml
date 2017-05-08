@@ -164,10 +164,10 @@ test_that("Test set_plot_predictions.", {
   expect_equal(set_plot_predictions("support_vector_machine", "binomial"), plot_predictions_binomial)
 })
 
-test_that("Test set_plot_metrics.", {
-  expect_error(set_plot_metrics(""))
-  expect_equal(set_plot_metrics(measure_mse_score), plot_metrics_gaussian_mse_score)
-  expect_equal(set_plot_metrics(measure_correlation_score), plot_metrics_gaussian_correlation_score)
-  expect_equal(set_plot_metrics(measure_r2_score), plot_metrics_gaussian_r2_score)
-  expect_equal(set_plot_metrics(measure_auc_score), plot_metrics_binomial_auc_score)
+test_that("Test set_plot_model_performance.", {
+  expect_error(set_plot_model_performance(""))
+  expect_equal(set_plot_model_performance(measure_mse_score), plot_model_performance_gaussian_mse_score)
+  expect_equal(set_plot_model_performance(measure_correlation_score), plot_model_performance_gaussian_correlation_score)
+  expect_equal(set_plot_model_performance(measure_r2_score), plot_model_performance_gaussian_r2_score)
+  expect_equal(set_plot_model_performance(measure_auc_score), plot_model_performance_binomial_auc_score)
 })

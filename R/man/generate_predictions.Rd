@@ -17,7 +17,7 @@ Generate predictions.
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},
-  \code{\link{generate_metrics}},
+  \code{\link{generate_model_performance}},
   \code{\link{generate_variable_importances}}
 }
 

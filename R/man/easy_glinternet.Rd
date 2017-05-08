@@ -11,7 +11,7 @@ easy_glinternet(.data, dependent_variable, family = "gaussian",
   n_samples = 1000, n_divisions = 1000, n_iterations = 10,
   random_state = NULL, progress_bar = TRUE, n_core = 1,
   coefficients = FALSE, variable_importances = FALSE, predictions = TRUE,
-  metrics = TRUE, model_args = list())
+  model_performance = TRUE, model_args = list())
 }
 \arguments{
 \item{.data}{A data.frame; the data to be analyzed.}
@@ -38,7 +38,7 @@ easy_glinternet(.data, dependent_variable, family = "gaussian",
 
 \item{n_samples}{An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.}
 
-\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the error metrics. Defaults to 1000.}
+\item{n_divisions}{An integer vector of length one; specifies the number of times the data should be divided when replicating the measures of model performance. Defaults to 1000.}
 
 \item{n_iterations}{An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.}
 
@@ -54,7 +54,7 @@ easy_glinternet(.data, dependent_variable, family = "gaussian",
 
 \item{predictions}{A logical vector of length one; whether or not to generate predictions for this analysis.}
 
-\item{metrics}{A logical vector of length one; whether or not to generate metrics for this analysis.}
+\item{model_performance}{A logical vector of length one; whether or not to generate measures of model performance for this analysis.}
 
 \item{model_args}{A list; the arguments to be passed to the algorithm specified.}
 }

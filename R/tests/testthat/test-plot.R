@@ -45,22 +45,22 @@ test_that("Test plot_predictions_binomial.", {
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_mean_squared_error.", {
-  g <- plot_metrics_gaussian_mse_score(rnorm(100))
+test_that("Test plot_model_performance_gaussian_mean_squared_error.", {
+  g <- plot_model_performance_gaussian_mse_score(rnorm(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_r2_score.", {
-  g <- plot_metrics_gaussian_r2_score(runif(100))
+test_that("Test plot_model_performance_gaussian_r2_score.", {
+  g <- plot_model_performance_gaussian_r2_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_cor_score.", {
-  g <- plot_metrics_gaussian_correlation_score(runif(100))
+test_that("Test plot_model_performance_gaussian_cor_score.", {
+  g <- plot_model_performance_gaussian_correlation_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_binomial_area_under_curve.", {
-  g <- plot_metrics_binomial_auc_score(runif(100))
+test_that("Test plot_model_performance_binomial_area_under_curve.", {
+  g <- plot_model_performance_binomial_auc_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })

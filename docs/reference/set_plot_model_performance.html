@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set categorical variables. — set_categorical_variables • easyml</title>
+<title>Set plot model performance function. — set_plot_model_performance • easyml</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,36 +77,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set categorical variables.</h1>
+    <h1>Set plot model performance function.</h1>
     </div>
 
     
-    <p>Set categorical variables.</p>
+    <p>Sets the function responsible for plotting the measures of model performance generated from the predictions generated from a fitted model.</p>
     
 
-    <pre><span class='fu'>set_categorical_variables</span>(<span class='no'>column_names</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre><span class='fu'>set_plot_model_performance</span>(<span class='no'>measure</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>column_names</dt>
-      <dd>A character vector; the column names of the data for this analysis.</dd>
-      <dt>categorical_variables</dt>
-      <dd>A character vector; the variables that are categorical. Defaults to NULL.</dd>
+      <dt>measure</dt>
+      <dd>A function; the function for measuring the results. Defaults to NULL.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NULL, or if <code>categorical_variables</code> is not NULL, then a logical vector of length <code>length(column_names</code> where TRUE represents that column is a categorical variable.</p>
+    <p>TA function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other setters: <code><a href='set_column_names.html'>set_column_names</a></code>,
-  <code><a href='set_cores.html'>set_cores</a></code>,
+    <p>Other setters: <code><a href='set_categorical_variables.html'>set_categorical_variables</a></code>,
+  <code><a href='set_column_names.html'>set_column_names</a></code>, <code><a href='set_cores.html'>set_cores</a></code>,
   <code><a href='set_dependent_variable.html'>set_dependent_variable</a></code>,
   <code><a href='set_independent_variables.html'>set_independent_variables</a></code>,
   <code><a href='set_looper_.html'>set_looper_</a></code>, <code><a href='set_looper.html'>set_looper</a></code>,
   <code><a href='set_measure.html'>set_measure</a></code>, <code><a href='set_parallel.html'>set_parallel</a></code>,
-  <code><a href='set_plot_model_performance.html'>set_plot_model_performance</a></code>,
   <code><a href='set_plot_predictions.html'>set_plot_predictions</a></code>,
   <code><a href='set_preprocess.html'>set_preprocess</a></code>,
   <code><a href='set_random_state.html'>set_random_state</a></code>,
