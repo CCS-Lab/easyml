@@ -12,7 +12,7 @@ __all__ = []
 plt.style.use('ggplot')
 
 
-def plot_metrics_gaussian_mean_squared_error(x):
+def plot_model_performance_gaussian_mean_squared_error(x):
     bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
@@ -77,6 +77,15 @@ def plot_predictions_gaussian(y_true, y_pred):
 
 
 def plot_predictions_binomial(y_true, y_pred):
+    fig, ax = plt.figure(), plt.gca()
+    ax.scatter(y_pred, y_true, color='black')
+    ax.set_xlabel('Predicted y values')
+    ax.set_ylabel('True y values')
+    ax.set_title('')
+    return fig
+
+
+def plot_roc_single_train_test_split(y_true, y_pred):
     Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
     fig = skplt.plot_roc_curve(y_true, Y_pred)
     return fig

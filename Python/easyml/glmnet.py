@@ -84,5 +84,10 @@ class easy_glmnet(easy_analysis):
         fig, ax = plt.subplots()
         ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
                     color='black', ecolor='black')
-        ax.set_title('Coefficients')
+        ax.set_xticks(range(0, n))
+        ax.set_xlim(-0.5, n - 0.5)
+        ax.set_xticklabels(self.column_names)
+        ax.set_xlabel('Predictors')
+        ax.set_ylabel('Coefficient estimates')
+        ax.set_title('Estimates of coefficients')
         return fig
