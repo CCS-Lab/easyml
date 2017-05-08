@@ -185,7 +185,7 @@ generate_model_performance <- function(object) {
   looper <- set_looper(progress_bar, n_core)
   
   # Define closure
-  generate_metric <- function(i) {
+  generate_model_performance_ <- function(i) {
     # Split data
     split_data <- resample(X, y, foldid = foldid, train_size = train_size)
     X_train <- split_data[["X_train"]]
@@ -238,7 +238,7 @@ generate_model_performance <- function(object) {
   }
 
   # Loop over number of divisions
-  output_divisions <- looper(1:n_divisions, generate_metric)
+  output_divisions <- looper(1:n_divisions, generate_model_performance_)
   model_performance_train <- lapply(output_divisions, 
                                     function(x) x$model_performance_train)
   model_performance_train <- unlist(model_performance_train)
