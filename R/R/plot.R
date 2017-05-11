@@ -16,8 +16,11 @@ plot_coefficients_processed <- function(coefficients_processed) {
   if (nrow(coefficients_processed) > 20) 
     warning("Number of predictors exceeds 20; plot may not render as nicely.")
   
+  p <- coefficients_processed
+  p$predictor <- factor(p$predictor, levels = p$predictor[order(p$mean)])  # sort beta coefficients
+  
   g <- 
-    ggplot2::ggplot(coefficients_processed, ggplot2::aes_string(x = "predictor", y = "mean", colour = "dot_color")) +
+    ggplot2::ggplot(p, ggplot2::aes_string(x = "predictor", y = "mean", colour = "dot_color")) +
     ggplot2::geom_errorbar(ggplot2::aes_string(ymin = "lower_bound", ymax = "upper_bound"), width = 0.1) + 
     ggplot2::geom_point() +
     ggplot2::scale_x_discrete("Predictors") +
@@ -54,8 +57,11 @@ plot_variable_importances_processed <- function(variable_importances_processed) 
   if (nrow(variable_importances_processed) > 20) 
     warning("Number of variables exceeds 20; plot may not render as nicely.")
   
+  p <- variable_importances_processed
+  p$predictor <- factor(p$predictor, levels = p$predictor[order(p$mean)])  # sort variable importances
+  
   g <- 
-    ggplot2::ggplot(variable_importances_processed, 
+    ggplot2::ggplot(p, 
                     ggplot2::aes_string(x = "predictor", y = "mean")) +
     ggplot2::geom_bar(stat = "identity") + 
     ggplot2::geom_errorbar(ggplot2::aes_string(ymin = "lower_bound", ymax = "upper_bound"), width = 0.1) + 
