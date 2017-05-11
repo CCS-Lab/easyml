@@ -16,6 +16,7 @@ fit_model.easy_support_vector_machine <- function(object) {
     type <- "nu-regression"
   } else if (family == "binomial") {
     type <- "C-classification"
+    model_args[["probability"]] <- TRUE
   }
   model_args[["type"]] <- type
 
@@ -36,12 +37,25 @@ fit_model.easy_support_vector_machine <- function(object) {
 #' @export
 predict_model.easy_support_vector_machine <- function(object, newx = NULL) {
   model <- object[["model"]]
-  # If newx == NULL (i.e. for training data prediction), do not pass new data
-  if (is.null(newx)) {
-    as.numeric(stats::predict(model))
+  
+  if (object[["family"]] == "binomial") {
+    # If newx == NULL (i.e. for training data prediction), do not pass new data
+    if (is.null(newx)) {
+      preds <- stats::predict(model, model$SV, probability = TRUE)
+    } else {
+      preds <- stats::predict(model, newdata = newx, probability = TRUE)
+    }
+    preds <- as.numeric(attr(preds, "probabilities")[, 2])
   } else {
-    as.numeric(stats::predict(model, newdata = newx))
+    # If newx == NULL (i.e. for training data prediction), do not pass new data
+    if (is.null(newx)) {
+      preds <- as.numeric(stats::predict(model))
+    } else {
+      preds <- as.numeric(stats::predict(model, newdata = newx))
+    }
   }
+  
+  preds
 }
 
 #' Easily build and evaluate a support vector machine regression model.

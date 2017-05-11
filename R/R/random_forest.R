@@ -52,10 +52,9 @@ predict_model.easy_random_forest <- function(object, newx = NULL) {
   if (object[["family"]] == "binomial") {
     # If newx == NULL (i.e. for training data prediction), do not pass new data
     if (is.null(newx)) {
-      preds <- as.numeric(stats::predict(model, type = "prob"))
+      preds <- as.numeric(stats::predict(model, type = "prob")[, 2])
     } else {
-      preds <- as.numeric(stats::predict(model, newdata = newx, type = "prob"))
-      preds <- matrix(preds, ncol = 2)[, 2]
+      preds <- as.numeric(stats::predict(model, newdata = newx, type = "prob")[, 2])
     }
   } else {
     # If newx == NULL (i.e. for training data prediction), do not pass new data
