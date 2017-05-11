@@ -41,7 +41,7 @@ predict_model.easy_neural_network <- function(object, newx = NULL) {
   family <- object[["family"]]
   preds <- stats::predict(model, newdata = newx, type = "raw")
   if (family == "binomial") {
-    preds <- round(preds[, 1])
+    preds <- preds[, 2]
   }
   preds <- as.numeric(preds)
   preds
