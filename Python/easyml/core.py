@@ -363,7 +363,7 @@ class easy_analysis:
 
     def plot_predictions_single_train_test_split_train(self):
         y_train = self.y_train
-        y_train_pred = np.mean(self.predictions_train, axis=1)
+        y_train_pred = np.mean(self.predictions_train, axis=0)
         if self.family == 'gaussian':
             fig = plot.plot_predictions_gaussian(y_train, y_train_pred)
         else:
@@ -372,7 +372,7 @@ class easy_analysis:
 
     def plot_predictions_single_train_test_split_test(self):
         y_test = self.y_test
-        y_test_pred = np.mean(self.predictions_test, axis=1)
+        y_test_pred = np.mean(self.predictions_test, axis=0)
         if self.family == 'gaussian':
             fig = plot.plot_predictions_gaussian(y_test, y_test_pred)
         else:
@@ -381,7 +381,7 @@ class easy_analysis:
 
     def plot_roc_single_train_test_split_train(self):
         y_train = self.y_train
-        y_train_pred = np.mean(self.predictions_train, axis=1)
+        y_train_pred = np.mean(self.predictions_train, axis=0)
         if self.family == 'gaussian':
             raise NotImplementedError
         else:
@@ -390,7 +390,7 @@ class easy_analysis:
 
     def plot_roc_single_train_test_split_test(self):
         y_test = self.y_test
-        y_test_pred = np.mean(self.predictions_test, axis=1)
+        y_test_pred = np.mean(self.predictions_test, axis=0)
         if self.family == 'gaussian':
             raise NotImplementedError
         else:

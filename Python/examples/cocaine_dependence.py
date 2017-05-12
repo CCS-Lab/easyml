@@ -13,11 +13,12 @@ results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
                       n_samples=5, n_divisions=5, n_iterations=2,
                       model_args={'alpha': 1, 'n_lambda': 200})
 print(results.plot_coefficients())
-print(results.plot_predictions_train())
-print(results.plot_predictions_test())
+print(results.plot_predictions_single_train_test_split_train())
+print(results.plot_predictions_single_train_test_split_test())
+print(results.plot_roc_single_train_test_split_train())
+print(results.plot_roc_single_train_test_split_test())
 print(results.plot_model_performance_train())
 print(results.plot_model_performance_test())
-
 
 # # Analyze data
 # results = random_forest.easy_random_forest(cocaine_dependence, 'DIAGNOSIS',
