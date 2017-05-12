@@ -14,7 +14,7 @@ A ggplot object. This plot may be rendered by outputting it to the command line 
 }
 \description{
 When calling \code{\link{easy_glmnet}}, coefficients from the 
-\code{\link{replicate_coefficients}} output are processed by the 
+\code{\link{generate_coefficients}} output are processed by the 
 \code{\link{process_coefficients}}  function and generated into 
 a plot. This plot tells us the direction, magitude, and statistical
 significance of each coefficient. Be careful using this plotting
@@ -22,12 +22,14 @@ method with datasets containing more than 20 variables as the plot
 may not render as nicely.
 }
 \seealso{
-Other plot: \code{\link{plot_metrics_binomial_area_under_curve}},
-  \code{\link{plot_metrics_gaussian_cor_score}},
-  \code{\link{plot_metrics_gaussian_mean_squared_error}},
-  \code{\link{plot_metrics_gaussian_r2_score}},
+Other plot: \code{\link{plot_model_performance_binomial_auc_score}},
+  \code{\link{plot_model_performance_gaussian_correlation_score}},
+  \code{\link{plot_model_performance_gaussian_mse_score}},
+  \code{\link{plot_model_performance_gaussian_r2_score}},
+  \code{\link{plot_model_performance_histogram}},
   \code{\link{plot_predictions_binomial}},
   \code{\link{plot_predictions_gaussian}},
+  \code{\link{plot_roc_curve}},
   \code{\link{plot_variable_importances_processed}}
 }
 

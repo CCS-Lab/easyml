@@ -1,14 +1,24 @@
-"""Utility functions.
 """
-import numpy as np
+Utility functions.
+"""
 import os
-import pandas as pd
 
 
 __all__ = []
 
 
 def reduce_cores(n_core, cpu_count=None):
+    """    
+    Reduces cores.
+    
+    If the number of cores exceeds the number of cores on the OS
+    then n_core is reduced to the number of cores on the OS.
+    
+    :param n_core: integer The number of cores to use for the analysis.
+    :param cpu_count: integer, None The number of CPUs available on the machine. Defaults to 
+    os.cpu_count() if None.
+    :return: number of cores.
+    """
     if cpu_count is None:
         cpu_count = os.cpu_count()
     n_core = min(n_core, cpu_count)
@@ -16,24 +26,16 @@ def reduce_cores(n_core, cpu_count=None):
 
 
 def remove_variables(data, exclude_variables=None):
+    """    
+    Removes variables from the data set.
+
+    If passed a list of variable names to exclude, remove_variables
+    will drop those variables from the dataset.
+
+    :param data: A pandas.DataFrame.
+    :param exclude_variables: A list of strings.
+    :return: A pandas.DataFrame.
+    """
     if exclude_variables is not None:
-        data = data.drop(exclude_variables, axis=1, inplace=False)
+        data = data.drop(exclude_variables, axis=1)
     return data
-
-
-def process_coefficients(coefs, column_names, survival_rate_cutoff=0.05):
-    n = coefs.shape[0]
-    survived = 1 * (abs(coefs) > 0)
-    survival_rate = np.sum(survived, axis=0) / float(n)
-    mask = 1 * (survival_rate > survival_rate_cutoff)
-    coefs_updated = coefs * mask
-    betas = pd.DataFrame({'predictor': column_names})
-    betas['mean'] = np.mean(coefs_updated, axis=0)
-    betas['lb'] = np.percentile(coefs_updated, q=2.5, axis=0)
-    betas['ub'] = np.percentile(coefs_updated, q=97.5, axis=0)
-    betas['survival'] = mask
-    betas['sig'] = betas['survival']
-    betas['dotColor1'] = 1 * (betas['mean'] != 0)
-    betas['dotColor2'] = (1 * np.logical_and(betas['dotColor1'] > 0, betas['sig'] > 0)) + 1
-    betas['dotColor'] = betas['dotColor1'] * betas['dotColor2']
-    return betas

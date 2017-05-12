@@ -15,7 +15,5 @@ articles:
       These are vignettes.
     contents:
     - cocaine
-    - movielens
-    - oscars
     - prostate
     - titanic

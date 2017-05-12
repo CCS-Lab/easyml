@@ -14,7 +14,7 @@ A ggplot object. This plot may be rendered by outputting it to the command line 
 }
 \description{
 When calling \code{\link{easy_random_forest}}, variable importances scores from the 
-\code{\link{replicate_variable_importances}} output are processed by the 
+\code{\link{generate_variable_importances}} output are processed by the 
 \code{\link{process_variable_importances}}  function and generated into 
 a plot. Importance scores for each predictor were estimated using the increase in 
 node impurity. Node impuirty measures the change in residual squared error 
@@ -28,11 +28,13 @@ may not render as nicely.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
-  \code{\link{plot_metrics_binomial_area_under_curve}},
-  \code{\link{plot_metrics_gaussian_cor_score}},
-  \code{\link{plot_metrics_gaussian_mean_squared_error}},
-  \code{\link{plot_metrics_gaussian_r2_score}},
+  \code{\link{plot_model_performance_binomial_auc_score}},
+  \code{\link{plot_model_performance_gaussian_correlation_score}},
+  \code{\link{plot_model_performance_gaussian_mse_score}},
+  \code{\link{plot_model_performance_gaussian_r2_score}},
+  \code{\link{plot_model_performance_histogram}},
   \code{\link{plot_predictions_binomial}},
-  \code{\link{plot_predictions_gaussian}}
+  \code{\link{plot_predictions_gaussian}},
+  \code{\link{plot_roc_curve}}
 }
 

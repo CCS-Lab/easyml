@@ -31,6 +31,7 @@ if [ ${TRAVIS_OS_NAME} == "linux" ]; then
     gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
     gpg -a --export E084DAB9 | sudo apt-key add -
     sudo apt-get update
+    sudo apt-get install gcc
     sudo apt-get install r-base-core
     sudo apt-get install libssl-dev
     

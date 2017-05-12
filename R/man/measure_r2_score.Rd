@@ -22,8 +22,8 @@ values, calculates the the R^2 metric.
 See here for more information: \url{https://en.wikipedia.org/wiki/Coefficient_of_determination}
 }
 \seealso{
-Other measure: \code{\link{measure_area_under_curve}},
-  \code{\link{measure_cor_score}},
-  \code{\link{measure_mean_squared_error}}
+Other measure: \code{\link{measure_auc_score}},
+  \code{\link{measure_correlation_score}},
+  \code{\link{measure_mse_score}}
 }
 

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cocaine • easyml</title>
+<title>Cocaine Dependence • easyml</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -57,10 +57,10 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Cocaine</h1>
+      <h1>Cocaine Dependence</h1>
                         <h4 class="author">Paul Hendricks</h4>
             
-            <h4 class="date">2017-02-08</h4>
+            <h4 class="date">2017-05-12</h4>
           </div>
 
     
@@ -69,42 +69,351 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#overview" class="anchor"> </a></body></html>Overview</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>In this vignette, we demonstrate the power of <code>easyml</code> using a Cocaine Dependence dataset.</p>
 </div>
 <div id="load-the-data" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#load-the-data" class="anchor"> </a></body></html>Load the data</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>First we load our libraries and the Cocaine Dependence dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(tidyr)
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(purrr)</code></pre></div>
+<span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following object is masked from 'package:testthat':
+## 
+##     matches</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">data</span>(<span class="st">"cocaine_dependence"</span>, <span class="dt">package =</span> <span class="st">"easyml"</span>)
+knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cocaine_dependence))</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">subject</th>
+<th align="right">diagnosis</th>
+<th align="right">age</th>
+<th align="right">male</th>
+<th align="right">edu_yrs</th>
+<th align="right">imt_comm_errors</th>
+<th align="right">imt_omis_errors</th>
+<th align="right">a_imt</th>
+<th align="right">b_d_imt</th>
+<th align="right">stop_ssrt</th>
+<th align="right">lnk_adjdd</th>
+<th align="right">lkhat_kirby</th>
+<th align="right">revlr_per_errors</th>
+<th align="right">bis_attention</th>
+<th align="right">bis_motor</th>
+<th align="right">bis_nonpl</th>
+<th align="right">igt_total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">20031</td>
+<td align="right">0</td>
+<td align="right">29</td>
+<td align="right">0</td>
+<td align="right">16</td>
+<td align="right">6.90</td>
+<td align="right">5.51</td>
+<td align="right">0.97</td>
+<td align="right">-0.12</td>
+<td align="right">346.3</td>
+<td align="right">-5.848444</td>
+<td align="right">-5.227870</td>
+<td align="right">2</td>
+<td align="right">11</td>
+<td align="right">21</td>
+<td align="right">24</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="right">20044</td>
+<td align="right">0</td>
+<td align="right">33</td>
+<td align="right">0</td>
+<td align="right">17</td>
+<td align="right">15.63</td>
+<td align="right">13.27</td>
+<td align="right">0.92</td>
+<td align="right">-0.09</td>
+<td align="right">303.4</td>
+<td align="right">-9.026670</td>
+<td align="right">-5.832566</td>
+<td align="right">1</td>
+<td align="right">12</td>
+<td align="right">21</td>
+<td align="right">22</td>
+<td align="right">44</td>
+</tr>
+<tr class="odd">
+<td align="right">20053</td>
+<td align="right">0</td>
+<td align="right">57</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">25.44</td>
+<td align="right">16.41</td>
+<td align="right">0.87</td>
+<td align="right">-0.27</td>
+<td align="right">214.6</td>
+<td align="right">-6.115988</td>
+<td align="right">-4.014322</td>
+<td align="right">5</td>
+<td align="right">13</td>
+<td align="right">19</td>
+<td align="right">17</td>
+<td align="right">-16</td>
+</tr>
+<tr class="even">
+<td align="right">20060</td>
+<td align="right">0</td>
+<td align="right">26</td>
+<td align="right">1</td>
+<td align="right">18</td>
+<td align="right">7.38</td>
+<td align="right">6.25</td>
+<td align="right">0.96</td>
+<td align="right">-0.09</td>
+<td align="right">190.2</td>
+<td align="right">-7.771655</td>
+<td align="right">-5.272179</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="right">21</td>
+<td align="right">17</td>
+<td align="right">52</td>
+</tr>
+<tr class="odd">
+<td align="right">20066</td>
+<td align="right">0</td>
+<td align="right">38</td>
+<td align="right">0</td>
+<td align="right">13</td>
+<td align="right">31.54</td>
+<td align="right">10.09</td>
+<td align="right">0.88</td>
+<td align="right">-0.61</td>
+<td align="right">273.9</td>
+<td align="right">-5.791562</td>
+<td align="right">-3.102204</td>
+<td align="right">5</td>
+<td align="right">11</td>
+<td align="right">20</td>
+<td align="right">23</td>
+<td align="right">-6</td>
+</tr>
+<tr class="even">
+<td align="right">20081</td>
+<td align="right">0</td>
+<td align="right">41</td>
+<td align="right">0</td>
+<td align="right">17</td>
+<td align="right">43.33</td>
+<td align="right">33.87</td>
+<td align="right">0.69</td>
+<td align="right">-0.20</td>
+<td align="right">306.2</td>
+<td align="right">-3.766913</td>
+<td align="right">-3.676198</td>
+<td align="right">8</td>
+<td align="right">10</td>
+<td align="right">17</td>
+<td align="right">14</td>
+<td align="right">-22</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="tidy-the-data" class="section level2">
+<div id="train-a-random-forest-model" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#tidy-the-data" class="anchor"> </a></body></html>Tidy the data</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<html><body><a href="#train-a-random-forest-model" class="anchor"> </a></body></html>Train a random forest model</h2>
+<p>To run an <code>easy_random_forest</code> model, we pass in the following parameters:</p>
+<ul>
+<li>the data set <code>cocaine_dependence</code>,</li>
+<li>the name of the dependent variable e.g. <code>diagnosis</code>,</li>
+<li>whether to run a <code>gaussian</code> or a <code>binomial</code> model,</li>
+<li>which variables to exclude from the analysis,</li>
+<li>which variables are categorical variables; these variables are not scaled, if <code>preprocess_scale</code> is used,</li>
+<li>the random state,</li>
+<li>whether to display a progress bar,</li>
+<li>how many cores to run the analysis on in parallel.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/easy_random_forest.html">easy_random_forest</a></span>(cocaine_dependence, <span class="st">"diagnosis"</span>,
+                              <span class="dt">family =</span> <span class="st">"binomial"</span>, 
+                              <span class="dt">exclude_variables =</span> <span class="kw">c</span>(<span class="st">"subject"</span>),
+                              <span class="dt">categorical_variables =</span> <span class="kw">c</span>(<span class="st">"male"</span>),
+                              <span class="dt">n_samples =</span> <span class="dv">10</span>, <span class="dt">n_divisions =</span> <span class="dv">10</span>,
+                              <span class="dt">n_iterations =</span> <span class="dv">2</span>, <span class="dt">progress_bar =</span> <span class="ot">FALSE</span>, 
+                              <span class="dt">random_state =</span> <span class="dv">12345</span>, <span class="dt">n_core =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
-<div id="train-the-models" class="section level2">
+<div id="assess-results" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#train-the-models" class="anchor"> </a></body></html>Train the models</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<html><body><a href="#assess-results" class="anchor"> </a></body></html>Assess results</h2>
+<p>Now let’s assess the results of the <code>easy_random_forest</code> model.</p>
+<div id="estimates-of-variable-importances" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#estimates-of-variable-importances" class="anchor"> </a></body></html>Estimates of variable importances</h3>
+<p>TO BE EDITED.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_variable_importances</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$variable_importances_processed
+knitr::<span class="kw">kable</span>(output, <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">predictor</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">lower_bound</th>
+<th align="right">upper_bound</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">2.87</td>
+<td align="right">0.14</td>
+<td align="right">2.73</td>
+<td align="right">3.01</td>
+</tr>
+<tr class="even">
+<td align="left">male</td>
+<td align="right">0.15</td>
+<td align="right">0.03</td>
+<td align="right">0.12</td>
+<td align="right">0.18</td>
+</tr>
+<tr class="odd">
+<td align="left">edu_yrs</td>
+<td align="right">2.46</td>
+<td align="right">0.13</td>
+<td align="right">2.33</td>
+<td align="right">2.59</td>
+</tr>
+<tr class="even">
+<td align="left">imt_comm_errors</td>
+<td align="right">1.44</td>
+<td align="right">0.11</td>
+<td align="right">1.33</td>
+<td align="right">1.55</td>
+</tr>
+<tr class="odd">
+<td align="left">imt_omis_errors</td>
+<td align="right">0.79</td>
+<td align="right">0.05</td>
+<td align="right">0.74</td>
+<td align="right">0.84</td>
+</tr>
+<tr class="even">
+<td align="left">a_imt</td>
+<td align="right">1.71</td>
+<td align="right">0.12</td>
+<td align="right">1.60</td>
+<td align="right">1.83</td>
+</tr>
+<tr class="odd">
+<td align="left">b_d_imt</td>
+<td align="right">1.36</td>
+<td align="right">0.10</td>
+<td align="right">1.26</td>
+<td align="right">1.45</td>
+</tr>
+<tr class="even">
+<td align="left">stop_ssrt</td>
+<td align="right">0.80</td>
+<td align="right">0.05</td>
+<td align="right">0.75</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="odd">
+<td align="left">lnk_adjdd</td>
+<td align="right">2.47</td>
+<td align="right">0.17</td>
+<td align="right">2.30</td>
+<td align="right">2.64</td>
+</tr>
+<tr class="even">
+<td align="left">lkhat_kirby</td>
+<td align="right">0.89</td>
+<td align="right">0.09</td>
+<td align="right">0.81</td>
+<td align="right">0.98</td>
+</tr>
+<tr class="odd">
+<td align="left">revlr_per_errors</td>
+<td align="right">1.80</td>
+<td align="right">0.15</td>
+<td align="right">1.65</td>
+<td align="right">1.94</td>
+</tr>
+<tr class="even">
+<td align="left">bis_attention</td>
+<td align="right">1.44</td>
+<td align="right">0.11</td>
+<td align="right">1.33</td>
+<td align="right">1.55</td>
+</tr>
+<tr class="odd">
+<td align="left">bis_motor</td>
+<td align="right">2.35</td>
+<td align="right">0.16</td>
+<td align="right">2.19</td>
+<td align="right">2.52</td>
+</tr>
+<tr class="even">
+<td align="left">bis_nonpl</td>
+<td align="right">3.20</td>
+<td align="right">0.20</td>
+<td align="right">3.00</td>
+<td align="right">3.40</td>
+</tr>
+<tr class="odd">
+<td align="left">igt_total</td>
+<td align="right">2.16</td>
+<td align="right">0.13</td>
+<td align="right">2.03</td>
+<td align="right">2.29</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="compare-results" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#compare-results" class="anchor"> </a></body></html>Compare results</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div id="predictions" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#predictions" class="anchor"> </a></body></html>Predictions</h3>
+<p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_train</code></pre></div>
+<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 </div>
-<div id="compare-run-times" class="section level2">
-<h2 class="hasAnchor">
-<html><body><a href="#compare-run-times" class="anchor"> </a></body></html>Compare run times</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div id="roc-curve" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#roc-curve" class="anchor"> </a></body></html>ROC Curve</h3>
+<p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_roc_single_train_test_split_train</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_roc_single_train_test_split_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
+</div>
+<div id="model-performance" class="section level3">
+<h3 class="hasAnchor">
+<html><body><a href="#model-performance" class="anchor"> </a></body></html>Model Performance</h3>
+<p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_train</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_test</code></pre></div>
+<p><img src="cocaine_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
+</div>
 </div>
 <div id="discuss" class="section level2">
 <h2 class="hasAnchor">
 <html><body><a href="#discuss" class="anchor"> </a></body></html>Discuss</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>In this vignette we used <code>easyml</code> to easily build and evaluate a random forest model TO BE EDITED.</p>
 </div>
 </div>
   </div>
@@ -115,10 +424,8 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
       <li><a href="#load-the-data">Load the data</a></li>
-      <li><a href="#tidy-the-data">Tidy the data</a></li>
-      <li><a href="#train-the-models">Train the models</a></li>
-      <li><a href="#compare-results">Compare results</a></li>
-      <li><a href="#compare-run-times">Compare run times</a></li>
+      <li><a href="#train-a-random-forest-model">Train a random forest model</a></li>
+      <li><a href="#assess-results">Assess results</a></li>
       <li><a href="#discuss">Discuss</a></li>
       </ul>
 </div>

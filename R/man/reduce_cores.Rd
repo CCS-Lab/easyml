@@ -18,7 +18,8 @@ An integer vector of length one; specifies the number of cores to use for this a
 Reduce number of cores.
 }
 \seealso{
-Other utils: \code{\link{correlation_test}},
+Other utils: \code{\link{check_arguments}},
+  \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{process_variable_importances}},
   \code{\link{remove_variables}}

@@ -11,14 +11,20 @@ LazyData: true
 Depends:
     R (>= 3.3.1)
 Imports:
+    caret, 
     corrplot, 
+    darch, 
+    dummies, 
     e1071, 
+    futile.logger, 
     ggplot2, 
+    glinternet, 
     glmnet, 
     parallel,
     pbapply,
     pbmcapply, 
     pROC, 
+    nnet, 
     randomForest, 
     scales, 
     scorer

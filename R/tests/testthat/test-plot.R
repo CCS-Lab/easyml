@@ -3,23 +3,20 @@ context("plot")
 
 # Load data
 data("cocaine_dependence", package = "easyml")
-cocaine_dependence <- cocaine_dependence
 
 # Settings
-.n_samples <- 10
-.n_divisions <- 10
+.n_samples <- 5
+.n_divisions <- 5
 .n_iterations <- 2
 
 # # Analyze data
-# glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis", 
-#                               family = "binomial", 
-#                               resample = resample_stratified_class_train_test_split, 
-#                               preprocess = preprocess_scale, 
-#                               exclude_variables = c("subject"), 
-#                               categorical_variables = c("male"), 
-#                               n_samples = .n_samples, n_divisions = .n_divisions, 
-#                               n_iterations = .n_iterations, random_state = 12345, n_core = 1, 
-#                               alpha = 1, nlambda = 200)
+# glmnet_results <- easy_glmnet(cocaine_dependence, "diagnosis",
+#                               family = "binomial",
+#                               preprocess = preprocess_scale,
+#                               exclude_variables = c("subject"),
+#                               categorical_variables = c("male"),
+#                               n_samples = .n_samples, n_divisions = .n_divisions,
+#                               n_iterations = .n_iterations, random_state = 12345, n_core = 1)
 # 
 # test_that("Test plot_coefficients_processed.", {
 #   g <- plot_coefficients_processed(glmnet_results$coefficients_processed)
@@ -48,22 +45,22 @@ test_that("Test plot_predictions_binomial.", {
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_mean_squared_error.", {
-  g <- plot_metrics_gaussian_mean_squared_error(rnorm(100))
+test_that("Test plot_model_performance_gaussian_mean_squared_error.", {
+  g <- plot_model_performance_gaussian_mse_score(rnorm(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_r2_score.", {
-  g <- plot_metrics_gaussian_r2_score(runif(100))
+test_that("Test plot_model_performance_gaussian_r2_score.", {
+  g <- plot_model_performance_gaussian_r2_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_gaussian_cor_score.", {
-  g <- plot_metrics_gaussian_cor_score(runif(100))
+test_that("Test plot_model_performance_gaussian_cor_score.", {
+  g <- plot_model_performance_gaussian_correlation_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })
 
-test_that("Test plot_metrics_binomial_area_under_curve.", {
-  g <- plot_metrics_binomial_area_under_curve(runif(100))
+test_that("Test plot_model_performance_binomial_area_under_curve.", {
+  g <- plot_model_performance_binomial_auc_score(runif(100))
   expect_equal(class(g), c("gg", "ggplot"))
 })

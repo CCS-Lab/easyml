@@ -1,63 +1,91 @@
-"""Functions for plotting.
+"""
+Functions for plotting.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import metrics
+import scikitplot.plotters as skplt
 
 
 __all__ = []
 
-
-def plot_auc_histogram(x):
-    bins = np.arange(0, 1, 0.02)
-    x_mean = np.mean(x)
-    plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean AUC = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlim([0.0, 1.0])
-    plt.xlabel('AUC')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of AUCs')
+# Settings
+plt.style.use('ggplot')
 
 
-def plot_mse_histogram(x):
+def plot_model_performance_gaussian_mean_squared_error(x):
     bins = np.linspace(0, np.max(x), 100)
     x_mean = np.mean(x)
-    plt.figure()
-    plt.hist(x, bins=bins, color='white', edgecolor='black')
-    plt.axvline(x=x_mean, color='black', linestyle='--')
-    plt.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    plt.xlabel('MSE')
-    plt.ylabel('Frequency')
-    plt.title('Distribution of MSEs')
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlabel('MSE')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of MSEs')
+    return fig
 
 
-def plot_roc_curve(y_true, y_pred):
-    # Compute ROC curve and ROC area for each class
-    fpr = dict()
-    tpr = dict()
-    roc_auc = dict()
-    for i in range(2):
-        fpr[i], tpr[i], _ = metrics.roc_curve(y_true, y_pred)
-        roc_auc[i] = metrics.auc(fpr[i], tpr[i])
-
-    # Plot ROC curve
-    plt.figure()
-    plt.plot(fpr[1], tpr[1], color='black',
-             lw=2, label='AUC = %.3f' % roc_auc[1])
-    plt.plot([0, 1], [0, 1], color='black', lw=2, linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('1 - Specificity')
-    plt.ylabel('Sensitivity')
-    plt.title('ROC Curve')
-    plt.legend(loc="lower right")
+def plot_model_performance_gaussian_cor_score(x):
+    bins = np.arange(0, 1, 0.02)
+    x_mean = np.mean(x)
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean Correlation Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('Correlation Score')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of Correlation Scores')
+    return fig
 
 
-def plot_gaussian_predictions(y_true, y_pred):
-    plt.figure()
-    plt.plot(y_pred, y_true, "o")
-    plt.xlabel('Predicted y values')
-    plt.ylabel('True y values')
-    plt.title('')
+def plot_model_performance_gaussian_r2_score(x):
+    bins = np.arange(0, 1, 0.02)
+    x_mean = np.mean(x)
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean R^2 Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('R^2')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of R^2 scores')
+    return fig
+
+
+def plot_model_performance_binomial_area_under_curve(x):
+    bins = np.arange(0, 1, 0.02)
+    x_mean = np.mean(x)
+    fig, ax = plt.figure(), plt.gca()
+    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.axvline(x=x_mean, color='black', linestyle='--')
+    ax.annotate('Mean AUC = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_xlabel('AUC')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of AUCs')
+    return fig
+
+
+def plot_predictions_gaussian(y_true, y_pred):
+    fig, ax = plt.figure(), plt.gca()
+    ax.scatter(y_pred, y_true, color='black')
+    ax.set_xlabel('Predicted y values')
+    ax.set_ylabel('True y values')
+    ax.set_title('')
+    return fig
+
+
+def plot_predictions_binomial(y_true, y_pred):
+    fig, ax = plt.figure(), plt.gca()
+    ax.scatter(y_pred, y_true, color='black')
+    ax.set_xlabel('Predicted y values')
+    ax.set_ylabel('True y values')
+    ax.set_title('')
+    return fig
+
+
+def plot_roc_single_train_test_split(y_true, y_pred):
+    Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
+    fig = skplt.plot_roc_curve(y_true, Y_pred)
+    return fig

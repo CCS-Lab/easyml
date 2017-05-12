@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Titanic • easyml</title>
+<title>Surviving the Titanic • easyml</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -57,10 +57,10 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Titanic</h1>
+      <h1>Surviving the Titanic</h1>
                         <h4 class="author">Paul Hendricks</h4>
             
-            <h4 class="date">2017-02-08</h4>
+            <h4 class="date">2017-05-12</h4>
           </div>
 
     
@@ -77,6 +77,7 @@
 <p>Install the <code>titanic</code> package from CRAN. This package contains datasets providing information on the fate of passengers on the fatal maiden voyage of the ocean liner “Titanic”, with variables such as economic status (class), sex, age and survival. These data sets are often used as an introduction to machine learning on <a href="https://www.kaggle.com/c/titanic">Kaggle</a>. More details about the dataset can be found there.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)
 <span class="kw">library</span>(titanic)
+<span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(ggplot2)
 
 <span class="kw">data</span>(<span class="st">"titanic_train"</span>, <span class="dt">package =</span> <span class="st">"titanic"</span>)
@@ -200,16 +201,15 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(titanic_train)
 <span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(Embarked), Embarked !=<span class="st"> ""</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Family_Size =</span> SibSp +<span class="st"> </span>Parch +<span class="st"> </span>1L) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pclass =</span> <span class="kw">as.character</span>(Pclass)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pclass_2 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "2"</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pclass_3 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "3"</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sex =</span> <span class="dv">1</span> *<span class="st"> </span>(Sex ==<span class="st"> "male"</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Embarked_Q =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "Q"</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Embarked_S =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "S"</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Age =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Age), <span class="kw">mean</span>(Age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), Age))</code></pre></div>
 </div>
-<div id="train-the-models" class="section level2">
+<div id="train-a-penalized-logistic-model" class="section level2">
 <h2 class="hasAnchor">
-<html><body><a href="#train-the-models" class="anchor"> </a></body></html>Train the models</h2>
+<html><body><a href="#train-a-penalized-logistic-model" class="anchor"> </a></body></html>Train a penalized logistic model</h2>
 <p>To run an <code>easy_glmnet</code> model, we pass in the following parameters:</p>
 <ul>
 <li>the data set <code>titanic_train_2</code>,</li>
@@ -224,15 +224,16 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(titanic_train)
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.exclude_variables &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"PassengerId"</span>, <span class="st">"Pclass"</span>, <span class="st">"Name"</span>, 
                         <span class="st">"Ticket"</span>, <span class="st">"Cabin"</span>, <span class="st">"Embarked"</span>)
-.categorical_variables &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"Sex"</span>, <span class="st">"SibSp"</span>, <span class="st">"Parch"</span>, <span class="st">"Family_Size"</span>, <span class="st">"Pclass_2"</span>, 
+.categorical_variables &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"Sex"</span>, <span class="st">"SibSp"</span>, <span class="st">"Parch"</span>, <span class="st">"Family_Size"</span>, 
                             <span class="st">"Pclass_3"</span>, <span class="st">"Embarked_Q"</span>, <span class="st">"Embarked_S"</span>)
-glmnet_results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/easy_glmnet.html">easy_glmnet</a></span>(titanic_train_2, <span class="st">"Survived"</span>, 
-                              <span class="dt">family =</span> <span class="st">"binomial"</span>, 
-                              <span class="dt">preprocess =</span> preprocess_scale, 
-                              <span class="dt">exclude_variables =</span> .exclude_variables, 
-                              <span class="dt">categorical_variables =</span> .categorical_variables, 
-                              <span class="dt">random_state =</span> <span class="dv">12345</span>, <span class="dt">progress_bar =</span> <span class="ot">FALSE</span>, 
-                              <span class="dt">n_core =</span> <span class="dv">8</span>)</code></pre></div>
+results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/easy_glmnet.html">easy_glmnet</a></span>(titanic_train_2, <span class="st">"Survived"</span>, 
+                       <span class="dt">family =</span> <span class="st">"binomial"</span>, 
+                       <span class="dt">preprocess =</span> preprocess_scale, 
+                       <span class="dt">exclude_variables =</span> .exclude_variables, 
+                       <span class="dt">categorical_variables =</span> .categorical_variables, 
+                       <span class="dt">random_state =</span> <span class="dv">12345</span>, <span class="dt">progress_bar =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">n_samples =</span> <span class="dv">10</span>, <span class="dt">n_divisions =</span> <span class="dv">10</span>, 
+                       <span class="dt">n_iterations =</span> <span class="dv">2</span>, <span class="dt">n_core =</span> <span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="assess-results" class="section level2">
 <h2 class="hasAnchor">
@@ -252,15 +253,16 @@ glmnet_results &lt;-<span class="st"> </span><span class="kw"><a href="../refere
 <li>For every additional Sibling or Spouse in a passenger’s family, the log-odds of survival decrease by 0.21 units,</li>
 <li>If a passenger is male, the log-odds of survival decrease by 2.64 units.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_coefficients_processed</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_coefficients</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>glmnet_results$coefficients_processed
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$coefficients_processed
 knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output):<span class="dv">1</span>, ], <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th></th>
 <th align="left">predictor</th>
 <th align="right">mean</th>
+<th align="right">sd</th>
 <th align="right">lower_bound</th>
 <th align="right">upper_bound</th>
 <th align="right">survival</th>
@@ -271,11 +273,12 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>10</td>
+<td>9</td>
 <td align="left">Fare</td>
-<td align="right">0.14</td>
-<td align="right">0.13</td>
-<td align="right">0.15</td>
+<td align="right">0.25</td>
+<td align="right">0.01</td>
+<td align="right">0.23</td>
+<td align="right">0.27</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -283,10 +286,24 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="left">2</td>
 </tr>
 <tr class="even">
-<td>9</td>
+<td>8</td>
 <td align="left">Age</td>
+<td align="right">-0.37</td>
+<td align="right">0.01</td>
+<td align="right">-0.39</td>
+<td align="right">-0.35</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td align="left">Embarked_S</td>
 <td align="right">-0.47</td>
-<td align="right">-0.48</td>
+<td align="right">0.01</td>
+<td align="right">-0.50</td>
 <td align="right">-0.45</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -294,36 +311,26 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="right">2</td>
 <td align="left">2</td>
 </tr>
-<tr class="odd">
-<td>8</td>
-<td align="left">Embarked_S</td>
-<td align="right">-0.40</td>
-<td align="right">-0.41</td>
-<td align="right">-0.38</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">2</td>
-</tr>
 <tr class="even">
-<td>7</td>
+<td>6</td>
 <td align="left">Embarked_Q</td>
 <td align="right">0.00</td>
+<td align="right">0.01</td>
+<td align="right">-0.02</td>
 <td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
 <td align="right">1</td>
-<td align="left">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">2</td>
 </tr>
 <tr class="odd">
-<td>6</td>
+<td>5</td>
 <td align="left">Pclass_3</td>
-<td align="right">-1.97</td>
-<td align="right">-2.03</td>
-<td align="right">-1.88</td>
+<td align="right">-1.44</td>
+<td align="right">0.02</td>
+<td align="right">-1.47</td>
+<td align="right">-1.41</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -331,59 +338,51 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="left">2</td>
 </tr>
 <tr class="even">
-<td>5</td>
-<td align="left">Pclass_2</td>
-<td align="right">-0.75</td>
-<td align="right">-0.81</td>
-<td align="right">-0.67</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">2</td>
-</tr>
-<tr class="odd">
 <td>4</td>
 <td align="left">Family_Size</td>
-<td align="right">-0.10</td>
-<td align="right">-0.10</td>
-<td align="right">-0.10</td>
+<td align="right">-0.09</td>
+<td align="right">0.01</td>
+<td align="right">-0.11</td>
+<td align="right">-0.08</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">2</td>
 <td align="left">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>3</td>
 <td align="left">Parch</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="right">0.00</td>
+<td align="right">0.00</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="left">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>2</td>
 <td align="left">SibSp</td>
-<td align="right">-0.20</td>
-<td align="right">-0.21</td>
-<td align="right">-0.19</td>
+<td align="right">-0.17</td>
+<td align="right">0.01</td>
+<td align="right">-0.18</td>
+<td align="right">-0.16</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">2</td>
 <td align="left">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>1</td>
 <td align="left">Sex</td>
-<td align="right">-2.63</td>
-<td align="right">-2.66</td>
-<td align="right">-2.59</td>
+<td align="right">-2.53</td>
+<td align="right">0.03</td>
+<td align="right">-2.57</td>
+<td align="right">-2.50</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -397,18 +396,18 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <h3 class="hasAnchor">
 <html><body><a href="#predictions-roc-curve" class="anchor"> </a></body></html>Predictions: ROC Curve</h3>
 <p>We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_predictions_train_mean</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_train</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_predictions_test_mean</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_predictions_single_train_test_split_test</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-5-2.png" width="672"></p>
 </div>
 <div id="metrics-auc" class="section level3">
 <h3 class="hasAnchor">
 <html><body><a href="#metrics-auc" class="anchor"> </a></body></html>Metrics: AUC</h3>
 <p>We can examine both the in-sample and out-of-sample AUC metrics for <code>n_divisions</code> train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_metrics_train_mean</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_train</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glmnet_results$plot_metrics_test_mean</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_model_performance_test</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
 </div>
 </div>
@@ -427,7 +426,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <li><a href="#overview">Overview</a></li>
       <li><a href="#load-the-data">Load the data</a></li>
       <li><a href="#tidy-the-data">Tidy the data</a></li>
-      <li><a href="#train-the-models">Train the models</a></li>
+      <li><a href="#train-a-penalized-logistic-model">Train a penalized logistic model</a></li>
       <li><a href="#assess-results">Assess results</a></li>
       <li><a href="#discuss">Discuss</a></li>
       </ul>

@@ -18,7 +18,8 @@ A data.frame; the replicated coefficients processed for easy plotting.
 Process coefficients.
 }
 \seealso{
-Other utils: \code{\link{correlation_test}},
+Other utils: \code{\link{check_arguments}},
+  \code{\link{correlation_test}},
   \code{\link{process_variable_importances}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}

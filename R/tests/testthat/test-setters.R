@@ -19,30 +19,6 @@ test_that("Test set_random_state.", {
   expect_equal(b, d)
 })
 
-test_that("Test set_coefficients_boolean.", {
-  expect_equal(set_coefficients_boolean("glmnet"), TRUE)
-  expect_equal(set_coefficients_boolean("random_forest"), FALSE)
-  expect_equal(set_coefficients_boolean("support_vector_machine"), FALSE)
-})
-
-test_that("Test set_predictions_boolean.", {
-  expect_equal(set_predictions_boolean("glmnet"), TRUE)
-  expect_equal(set_predictions_boolean("random_forest"), TRUE)
-  expect_equal(set_predictions_boolean("support_vector_machine"), TRUE)
-})
-
-test_that("Test set_variable_importances_boolean.", {
-  expect_equal(set_variable_importances_boolean("glmnet"), FALSE)
-  expect_equal(set_variable_importances_boolean("random_forest"), TRUE)
-  expect_equal(set_variable_importances_boolean("support_vector_machine"), FALSE)
-})
-
-test_that("Test set_metrics_boolean.", {
-  expect_equal(set_metrics_boolean("glmnet"), TRUE)
-  expect_equal(set_metrics_boolean("random_forest"), TRUE)
-  expect_equal(set_metrics_boolean("support_vector_machine"), TRUE)
-})
-
 test_that("Test set_parallel.", {
   expect_equal(set_parallel(1), FALSE)
   expect_equal(set_parallel(2), TRUE)
@@ -166,41 +142,16 @@ test_that("Test set_preprocess.", {
 
 test_that("Test set_measure.", {
   expect_error(set_measure(NULL, NULL, NULL))
-  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_cor_score)
-  expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_area_under_curve)
-  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_cor_score)
-  expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_area_under_curve)
-  expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_mean_squared_error)
-  expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_area_under_curve)
+  expect_equal(set_measure(NULL, "glmnet", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "glmnet", "binomial"), measure_auc_score)
+  expect_equal(set_measure(NULL, "random_forest", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "random_forest", "binomial"), measure_auc_score)
+  expect_equal(set_measure(NULL, "support_vector_machine", "gaussian"), measure_correlation_score)
+  expect_equal(set_measure(NULL, "support_vector_machine", "binomial"), measure_auc_score)
   expect_equal(set_measure(identity), identity)
   expect_equal(set_measure(identity, "", NULL), identity)
   expect_equal(set_measure(identity, NULL, ""), identity)
   expect_equal(set_measure(identity, "", ""), identity)
-})
-
-test_that("Test set_fit_model.", {
-  expect_error(set_fit_model("", ""))
-  expect_equal(set_fit_model("glmnet", "gaussian"), glmnet_fit_model_gaussian)
-  expect_equal(set_fit_model("glmnet", "binomial"), glmnet_fit_model_binomial)
-  expect_equal(set_fit_model("random_forest", "gaussian"), random_forest_fit_model_gaussian)
-  expect_equal(set_fit_model("random_forest", "binomial"), random_forest_fit_model_binomial)
-  expect_equal(set_fit_model("support_vector_machine", "gaussian"), support_vector_machine_fit_model_gaussian)
-  expect_equal(set_fit_model("support_vector_machine", "binomial"), support_vector_machine_fit_model_binomial)
-})
-
-test_that("Test set_extract_coefficients.", {
-  expect_equal(set_extract_coefficients("", ""), NULL)
-  expect_equal(set_extract_coefficients("glmnet", ""), glmnet_extract_coefficients)
-})
-
-test_that("Test set_predict_model.", {
-  expect_error(set_predict_model("", ""))
-  expect_equal(set_predict_model("glmnet", "gaussian"), glmnet_predict_model)
-  expect_equal(set_predict_model("glmnet", "binomial"), glmnet_predict_model)
-  expect_equal(set_predict_model("random_forest", "gaussian"), random_forest_predict_model)
-  expect_equal(set_predict_model("random_forest", "binomial"), random_forest_predict_model)
-  expect_equal(set_predict_model("support_vector_machine", "gaussian"), support_vector_machine_predict_model)
-  expect_equal(set_predict_model("support_vector_machine", "binomial"), support_vector_machine_predict_model)
 })
 
 test_that("Test set_plot_predictions.", {
@@ -213,10 +164,10 @@ test_that("Test set_plot_predictions.", {
   expect_equal(set_plot_predictions("support_vector_machine", "binomial"), plot_predictions_binomial)
 })
 
-test_that("Test set_plot_metrics.", {
-  expect_error(set_plot_metrics(""))
-  expect_equal(set_plot_metrics(measure_r2_score), plot_metrics_gaussian_r2_score)
-  expect_equal(set_plot_metrics(measure_mean_squared_error), plot_metrics_gaussian_mean_squared_error)
-  expect_equal(set_plot_metrics(measure_area_under_curve), plot_metrics_binomial_area_under_curve)
-  expect_equal(set_plot_metrics(measure_cor_score), plot_metrics_gaussian_cor_score)
+test_that("Test set_plot_model_performance.", {
+  expect_error(set_plot_model_performance(""))
+  expect_equal(set_plot_model_performance(measure_mse_score), plot_model_performance_gaussian_mse_score)
+  expect_equal(set_plot_model_performance(measure_correlation_score), plot_model_performance_gaussian_correlation_score)
+  expect_equal(set_plot_model_performance(measure_r2_score), plot_model_performance_gaussian_r2_score)
+  expect_equal(set_plot_model_performance(measure_auc_score), plot_model_performance_binomial_auc_score)
 })
