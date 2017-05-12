@@ -13,6 +13,10 @@ results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
                       n_samples=5, n_divisions=5, n_iterations=2,
                       model_args={'alpha': 1, 'n_lambda': 200})
 print(results.plot_coefficients())
+print(results.plot_predictions_train())
+print(results.plot_predictions_test())
+print(results.plot_model_performance_train())
+print(results.plot_model_performance_test())
 
 
 # # Analyze data

@@ -95,14 +95,14 @@ def set_plot_predictions(family=None):
     return plot_predictions
 
 
-def set_plot_model_performance(model_performance):
-    if model_performance == meas.mean_squared_error:
+def set_plot_model_performance(measure):
+    if measure == meas.measure_mean_squared_error:
         plot_model_performance = plt.plot_model_performance_gaussian_mean_squared_error
-    elif model_performance == meas.model_performance_cor_score:
+    elif measure == meas.measure_cor_score:
         plot_model_performance = plt.plot_model_performance_gaussian_cor_score
-    elif model_performance == meas.model_performance_r2_score:
+    elif measure == meas.measure_r2_score:
         plot_model_performance = plt.plot_model_performance_gaussian_r2_score
-    elif model_performance == meas.model_performance_area_under_curve:
+    elif measure == meas.measure_area_under_curve:
         plot_model_performance = plt.plot_model_performance_binomial_area_under_curve
     else:
         raise ValueError

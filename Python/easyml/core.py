@@ -361,7 +361,7 @@ class easy_analysis:
 
         return model_performance_train, model_performance_test
 
-    def plot_predictions_train(self):
+    def plot_predictions_single_train_test_split_train(self):
         y_train = self.y_train
         y_train_pred = np.mean(self.predictions_train, axis=1)
         if self.family == 'gaussian':
@@ -370,7 +370,7 @@ class easy_analysis:
             fig = plot.plot_predictions_binomial(y_train, y_train_pred)
         return fig
 
-    def plot_predictions_test(self):
+    def plot_predictions_single_train_test_split_test(self):
         y_test = self.y_test
         y_test_pred = np.mean(self.predictions_test, axis=1)
         if self.family == 'gaussian':
@@ -379,7 +379,7 @@ class easy_analysis:
             fig = plot.plot_predictions_binomial(y_test, y_test_pred)
         return fig
 
-    def plot_roc_curve_train(self):
+    def plot_roc_single_train_test_split_train(self):
         y_train = self.y_train
         y_train_pred = np.mean(self.predictions_train, axis=1)
         if self.family == 'gaussian':
@@ -388,7 +388,7 @@ class easy_analysis:
             fig = plot.plot_roc_single_train_test_split(y_train, y_train_pred)
         return fig
 
-    def plot_roc_curve_test(self):
+    def plot_roc_single_train_test_split_test(self):
         y_test = self.y_test
         y_test_pred = np.mean(self.predictions_test, axis=1)
         if self.family == 'gaussian':
