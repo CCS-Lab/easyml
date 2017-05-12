@@ -37,7 +37,7 @@ if [ ${TASK} == "python_test" ]; then
     pip3 install .
     
     # Install package dependencies
-    pip3 install numpy scipy six
+    pip3 install matplotlib numpy scipy six
     pip3 install -r requirements.txt
     
     # Run tests
