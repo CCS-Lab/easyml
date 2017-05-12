@@ -57,6 +57,7 @@ predict_model.easy_avNNet <- function(object, newx = NULL) {
 #' 
 #' # Binomial
 #' data("cocaine_dependence", package = "easyml")
+#' model_args <- list(size = 5, linout = TRUE, trace = FALSE)
 #' results <- easy_avNNet(cocaine_dependence, "diagnosis", 
 #'                        family = "binomial", 
 #'                        exclude_variables = c("subject"), 
@@ -64,7 +65,7 @@ predict_model.easy_avNNet <- function(object, newx = NULL) {
 #'                        preprocess = preprocess_scale, 
 #'                        n_samples = 10, n_divisions = 10, 
 #'                        n_iterations = 2, random_state = 12345, 
-#'                        n_core = 1)
+#'                        n_core = 1, model_args = model_args)
 #' }
 #' @export
 easy_avNNet <- function(.data, dependent_variable, 
