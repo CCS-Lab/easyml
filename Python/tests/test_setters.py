@@ -93,8 +93,8 @@ def test_set_plot_predictions():
     assert setters.set_plot_predictions('binomial') == plot.plot_predictions_binomial
 
 
-def test_set_plot_metrics():
-    assert setters.set_plot_metrics(measure.mean_squared_error) == plot.plot_metrics_gaussian_mean_squared_error
-    assert setters.set_plot_metrics(measure.measure_cor_score) == plot.plot_metrics_gaussian_cor_score
-    assert setters.set_plot_metrics(measure.measure_r2_score) == plot.plot_metrics_gaussian_r2_score
-    assert setters.set_plot_metrics(measure.measure_area_under_curve) == plot.plot_metrics_binomial_area_under_curve
+def test_set_plot_model_performance():
+    assert setters.set_plot_model_performance(measure.measure_mean_squared_error) == plot.plot_model_performance_gaussian_mean_squared_error
+    assert setters.set_plot_model_performance(measure.measure_cor_score) == plot.plot_model_performance_gaussian_cor_score
+    assert setters.set_plot_model_performance(measure.measure_r2_score) == plot.plot_model_performance_gaussian_r2_score
+    assert setters.set_plot_model_performance(measure.measure_area_under_curve) == plot.plot_model_performance_binomial_area_under_curve
