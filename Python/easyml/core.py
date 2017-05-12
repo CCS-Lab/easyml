@@ -117,6 +117,9 @@ class easy_analysis:
             # generate measures of model performance
             self.model_performance = self.generate_model_performance()
 
+            # model performance function
+            self.plot_model_performance = setters.set_plot_model_performance(self.measure)
+
             # unpack train and test measures of model performance
             self.model_performance_train, self.model_performance_test = self.model_performance
 
@@ -359,19 +362,45 @@ class easy_analysis:
         return model_performance_train, model_performance_test
 
     def plot_predictions_train(self):
-        return 1
+        y_train = self.y_train
+        y_train_pred = np.mean(self.predictions_train, axis=1)
+        if self.family == 'gaussian':
+            fig = plot.plot_predictions_gaussian(y_train, y_train_pred)
+        else:
+            fig = plot.plot_predictions_binomial(y_train, y_train_pred)
+        return fig
 
     def plot_predictions_test(self):
-        return 1
+        y_test = self.y_test
+        y_test_pred = np.mean(self.predictions_test, axis=1)
+        if self.family == 'gaussian':
+            fig = plot.plot_predictions_gaussian(y_test, y_test_pred)
+        else:
+            fig = plot.plot_predictions_binomial(y_test, y_test_pred)
+        return fig
 
     def plot_roc_curve_train(self):
-        return 1
+        y_train = self.y_train
+        y_train_pred = np.mean(self.predictions_train, axis=1)
+        if self.family == 'gaussian':
+            raise NotImplementedError
+        else:
+            fig = plot.plot_roc_single_train_test_split(y_train, y_train_pred)
+        return fig
 
     def plot_roc_curve_test(self):
-        return 1
+        y_test = self.y_test
+        y_test_pred = np.mean(self.predictions_test, axis=1)
+        if self.family == 'gaussian':
+            raise NotImplementedError
+        else:
+            fig = plot.plot_roc_single_train_test_split(y_test, y_test_pred)
+        return fig
 
     def plot_model_performance_train(self):
-        return 1
+        fig = self.plot_model_performance(self.model_performance_train)
+        return fig
 
     def plot_model_performance_test(self):
-        return 1
+        fig = self.plot_model_performance(self.model_performance_test)
+        return fig
