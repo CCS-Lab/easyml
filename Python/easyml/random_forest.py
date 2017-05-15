@@ -58,9 +58,9 @@ class easy_random_forest(easy_analysis):
         return predictions
 
     def plot_variable_importances(self):
-        n = self.importances.shape[1]
-        importances_mean = np.mean(self.importances, axis=0)
-        importances_std = np.std(self.importances, axis=0)
+        n = self.variable_importances.shape[1]
+        importances_mean = np.mean(self.variable_importances, axis=0)
+        importances_std = np.std(self.variable_importances, axis=0)
         fig, ax = plt.figure(), plt.gca()
         ax.bar(range(n), importances_mean, color='grey', ecolor='black',
                yerr=importances_std, align='center')
