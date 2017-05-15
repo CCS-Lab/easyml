@@ -8,7 +8,7 @@ A toolkit for easily building and evaluating machine learning models.
 Installation
 ------------
 
-See installation instructions for the Python or R packages.
+See installation instructions for the Python or R packages. **The easyml Python package is unstable yet, so come back later**.
 
 If you encounter a clear bug, please file a [minimal reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on [github](https://github.com/CCS-Lab/easyml/issues).
 
