@@ -4,6 +4,7 @@ Functions for plotting.
 import matplotlib.pyplot as plt
 import numpy as np
 import scikitplot.plotters as skplt
+from sklearn import linear_model
 
 
 __all__ = []
@@ -77,10 +78,25 @@ def plot_predictions_gaussian(y_true, y_pred):
 
 
 def plot_predictions_binomial(y_true, y_pred):
+    # run the classifier
+    clf = linear_model.LogisticRegression()
+    clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
+
     fig, ax = plt.figure(), plt.gca()
     ax.scatter(y_pred, y_true, color='black')
+    newx = np.arange(0, 1, 0.001)
+
+    def model(x):
+        return 1 / (1 + np.exp(-x))
+
+    loss = model(newx * clf.coef_ + clf.intercept_).ravel()
+    ax.plot(newx, loss, color='black')
     ax.set_xlabel('Predicted y values')
     ax.set_ylabel('True y values')
+    ax.set_xticks(np.arange(0, 1, 0.05))
+    ax.set_yticks(np.arange(0, 1, 0.05))
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
     ax.set_title('')
     return fig
 

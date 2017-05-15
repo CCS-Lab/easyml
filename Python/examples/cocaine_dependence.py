@@ -22,7 +22,7 @@ results = random_forest.easy_random_forest(cocaine_dependence, 'DIAGNOSIS',
                                           exclude_variables=['subject'],
                                           categorical_variables=['Male'],
                                           random_state=1, progress_bar=True, n_core=1,
-                                          n_samples=5, n_divisions=5, n_iterations=2,
+                                          n_samples=5, n_divisions=20, n_iterations=2,
                                           model_args={'n_estimators': 10})
 print(results.plot_variable_importances())
 
