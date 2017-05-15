@@ -11,6 +11,10 @@ output = glmnet.easy_glmnet(prostate, 'lpsa',
                             n_samples=10, n_divisions=10, n_iterations=2,
                             model_args={'alpha': 1})
 output.plot_coefficients()
+output.plot_predictions_single_train_test_split_train()
+output.plot_predictions_single_train_test_split_test()
+output.plot_model_performance_train()
+output.plot_model_performance_test()
 
 # Analyze data
 output = random_forest.easy_random_forest(prostate, 'lpsa',

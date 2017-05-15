@@ -14,7 +14,7 @@ plt.style.use('ggplot')
 
 
 def plot_model_performance_gaussian_mean_squared_error(x):
-    bins = np.linspace(0, np.max(x), 100)
+    bins = np.linspace(0, np.max(x), 30)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
@@ -27,7 +27,7 @@ def plot_model_performance_gaussian_mean_squared_error(x):
 
 
 def plot_model_performance_gaussian_cor_score(x):
-    bins = np.arange(0, 1.02, 0.02)
+    bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
@@ -41,7 +41,7 @@ def plot_model_performance_gaussian_cor_score(x):
 
 
 def plot_model_performance_gaussian_r2_score(x):
-    bins = np.arange(0, 1.02, 0.02)
+    bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
@@ -55,7 +55,7 @@ def plot_model_performance_gaussian_r2_score(x):
 
 
 def plot_model_performance_binomial_area_under_curve(x):
-    bins = np.arange(0, 1.02, 0.02)
+    bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
@@ -69,8 +69,16 @@ def plot_model_performance_binomial_area_under_curve(x):
 
 
 def plot_predictions_gaussian(y_true, y_pred):
+    # run the classifier
+    clf = linear_model.LinearRegression()
+    clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
+
     fig, ax = plt.figure(), plt.gca()
     ax.scatter(y_pred, y_true, color='black')
+    newx = np.linspace(0, np.max(y_pred) + np.std(y_pred), 100)
+
+    loss = clf.predict(newx.reshape(-1, 1)).ravel()
+    ax.plot(newx, loss, color='black')
     ax.set_xlabel('Predicted y values')
     ax.set_ylabel('True y values')
     ax.set_title('')
