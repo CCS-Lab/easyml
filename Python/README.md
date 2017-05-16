@@ -36,7 +36,7 @@ For a dataset with a continuous dependent variable:
 prostate = pd.read_table('./prostate.txt')
 
 # Analyze data
-output = glmnet.easy_glmnet(prostate, 'lpsa',
+output = easy_glmnet(prostate, 'lpsa',
             random_state=1, progress_bar=True, n_core=1,
             n_samples=100, n_divisions=10, n_iterations=5,
             model_args={'alpha': 1, 'n_lambda': 200})
