@@ -25,9 +25,7 @@ Examples
 Load the `easyml` library:
 
 ``` python
-import os
 import pandas as pd
-
 from easyml.glmnet import easy_glmnet
 ```
 
@@ -38,10 +36,10 @@ For a dataset with a continuous dependent variable:
 prostate = pd.read_table('./prostate.txt')
 
 # Analyze data
-easy_glmnet(prostate, 'lpsa',
-            random_state=1, progress_bar=True, n_core=os.cpu_count(),
+output = glmnet.easy_glmnet(prostate, 'lpsa',
+            random_state=1, progress_bar=True, n_core=1,
             n_samples=100, n_divisions=10, n_iterations=5,
-            alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)
+            model_args={'alpha': 1, 'n_lambda': 200})
 ```
 
 For a dataset with a binary dependent variable:
@@ -51,31 +49,32 @@ For a dataset with a binary dependent variable:
 cocaine_depedence = pd.read_table('./cocaine_depedence.txt')
 
 # Analyze data
-easy_glmnet(cocaine_depedence, 'DIAGNOSIS',
-            family='binomial', exclude_variables=['subject'], categorical_variables=['Male'],
-            random_state=1, progress_bar=True, n_core=os.cpu_count(),
-            n_samples=100, n_divisions=10, n_iterations=5,
-            alpha=1, n_lambda=200, standardize=False, cut_point=0, max_iter=1e6)
+results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
+                      family='binomial',
+                      exclude_variables=['subject'],
+                      categorical_variables=['Male'],
+                      random_state=12345, progress_bar=True, n_core=1,
+                      n_samples=5, n_divisions=5, n_iterations=2,
+                      model_args={'alpha': 1, 'n_lambda': 200})
 ```
 
 Citation
 --------
 
-A whitepaper for easyml is available at http://arxiv.org/abs/TOBEEDITED. If you find this code useful please cite us in your work:
+A whitepaper for easyml is available at https://doi.org/10.1101/137240. If you find this code useful please cite us in your work:
 
 ```
-@inproceedings{easyml,
-	title = {easyml: A toolkit for easily building and evaluating machine learning models},
-	author = {Paul Hendricks and Woo-Young Ahn},
+@article {Hendricks137240,
+	author = {Hendricks, Paul and Ahn, Woo-Young},
+	title = {Easyml: Easily Build And Evaluate Machine Learning Models},
 	year = {2017},
+	doi = {10.1101/137240},
+	publisher = {Cold Spring Harbor Labs Journals},
+	URL = {http://biorxiv.org/content/early/2017/05/12/137240},
+	journal = {bioRxiv}
 }
 ```
 
 References
 ----------
-
-Ahn, W.-Y.∗, Ramesh∗, D., Moeller, F. G., & Vassileva, J. (2016) Utility of machine learning approaches to identify behavioral markers for substance use disorders: Impulsivity dimensions as predictors of current cocaine dependence. Frontiers in Psychiatry, 7: 34. [PDF](https://u.osu.edu/ccsl/files/2015/08/Ahn2016_Frontiers-26g6nye.pdf) ∗Co-first authors
-
-Ahn, W.-Y. & Vassileva, J. (2016) Machine-learning identifies substance-specific behavioral markers for opiate and stimulant dependence. Drug and Alcohol Dependence, 161 (1), 247–257. [PDF](https://u.osu.edu/ccsl/files/2016/02/Ahn2016_DAD-oftlf3.pdf)
-
-Ahn, W.-Y., Kishida, K. T., Gu, X., Lohrenz, T., Harvey, A. H., Alford, J. R., Smith, K. B., Yaffe, G., Hibbing, J. R., Dayan, P., & Montague, P. R. (2014) Nonpolitical images evoke neural predictors of political ideology. Current Biology, 24(22), 2693-2599. [PDF](https://u.osu.edu/ccsl/files/2015/11/Ahn2014_CB-1l5475k.pdf) [SOM](https://u.osu.edu/ccsl/files/2015/11/Ahn2014_CB_SOM-1xag1ph.pdf)
+Hendricks, P., & Ahn, W.-Y. (2017). Easyml: Easily Build And Evaluate Machine Learning Models. bioRxiv, 137240. http://doi.org/10.1101/137240
