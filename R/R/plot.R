@@ -25,7 +25,7 @@ plot_coefficients_processed <- function(coefficients_processed) {
     ggplot2::geom_point() +
     ggplot2::scale_x_discrete("Predictors") +
     ggplot2::scale_y_continuous("Coefficient estimates") + 
-    ggplot2::scale_color_manual("", values = c("0" = "grey", "2" = "black"), 
+    ggplot2::scale_color_manual("", values = c("0" = "#D3D3D3", "2" = "#000000"), 
                                 labels = c("0" = "Insignificant", "2" = "Significant")) + 
     ggplot2::ggtitle("Estimates of coefficients") + 
     ggplot2::theme_bw() + 
