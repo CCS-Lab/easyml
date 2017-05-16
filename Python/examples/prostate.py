@@ -32,9 +32,3 @@ output.plot_predictions_single_train_test_split_train()
 output.plot_predictions_single_train_test_split_test()
 output.plot_model_performance_train()
 output.plot_model_performance_test()
-
-import matplotlib.pyplot as plt
-import numpy as np
-plt.figure()
-plt.plot(np.random.normal(0, 1, 10),np.random.normal(0, 1, 10) )
-plt.title('Actual vs. Predicted y values\nTrain Predictions', loc='left')
