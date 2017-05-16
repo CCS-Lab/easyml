@@ -49,7 +49,7 @@ def set_preprocess(preprocess=None):
 def set_measure(measure=None, family=None):
     if not measure:
         if family == 'gaussian':
-            measure = meas.measure_mean_squared_error
+            measure = meas.measure_cor_score
         elif family == 'binomial':
             measure = meas.measure_area_under_curve
         else:

@@ -10,9 +10,14 @@ data("prostate", package = "easyml")
 .n_core <- 1
 
 # Analyze data
-glmnet_results <- easy_glmnet(prostate, "lpsa", 
-                              n_samples = .n_samples, n_divisions = .n_divisions, 
-                              n_iterations = .n_iterations, random_state = 1, n_core = .n_core)
+results <- easy_glmnet(prostate, "lpsa", 
+                       n_samples = .n_samples, n_divisions = .n_divisions, 
+                       n_iterations = .n_iterations, random_state = 1, n_core = .n_core)
+results$plot_coefficients
+results$plot_predictions_single_train_test_split_train
+results$plot_predictions_single_train_test_split_test
+results$plot_model_performance_train
+results$plot_model_performance_test
 
 glinternet_results <- easy_glinternet(prostate, "lpsa", 
                                       n_samples = .n_samples, n_divisions = .n_divisions, 
