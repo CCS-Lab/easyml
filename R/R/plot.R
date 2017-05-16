@@ -84,7 +84,7 @@ plot_variable_importances_processed <- function(variable_importances_processed) 
 plot_predictions_gaussian <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, 
                    stringsAsFactors = FALSE)
-  cor_score <- round(measure_correlation_score(y_true, y_pred), 3)
+  cor_score <- round(measure_correlation_score(y_true, y_pred), digits = 2)
   msg <- "Actual vs. Predicted y values (Correlation Score = "
   .title <- paste0(msg, cor_score, ")")
   g <- 
@@ -109,7 +109,7 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 plot_predictions_binomial <- function(y_true, y_pred) {
   df <- data.frame(y_true = y_true, y_pred = y_pred, 
                    stringsAsFactors = FALSE)
-  cor_score <- round(measure_correlation_score(y_true, y_pred), 3)
+  cor_score <- round(measure_correlation_score(y_true, y_pred), digits = 2)
   msg <- "Actual vs. Predicted y values (Correlation Score = "
   .title <- paste0(msg, cor_score, ")")
   g <- 
@@ -136,7 +136,7 @@ plot_predictions_binomial <- function(y_true, y_pred) {
 plot_roc_curve <- function(y_true, y_pred) {
   results <- pROC::roc(y_true, y_pred)
   auc <- as.numeric(results$auc)
-  auc_label <- paste("AUC = ", round(auc, digits = 3), sep = "")
+  auc_label <- paste("AUC Score = ", round(auc, digits = 2), sep = "")
   df <- data.frame(sensitivities = results$sensitivities, 
                    one_minus_specificities = 1 - results$specificities, 
                    stringsAsFactors = FALSE)
@@ -163,7 +163,7 @@ plot_roc_curve <- function(y_true, y_pred) {
 #' @family plot
 #' @export
 plot_model_performance_histogram <- function(x, name) {
-  mean_x <- round(mean(x), digits = 3)
+  mean_x <- round(mean(x), digits = 2)
   label <- paste0("Mean ", name, " Score = ", mean_x)
   .title <- paste0("Distribution of ", name, " Scores (", label, ")")
   df <- data.frame(x = x, stringsAsFactors = FALSE)

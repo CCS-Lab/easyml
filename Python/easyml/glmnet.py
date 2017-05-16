@@ -95,11 +95,3 @@ class easy_glmnet(easy_analysis):
         ax.set_ylabel('Predictors')
         ax.set_title('Estimates of coefficients', loc='left')
         return fig
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.random.uniform(0, 1, 3)
-names = ['foo', 'bar', 'baz']
-temp = {k: v for k, v in zip(names, x)}
-

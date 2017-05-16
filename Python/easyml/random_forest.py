@@ -60,17 +60,17 @@ class easy_random_forest(easy_analysis):
     def plot_variable_importances(self):
         n = self.variable_importances.shape[1]
         importances_mean = np.mean(self.variable_importances, axis=0)
-        column_names = [v[1] for v in sorted(zip(importances_mean, self.column_names), reverse=True)]
+        column_names = [v[1] for v in sorted(zip(importances_mean, self.column_names))]
         importances_std = np.std(self.variable_importances, axis=0)
-        importances_std = [v[1] for v in sorted(zip(importances_mean, importances_std), reverse=True)]
-        importances_mean = sorted(importances_mean, reverse=True)
+        importances_std = [v[1] for v in sorted(zip(importances_mean, importances_std))]
+        importances_mean = sorted(importances_mean)
 
         fig, ax = plt.figure(), plt.gca()
-        ax.bar(range(n), importances_mean, color='grey', ecolor='black',
-               yerr=importances_std, align='center')
-        ax.set_xticks(range(n))
-        ax.set_xticklabels(column_names)
-        ax.set_xlabel('Predictors')
-        ax.set_ylabel('Variable Importance (Mean Decrease in Gini Index)')
-        ax.set_title('Variable Importances')
+        ax.barh(range(n), importances_mean, color='grey', ecolor='black',
+                xerr=importances_std, align='center')
+        ax.set_xlabel('Variable Importance (Mean Decrease in Gini Index)')
+        ax.set_yticks(range(n))
+        ax.set_yticklabels(column_names)
+        ax.set_ylabel('Predictors')
+        ax.set_title('Variable Importances', loc='left')
         return fig

@@ -20,10 +20,10 @@ def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
-    ax.annotate('Mean MSE = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
     ax.set_xlabel('MSE')
     ax.set_ylabel('Frequency')
-    ax.set_title('Distribution of MSEs\n{} Dataset'.format(subtitle), loc='left')
+    title = 'Distribution of MSEs (Mean MSE = {})\n{} Dataset'.format(x_mean, subtitle)
+    ax.set_title(title, loc='left')
     return fig
 
 
@@ -33,11 +33,11 @@ def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
-    ax.annotate('Mean Correlation Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
     ax.set_xlim([0.0, 1.0])
     ax.set_xlabel('Correlation Score')
     ax.set_ylabel('Frequency')
-    ax.set_title('Distribution of Correlation Scores\n{} Dataset'.format(subtitle), loc='left')
+    title = 'Distribution of Correlation Scores (Mean Correlation Score = {})\n{} Dataset'.format(x_mean, subtitle)
+    ax.set_title(title, loc='left')
     return fig
 
 
@@ -51,21 +51,21 @@ def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
     ax.set_xlim([0.0, 1.0])
     ax.set_xlabel('R^2')
     ax.set_ylabel('Frequency')
-    ax.set_title('Distribution of R^2 scores\n{} Dataset'.format(subtitle), loc='left')
+    title = 'Distribution of R^2 Scores (Mean R^2 Score = {})\n{} Dataset'.format(x_mean, subtitle)
+    ax.set_title(title, loc='left')
     return fig
 
 
 def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
-    x_mean = np.mean(x)
+    x_mean = round(np.mean(x), 2)
     fig, ax = plt.figure(), plt.gca()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
-    ax.annotate('Mean AUC = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
     ax.set_xlim([0.0, 1.0])
     ax.set_xlabel('AUC')
-    ax.set_ylabel('Frequency')
-    ax.set_title('Distribution of AUCs\n{} Dataset'.format(subtitle), loc='left')
+    title = 'Distribution of AUC Scores (Mean AUC Score = {})\n{} Dataset'.format(x_mean, subtitle)
+    ax.set_title(title, loc='left')
     return fig
 
 
@@ -116,7 +116,7 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
 
 def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
     auc = round(roc_auc_score(y_true, y_pred), 2)
-    title = 'ROC Curve (AUC = {})\n{} Dataset'.format(auc, subtitle)
+    title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc, subtitle)
     Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
     fig = skplt.plot_roc_curve(y_true, Y_pred, title=title)
     return fig
