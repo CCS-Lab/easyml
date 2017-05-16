@@ -80,20 +80,20 @@ class easy_glmnet(easy_analysis):
     def plot_coefficients(self):
         n = self.coefficients.shape[1]
         coefficients_mean = np.mean(self.coefficients, axis=0)
-        column_names = [v[1] for v in sorted(zip(coefficients_mean, self.column_names), reverse=True)]
+        column_names = [v[1] for v in sorted(zip(coefficients_mean, self.column_names))]
         coefficients_std = np.std(self.coefficients, axis=0)
-        coefficients_std = [v[1] for v in sorted(zip(coefficients_mean, coefficients_std), reverse=True)]
-        coefficients_mean = sorted(coefficients_mean, reverse=True)
+        coefficients_std = [v[1] for v in sorted(zip(coefficients_mean, coefficients_std))]
+        coefficients_mean = sorted(coefficients_mean)
 
         fig, ax = plt.subplots()
-        ax.errorbar(range(n), coefficients_mean, yerr=coefficients_std, fmt='o',
+        ax.errorbar(coefficients_mean, range(n), xerr=coefficients_std, fmt='o',
                     color='black', ecolor='black')
-        ax.set_xticks(range(0, n))
-        ax.set_xlim(-0.5, n - 0.5)
-        ax.set_xticklabels(column_names)
-        ax.set_xlabel('Predictors')
-        ax.set_ylabel('Coefficient estimates')
-        ax.set_title('Estimates of coefficients')
+        ax.set_xlabel('Coefficient estimates')
+        ax.set_yticks(range(0, n))
+        ax.set_ylim(-0.5, n - 0.5)
+        ax.set_yticklabels(column_names)
+        ax.set_ylabel('Predictors')
+        ax.set_title('Estimates of coefficients', loc='left')
         return fig
 
 import matplotlib.pyplot as plt
