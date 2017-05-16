@@ -64,5 +64,9 @@ class easy_random_forest(easy_analysis):
         fig, ax = plt.figure(), plt.gca()
         ax.bar(range(n), importances_mean, color='grey', ecolor='black',
                yerr=importances_std, align='center')
-        ax.set_title('Feature importances')
+        ax.set_xticks(range(n))
+        ax.set_xticklabels(self.column_names)
+        ax.set_xlabel('Predictors')
+        ax.set_ylabel('Variable Importance (Mean Decrease in Gini Index)')
+        ax.set_title('Variable Importances')
         return fig
