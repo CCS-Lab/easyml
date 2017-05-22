@@ -17,56 +17,59 @@ plt.style.use('ggplot')
 def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
     bins = np.linspace(0, np.max(x), 30)
     x_mean = np.mean(x)
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.set_xlabel('MSE')
     ax.set_ylabel('Frequency')
     title = 'Distribution of MSEs (Mean MSE = {})\n{} Dataset'.format(x_mean, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.set_xlim([0.0, 1.0])
+    ax.set_xticks(np.arange(0, 1.1, 0.10))
     ax.set_xlabel('Correlation Score')
     ax.set_ylabel('Frequency')
     title = 'Distribution of Correlation Scores (Mean Correlation Score = {})\n{} Dataset'.format(x_mean, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.annotate('Mean R^2 Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
     ax.set_xlim([0.0, 1.0])
+    ax.set_xticks(np.arange(0, 1.1, 0.10))
     ax.set_xlabel('R^2')
     ax.set_ylabel('Frequency')
     title = 'Distribution of R^2 Scores (Mean R^2 Score = {})\n{} Dataset'.format(x_mean, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='white', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.set_xlim([0.0, 1.0])
+    ax.set_xticks(np.arange(0, 1.1, 0.10))
     ax.set_xlabel('AUC')
     title = 'Distribution of AUC Scores (Mean AUC Score = {})\n{} Dataset'.format(x_mean, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
@@ -74,7 +77,7 @@ def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
     clf = linear_model.LinearRegression()
     clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
 
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.scatter(y_pred, y_true, color='black')
     newx = np.linspace(0, np.max(y_pred) + np.std(y_pred), 100)
 
@@ -85,7 +88,7 @@ def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
     correlation_score = round(np.corrcoef(y_true, y_pred)[0, 1], 2)
     title = 'Actual vs. Predicted y values (Correlation Score =  {})\n{} Dataset'.format(correlation_score, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
@@ -93,7 +96,7 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
     clf = linear_model.LogisticRegression()
     clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
 
-    fig, ax = plt.figure(), plt.gca()
+    fig, ax = plt.subplots()
     ax.scatter(y_pred, y_true, color='black')
     newx = np.arange(0, 1, 0.001)
 
@@ -111,12 +114,12 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
     correlation_score = round(np.corrcoef(y_true, y_pred)[0, 1], 2)
     title = 'Actual vs. Predicted y values (Correlation Score =  {})\n{} Dataset'.format(correlation_score, subtitle)
     ax.set_title(title, loc='left')
-    return fig
+    return fig, ax
 
 
 def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
     auc = round(roc_auc_score(y_true, y_pred), 2)
     title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc, subtitle)
     Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
-    fig = skplt.plot_roc_curve(y_true, Y_pred, title=title)
-    return fig
+    axes = skplt.plot_roc_curve(y_true, Y_pred, title=title)
+    return axes
