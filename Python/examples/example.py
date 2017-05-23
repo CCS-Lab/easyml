@@ -18,16 +18,17 @@ print(output.coefficients)
 # Generate coefficients from data by hand
 X, y = prostate.drop('lpsa', axis=1).values, prostate['lpsa'].values
 sclr = StandardScaler()
-X = sclr.fit_transform(X)
+X_preprocessed = sclr.fit_transform(X)
 
 # data is the same in both - check
-assert np.all(X == output.X_preprocessed)
+assert np.all(X_preprocessed == output.X_preprocessed)
 
 coefficients = []
 for i in range(10):
-    model = ElasticNet(alpha=1, standardize=False)
-    model.fit(X, y)
+    model = ElasticNet(alpha=1, standardize=False, cut_point=0.0, n_lambda=200)
+    model.fit(X_preprocessed, y)
     coefficients.append(np.asarray(model.coef_))
 
+print(coefficients)
 # coefficients are the same in both - check
 assert np.all(output.coefficients == coefficients)
