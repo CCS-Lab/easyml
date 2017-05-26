@@ -1,8 +1,11 @@
 from easyml import glmnet, random_forest, support_vector_machine
 from easyml.datasets import load_prostate
 
-import pandas as pd
 
+# Settings
+n_samples = 50
+n_divisions = 50
+n_iterations = 2
 
 # Load data
 prostate = load_prostate()
