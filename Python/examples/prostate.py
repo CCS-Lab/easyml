@@ -1,9 +1,11 @@
 from easyml import glmnet, random_forest, support_vector_machine
+from easyml.datasets import load_prostate
+
 import pandas as pd
 
 
 # Load data
-prostate = pd.read_table('./Python/examples/prostate.txt')
+prostate = load_prostate()
 
 # Analyze data
 output = support_vector_machine.easy_support_vector_machine(prostate, 'lpsa',
