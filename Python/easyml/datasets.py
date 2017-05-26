@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 
 
-__all__ = []
+__all__ = ['load_cocaine_dependence', 'load_prostate']
 
 
 def load_cocaine_dependence():
