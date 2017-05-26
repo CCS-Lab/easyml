@@ -122,4 +122,5 @@ def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
     title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc, subtitle)
     Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
     axes = skplt.plot_roc_curve(y_true, Y_pred, title=title)
-    return axes
+    fig = axes.get_figure()
+    return fig, axes
