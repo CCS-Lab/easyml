@@ -65,7 +65,7 @@ class easy_random_forest(easy_analysis):
         importances_std = [v[1] for v in sorted(zip(importances_mean, importances_std))]
         importances_mean = sorted(importances_mean)
 
-        fig, ax = plt.figure(), plt.gca()
+        fig, ax = plt.subplots()
         ax.barh(range(n), importances_mean, color='grey', ecolor='black',
                 xerr=importances_std, align='center')
         ax.set_xlabel('Variable Importance (Mean Decrease in Gini Index)')
@@ -73,4 +73,4 @@ class easy_random_forest(easy_analysis):
         ax.set_yticklabels(column_names)
         ax.set_ylabel('Predictors')
         ax.set_title('Variable Importances', loc='left')
-        return fig
+        return fig, ax

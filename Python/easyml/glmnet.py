@@ -94,4 +94,4 @@ class easy_glmnet(easy_analysis):
         ax.set_yticklabels(column_names)
         ax.set_ylabel('Predictors')
         ax.set_title('Estimates of coefficients', loc='left')
-        return fig
+        return fig, ax
