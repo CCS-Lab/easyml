@@ -1,6 +1,0 @@
-hello world
-===========
-
-### this is a h3
-
-This is a paragraph.

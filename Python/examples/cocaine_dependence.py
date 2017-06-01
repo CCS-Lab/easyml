@@ -11,23 +11,6 @@ n_iterations = 2
 cocaine_dependence = load_cocaine_dependence()
 
 # Analyze data
-results = glmnet.easy_glmnet(cocaine_dependence, 'diagnosis',
-                             family='binomial',
-                             exclude_variables=['subject'],
-                             categorical_variables=['male'],
-                             random_state=12345, progress_bar=True, n_core=1,
-                             n_samples=n_samples, n_divisions=n_divisions, n_iterations=n_iterations,
-                             model_args={'alpha': 1, 'n_lambda': 200})
-
-print(results.plot_coefficients())
-print(results.plot_predictions_single_train_test_split_train())
-print(results.plot_predictions_single_train_test_split_test())
-print(results.plot_roc_single_train_test_split_train())
-print(results.plot_roc_single_train_test_split_test())
-print(results.plot_model_performance_train())
-print(results.plot_model_performance_test())
-
-# Analyze data
 results = random_forest.easy_random_forest(cocaine_dependence, 'diagnosis',
                                           family='binomial',
                                           exclude_variables=['subject'],
@@ -37,6 +20,24 @@ results = random_forest.easy_random_forest(cocaine_dependence, 'diagnosis',
                                           n_iterations=n_iterations,
                                           model_args={'n_estimators': 10})
 print(results.plot_variable_importances())
+print(results.plot_predictions_single_train_test_split_train())
+print(results.plot_predictions_single_train_test_split_test())
+print(results.plot_roc_single_train_test_split_train())
+print(results.plot_roc_single_train_test_split_test())
+print(results.plot_model_performance_train())
+print(results.plot_model_performance_test())
+
+
+# Analyze data
+results = glmnet.easy_glmnet(cocaine_dependence, 'diagnosis',
+                             family='binomial',
+                             exclude_variables=['subject'],
+                             categorical_variables=['male'],
+                             random_state=12345, progress_bar=True, n_core=1,
+                             n_samples=n_samples, n_divisions=n_divisions, n_iterations=n_iterations,
+                             model_args={'alpha': 1, 'n_lambda': 200})
+
+print(results.plot_coefficients())
 print(results.plot_predictions_single_train_test_split_train())
 print(results.plot_predictions_single_train_test_split_test())
 print(results.plot_roc_single_train_test_split_train())
