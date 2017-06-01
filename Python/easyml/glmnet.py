@@ -90,8 +90,9 @@ class easy_glmnet(easy_analysis):
         coefficients_mean = sorted(coefficients_mean)
 
         fig, ax = plt.subplots()
-        ax.errorbar(coefficients_mean, range(n), xerr=coefficients_std, fmt='o',
-                    color='black', ecolor='black')
+        colors = ['grey' if i == 0 else 'black' for i in coefficients_mean]
+        for i, coef_mean, coef_std, col in zip(range(n), coefficients_mean, coefficients_std, colors):
+            ax.errorbar(coef_mean, i, xerr=coef_std, fmt='o', color=col)
         ax.set_xlabel('Coefficient estimates')
         ax.set_yticks(range(0, n))
         ax.set_ylim(-0.5, n - 0.5)
