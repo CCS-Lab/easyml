@@ -132,6 +132,7 @@ def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
         fpr[i], tpr[i], _ = roc_curve(Y_true[:, i], Y_pred[:, i])
         roc_auc[i] = auc(fpr[i], tpr[i])
 
+    tpr[1][0] = 0
     fig, ax = plt.subplots()
     ax.plot(fpr[1], tpr[1], color='black')
     ax.plot([0, 1], [0, 1], color='black', linestyle='--')
