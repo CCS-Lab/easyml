@@ -3,22 +3,22 @@ Functions for plotting.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-import scikitplot.plotters as skplt
+import seaborn as sns
 from sklearn import linear_model
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import auc, roc_auc_score, roc_curve
 
 
 __all__ = []
 
 # Settings
-plt.style.use('ggplot')
+sns.set_style('whitegrid')
 
 
 def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
     bins = np.linspace(0, np.max(x), 30)
     x_mean = np.mean(x)
     fig, ax = plt.subplots()
-    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.set_xlabel('MSE')
     ax.set_ylabel('Frequency')
@@ -31,10 +31,10 @@ def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
     fig, ax = plt.subplots()
-    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
-    ax.set_xlim([0.0, 1.0])
-    ax.set_xticks(np.arange(0, 1.1, 0.10))
+    ax.set_xlim([0.0, 1.05])
+    ax.set_xticks(np.arange(0, 1.05, 0.05))
     ax.set_xlabel('Correlation Score')
     ax.set_ylabel('Frequency')
     title = 'Distribution of Correlation Scores (Mean Correlation Score = {})\n{} Dataset'.format(x_mean, subtitle)
@@ -46,11 +46,11 @@ def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = np.mean(x)
     fig, ax = plt.subplots()
-    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
     ax.annotate('Mean R^2 Score = %.3f' % x_mean, xy=(150, 200), xycoords='figure pixels', size=28)
-    ax.set_xlim([0.0, 1.0])
-    ax.set_xticks(np.arange(0, 1.1, 0.10))
+    ax.set_xlim([0.0, 1.05])
+    ax.set_xticks(np.arange(0, 1.05, 0.05))
     ax.set_xlabel('R^2')
     ax.set_ylabel('Frequency')
     title = 'Distribution of R^2 Scores (Mean R^2 Score = {})\n{} Dataset'.format(x_mean, subtitle)
@@ -62,10 +62,10 @@ def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
-    ax.hist(x, bins=bins, color='white', edgecolor='black')
+    ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
-    ax.set_xlim([0.0, 1.0])
-    ax.set_xticks(np.arange(0, 1.1, 0.10))
+    ax.set_xlim([0.0, 1.05])
+    ax.set_xticks(np.arange(0, 1.05, 0.05))
     ax.set_xlabel('AUC')
     title = 'Distribution of AUC Scores (Mean AUC Score = {})\n{} Dataset'.format(x_mean, subtitle)
     ax.set_title(title, loc='left')
@@ -118,9 +118,28 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
 
 
 def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
-    auc = round(roc_auc_score(y_true, y_pred), 2)
-    title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc, subtitle)
+    auc_label = round(roc_auc_score(y_true, y_pred), 2)
+    title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc_label, subtitle)
+    Y_true = np.concatenate((np.expand_dims(1 - y_true, axis=1), np.expand_dims(y_true, axis=1)), axis=1)
     Y_pred = np.concatenate((np.expand_dims(1 - y_pred, axis=1), np.expand_dims(y_pred, axis=1)), axis=1)
-    axes = skplt.plot_roc_curve(y_true, Y_pred, title=title)
-    fig = axes.get_figure()
-    return fig, axes
+    n_classes = Y_true.shape[1]
+
+    # Compute ROC curve and ROC area for each class
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(Y_true[:, i], Y_pred[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    fig, ax = plt.subplots()
+    ax.plot(fpr[1], tpr[1], color='black')
+    ax.plot([0, 1], [0, 1], color='black', linestyle='--')
+    ax.set_xlabel('Sensitivity')
+    ax.set_xlim([0.0, 1.05])
+    ax.set_xticks(np.arange(0, 1.05, 0.05))
+    ax.set_ylabel('Specificity')
+    ax.set_ylim([0.0, 1.05])
+    ax.set_yticks(np.arange(0, 1.05, 0.05))
+    ax.set_title(title, loc='left')
+    return fig, ax

@@ -3,12 +3,16 @@ Functions for random forest analysis.
 """
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 
 from .core import easy_analysis
 
 
 __all__ = ['easy_random_forest']
+
+# Settings
+sns.set_style('whitegrid')
 
 
 class easy_random_forest(easy_analysis):

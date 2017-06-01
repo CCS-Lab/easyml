@@ -5,12 +5,16 @@ from glmnet import ElasticNet, LogitNet
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 from .core import easy_analysis
 from .preprocess import preprocess_scale
 
 
 __all__ = ['easy_glmnet']
+
+# Settings
+sns.set_style('whitegrid')
 
 
 class easy_glmnet(easy_analysis):
