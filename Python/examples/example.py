@@ -31,4 +31,4 @@ for i in range(10):
 
 print(coefficients)
 # coefficients are the same in both - check
-assert np.all(output.coefficients == coefficients)
+assert np.all(output.coefficients == np.asarray(coefficients))
