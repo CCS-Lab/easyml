@@ -1,11 +1,11 @@
+from easyml.datasets import load_prostate
 from glmnet import ElasticNet
 import numpy as np
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
 
 # Load data
-prostate = pd.read_table('./Python/examples/prostate.txt')
+prostate = load_prostate()
 
 # Generate coefficients from data by hand
 X, y = prostate.drop('lpsa', axis=1).values, prostate['lpsa'].values
