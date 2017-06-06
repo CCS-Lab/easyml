@@ -36,7 +36,8 @@ results = glmnet.easy_glmnet(cocaine_dependence, 'diagnosis',
                              random_state=12345, progress_bar=True, n_core=1,
                              n_samples=n_samples, n_divisions=n_divisions, n_iterations=n_iterations,
                              model_args={'alpha': 1, 'n_lambda': 200})
-
+coefs = results.coefficients
+print(coefs)
 print(results.plot_coefficients())
 print(results.plot_predictions_single_train_test_split_train())
 print(results.plot_predictions_single_train_test_split_test())
