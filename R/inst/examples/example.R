@@ -1,7 +1,9 @@
+library(easyml) # devtools::install_github("CCS-Lab/easyml", subdir = "R")
 library(glmnet)
 
 data("prostate", package = "easyml")
 
+# Set X, y, and scale X
 X <- as.matrix(prostate[, -9])
 y <- prostate[, 9]
 X_scaled <- scale(X)

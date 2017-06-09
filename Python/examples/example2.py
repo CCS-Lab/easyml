@@ -1,11 +1,15 @@
-from easyml.datasets import load_prostate
 from glmnet import ElasticNet
+import io
 import numpy as np
+import pandas as pd
+import requests
 from sklearn.preprocessing import StandardScaler
 
 
 # Load data
-prostate = load_prostate()
+url = 'https://raw.githubusercontent.com/CCS-Lab/easyml/master/Python/datasets/prostate.csv'
+s = requests.get(url).content
+prostate = pd.read_csv(io.StringIO(s.decode('utf-8')))
 
 # Generate coefficients from data by hand
 X, y = prostate.drop('lpsa', axis=1).values, prostate['lpsa'].values
