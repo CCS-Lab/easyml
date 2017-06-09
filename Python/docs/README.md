@@ -6,3 +6,11 @@ To contribute, edit the *.rst files within the docs folder. Then execute the fol
 ```bash
 sphinx-build . _build
 ```
+
+To autobuild and see changes in real time:
+
+```bash
+sphinx-autobuild . _build
+```
+
+Then go to http://127.0.0.1:8000/.
