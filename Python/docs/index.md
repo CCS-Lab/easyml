@@ -19,6 +19,16 @@ pip install -r requirements.txt
 
 If you encounter a clear bug, please file a [minimal reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on [github](https://github.com/CCS-Lab/easyml/issues).
 
+Documentation
+-------------
+
+For more documentation, please see the page on [Documentation](documentation).
+
+Vignettes
+---------
+
+For vignettes, please see the page on [Vignettes](vignettes).
+
 Examples
 --------
 
