@@ -78,4 +78,3 @@ A whitepaper for easyml is available at https://doi.org/10.1101/137240. If you f
 References
 ----------
 Hendricks, P., & Ahn, W.-Y. (2017). Easyml: Easily Build And Evaluate Machine Learning Models. bioRxiv, 137240. http://doi.org/10.1101/137240
-
