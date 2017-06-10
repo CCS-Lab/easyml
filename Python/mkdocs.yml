@@ -1,0 +1,6 @@
+site_name: easyml
+pages:
+    - Home: index.md
+    - Documentation: documentation/index.md
+    - Vignettes: vignettes/index.md
+theme: readthedocs

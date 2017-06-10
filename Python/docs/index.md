@@ -1,5 +1,5 @@
 easyml
-======
+------
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)[![DOI](https://zenodo.org/badge/71721801.svg)](https://zenodo.org/badge/latestdoi/71721801)[![Documentation Status](https://readthedocs.org/projects/easyml/badge/?version=master)](http://easyml.readthedocs.io/en/master/?badge=master)[![Build Status](https://travis-ci.org/CCS-Lab/easyml.svg?branch=master)](https://travis-ci.org/CCS-Lab/easyml)
 
@@ -18,16 +18,6 @@ pip install -r requirements.txt
 ```
 
 If you encounter a clear bug, please file a [minimal reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on [github](https://github.com/CCS-Lab/easyml/issues).
-
-Documentation
--------------
-
-To be edited.
-
-Vignettes
----------
-
-To be edited.
 
 Examples
 --------
@@ -88,8 +78,3 @@ A whitepaper for easyml is available at https://doi.org/10.1101/137240. If you f
 References
 ----------
 Hendricks, P., & Ahn, W.-Y. (2017). Easyml: Easily Build And Evaluate Machine Learning Models. bioRxiv, 137240. http://doi.org/10.1101/137240
-
-License
--------
-
-Please see the [project license](LICENSE.html) for further details.
