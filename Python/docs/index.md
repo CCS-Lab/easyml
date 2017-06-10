@@ -19,6 +19,16 @@ pip install -r requirements.txt
 
 If you encounter a clear bug, please file a [minimal reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on [github](https://github.com/CCS-Lab/easyml/issues).
 
+Documentation
+-------------
+
+To be edited.
+
+Vignettes
+---------
+
+To be edited.
+
 Examples
 --------
 
@@ -78,3 +88,8 @@ A whitepaper for easyml is available at https://doi.org/10.1101/137240. If you f
 References
 ----------
 Hendricks, P., & Ahn, W.-Y. (2017). Easyml: Easily Build And Evaluate Machine Learning Models. bioRxiv, 137240. http://doi.org/10.1101/137240
+
+License
+-------
+
+Please see the [project license](LICENSE.html) for further details.
