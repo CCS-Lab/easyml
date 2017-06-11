@@ -6,6 +6,8 @@ easyml
 
 A toolkit for easily building and evaluating machine learning models.
 
+R tutorial: https://ccs-lab.github.io/easyml/
+
 Installation
 ------------
 
