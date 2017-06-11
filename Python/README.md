@@ -5,6 +5,8 @@ easyml
 
 A toolkit for easily building and evaluating machine learning models.
 
+Python tutorial: http://easyml.readthedocs.io
+
 Installation
 ------------
 
