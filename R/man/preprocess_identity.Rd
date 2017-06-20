@@ -20,4 +20,3 @@ Preprocess data by leaving it exactly the way it is.
 \seealso{
 Other preprocess: \code{\link{preprocess_scale}}
 }
-

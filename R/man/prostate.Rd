@@ -32,4 +32,3 @@ Prostate data.
 Other data: \code{\link{cocaine_dependence}}
 }
 \keyword{datasets}
-

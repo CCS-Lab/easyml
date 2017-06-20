@@ -20,4 +20,3 @@ Preprocess data by scaling it.
 \seealso{
 Other preprocess: \code{\link{preprocess_identity}}
 }
-

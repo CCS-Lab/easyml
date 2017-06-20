@@ -17,4 +17,3 @@ A vector, the predicted values using the new data.
 \description{
 Predict values for a neural network model.
 }
-

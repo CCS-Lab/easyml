@@ -15,4 +15,3 @@ A list of class \code{easy_deep_neural_network}.
 \description{
 Fit a deep neural network model.
 }
-

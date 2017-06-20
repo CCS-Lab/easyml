@@ -15,4 +15,3 @@ A data.frame, the replicated random forest variable importance scores.
 \description{
 Extract variable importance scores from a random forest model.
 }
-

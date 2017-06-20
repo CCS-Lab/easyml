@@ -15,4 +15,3 @@ A data.frame, the generated coefficients.
 \description{
 Extract coefficients.
 }
-

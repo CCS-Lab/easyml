@@ -96,4 +96,3 @@ Other recipes: \code{\link{easy_analysis}},
   \code{\link{easy_random_forest}},
   \code{\link{easy_support_vector_machine}}
 }
-

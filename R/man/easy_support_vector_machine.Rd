@@ -95,4 +95,3 @@ Other recipes: \code{\link{easy_analysis}},
   \code{\link{easy_neural_network}},
   \code{\link{easy_random_forest}}
 }
-

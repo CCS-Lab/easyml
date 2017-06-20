@@ -22,4 +22,3 @@ Other utils: \code{\link{check_arguments}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}
 }
-

@@ -15,4 +15,3 @@ A list of class \code{easy_support_vector_machine}.
 \description{
 Fit a support vector machine regression model.
 }
-

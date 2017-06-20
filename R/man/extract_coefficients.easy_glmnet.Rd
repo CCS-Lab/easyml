@@ -15,4 +15,3 @@ A data.frame, the replicated penalized regression coefficients.
 \description{
 Extract coefficients from a penalized regression model.
 }
-

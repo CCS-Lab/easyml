@@ -32,4 +32,3 @@ Other plot: \code{\link{plot_model_performance_binomial_auc_score}},
   \code{\link{plot_roc_curve}},
   \code{\link{plot_variable_importances_processed}}
 }
-

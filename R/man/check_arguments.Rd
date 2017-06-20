@@ -26,4 +26,3 @@ Other utils: \code{\link{correlation_test}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}
 }
-

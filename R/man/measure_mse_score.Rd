@@ -23,4 +23,3 @@ Other measure: \code{\link{measure_auc_score}},
   \code{\link{measure_correlation_score}},
   \code{\link{measure_r2_score}}
 }
-

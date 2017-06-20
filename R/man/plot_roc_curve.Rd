@@ -28,4 +28,3 @@ Other plot: \code{\link{plot_coefficients_processed}},
   \code{\link{plot_predictions_gaussian}},
   \code{\link{plot_variable_importances_processed}}
 }
-

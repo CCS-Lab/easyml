@@ -40,4 +40,3 @@ Cocaine data.
 Other data: \code{\link{prostate}}
 }
 \keyword{datasets}
-

@@ -20,4 +20,3 @@ Other generate: \code{\link{generate_coefficients}},
   \code{\link{generate_model_performance}},
   \code{\link{generate_predictions}}
 }
-

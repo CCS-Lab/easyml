@@ -30,4 +30,3 @@ Other setters: \code{\link{set_column_names}},
   \code{\link{set_random_state}},
   \code{\link{set_resample}}
 }
-

@@ -15,4 +15,3 @@ A list of class \code{easy_*}, where * is the name of the algorithm.
 \description{
 Fit model.
 }
-

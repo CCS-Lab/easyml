@@ -15,4 +15,3 @@ A data.frame, the generated random forest variable importance scores.
 \description{
 Extract variable importances.
 }
-

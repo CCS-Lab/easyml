@@ -15,4 +15,3 @@ A list of class \code{easy_random_forest}.
 \description{
 Fit a random forest model.
 }
-

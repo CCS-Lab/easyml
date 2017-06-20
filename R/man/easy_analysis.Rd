@@ -122,4 +122,3 @@ Other recipes: \code{\link{easy_avNNet}},
   \code{\link{easy_random_forest}},
   \code{\link{easy_support_vector_machine}}
 }
-

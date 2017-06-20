@@ -29,4 +29,3 @@ Other resample: \code{\link{resample_fold_train_test_split}},
   \code{\link{resample_stratified_class_train_test_split}},
   \code{\link{resample_stratified_simple_train_test_split}}
 }
-

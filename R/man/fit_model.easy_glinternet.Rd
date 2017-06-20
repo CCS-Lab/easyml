@@ -15,4 +15,3 @@ A list of class \code{easy_glinternet}.
 \description{
 Fit a penalized regression model with interactions.
 }
-

@@ -15,4 +15,3 @@ A list of class \code{easy_glmnet}.
 \description{
 Fit a penalized regression model.
 }
-

@@ -15,4 +15,3 @@ A list of class \code{easy_avNNet}.
 \description{
 Fit a neural network model.
 }
-

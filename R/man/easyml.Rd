@@ -8,4 +8,3 @@
 \description{
 easyml: Easily build and evaluate machine learning models.
 }
-

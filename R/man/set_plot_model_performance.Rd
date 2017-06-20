@@ -27,4 +27,3 @@ Other setters: \code{\link{set_categorical_variables}},
   \code{\link{set_random_state}},
   \code{\link{set_resample}}
 }
-

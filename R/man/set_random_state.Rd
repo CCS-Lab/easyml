@@ -26,4 +26,3 @@ Other setters: \code{\link{set_categorical_variables}},
   \code{\link{set_plot_predictions}},
   \code{\link{set_preprocess}}, \code{\link{set_resample}}
 }
-
