@@ -6,26 +6,26 @@
 \title{Cocaine data.}
 \format{Data frame with columns
 \describe{
-\item{subject}{To Be Edited}
-\item{diagnosis}{To Be Edited}
-\item{age}{To Be Edited}
-\item{male}{To Be Edited}
-\item{edu_yrs}{To Be Edited}
-\item{imt_comm_errors}{To Be Edited}
-\item{imt_omis_errors}{To Be Edited}
-\item{a_imt}{To Be Edited}
-\item{b_d_imt}{To Be Edited}
-\item{stop_ssrt}{To Be Edited}
-\item{lnk_adjdd}{To Be Edited}
-\item{lkhat_kirby}{To Be Edited}
-\item{revlr_per_errors}{To Be Edited}
-\item{bis_attention}{To Be Edited}
-\item{bis_motor}{To Be Edited}
-\item{bis_nonpL}{To Be Edited}
-\item{igt_total}{To Be Edited}
+\item{subject}{Subject ID}
+\item{diagnosis}{Diagnosis status}
+\item{age}{Age of Subject}
+\item{male}{Gender of subject}
+\item{edu_yrs}{Education of subject in years}
+\item{imt_comm_errors}{Immediate Memory Task commission errors}
+\item{imt_omis_errors}{Immediate Memory Task omission errors}
+\item{a_imt}{Immediate Memory Task non-parametric discriminability}
+\item{b_d_imt}{Immediate Memory Task response bias }
+\item{stop_ssrt}{Stop-Signal Task stop-signal reaction time}
+\item{lnk_adjdd}{log(Adjusting Delay-Discounting Task discounting rate)}
+\item{lkhat_kirby}{log(Kirby Monetary-Choice Delay-Discounting Questionnaire)}
+\item{revlr_per_errors}{Probabilistic Reversal-Learning Task errors}
+\item{bis_attention}{Barratt Impulsiveness Scale attentional impulsivity}
+\item{bis_motor}{Barratt Impulsiveness Scale motor impulsivity}
+\item{bis_nonpL}{Barratt Impulsiveness Scale nonplanning impulsivity}
+\item{igt_total}{Iowa Gambling Task total score}
 }}
 \source{
-https://www.tobeedited.com/
+https://github.com/CCS-Lab/easyml/blob/master/Python/datasets/cocaine_dependence.csv
 }
 \usage{
 cocaine_dependence
@@ -34,7 +34,7 @@ cocaine_dependence
 Cocaine data.
 }
 \examples{
-  cocaine_dependence
+data("cocaine_dependence", package = "easyml")
 }
 \seealso{
 Other data: \code{\link{prostate}}

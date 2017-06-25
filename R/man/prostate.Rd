@@ -6,18 +6,18 @@
 \title{Prostate data.}
 \format{Data frame with columns
 \describe{
-\item{lcavol}{To Be Edited}
-\item{lweight}{To Be Edited}
-\item{age}{To Be Edited}
-\item{lbph}{To Be Edited}
-\item{svi}{To Be Edited}
-\item{lcp}{To Be Edited}
-\item{gleason}{To Be Edited}
-\item{pgg45}{To Be Edited}
-\item{lpsa}{To Be Edited}
+\item{lcavol}{log(cancer volume)}
+\item{lweight}{log(prostate weight)}
+\item{age}{age}
+\item{lbph}{log(benign prostatic hyperplasia amount)}
+\item{svi}{seminal vesicle invasion}
+\item{lcp}{log(capsular penetration)}
+\item{gleason}{Gleason score}
+\item{pgg45}{percentage Gleason scores 4 or 5}
+\item{lpsa}{log(prostate specific antigen)}
 }}
 \source{
-https://www.tobeedited.com/
+Stamey, T.A., Kabalin, J.N., McNeal, J.E., Johnstone, I.M., Freiha, F., Redwine, E.A. and Yang, N. (1989) Prostate specific antigen in the diagnosis and treatment of adenocarcinoma of the prostate: II. radical prostatectomy treated patients, Journal of Urology 141(5), 1076–1083.
 }
 \usage{
 prostate
@@ -26,7 +26,7 @@ prostate
 Prostate data.
 }
 \examples{
-  prostate
+data("prostate", package = "easyml")
 }
 \seealso{
 Other data: \code{\link{cocaine_dependence}}
