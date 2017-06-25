@@ -7,7 +7,7 @@
 generate_predictions(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_*}, where * is the name of the algorithm.}
 }
 \value{
 A list of matrixes, the generated predictions.

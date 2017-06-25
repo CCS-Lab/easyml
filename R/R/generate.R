@@ -1,6 +1,6 @@
 #' Generate coefficients.
 #'
-#' @param object TO BE EDITED.
+#' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated penalized regression model coefficients.
 #' @family generate
 #' @export
@@ -46,7 +46,7 @@ generate_coefficients <- function(object) {
 
 #' Generate variable importances.
 #'
-#' @param object TO BE EDITED.
+#' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated variable importance scores.
 #' @family generate
 #' @export
@@ -91,7 +91,7 @@ generate_variable_importances <- function(object) {
 
 #' Generate predictions.
 #'
-#' @param object TO BE EDITED.
+#' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A list of matrixes, the generated predictions.
 #' @family generate
 #' @export
@@ -153,7 +153,7 @@ generate_predictions <- function(object) {
 
 #' Generate measures of model performance.
 #'
-#' @param object TO BE EDITED.
+#' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A list of matrixes, the generated measures of model performance.
 #' @family generate
 #' @export

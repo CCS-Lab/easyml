@@ -7,7 +7,7 @@
 generate_coefficients(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_*}, where * is the name of the algorithm.}
 }
 \value{
 A data.frame, the generated penalized regression model coefficients.

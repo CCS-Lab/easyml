@@ -7,7 +7,7 @@
 generate_variable_importances(object)
 }
 \arguments{
-\item{object}{TO BE EDITED.}
+\item{object}{A list of class \code{easy_*}, where * is the name of the algorithm.}
 }
 \value{
 A data.frame, the generated variable importance scores.
