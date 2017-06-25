@@ -15,7 +15,7 @@ set_dependent_variable(.data, dependent_variable)
 A vector, the dependent variable of the analysis.
 }
 \description{
-Set dependent variable.
+This helper functions isolates the dependent variable in a data.frame.
 }
 \seealso{
 Other setters: \code{\link{set_categorical_variables}},

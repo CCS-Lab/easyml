@@ -13,7 +13,7 @@ set_parallel(n_core)
 A logical vector of length one; whether analyis should be run in parallel or not.
 }
 \description{
-Set parallel.
+This helper function decides whether the analysis should be run in parallel based on the number of cores specified.
 }
 \seealso{
 Other setters: \code{\link{set_categorical_variables}},

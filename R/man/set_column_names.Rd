@@ -22,7 +22,9 @@ set_column_names(column_names, dependent_variable, preprocess = NULL,
 The updated columns, in the correct order for preprocessing.
 }
 \description{
-Set column names.
+This functions helps decide what the updated column names of a data.frame should be within
+the easyml framework based on the dependent variable, preprocessing function, 
+exclusionary variables, and categorical variables.
 }
 \seealso{
 Other setters: \code{\link{set_categorical_variables}},

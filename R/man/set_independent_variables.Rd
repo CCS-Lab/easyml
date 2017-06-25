@@ -15,7 +15,7 @@ set_independent_variables(.data, dependent_variable)
 A data.frame, the independent variables of the analysis.
 }
 \description{
-Set independent variables.
+This helper functions isolates the independent variables in a data.frame.
 }
 \seealso{
 Other setters: \code{\link{set_categorical_variables}},

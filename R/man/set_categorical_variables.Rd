@@ -15,7 +15,8 @@ set_categorical_variables(column_names, categorical_variables = NULL)
 NULL, or if \code{categorical_variables} is not NULL, then a logical vector of length \code{length(column_names} where TRUE represents that column is a categorical variable.
 }
 \description{
-Set categorical variables.
+This helper functions determines a logical boolean vector based on the column names 
+and the designation for which ones are categorical variables.
 }
 \seealso{
 Other setters: \code{\link{set_column_names}},

@@ -15,6 +15,8 @@ set_random_state <- function(random_state = NULL) {
 
 #' Set parallel.
 #' 
+#' This helper function decides whether the analysis should be run in parallel based on the number of cores specified.
+#' 
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return A logical vector of length one; whether analyis should be run in parallel or not.
 #' @family setters
@@ -96,6 +98,10 @@ set_looper_ <- function(progress_bar = FALSE, parallel = FALSE) {
 
 #' Set column names.
 #' 
+#' This functions helps decide what the updated column names of a data.frame should be within
+#' the easyml framework based on the dependent variable, preprocessing function, 
+#' exclusionary variables, and categorical variables.
+#' 
 #' @param column_names A character vector; the column names of the data for this analysis.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.
@@ -120,6 +126,9 @@ set_column_names <- function(column_names, dependent_variable,
 }
 
 #' Set categorical variables.
+#' 
+#' This helper functions determines a logical boolean vector based on the column names 
+#' and the designation for which ones are categorical variables.
 #'
 #' @param column_names A character vector; the column names of the data for this analysis.
 #' @param categorical_variables A character vector; the variables that are categorical. Defaults to NULL.
@@ -134,6 +143,8 @@ set_categorical_variables <- function(column_names, categorical_variables = NULL
 }
 
 #' Set dependent variable.
+#' 
+#' This helper functions isolates the dependent variable in a data.frame.
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
@@ -146,6 +157,8 @@ set_dependent_variable <- function(.data, dependent_variable) {
 }
 
 #' Set independent variables.
+#' 
+#' This helper functions isolates the independent variables in a data.frame.
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.

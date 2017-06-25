@@ -17,7 +17,6 @@ measure_mse_score <- scorer::mean_squared_error
 #' 
 #' See here for more information: \url{https://en.wikipedia.org/wiki/Coefficient_of_determination}
 #'
-#'
 #' @param y_true A numeric vector; the ground truth (correct) target values.
 #' @param y_pred A numeric vector; the estimated target values.
 #' @return A numeric vector of length one; the R^2 metric.
