@@ -61,7 +61,9 @@ easy_glmnet(.data, dependent_variable, family = "gaussian", resample = NULL,
 A list of class \code{easy_glmnet}.
 }
 \description{
-Easily build and evaluate a penalized regression model.
+This function wraps the easyml core framework, allowing a user 
+to easily run the easyml methodology for a glmnet
+model.
 }
 \examples{
 \dontrun{

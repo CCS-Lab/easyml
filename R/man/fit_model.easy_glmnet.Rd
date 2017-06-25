@@ -13,5 +13,7 @@
 A list of class \code{easy_glmnet}.
 }
 \description{
-Fit a penalized regression model.
+This function wraps the procedure for fitting a 
+glmnet model and makes it accessible 
+to the easyml core framework.
 }

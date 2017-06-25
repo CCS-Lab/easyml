@@ -1,5 +1,9 @@
 #' Fit a penalized regression model.
 #' 
+#' This function wraps the procedure for fitting a 
+#' glmnet model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_glmnet}.
 #' @return A list of class \code{easy_glmnet}.
 #' @export
@@ -30,21 +34,11 @@ fit_model.easy_glmnet <- function(object) {
   object
 }
 
-#' Extract coefficients from a penalized regression model.
-#' 
-#' @param object A list of class \code{easy_glmnet}.
-#' @return A data.frame, the replicated penalized regression coefficients.
-#' @export
-extract_coefficients.easy_glmnet <- function(object) {
-  model <- object[["model"]]
-  model_cv <- object[["model_cv"]]
-  coefs <- stats::coef(model, s = model_cv$lambda.min)
-  coefs_df <- data.frame(t(as.matrix(as.numeric(coefs), nrow = 1)))
-  colnames(coefs_df) <- rownames(coefs)
-  coefs_df
-}
-
 #' Predict values for a penalized regression model.
+#' 
+#' This function wraps the procedure for predicting values from 
+#' a glmnet model and makes it accessible 
+#' to the easyml core framework.
 #' 
 #' @param object A list of class \code{easy_glmnet}.
 #' @param newx A data.frame, the new data to use for predictions.
@@ -59,7 +53,25 @@ predict_model.easy_glmnet <- function(object, newx = NULL) {
   preds
 }
 
+#' Extract coefficients from a penalized regression model.
+#' 
+#' @param object A list of class \code{easy_glmnet}.
+#' @return A data.frame, the replicated penalized regression coefficients.
+#' @export
+extract_coefficients.easy_glmnet <- function(object) {
+  model <- object[["model"]]
+  model_cv <- object[["model_cv"]]
+  coefs <- stats::coef(model, s = model_cv$lambda.min)
+  coefs_df <- data.frame(t(as.matrix(as.numeric(coefs), nrow = 1)))
+  colnames(coefs_df) <- rownames(coefs)
+  coefs_df
+}
+
 #' Easily build and evaluate a penalized regression model.
+#' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for a glmnet
+#' model.
 #'
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_glmnet}.
