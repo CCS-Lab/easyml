@@ -143,9 +143,6 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
                           coefficients = NULL, variable_importances = NULL, 
                           predictions = NULL, model_performance = NULL, 
                           model_args = list()) {
-  # Check positional arguments for validity
-  check_arguments(.data, dependent_variable, algorithm)
-  
   # Instantiate object
   object <- list()
   
