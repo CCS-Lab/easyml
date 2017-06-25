@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -81,18 +84,24 @@
     </div>
 
     
-    <p>Process coefficients.</p>
+    <p>Takes the coefficients returned by the generate_coefficients function 
+and prepares the coefficients for plotting.</p>
     
 
-    <pre><span class='fu'>process_coefficients</span>(<span class='no'>coefficients</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
+    <pre class="usage"><span class='fu'>process_coefficients</span>(<span class='no'>coefficients</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>coefficients</dt>
-      <dd>A data.frame, the replicated coefficients.</dd>
-      <dt>survival_rate_cutoff</dt>
-      <dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>coefficients</th>
+      <td><p>A data.frame, the replicated coefficients.</p></td>
+    </tr>
+    <tr>
+      <th>survival_rate_cutoff</th>
+      <td><p>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -100,8 +109,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other utils: <code><a href='check_arguments.html'>check_arguments</a></code>,
-  <code><a href='correlation_test.html'>correlation_test</a></code>,
+    <p>Other utils: <code><a href='correlation_test.html'>correlation_test</a></code>,
   <code><a href='process_variable_importances.html'>process_variable_importances</a></code>,
   <code><a href='reduce_cores.html'>reduce_cores</a></code>,
   <code><a href='remove_variables.html'>remove_variables</a></code></p>

@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -84,7 +87,7 @@
     <p>This recipe is the workhorse behind all of the easy_* functions.</p>
     
 
-    <pre><span class='fu'>easy_analysis</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='no'>algorithm</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>,
+    <pre class="usage"><span class='fu'>easy_analysis</span>(<span class='no'>.data</span>, <span class='no'>dependent_variable</span>, <span class='no'>algorithm</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"gaussian"</span>,
   <span class='kw'>resample</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>exclude_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>categorical_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>train_size</span> <span class='kw'>=</span> <span class='fl'>0.667</span>, <span class='kw'>foldid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>survival_rate_cutoff</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
@@ -94,106 +97,153 @@
   <span class='kw'>model_performance</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>model_args</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>.data</dt>
-      <dd>A data.frame; the data to be analyzed.</dd>
-      <dt>dependent_variable</dt>
-      <dd>A character vector of length one; the dependent variable for this analysis.</dd>
-      <dt>algorithm</dt>
-      <dd>A character vector of length one; the algorithm to run on the data. Choices are currently one of c(&quot;deep_neural_network&quot;, &quot;glinternet&quot;, &quot;glmnet&quot;, &quot;neural_network&quot;, &quot;random_forest&quot;, &quot;support_vector_machine&quot;).</dd>
-      <dt>family</dt>
-      <dd>A character vector of length one; the type of regression to run on the data. Choices are one of c(&quot;gaussian&quot;, &quot;binomial&quot;). Defaults to &quot;gaussian&quot;.</dd>
-      <dt>resample</dt>
-      <dd>A function; the function for resampling the data. Defaults to NULL.</dd>
-      <dt>preprocess</dt>
-      <dd>A function; the function for preprocessing the data. Defaults to NULL.</dd>
-      <dt>measure</dt>
-      <dd>A function; the function for measuring the results. Defaults to NULL.</dd>
-      <dt>exclude_variables</dt>
-      <dd>A character vector; the variables from the data set to exclude. Defaults to NULL.</dd>
-      <dt>categorical_variables</dt>
-      <dd>A character vector; the variables that are categorical. Defaults to NULL.</dd>
-      <dt>train_size</dt>
-      <dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</dd>
-      <dt>foldid</dt>
-      <dd>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</dd>
-      <dt>survival_rate_cutoff</dt>
-      <dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</dd>
-      <dt>n_samples</dt>
-      <dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</dd>
-      <dt>n_divisions</dt>
-      <dd>An integer vector of length one; specifies the number of times the data should be divided when replicating the measures of model performance. Defaults to 1000.</dd>
-      <dt>n_iterations</dt>
-      <dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</dd>
-      <dt>random_state</dt>
-      <dd>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</dd>
-      <dt>progress_bar</dt>
-      <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
-      <dt>n_core</dt>
-      <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.</dd>
-      <dt>coefficients</dt>
-      <dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
-      <dt>variable_importances</dt>
-      <dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
-      <dt>predictions</dt>
-      <dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
-      <dt>model_performance</dt>
-      <dd>A logical vector of length one; whether or not to generate measures of model performance for this analysis.</dd>
-      <dt>model_args</dt>
-      <dd>A list; the arguments to be passed to the algorithm specified.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>A data.frame; the data to be analyzed.</p></td>
+    </tr>
+    <tr>
+      <th>dependent_variable</th>
+      <td><p>A character vector of length one; the dependent variable for this analysis.</p></td>
+    </tr>
+    <tr>
+      <th>algorithm</th>
+      <td><p>A character vector of length one; the algorithm to run on the data. Choices are currently one of c("deep_neural_network", "glinternet", "glmnet", "neural_network", "random_forest", "support_vector_machine").</p></td>
+    </tr>
+    <tr>
+      <th>family</th>
+      <td><p>A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".</p></td>
+    </tr>
+    <tr>
+      <th>resample</th>
+      <td><p>A function; the function for resampling the data. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>preprocess</th>
+      <td><p>A function; the function for preprocessing the data. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>measure</th>
+      <td><p>A function; the function for measuring the results. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>exclude_variables</th>
+      <td><p>A character vector; the variables from the data set to exclude. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>categorical_variables</th>
+      <td><p>A character vector; the variables that are categorical. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>train_size</th>
+      <td><p>A numeric vector of length one; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.</p></td>
+    </tr>
+    <tr>
+      <th>foldid</th>
+      <td><p>A vector with length equal to <code>length(y)</code> which identifies cases belonging to the same fold.</p></td>
+    </tr>
+    <tr>
+      <th>survival_rate_cutoff</th>
+      <td><p>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.</p></td>
+    </tr>
+    <tr>
+      <th>n_samples</th>
+      <td><p>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated. Defaults to 1000.</p></td>
+    </tr>
+    <tr>
+      <th>n_divisions</th>
+      <td><p>An integer vector of length one; specifies the number of times the data should be divided when replicating the measures of model performance. Defaults to 1000.</p></td>
+    </tr>
+    <tr>
+      <th>n_iterations</th>
+      <td><p>An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.</p></td>
+    </tr>
+    <tr>
+      <th>random_state</th>
+      <td><p>An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.</p></td>
+    </tr>
+    <tr>
+      <th>progress_bar</th>
+      <td><p>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>n_core</th>
+      <td><p>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.</p></td>
+    </tr>
+    <tr>
+      <th>coefficients</th>
+      <td><p>A logical vector of length one; whether or not to generate coefficients for this analysis.</p></td>
+    </tr>
+    <tr>
+      <th>variable_importances</th>
+      <td><p>A logical vector of length one; whether or not to generate variable importances for this analysis.</p></td>
+    </tr>
+    <tr>
+      <th>predictions</th>
+      <td><p>A logical vector of length one; whether or not to generate predictions for this analysis.</p></td>
+    </tr>
+    <tr>
+      <th>model_performance</th>
+      <td><p>A logical vector of length one; whether or not to generate measures of model performance for this analysis.</p></td>
+    </tr>
+    <tr>
+      <th>model_args</th>
+      <td><p>A list; the arguments to be passed to the algorithm specified.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of class <code>easy_*</code>, where * is the name of the algorithm.
-<dl class='dl-horizontal'>
-<dt>call</dt><dd>An object of class <code>call</code>; the original function call.</dd>
-<dt>data</dt><dd>A data.frame; the original data.</dd>
-<dt>dependent_variable</dt><dd>A character vector of length one; the dependent variable for this analysis.</dd>
-<dt>algorithm</dt><dd>A character vector of length one; the algorithm to run on the data.</dd>
-<dt>class</dt><dd>A character vector of length one; the class of the object.</dd>
-<dt>family</dt><dd>A character vector of length one; the type of regression to run on the data. Choices are one of c(&quot;gaussian&quot;, &quot;binomial&quot;). Defaults to &quot;gaussian&quot;.</dd>
-<dt>resample</dt><dd>A function; the function for resampling the data.</dd>
-<dt>preprocess</dt><dd>A function; the function for preprocessing the data.</dd>
-<dt>measure</dt><dd>A function; the function for measuring the results.</dd>
-<dt>exclude_variables</dt><dd>A character vector; the variables from the data set to exclude.</dd>
-<dt>train_size</dt><dd>A numeric vector of length one; specifies what proportion of the data should be used for the training data set.</dd>
-<dt>survival_rate_cutoff</dt><dd>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples.</dd>
-<dt>n_samples</dt><dd>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated.</dd>
-<dt>n_divisions</dt><dd>An integer vector of length one; specifies the number of times the data should be divided when generating measures of model performance.</dd>
-<dt>n_iterations</dt><dd>An integer vector of length one; during each division, specifies the number of times the predictions should be generated.</dd>
-<dt>random_state</dt><dd>An integer vector of length one; specifies the seed to be used for the analysis.</dd>
-<dt>progress_bar</dt><dd>A logical vector of length one; specifies whether to display a progress bar during calculations.</dd>
-<dt>n_core</dt><dd>An integer vector of length one; specifies the number of cores to use for this analysis.</dd>
-<dt>generate_coefficients</dt><dd>A logical vector of length one; whether or not to generate coefficients for this analysis.</dd>
-<dt>generate_variable_importances</dt><dd>A logical vector of length one; whether or not to generate variable importances for this analysis.</dd>
-<dt>generate_predictions</dt><dd>A logical vector of length one; whether or not to generate predictions for this analysis.</dd>
-<dt>generate_model_performance</dt><dd>A logical vector of length one; whether or not to generate measures of model performance for this analysis.</dd>
-<dt>model_args</dt><dd>A list; the arguments to be passed to the algorithm specified.</dd>
-<dt>column_names</dt><dd>A character vector; the column names.</dd>
-<dt>categorical_variables</dt><dd>A logical vector; the variables that are categorical.</dd>
-<dt>X</dt><dd>A data.frame; the full dataset to be used for modeling.</dd>
-<dt>y</dt><dd>A vector; the full response variable to be used for modeling.</dd>
-<dt>coefficients</dt><dd>A (n_variables, n_samples) matrix; the generated coefficients.</dd>
-<dt>coefficients_processed</dt><dd>A data.frame; the coefficients after being processed.</dd>
-<dt>plot_coefficients_processed</dt><dd>A ggplot object; the plot of the processed coefficients.</dd>
-<dt>X_train</dt><dd>A data.frame; the train dataset to be used for modeling.</dd>
-<dt>X_test</dt><dd>A data.frame; the test dataset to be used for modeling.</dd>
-<dt>y_train</dt><dd>A vector; the train response variable to be used for modeling.</dd>
-<dt>y_test</dt><dd>A vector; the test response variable to be used for modeling.</dd>
-<dt>predictions_train</dt><dd>A (nrow(X_train), n_samples) matrix; the train predictions.</dd>
-<dt>predictions_test</dt><dd>A (nrow(X_test), n_samples) matrix; the test predictions.</dd>
-<dt>predictions_train_mean</dt><dd>A vector; the mean train predictions.</dd>
-<dt>predictions_test_mean</dt><dd>A vector; the mean test predictions.</dd>
-<dt>plot_predictions</dt><dd>A function; the function for plotting predictions generated by the model.</dd>
-<dt>plot_predictions_train_mean</dt><dd>A ggplot object; the plot of the mean train predictions.</dd>
-<dt>plot_predictions_test_mean</dt><dd>A ggplot object; the plot of the mean test predictions.</dd>
-<dt>model_performance_train</dt><dd>A vector of length n_divisions; the measures of model performance on the train datasets.</dd>
-<dt>model_performance_test</dt><dd>A vector of length n_divisions; the measures of model performance on the test datasets.</dd>
-<dt>plot_model_performance</dt><dd>A function; the function for plotting the measures of model performance.</dd>
-<dt>plot_model_performance_train</dt><dd>A ggplot object; the plot of the measures of model performance on the train datasets.</dd>
-<dt>plot_model_performance_test</dt><dd>A ggplot object; the plot of the measures of model performance on the test datasets.</dd>
-</dl></p>
+    <p>A list of class <code>easy_*</code>, where * is the name of the algorithm.</p><dl class='dl-horizontal'>
+<dt>call</dt><dd><p>An object of class <code>call</code>; the original function call.</p></dd>
+<dt>data</dt><dd><p>A data.frame; the original data.</p></dd>
+<dt>dependent_variable</dt><dd><p>A character vector of length one; the dependent variable for this analysis.</p></dd>
+<dt>algorithm</dt><dd><p>A character vector of length one; the algorithm to run on the data.</p></dd>
+<dt>class</dt><dd><p>A character vector of length one; the class of the object.</p></dd>
+<dt>family</dt><dd><p>A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".</p></dd>
+<dt>resample</dt><dd><p>A function; the function for resampling the data.</p></dd>
+<dt>preprocess</dt><dd><p>A function; the function for preprocessing the data.</p></dd>
+<dt>measure</dt><dd><p>A function; the function for measuring the results.</p></dd>
+<dt>exclude_variables</dt><dd><p>A character vector; the variables from the data set to exclude.</p></dd>
+<dt>train_size</dt><dd><p>A numeric vector of length one; specifies what proportion of the data should be used for the training data set.</p></dd>
+<dt>survival_rate_cutoff</dt><dd><p>A numeric vector of length one; for <code><a href='easy_glmnet.html'>easy_glmnet</a></code>, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples.</p></dd>
+<dt>n_samples</dt><dd><p>An integer vector of length one; specifies the number of times the coefficients and predictions should be generated.</p></dd>
+<dt>n_divisions</dt><dd><p>An integer vector of length one; specifies the number of times the data should be divided when generating measures of model performance.</p></dd>
+<dt>n_iterations</dt><dd><p>An integer vector of length one; during each division, specifies the number of times the predictions should be generated.</p></dd>
+<dt>random_state</dt><dd><p>An integer vector of length one; specifies the seed to be used for the analysis.</p></dd>
+<dt>progress_bar</dt><dd><p>A logical vector of length one; specifies whether to display a progress bar during calculations.</p></dd>
+<dt>n_core</dt><dd><p>An integer vector of length one; specifies the number of cores to use for this analysis.</p></dd>
+<dt>generate_coefficients</dt><dd><p>A logical vector of length one; whether or not to generate coefficients for this analysis.</p></dd>
+<dt>generate_variable_importances</dt><dd><p>A logical vector of length one; whether or not to generate variable importances for this analysis.</p></dd>
+<dt>generate_predictions</dt><dd><p>A logical vector of length one; whether or not to generate predictions for this analysis.</p></dd>
+<dt>generate_model_performance</dt><dd><p>A logical vector of length one; whether or not to generate measures of model performance for this analysis.</p></dd>
+<dt>model_args</dt><dd><p>A list; the arguments to be passed to the algorithm specified.</p></dd>
+<dt>column_names</dt><dd><p>A character vector; the column names.</p></dd>
+<dt>categorical_variables</dt><dd><p>A logical vector; the variables that are categorical.</p></dd>
+<dt>X</dt><dd><p>A data.frame; the full dataset to be used for modeling.</p></dd>
+<dt>y</dt><dd><p>A vector; the full response variable to be used for modeling.</p></dd>
+<dt>coefficients</dt><dd><p>A (n_variables, n_samples) matrix; the generated coefficients.</p></dd>
+<dt>coefficients_processed</dt><dd><p>A data.frame; the coefficients after being processed.</p></dd>
+<dt>plot_coefficients_processed</dt><dd><p>A ggplot object; the plot of the processed coefficients.</p></dd>
+<dt>X_train</dt><dd><p>A data.frame; the train dataset to be used for modeling.</p></dd>
+<dt>X_test</dt><dd><p>A data.frame; the test dataset to be used for modeling.</p></dd>
+<dt>y_train</dt><dd><p>A vector; the train response variable to be used for modeling.</p></dd>
+<dt>y_test</dt><dd><p>A vector; the test response variable to be used for modeling.</p></dd>
+<dt>predictions_train</dt><dd><p>A (nrow(X_train), n_samples) matrix; the train predictions.</p></dd>
+<dt>predictions_test</dt><dd><p>A (nrow(X_test), n_samples) matrix; the test predictions.</p></dd>
+<dt>predictions_train_mean</dt><dd><p>A vector; the mean train predictions.</p></dd>
+<dt>predictions_test_mean</dt><dd><p>A vector; the mean test predictions.</p></dd>
+<dt>plot_predictions</dt><dd><p>A function; the function for plotting predictions generated by the model.</p></dd>
+<dt>plot_predictions_train_mean</dt><dd><p>A ggplot object; the plot of the mean train predictions.</p></dd>
+<dt>plot_predictions_test_mean</dt><dd><p>A ggplot object; the plot of the mean test predictions.</p></dd>
+<dt>model_performance_train</dt><dd><p>A vector of length n_divisions; the measures of model performance on the train datasets.</p></dd>
+<dt>model_performance_test</dt><dd><p>A vector of length n_divisions; the measures of model performance on the test datasets.</p></dd>
+<dt>plot_model_performance</dt><dd><p>A function; the function for plotting the measures of model performance.</p></dd>
+<dt>plot_model_performance_train</dt><dd><p>A ggplot object; the plot of the measures of model performance on the train datasets.</p></dd>
+<dt>plot_model_performance_test</dt><dd><p>A ggplot object; the plot of the measures of model performance on the test datasets.</p></dd>
+</dl>
+
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

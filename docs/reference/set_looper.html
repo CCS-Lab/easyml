@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -84,15 +87,20 @@
     <p>This function decides which looper (a functional like lapply) to run. Please note this affects global state and sets the number of cores by ultimately running <code>options(mc.cores = n_core)</code>.</p>
     
 
-    <pre><span class='fu'>set_looper</span>(<span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>set_looper</span>(<span class='kw'>progress_bar</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_core</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>progress_bar</dt>
-      <dd>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</dd>
-      <dt>n_core</dt>
-      <dd>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>progress_bar</th>
+      <td><p>A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>n_core</th>
+      <td><p>An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 

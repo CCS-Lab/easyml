@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -81,20 +84,27 @@
     </div>
 
     
-    <p>See here for source: <a href = 'http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram'>http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram</a>.</p>
+    <p>See here for source: <a href='http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram'>http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram</a>.</p>
     
 
-    <pre><span class='fu'>correlation_test</span>(<span class='no'>x</span>, <span class='kw'>confidence_level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>correlation_test</span>(<span class='no'>x</span>, <span class='kw'>confidence_level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>x</dt>
-      <dd>An object of class &quot;DataFrame&quot; or &quot;matrix&quot;.</dd>
-      <dt>confidence_level</dt>
-      <dd>confidence level for the returned confidence interval. Currently only used for the Pearson product moment correlation coefficient if there are at least 4 complete pairs of observations.</dd>
-      <dt>...</dt>
-      <dd>further arguments to be passed to or from <code>cor.test</code>.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An object of class "DataFrame" or "matrix".</p></td>
+    </tr>
+    <tr>
+      <th>confidence_level</th>
+      <td><p>confidence level for the returned confidence interval. Currently only used for the Pearson product moment correlation coefficient if there are at least 4 complete pairs of observations.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments to be passed to or from <code>cor.test</code>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -102,8 +112,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>Other utils: <code><a href='check_arguments.html'>check_arguments</a></code>,
-  <code><a href='process_coefficients.html'>process_coefficients</a></code>,
+    <p>Other utils: <code><a href='process_coefficients.html'>process_coefficients</a></code>,
   <code><a href='process_variable_importances.html'>process_variable_importances</a></code>,
   <code><a href='reduce_cores.html'>reduce_cores</a></code>,
   <code><a href='remove_variables.html'>remove_variables</a></code></p>
