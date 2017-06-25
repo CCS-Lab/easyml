@@ -13,5 +13,7 @@
 A list of class \code{easy_glinternet}.
 }
 \description{
-Fit a penalized regression model with interactions.
+This function wraps the procedure for fitting a 
+glinternet model and makes it accessible 
+to the easyml core framework.
 }

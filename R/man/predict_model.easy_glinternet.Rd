@@ -15,5 +15,7 @@
 A vector, the predicted values using the new data.
 }
 \description{
-Predict values for a penalized regression model with interactions.
+This function wraps the procedure for predicting values from 
+a glinternet model and makes it accessible 
+to the easyml core framework.
 }

@@ -1,5 +1,9 @@
 #' Fit a penalized regression model with interactions.
 #' 
+#' This function wraps the procedure for fitting a 
+#' glinternet model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_glinternet}.
 #' @return A list of class \code{easy_glinternet}.
 #' @export
@@ -36,6 +40,10 @@ fit_model.easy_glinternet <- function(object) {
 
 #' Predict values for a penalized regression model with interactions.
 #' 
+#' This function wraps the procedure for predicting values from 
+#' a glinternet model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_glinternet}.
 #' @param newx A data.frame, the new data to use for predictions.
 #' @return A vector, the predicted values using the new data.
@@ -47,6 +55,10 @@ predict_model.easy_glinternet <- function(object, newx = NULL) {
 }
 
 #' Easily build and evaluate a penalized regression model with interactions.
+#' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for a glinternet
+#' model.
 #'
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_glinternet}.
