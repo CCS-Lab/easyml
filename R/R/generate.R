@@ -1,4 +1,4 @@
-#' Generate coefficients.
+#' Generate coefficients for a model (if applicable).
 #'
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated penalized regression model coefficients.
@@ -44,7 +44,7 @@ generate_coefficients <- function(object) {
   coefs
 }
 
-#' Generate variable importances.
+#' Generate variable importances for a model (if applicable).
 #'
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated variable importance scores.
@@ -89,7 +89,7 @@ generate_variable_importances <- function(object) {
   variable_importances
 }
 
-#' Generate predictions.
+#' Generate predictions for a model.
 #'
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A list of matrixes, the generated predictions.
@@ -151,7 +151,7 @@ generate_predictions <- function(object) {
        predictions_test = predictions_test)
 }
 
-#' Generate measures of model performance.
+#' Generate measures of model performance for a model.
 #'
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A list of matrixes, the generated measures of model performance.

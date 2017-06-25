@@ -15,7 +15,8 @@ plot_roc_curve(y_true, y_pred)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot ROC Curve.
+Given the ground truth (correct) target values and the estimated 
+target values will plot an ROC curve.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

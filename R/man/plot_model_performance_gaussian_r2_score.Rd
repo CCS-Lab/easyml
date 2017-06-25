@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_model_performance_gaussian_r2_score}
 \alias{plot_model_performance_gaussian_r2_score}
-\title{Plot coefficient of determination (R^2) metrics.}
+\title{Plot histogram of the coefficient of determination (R^2) metrics.}
 \usage{
 plot_model_performance_gaussian_r2_score(x)
 }
@@ -13,7 +13,7 @@ plot_model_performance_gaussian_r2_score(x)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot coefficient of determination (R^2) metrics.
+This function plots a histogram of the coefficient of determination (R^2) metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

@@ -15,7 +15,8 @@ plot_model_performance_histogram(x, name)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot histogram of measures of model performance.
+Given a numeric vector will plot a histogram 
+for any number of measures of model performance.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

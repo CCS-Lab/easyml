@@ -15,7 +15,8 @@ plot_predictions_binomial(y_true, y_pred)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot binomial predictions.
+Plots a logistic plot of the ground truth (correct) target values 
+and the estimated target values.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_model_performance}
 \alias{generate_model_performance}
-\title{Generate measures of model performance.}
+\title{Generate measures of model performance for a model.}
 \usage{
 generate_model_performance(object)
 }
@@ -13,7 +13,7 @@ generate_model_performance(object)
 A list of matrixes, the generated measures of model performance.
 }
 \description{
-Generate measures of model performance.
+Generate measures of model performance for a model.
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},

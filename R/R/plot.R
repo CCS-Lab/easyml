@@ -75,6 +75,9 @@ plot_variable_importances_processed <- function(variable_importances_processed) 
 }
 
 #' Plot gaussian predictions.
+#' 
+#' Plots a scatter plot of the ground truth (correct) target values 
+#' and the estimated target values.
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
@@ -100,6 +103,9 @@ plot_predictions_gaussian <- function(y_true, y_pred) {
 }
 
 #' Plot binomial predictions.
+#' 
+#' Plots a logistic plot of the ground truth (correct) target values 
+#' and the estimated target values.
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
@@ -127,6 +133,9 @@ plot_predictions_binomial <- function(y_true, y_pred) {
 }
 
 #' Plot ROC Curve.
+#' 
+#' Given the ground truth (correct) target values and the estimated 
+#' target values will plot an ROC curve.
 #'
 #' @param y_true Ground truth (correct) target values.
 #' @param y_pred Estimated target values.
@@ -156,6 +165,9 @@ plot_roc_curve <- function(y_true, y_pred) {
 }
 
 #' Plot histogram of measures of model performance.
+#' 
+#' Given a numeric vector will plot a histogram 
+#' for any number of measures of model performance.
 #'
 #' @param x A vector, the mean squared error metrics to be plotted as a histogram.
 #' @param name A character vector of length one, the name of the metric.
@@ -179,7 +191,9 @@ plot_model_performance_histogram <- function(x, name) {
   g
 }
 
-#' Plot mean squared error metrics.
+#' Plot histogram of the mean squared error metrics.
+#' 
+#' This function plots a histogram of the mean squared error metrics.
 #'
 #' @param x A vector, the mean squared error metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
@@ -194,7 +208,9 @@ plot_model_performance_gaussian_mse_score <- function(x) {
   g
 }
 
-#' Plot correlation coefficient metrics.
+#' Plot histogram of the correlation coefficient metrics.
+#' 
+#' This function plots a histogram of the correlation coefficient metrics.
 #'
 #' @param x A vector, the correlation coefficient metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
@@ -211,7 +227,9 @@ plot_model_performance_gaussian_correlation_score <- function(x) {
   g
 }
 
-#' Plot coefficient of determination (R^2) metrics.
+#' Plot histogram of the coefficient of determination (R^2) metrics.
+#' 
+#' This function plots a histogram of the coefficient of determination (R^2) metrics.
 #'
 #' @param x A vector, the coefficient of determination (R^2) metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
@@ -228,7 +246,9 @@ plot_model_performance_gaussian_r2_score <- function(x) {
   g
 }
 
-#' Plot area under the curve (AUC) metrics.
+#' Plot histogram of the area under the curve (AUC) metrics.
+#' 
+#' This function plots a histogram of the area under the curve (AUC) metrics.
 #'
 #' @param x A vector, the area under the curve (AUC) metrics to be plotted as a histogram.
 #' @return A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.

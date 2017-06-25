@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_predictions}
 \alias{generate_predictions}
-\title{Generate predictions.}
+\title{Generate predictions for a model.}
 \usage{
 generate_predictions(object)
 }
@@ -13,7 +13,7 @@ generate_predictions(object)
 A list of matrixes, the generated predictions.
 }
 \description{
-Generate predictions.
+Generate predictions for a model.
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},

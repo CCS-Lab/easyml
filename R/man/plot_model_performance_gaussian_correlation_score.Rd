@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_model_performance_gaussian_correlation_score}
 \alias{plot_model_performance_gaussian_correlation_score}
-\title{Plot correlation coefficient metrics.}
+\title{Plot histogram of the correlation coefficient metrics.}
 \usage{
 plot_model_performance_gaussian_correlation_score(x)
 }
@@ -13,7 +13,7 @@ plot_model_performance_gaussian_correlation_score(x)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot correlation coefficient metrics.
+This function plots a histogram of the correlation coefficient metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},

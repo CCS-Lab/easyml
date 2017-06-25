@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_coefficients}
 \alias{generate_coefficients}
-\title{Generate coefficients.}
+\title{Generate coefficients for a model (if applicable).}
 \usage{
 generate_coefficients(object)
 }
@@ -13,7 +13,7 @@ generate_coefficients(object)
 A data.frame, the generated penalized regression model coefficients.
 }
 \description{
-Generate coefficients.
+Generate coefficients for a model (if applicable).
 }
 \seealso{
 Other generate: \code{\link{generate_model_performance}},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate.R
 \name{generate_variable_importances}
 \alias{generate_variable_importances}
-\title{Generate variable importances.}
+\title{Generate variable importances for a model (if applicable).}
 \usage{
 generate_variable_importances(object)
 }
@@ -13,7 +13,7 @@ generate_variable_importances(object)
 A data.frame, the generated variable importance scores.
 }
 \description{
-Generate variable importances.
+Generate variable importances for a model (if applicable).
 }
 \seealso{
 Other generate: \code{\link{generate_coefficients}},

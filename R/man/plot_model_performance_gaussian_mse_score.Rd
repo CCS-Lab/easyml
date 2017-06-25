@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot_model_performance_gaussian_mse_score}
 \alias{plot_model_performance_gaussian_mse_score}
-\title{Plot mean squared error metrics.}
+\title{Plot histogram of the mean squared error metrics.}
 \usage{
 plot_model_performance_gaussian_mse_score(x)
 }
@@ -13,7 +13,7 @@ plot_model_performance_gaussian_mse_score(x)
 A ggplot object. This plot may be rendered by outputting it to the command line or modified using ggplot semantics.
 }
 \description{
-Plot mean squared error metrics.
+This function plots a histogram of the mean squared error metrics.
 }
 \seealso{
 Other plot: \code{\link{plot_coefficients_processed}},
