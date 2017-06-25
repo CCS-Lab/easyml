@@ -1,4 +1,8 @@
-#' Fit a neural network model.
+#' Fit an average neural network model.
+#' 
+#' This function wraps the procedure for fitting an 
+#' average neural network model and makes it accessible 
+#' to the easyml core framework.
 #' 
 #' @param object A list of class \code{easy_avNNet}.
 #' @return A list of class \code{easy_avNNet}.
@@ -20,7 +24,11 @@ fit_model.easy_avNNet <- function(object) {
   object
 }
 
-#' Predict values for a neural network model.
+#' Predict values for an average neural network model.
+#' 
+#' This function wraps the procedure for predicting values from 
+#' and average neural network model and makes it accessible 
+#' to the easyml core framework.
 #' 
 #' @param object A list of class \code{easy_avNNet}.
 #' @param newx A data.frame, the new data to use for predictions.
@@ -39,8 +47,12 @@ predict_model.easy_avNNet <- function(object, newx = NULL) {
   preds
 }
 
-#' Easily build and evaluate a neural network.
-#'
+#' Easily build and evaluate an average neural network.
+#' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for an average neural network
+#' model.
+#' 
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_avNNet}.
 #' @family recipes

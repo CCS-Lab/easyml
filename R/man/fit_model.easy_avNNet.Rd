@@ -2,7 +2,7 @@
 % Please edit documentation in R/avNNet.R
 \name{fit_model.easy_avNNet}
 \alias{fit_model.easy_avNNet}
-\title{Fit a neural network model.}
+\title{Fit an average neural network model.}
 \usage{
 \method{fit_model}{easy_avNNet}(object)
 }
@@ -13,5 +13,7 @@
 A list of class \code{easy_avNNet}.
 }
 \description{
-Fit a neural network model.
+This function wraps the procedure for fitting an 
+average neural network model and makes it accessible 
+to the easyml core framework.
 }

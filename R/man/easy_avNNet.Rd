@@ -2,7 +2,7 @@
 % Please edit documentation in R/avNNet.R
 \name{easy_avNNet}
 \alias{easy_avNNet}
-\title{Easily build and evaluate a neural network.}
+\title{Easily build and evaluate an average neural network.}
 \usage{
 easy_avNNet(.data, dependent_variable, family = "gaussian", resample = NULL,
   preprocess = preprocess_scale, measure = NULL, exclude_variables = NULL,
@@ -61,7 +61,9 @@ easy_avNNet(.data, dependent_variable, family = "gaussian", resample = NULL,
 A list of class \code{easy_avNNet}.
 }
 \description{
-Easily build and evaluate a neural network.
+This function wraps the easyml core framework, allowing a user 
+to easily run the easyml methodology for an average neural network
+model.
 }
 \examples{
 \dontrun{

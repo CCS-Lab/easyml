@@ -2,7 +2,7 @@
 % Please edit documentation in R/avNNet.R
 \name{predict_model.easy_avNNet}
 \alias{predict_model.easy_avNNet}
-\title{Predict values for a neural network model.}
+\title{Predict values for an average neural network model.}
 \usage{
 \method{predict_model}{easy_avNNet}(object, newx = NULL)
 }
@@ -15,5 +15,7 @@
 A vector, the predicted values using the new data.
 }
 \description{
-Predict values for a neural network model.
+This function wraps the procedure for predicting values from 
+and average neural network model and makes it accessible 
+to the easyml core framework.
 }
