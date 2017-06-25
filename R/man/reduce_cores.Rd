@@ -15,11 +15,11 @@ reduce_cores(n_core, cpu_count = NULL)
 An integer vector of length one; specifies the number of cores to use for this analysis.
 }
 \description{
-Reduce number of cores.
+This function takes the number of cores specified by the user and
+reduces it to the maximum number of cores supported by the computer.
 }
 \seealso{
-Other utils: \code{\link{check_arguments}},
-  \code{\link{correlation_test}},
+Other utils: \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{process_variable_importances}},
   \code{\link{remove_variables}}

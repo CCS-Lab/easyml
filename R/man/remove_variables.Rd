@@ -15,11 +15,10 @@ remove_variables(.data = NULL, exclude_variables = NULL)
 A data.frame; the data to be analyzed.
 }
 \description{
-Remove variables from a dataset.
+This utility function removes variables from a data.frame.
 }
 \seealso{
-Other utils: \code{\link{check_arguments}},
-  \code{\link{correlation_test}},
+Other utils: \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{process_variable_importances}},
   \code{\link{reduce_cores}}

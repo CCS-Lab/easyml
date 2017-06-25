@@ -15,7 +15,15 @@ preprocess_scale(.data, categorical_variables = NULL)
 A list, containing one or two data.frames.
 }
 \description{
-Preprocess data by scaling it.
+This function takes either a data.frame or a list of data.frames. In 
+the event of the first, this fuction takes the dataset and will
+scale each column that is not categorical such that that column
+has zero mean and unit variance. In the event of the second, this 
+function takes the training dataset and will identify the parameters 
+needed to scale the training dataset such that each column that 
+is not categorical has zero mean and unit variance, and then will 
+apply those parameters to each column in the testing dataset 
+that is not categorical.
 }
 \seealso{
 Other preprocess: \code{\link{preprocess_identity}}

@@ -13,11 +13,12 @@ process_variable_importances(variable_importances)
 A data.frame; the replicated variable importances processed for easy plotting.
 }
 \description{
-Process variable importances.
+Takes the variable importances returned by the 
+generate_variable_importances function and prepares 
+the variable importances for plotting.
 }
 \seealso{
-Other utils: \code{\link{check_arguments}},
-  \code{\link{correlation_test}},
+Other utils: \code{\link{correlation_test}},
   \code{\link{process_coefficients}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}

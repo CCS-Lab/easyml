@@ -1,4 +1,7 @@
 #' Process coefficients.
+#' 
+#' Takes the coefficients returned by the generate_coefficients function 
+#' and prepares the coefficients for plotting.
 #'
 #' @param coefficients A data.frame, the replicated coefficients.
 #' @param survival_rate_cutoff A numeric vector of length one; for \code{\link{easy_glmnet}}, specifies the minimal threshold (as a percentage) a coefficient must appear out of n_samples. Defaults to 0.05.
@@ -29,6 +32,10 @@ process_coefficients <- function(coefficients, survival_rate_cutoff = 0.05) {
 }
 
 #' Process variable importances.
+#' 
+#' Takes the variable importances returned by the 
+#' generate_variable_importances function and prepares 
+#' the variable importances for plotting.
 #'
 #' @param variable_importances A data.frame, the replicated coefficients.
 #' @return A data.frame; the replicated variable importances processed for easy plotting.

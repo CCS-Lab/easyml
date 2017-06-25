@@ -1,4 +1,7 @@
 #' Preprocess data by leaving it exactly the way it is.
+#' 
+#' This function is the same as the identity function. Anything passed
+#' to it is returned untouched.
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.
@@ -10,6 +13,16 @@ preprocess_identity <- function(.data, categorical_variables = NULL) {
 }
 
 #' Preprocess data by scaling it.
+#' 
+#' This function takes either a data.frame or a list of data.frames. In 
+#' the event of the first, this fuction takes the dataset and will
+#' scale each column that is not categorical such that that column
+#' has zero mean and unit variance. In the event of the second, this 
+#' function takes the training dataset and will identify the parameters 
+#' needed to scale the training dataset such that each column that 
+#' is not categorical has zero mean and unit variance, and then will 
+#' apply those parameters to each column in the testing dataset 
+#' that is not categorical.
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param categorical_variables A logical vector; each value TRUE indicates that column in the data.frame is a categorical variable. Defaults to NULL.

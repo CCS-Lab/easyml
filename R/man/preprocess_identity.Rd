@@ -15,7 +15,8 @@ preprocess_identity(.data, categorical_variables = NULL)
 A list, containing one or two data.frames.
 }
 \description{
-Preprocess data by leaving it exactly the way it is.
+This function is the same as the identity function. Anything passed
+to it is returned untouched.
 }
 \seealso{
 Other preprocess: \code{\link{preprocess_scale}}

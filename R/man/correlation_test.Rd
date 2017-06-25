@@ -20,8 +20,7 @@ A list containing three matrices; p_value, lower_bound, and upper bound.
 See here for source: \url{http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram}.
 }
 \seealso{
-Other utils: \code{\link{check_arguments}},
-  \code{\link{process_coefficients}},
+Other utils: \code{\link{process_coefficients}},
   \code{\link{process_variable_importances}},
   \code{\link{reduce_cores}},
   \code{\link{remove_variables}}

@@ -1,4 +1,7 @@
 #' Reduce number of cores.
+#' 
+#' This function takes the number of cores specified by the user and
+#' reduces it to the maximum number of cores supported by the computer.
 #'
 #' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @param cpu_count An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
@@ -14,6 +17,8 @@ reduce_cores <- function(n_core, cpu_count = NULL) {
 }
 
 #' Remove variables from a dataset.
+#' 
+#' This utility function removes variables from a data.frame.
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param exclude_variables A character vector; the variables from the data set to exclude. Defaults to NULL.
@@ -59,16 +64,4 @@ correlation_test <- function(x, confidence_level = 0.95, ...) {
   list(p_value = p_value, 
        lower_bound = lower_bound, 
        upper_bound = upper_bound)
-}
-
-#' Check the positional arguments.
-#'
-#' @param .data A data.frame; the data to be analyzed.
-#' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are one of c("glmnet", "random_forest", "support_vector_machine").
-#' @return NULL.
-#' @family utils
-#' @export
-check_arguments <- function(.data, dependent_variable, algorithm) {
-  invisible()
 }
