@@ -16,6 +16,6 @@ A vector, the predicted values using the new data.
 }
 \description{
 This function wraps the procedure for predicting values from 
-and average neural network model and makes it accessible 
+a average neural network model and makes it accessible 
 to the easyml core framework.
 }

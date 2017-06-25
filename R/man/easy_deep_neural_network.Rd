@@ -62,7 +62,9 @@ easy_deep_neural_network(.data, dependent_variable, family = "gaussian",
 A list of class \code{easy_deep_neural_network}.
 }
 \description{
-Easily build and evaluate a deep neural network.
+This function wraps the easyml core framework, allowing a user 
+to easily run the easyml methodology for a deep neural network
+model.
 }
 \examples{
 \dontrun{

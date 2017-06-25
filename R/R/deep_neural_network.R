@@ -1,5 +1,9 @@
 #' Fit a deep neural network model.
 #' 
+#' This function wraps the procedure for fitting a 
+#' deep neural network model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_deep_neural_network}.
 #' @return A list of class \code{easy_deep_neural_network}.
 #' @export
@@ -23,6 +27,10 @@ fit_model.easy_deep_neural_network <- function(object) {
 
 #' Predict values for a deep neural network model.
 #' 
+#' This function wraps the procedure for predicting values from 
+#' a deep neural network model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_deep_neural_network}.
 #' @param newx A data.frame, the new data to use for predictions.
 #' @return A vector, the predicted values using the new data.
@@ -41,7 +49,11 @@ predict_model.easy_deep_neural_network <- function(object, newx = NULL) {
 }
 
 #' Easily build and evaluate a deep neural network.
-#'
+#' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for a deep neural network
+#' model.
+#' 
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_deep_neural_network}.
 #' @family recipes

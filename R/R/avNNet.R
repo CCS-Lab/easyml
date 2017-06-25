@@ -27,7 +27,7 @@ fit_model.easy_avNNet <- function(object) {
 #' Predict values for an average neural network model.
 #' 
 #' This function wraps the procedure for predicting values from 
-#' and average neural network model and makes it accessible 
+#' a average neural network model and makes it accessible 
 #' to the easyml core framework.
 #' 
 #' @param object A list of class \code{easy_avNNet}.
@@ -47,7 +47,7 @@ predict_model.easy_avNNet <- function(object, newx = NULL) {
   preds
 }
 
-#' Easily build and evaluate an average neural network.
+#' Easily build and evaluate an average neural network model.
 #' 
 #' This function wraps the easyml core framework, allowing a user 
 #' to easily run the easyml methodology for an average neural network

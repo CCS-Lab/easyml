@@ -2,7 +2,7 @@
 % Please edit documentation in R/avNNet.R
 \name{easy_avNNet}
 \alias{easy_avNNet}
-\title{Easily build and evaluate an average neural network.}
+\title{Easily build and evaluate an average neural network model.}
 \usage{
 easy_avNNet(.data, dependent_variable, family = "gaussian", resample = NULL,
   preprocess = preprocess_scale, measure = NULL, exclude_variables = NULL,
