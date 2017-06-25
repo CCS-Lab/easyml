@@ -13,5 +13,7 @@
 A list of class \code{easy_support_vector_machine}.
 }
 \description{
-Fit a support vector machine regression model.
+This function wraps the procedure for fitting a 
+support vector machine model and makes it accessible 
+to the easyml core framework.
 }

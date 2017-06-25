@@ -13,5 +13,7 @@
 A list of class \code{easy_random_forest}.
 }
 \description{
-Fit a random forest model.
+This function wraps the procedure for fitting a 
+random forest model and makes it accessible 
+to the easyml core framework.
 }

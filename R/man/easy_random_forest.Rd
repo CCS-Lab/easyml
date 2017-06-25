@@ -60,7 +60,9 @@ easy_random_forest(.data, dependent_variable, family = "gaussian",
 A list of class \code{easy_random_forest}.
 }
 \description{
-Easily build and evaluate a random forest regression model.
+This function wraps the easyml core framework, allowing a user 
+to easily run the easyml methodology for a random forest
+model.
 }
 \examples{
 \dontrun{

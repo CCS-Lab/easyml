@@ -1,5 +1,9 @@
 #' Fit a support vector machine regression model.
-#'
+#' 
+#' This function wraps the procedure for fitting a 
+#' support vector machine model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_support_vector_machine}.
 #' @return A list of class \code{easy_support_vector_machine}.
 #' @export
@@ -31,6 +35,10 @@ fit_model.easy_support_vector_machine <- function(object) {
 
 #' Predict values for a support vector machine regression model.
 #' 
+#' This function wraps the procedure for predicting values from 
+#' a support vector machine model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_support_vector_machine}.
 #' @param newx A data.frame, the new data to use for predictions.
 #' @return A vector, the predicted values using the new data.
@@ -59,6 +67,10 @@ predict_model.easy_support_vector_machine <- function(object, newx = NULL) {
 }
 
 #' Easily build and evaluate a support vector machine regression model.
+#' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for a support vector machine
+#' model.
 #'
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_support_vector_machine}.

@@ -13,5 +13,7 @@
 A list of class \code{easy_neural_network}.
 }
 \description{
-Fit a neural network model.
+This function wraps the procedure for fitting a 
+neural network model and makes it accessible 
+to the easyml core framework.
 }

@@ -1,5 +1,9 @@
 #' Fit a random forest model.
 #' 
+#' This function wraps the procedure for fitting a 
+#' random forest model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_random_forest}.
 #' @return A list of class \code{easy_random_forest}.
 #' @export
@@ -26,20 +30,11 @@ fit_model.easy_random_forest <- function(object) {
   object
 }
 
-#' Extract variable importance scores from a random forest model.
-#' 
-#' @param object A list of class \code{easy_random_forest}.
-#' @return A data.frame, the replicated random forest variable importance scores.
-#' @export
-extract_variable_importances.easy_random_forest <- function(object) {
-  model <- object[["model"]]
-  importance <- randomForest::importance(model)
-  importance_df <- data.frame(t(importance))
-  rownames(importance_df) <- NULL
-  importance_df
-}
-
 #' Predict values for a random forest regression model.
+#' 
+#' This function wraps the procedure for predicting values from 
+#' a random forest model and makes it accessible 
+#' to the easyml core framework.
 #' 
 #' @param object A list of class \code{easy_random_forest}.
 #' @param newx A data.frame, the new data to use for predictions.
@@ -68,8 +63,29 @@ predict_model.easy_random_forest <- function(object, newx = NULL) {
   preds
 }
 
+#' Extract variable importance scores from a random forest model.
+#' 
+#' This function wraps the procedure for extracting variable importances
+#'  from a random forest model and makes it accessible 
+#' to the easyml core framework.
+#' 
+#' @param object A list of class \code{easy_random_forest}.
+#' @return A data.frame, the replicated random forest variable importance scores.
+#' @export
+extract_variable_importances.easy_random_forest <- function(object) {
+  model <- object[["model"]]
+  importance <- randomForest::importance(model)
+  importance_df <- data.frame(t(importance))
+  rownames(importance_df) <- NULL
+  importance_df
+}
+
 #' Easily build and evaluate a random forest regression model.
 #' 
+#' This function wraps the easyml core framework, allowing a user 
+#' to easily run the easyml methodology for a random forest
+#' model.
+#'
 #' @inheritParams easy_analysis
 #' @return A list of class \code{easy_random_forest}.
 #' @family recipes

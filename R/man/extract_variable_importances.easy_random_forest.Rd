@@ -13,5 +13,7 @@
 A data.frame, the replicated random forest variable importance scores.
 }
 \description{
-Extract variable importance scores from a random forest model.
+This function wraps the procedure for extracting variable importances
+ from a random forest model and makes it accessible 
+to the easyml core framework.
 }

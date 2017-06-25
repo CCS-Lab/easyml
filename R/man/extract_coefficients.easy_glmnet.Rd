@@ -13,5 +13,7 @@
 A data.frame, the replicated penalized regression coefficients.
 }
 \description{
-Extract coefficients from a penalized regression model.
+This function wraps the procedure for extracting coefficients from a 
+glmnet model and makes it accessible 
+to the easyml core framework.
 }

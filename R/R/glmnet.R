@@ -55,6 +55,10 @@ predict_model.easy_glmnet <- function(object, newx = NULL) {
 
 #' Extract coefficients from a penalized regression model.
 #' 
+#' This function wraps the procedure for extracting coefficients from a 
+#' glmnet model and makes it accessible 
+#' to the easyml core framework.
+#' 
 #' @param object A list of class \code{easy_glmnet}.
 #' @return A data.frame, the replicated penalized regression coefficients.
 #' @export

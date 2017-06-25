@@ -60,7 +60,9 @@ easy_support_vector_machine(.data, dependent_variable, family = "gaussian",
 A list of class \code{easy_support_vector_machine}.
 }
 \description{
-Easily build and evaluate a support vector machine regression model.
+This function wraps the easyml core framework, allowing a user 
+to easily run the easyml methodology for a support vector machine
+model.
 }
 \examples{
 \dontrun{
