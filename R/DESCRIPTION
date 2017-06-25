@@ -3,9 +3,9 @@ Version: 0.1.0
 Title: Easily Build and Evaluate Machine Learning Models
 Description: Easily build and evaluate machine learning models on a dataset.
 Authors@R: c(
-    person("Woo-Young", "Ahn", , "ahn.280@osu.edu", c("aut", "cre")),
-    person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", "aut"),
-    person("OSU-CCSL", role = "cph"))
+  person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", c("aut", "cre")), 
+  person("Woo-Young", "Ahn", , "ahn.280@osu.edu", "aut"),
+  person("OSU-CCSL", role = "cph"))
 License: MIT + file LICENSE
 LazyData: true
 Depends:
