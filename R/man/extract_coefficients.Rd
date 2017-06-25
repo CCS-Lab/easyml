@@ -13,5 +13,8 @@ extract_coefficients(object)
 A data.frame, the generated coefficients.
 }
 \description{
-Extract coefficients.
+The generic function  for extracting coefficients from
+a model within the easyml core framework, if such an
+operation is applicable for that model. Users can create their own 
+extract_coefficients function for their own class of model.
 }

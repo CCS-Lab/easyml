@@ -13,5 +13,8 @@ extract_variable_importances(object)
 A data.frame, the generated random forest variable importance scores.
 }
 \description{
-Extract variable importances.
+The generic function  for extracting variable importances from
+a model within the easyml core framework, if such an
+operation is applicable for that model. Users can create their own 
+extract_variable_importances function for their own class of model.
 }

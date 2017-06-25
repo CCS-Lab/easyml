@@ -13,5 +13,7 @@ fit_model(object)
 A list of class \code{easy_*}, where * is the name of the algorithm.
 }
 \description{
-Fit model.
+The generic function  for fitting a model within 
+the easyml core framework. Users can create their own 
+fit_model function for their own class of model.
 }

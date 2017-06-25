@@ -1,5 +1,9 @@
 #' Fit model.
 #' 
+#' The generic function  for fitting a model within 
+#' the easyml core framework. Users can create their own 
+#' fit_model function for their own class of model.
+#' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @export
@@ -8,6 +12,11 @@ fit_model <- function(object) {
 }
 
 #' Extract coefficients.
+#' 
+#' The generic function  for extracting coefficients from
+#' a model within the easyml core framework, if such an
+#' operation is applicable for that model. Users can create their own 
+#' extract_coefficients function for their own class of model.
 #' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated coefficients.
@@ -18,6 +27,11 @@ extract_coefficients <- function(object) {
 
 #' Extract variable importances.
 #' 
+#' The generic function  for extracting variable importances from
+#' a model within the easyml core framework, if such an
+#' operation is applicable for that model. Users can create their own 
+#' extract_variable_importances function for their own class of model.
+#' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @return A data.frame, the generated random forest variable importance scores.
 #' @export
@@ -26,6 +40,10 @@ extract_variable_importances <- function(object) {
 }
 
 #' Predict model.
+#' 
+#' The generic function  for generating predictions from a model within 
+#' the easyml core framework. Users can create their own 
+#' predict_model function for their own class of model.
 #' 
 #' @param object A list of class \code{easy_*}, where * is the name of the algorithm.
 #' @param newx A data.frame, the new data to use for predictions.

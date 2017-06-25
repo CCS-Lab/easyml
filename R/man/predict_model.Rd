@@ -15,5 +15,7 @@ predict_model(object, newx = NULL)
 A vector, the predicted values using the new data.
 }
 \description{
-Predict model.
+The generic function  for generating predictions from a model within 
+the easyml core framework. Users can create their own 
+predict_model function for their own class of model.
 }
