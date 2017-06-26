@@ -16,7 +16,7 @@ A ggplot object. This plot may be rendered by outputting it to the command line 
 When calling \code{\link{easy_glmnet}}, coefficients from the 
 \code{\link{generate_coefficients}} output are processed by the 
 \code{\link{process_coefficients}}  function and generated into 
-a plot. This plot tells us the direction, magitude, and statistical
+a plot. This plot tells us the direction, magnitude, and statistical
 significance of each coefficient. Be careful using this plotting
 method with datasets containing more than 20 variables as the plot 
 may not render as nicely.
