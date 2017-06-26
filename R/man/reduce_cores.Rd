@@ -7,9 +7,9 @@
 reduce_cores(n_core, cpu_count = NULL)
 }
 \arguments{
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 
-\item{cpu_count}{An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{cpu_count}{An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 }
 \value{
 An integer vector of length one; specifies the number of cores to use for this analysis.

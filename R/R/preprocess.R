@@ -15,7 +15,7 @@ preprocess_identity <- function(.data, categorical_variables = NULL) {
 #' Preprocess data by scaling it.
 #' 
 #' This function takes either a data.frame or a list of data.frames. In 
-#' the event of the first, this fuction takes the dataset and will
+#' the event of the first, this function takes the dataset and will
 #' scale each column that is not categorical such that that column
 #' has zero mean and unit variance. In the event of the second, this 
 #' function takes the training dataset and will identify the parameters 

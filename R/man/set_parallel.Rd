@@ -7,10 +7,10 @@
 set_parallel(n_core)
 }
 \arguments{
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 }
 \value{
-A logical vector of length one; whether analyis should be run in parallel or not.
+A logical vector of length one; whether analysis should be run in parallel or not.
 }
 \description{
 This helper function decides whether the analysis should be run in parallel based on the number of cores specified.

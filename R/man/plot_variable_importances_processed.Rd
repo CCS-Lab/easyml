@@ -17,7 +17,7 @@ When calling \code{\link{easy_random_forest}}, variable importances scores from 
 \code{\link{generate_variable_importances}} output are processed by the 
 \code{\link{process_variable_importances}}  function and generated into 
 a plot. Importance scores for each predictor were estimated using the increase in 
-node impurity. Node impuirty measures the change in residual squared error 
+node impurity. Node impurity measures the change in residual squared error 
 that is attributable to the predictor across all trees. Unlike the 
 \code{\link{easy_glmnet}} coefficients, random forest importance scores 
 do not indicate directional effects, but instead represent the magnitude 

@@ -44,7 +44,7 @@ easy_support_vector_machine(.data, dependent_variable, family = "gaussian",
 
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
 
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1.}
 
 \item{coefficients}{A logical vector of length one; whether or not to generate coefficients for this analysis.}
 

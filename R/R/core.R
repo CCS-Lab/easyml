@@ -74,7 +74,7 @@ predict_model <- function(object, newx = NULL) {
 #' @param n_iterations An integer vector of length one; during each division, specifies the number of times the predictions should be generated. Defaults to 10.
 #' @param random_state An integer vector of length one; specifies the seed to be used for the analysis. Defaults to NULL.
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1.
 #' @param coefficients A logical vector of length one; whether or not to generate coefficients for this analysis.
 #' @param variable_importances A logical vector of length one; whether or not to generate variable importances for this analysis.
 #' @param predictions A logical vector of length one; whether or not to generate predictions for this analysis.

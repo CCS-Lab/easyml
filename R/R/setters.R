@@ -17,8 +17,8 @@ set_random_state <- function(random_state = NULL) {
 #' 
 #' This helper function decides whether the analysis should be run in parallel based on the number of cores specified.
 #' 
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @return A logical vector of length one; whether analyis should be run in parallel or not.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @return A logical vector of length one; whether analysis should be run in parallel or not.
 #' @family setters
 #' @export
 set_parallel <- function(n_core) {
@@ -36,7 +36,7 @@ set_parallel <- function(n_core) {
 #' 
 #' Please note this affects global state and sets the number of cores by running \code{options(mc.cores = n_core)}.
 #'
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return NULL.
 #' @family setters
 #' @export
@@ -50,7 +50,7 @@ set_cores <- function(n_core) {
 #' This function decides which looper (a functional like lapply) to run. Please note this affects global state and sets the number of cores by ultimately running \code{options(mc.cores = n_core)}.
 #'
 #' @param progress_bar A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return The looper to use depending on progress bar and whether to run in parallel or not.
 #' @family setters
 #' @export

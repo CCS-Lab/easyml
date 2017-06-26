@@ -9,7 +9,7 @@ set_looper(progress_bar = FALSE, n_core = 1)
 \arguments{
 \item{progress_bar}{A logical vector of length one; specifies whether to display a progress bar during calculations. Defaults to TRUE.}
 
-\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
+\item{n_core}{An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.}
 }
 \value{
 The looper to use depending on progress bar and whether to run in parallel or not.

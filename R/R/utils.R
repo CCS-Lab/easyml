@@ -3,8 +3,8 @@
 #' This function takes the number of cores specified by the user and
 #' reduces it to the maximum number of cores supported by the computer.
 #'
-#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
-#' @param cpu_count An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currenly only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param n_core An integer vector of length one; specifies the number of cores to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
+#' @param cpu_count An integer vector of length one; specifies the number of cores potentially available to use for this analysis. Currently only works on Mac OSx and Unix/Linux systems. Defaults to 1L.
 #' @return An integer vector of length one; specifies the number of cores to use for this analysis.
 #' @family utils
 #' @export
