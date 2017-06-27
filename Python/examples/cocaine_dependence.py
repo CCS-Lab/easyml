@@ -1,5 +1,5 @@
-from easyml import glmnet, random_forest, support_vector_machine
-from easyml.datasets import load_cocaine_dependence
+from easymlpy import glmnet, random_forest, support_vector_machine
+from easymlpy.datasets import load_cocaine_dependence
 
 
 # Settings

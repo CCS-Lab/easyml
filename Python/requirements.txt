@@ -7,7 +7,7 @@ colorama==0.3.7
 CommonMark==0.5.4
 cycler==0.10.0
 docutils==0.13.1
-easyml==0.1.0
+easymlpy==0.1.0
 glmnet==1.0.0
 imagesize==0.7.1
 Jinja2==2.9.4

@@ -1,4 +1,4 @@
-from easyml import glmnet
+from easymlpy import glmnet
 from glmnet import ElasticNet
 import numpy as np
 import pandas as pd
