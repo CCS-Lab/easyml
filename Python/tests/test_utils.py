@@ -1,6 +1,6 @@
 """Tests for utility functions.
 """
-from easyml import utils
+from easymlpy import utils
 
 
 def test_reduce_cores():

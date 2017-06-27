@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from easyml import measure, plot, preprocess, resample, setters
+from easymlpy import measure, plot, preprocess, resample, setters
 
 
 def test_set_random_state():
