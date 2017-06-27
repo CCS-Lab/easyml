@@ -10,7 +10,13 @@ Python tutorial: http://easyml.readthedocs.io
 Installation
 ------------
 
-You can install the latest development version from github with:
+You can install the latest development version from Pypi:
+
+```bash
+pip install easymlpy
+```
+
+Or from GitHub with:
 
 ```bash
 git clone https://github.com/CCS-Lab/easyml.git
@@ -24,7 +30,7 @@ If you encounter a clear bug, please file a [minimal reproducible example](http:
 Examples
 --------
 
-Load the `easyml` library:
+Load the `easymlpy` library:
 
 ``` python
 import pandas as pd
