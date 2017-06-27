@@ -10,7 +10,7 @@ Python tutorial: http://easyml.readthedocs.io
 Installation
 ------------
 
-You can install the latest development version from Pypi:
+You can install the latest development version from PyPI:
 
 ```bash
 pip install easymlpy
