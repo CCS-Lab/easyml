@@ -14,3 +14,17 @@ sphinx-autobuild . _build
 ```
 
 Then go to http://127.0.0.1:8000/.
+
+To run notebooks:
+
+```bash
+jupyter notebook
+```
+
+To build vignettes:
+
+```bash
+jupyter nbconvert cocaine.ipynb --to markdown
+jupyter nbconvert prostate.ipynb --to markdown
+jupyter nbconvert titanic.ipynb --to markdown
+```

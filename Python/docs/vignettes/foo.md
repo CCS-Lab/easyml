@@ -1,4 +1,0 @@
-Foo
----
-
-To be updated.
