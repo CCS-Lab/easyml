@@ -33,7 +33,7 @@ Examples
 Load the `easymlpy` library:
 
 ``` python
-import pandas as pd
+from easyml.datasets import load_prostate, load_cocaine_depedence
 from easymlpy.glmnet import easy_glmnet
 ```
 
@@ -41,7 +41,7 @@ For a dataset with a continuous dependent variable:
 
 ``` python
 # Load data
-prostate = pd.read_table('./prostate.txt')
+prostate = load_prostate()
 
 # Analyze data
 output = easy_glmnet(prostate, 'lpsa',
@@ -54,7 +54,7 @@ For a dataset with a binary dependent variable:
 
 ``` python
 # Load data
-cocaine_depedence = pd.read_table('./cocaine_depedence.txt')
+cocaine_depedence = load_cocaine_depedence()
 
 # Analyze data
 results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
