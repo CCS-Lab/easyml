@@ -8,25 +8,25 @@ easymlpy.core module
 --------------------
 
 .. automodule:: easymlpy.core
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 easymlpy.datasets module
 ------------------------
 
 .. automodule:: easymlpy.datasets
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 easymlpy.glmnet module
 ----------------------
 
 .. automodule:: easymlpy.glmnet
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 easymlpy.measure module
 -----------------------
