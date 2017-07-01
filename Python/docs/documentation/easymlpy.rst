@@ -1,9 +1,6 @@
 easymlpy package
 ================
 
-Submodules
-----------
-
 easymlpy.core module
 --------------------
 
