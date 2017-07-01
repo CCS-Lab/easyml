@@ -21,7 +21,10 @@ import mock
 import sys
 
 MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy',
-                'scikit-learn', 'glmnet', 'seaborn']
+                'scikit-learn', 'glmnet', 'seaborn', 'sklearn',
+                'sklearn.metrics', 'sklearn.preprocessing',
+                'sklearn.ensemble', 'sklearn.model_selection',
+                'sklearn.svm']
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
