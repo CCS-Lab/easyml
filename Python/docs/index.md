@@ -8,7 +8,12 @@ A toolkit for easily building and evaluating machine learning models.
 Installation
 ------------
 
-You can install the latest development version from github with:
+You can install the latest development version from PyPI:
+```bash
+pip install easymlpy
+```
+
+Or from GitHub with:
 
 ```bash
 git clone https://github.com/CCS-Lab/easyml.git
@@ -32,37 +37,37 @@ For vignettes, please see the page on [Vignettes](vignettes).
 Examples
 --------
 
-Load the `easyml` library:
+Load the `easymlpy` library:
 
 ``` python
-import pandas as pd
-from easyml.glmnet import easy_glmnet
+from easyml.datasets import load_prostate, load_cocaine_depedence
+from easymlpy.glmnet import easy_glmnet
 ```
 
 For a dataset with a continuous dependent variable:
 
 ``` python
 # Load data
-prostate = pd.read_table('./prostate.txt')
+prostate = load_prostate()
 
 # Analyze data
 output = easy_glmnet(prostate, 'lpsa',
-            random_state=1, progress_bar=True, n_core=1,
-            n_samples=100, n_divisions=10, n_iterations=5,
-            model_args={'alpha': 1, 'n_lambda': 200})
+                     random_state=1, progress_bar=True, n_core=1,
+                     n_samples=100, n_divisions=10, n_iterations=5,
+                     model_args={'alpha': 1, 'n_lambda': 200})
 ```
 
 For a dataset with a binary dependent variable:
 
 ``` python
 # Load data
-cocaine_depedence = pd.read_table('./cocaine_depedence.txt')
+cocaine_depedence = load_cocaine_depedence()
 
 # Analyze data
-results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
+results = easy_glmnet(cocaine_dependence, 'diagnosis',
                       family='binomial',
                       exclude_variables=['subject'],
-                      categorical_variables=['Male'],
+                      categorical_variables=['male'],
                       random_state=12345, progress_bar=True, n_core=1,
                       n_samples=5, n_divisions=5, n_iterations=2,
                       model_args={'alpha': 1, 'n_lambda': 200})

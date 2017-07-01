@@ -57,10 +57,10 @@ For a dataset with a binary dependent variable:
 cocaine_depedence = load_cocaine_depedence()
 
 # Analyze data
-results = easy_glmnet(cocaine_dependence, 'DIAGNOSIS',
+results = easy_glmnet(cocaine_dependence, 'diagnosis',
                       family='binomial',
                       exclude_variables=['subject'],
-                      categorical_variables=['Male'],
+                      categorical_variables=['male'],
                       random_state=12345, progress_bar=True, n_core=1,
                       n_samples=5, n_divisions=5, n_iterations=2,
                       model_args={'alpha': 1, 'n_lambda': 200})
