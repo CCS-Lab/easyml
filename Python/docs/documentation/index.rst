@@ -1,4 +1,7 @@
 Documentation
--------------
+=============
 
-* `Modules <modules.html>`_
+.. toctree::
+   :maxdepth: 4
+
+   easymlpy
