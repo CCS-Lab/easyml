@@ -39,14 +39,14 @@ Examples
 
 Load the `easymlpy` library:
 
-``` python
-from easyml.datasets import load_prostate, load_cocaine_depedence
+```python
+from easymlpy.datasets import load_prostate, load_cocaine_dependence
 from easymlpy.glmnet import easy_glmnet
 ```
 
 For a dataset with a continuous dependent variable:
 
-``` python
+```python
 # Load data
 prostate = load_prostate()
 
@@ -59,9 +59,9 @@ output = easy_glmnet(prostate, 'lpsa',
 
 For a dataset with a binary dependent variable:
 
-``` python
+```python
 # Load data
-cocaine_depedence = load_cocaine_depedence()
+cocaine_dependence = load_cocaine_dependence()
 
 # Analyze data
 results = easy_glmnet(cocaine_dependence, 'diagnosis',

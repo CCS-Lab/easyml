@@ -46,7 +46,7 @@ Load the easymlpy library:
 
 .. code-block:: python
 
-   from easyml.datasets import load_prostate, load_cocaine_depedence
+   from easymlpy.datasets import load_prostate, load_cocaine_dependence
    from easymlpy.glmnet import easy_glmnet
 
 For a dataset with a continuous dependent variable:
@@ -67,7 +67,7 @@ For a dataset with a binary dependent variable:
 .. code-block:: python
 
    # Load data
-   cocaine_depedence = load_cocaine_depedence()
+   cocaine_dependence = load_cocaine_dependence()
 
    # Analyze data
    results = easy_glmnet(cocaine_dependence, 'diagnosis',
