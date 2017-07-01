@@ -8,6 +8,7 @@ CommonMark==0.5.4
 cycler==0.10.0
 docutils==0.13.1
 easymlpy==0.1.1
+numpy==1.11.2
 glmnet==1.0.0
 imagesize==0.7.1
 Jinja2==2.9.4
@@ -15,7 +16,6 @@ jmespath==0.9.1
 livereload==2.5.1
 MarkupSafe==0.23
 matplotlib==1.5.3
-numpy==1.11.2
 pandas==0.19.1
 pathtools==0.1.2
 port-for==0.3.1
