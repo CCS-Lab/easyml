@@ -1,5 +1,5 @@
-Modules
-=======
+easymlpy package
+================
 
 easymlpy.core module
 --------------------
