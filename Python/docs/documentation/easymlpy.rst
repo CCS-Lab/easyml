@@ -88,9 +88,9 @@ easymlpy.utils module
 ---------------------
 
 .. automodule:: easymlpy.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 Module contents
