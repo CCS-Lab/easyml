@@ -5,7 +5,8 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, roc_auc_score
 
 
-__all__ = []
+__all__ = ['measure_mean_squared_error', 'measure_cor_score',
+           'measure_r2_score', 'measure_area_under_curve']
 
 
 def measure_mean_squared_error(y_true, y_pred):

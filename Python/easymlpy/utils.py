@@ -4,7 +4,7 @@ Utility functions.
 import os
 
 
-__all__ = []
+__all__ = ['reduce_cores', 'remove_variables']
 
 
 def reduce_cores(n_core, cpu_count=None):

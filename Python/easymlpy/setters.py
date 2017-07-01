@@ -9,7 +9,7 @@ from . import plot as plt
 from . import resample as res
 
 
-__all__ = []
+__all__ = ['set_random_state']
 
 
 def set_random_state(random_state=None):
