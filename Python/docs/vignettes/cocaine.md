@@ -96,7 +96,7 @@ TO BE EDITED.
 print(results.plot_variable_importances())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10704bf60>, <matplotlib.axes._subplots.AxesSubplot object at 0x10cd604a8>)
+    (<matplotlib.figure.Figure object at 0x106d54588>, <matplotlib.axes._subplots.AxesSubplot object at 0x10c6d82e8>)
 
 
 
@@ -112,15 +112,11 @@ We can examine both the in-sample and out-of-sample ROC curve plots for one part
 print(results.plot_predictions_single_train_test_split_train())
 ```
 
-    /Users/paulhendricks/miniconda3/envs/easyml/lib/python3.5/site-packages/sklearn/utils/validation.py:526: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-      y = column_or_1d(y, warn=True)
-
-
-    (<matplotlib.figure.Figure object at 0x106f98470>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fb31978>)
+    (<matplotlib.figure.Figure object at 0x10c5362e8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f165630>)
 
 
 
-![png](cocaine_files/cocaine_8_2.png)
+![png](cocaine_files/cocaine_8_1.png)
 
 
 
@@ -128,15 +124,11 @@ print(results.plot_predictions_single_train_test_split_train())
 print(results.plot_predictions_single_train_test_split_test())
 ```
 
-    /Users/paulhendricks/miniconda3/envs/easyml/lib/python3.5/site-packages/sklearn/utils/validation.py:526: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-      y = column_or_1d(y, warn=True)
-
-
-    (<matplotlib.figure.Figure object at 0x10ca367b8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fd2d2b0>)
+    (<matplotlib.figure.Figure object at 0x10f32bb70>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f2566d8>)
 
 
 
-![png](cocaine_files/cocaine_9_2.png)
+![png](cocaine_files/cocaine_9_1.png)
 
 
 # ROC Curve
@@ -148,7 +140,7 @@ We can examine both the in-sample and out-of-sample ROC curve plots for one part
 print(results.plot_roc_single_train_test_split_train())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10fd14240>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fd4aac8>)
+    (<matplotlib.figure.Figure object at 0x10f305860>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f26f828>)
 
 
 
@@ -160,7 +152,7 @@ print(results.plot_roc_single_train_test_split_train())
 print(results.plot_roc_single_train_test_split_test())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10fd31400>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fb610b8>)
+    (<matplotlib.figure.Figure object at 0x10f48f0b8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f4b6e10>)
 
 
 
@@ -176,7 +168,7 @@ We can examine both the in-sample and out-of-sample AUC metrics for n_divisions 
 print(results.plot_model_performance_train())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10fb9aa58>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fb57630>)
+    (<matplotlib.figure.Figure object at 0x10f5fcb00>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f746978>)
 
 
 
@@ -188,7 +180,7 @@ print(results.plot_model_performance_train())
 print(results.plot_model_performance_test())
 ```
 
-    (<matplotlib.figure.Figure object at 0x110011550>, <matplotlib.axes._subplots.AxesSubplot object at 0x10ffe30b8>)
+    (<matplotlib.figure.Figure object at 0x10f35a198>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f478748>)
 
 
 
