@@ -93,18 +93,22 @@ def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
 
 def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
     # run the classifier
-    clf = linear_model.LogisticRegression()
-    clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
+    X = y_pred[:, np.newaxis]
+    y = y_true
+    clf = linear_model.LogisticRegression(C=1e5)
+    clf.fit(X, y)
 
+    # and plot the result
     fig, ax = plt.subplots()
     ax.scatter(y_pred, y_true, color='black')
-    newx = np.arange(0, 1, 0.001)
+    ax.scatter(X.ravel(), y, color='black', zorder=20)
+    X_test = np.linspace(0, 1, 1000)
 
     def model(x):
         return 1 / (1 + np.exp(-x))
 
-    loss = model(newx * clf.coef_ + clf.intercept_).ravel()
-    ax.plot(newx, loss, color='black')
+    loss = model(X_test * clf.coef_ + clf.intercept_).ravel()
+    ax.plot(X_test, loss, color='black')
     ax.set_xlabel('Predicted y values')
     ax.set_ylabel('True y values')
     ax.set_xticks(np.arange(0, 1.05, 0.05))
