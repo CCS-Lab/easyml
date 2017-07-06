@@ -16,7 +16,7 @@ sns.set_style('whitegrid')
 
 def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
     bins = np.linspace(0, np.max(x), 30)
-    x_mean = np.mean(x)
+    x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
@@ -29,7 +29,7 @@ def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
 
 def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
-    x_mean = np.mean(x)
+    x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
@@ -44,7 +44,7 @@ def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
 
 def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
     bins = np.arange(0, 1.01, 0.01)
-    x_mean = np.mean(x)
+    x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
     ax.hist(x, bins=bins, color='black', edgecolor='black')
     ax.axvline(x=x_mean, color='black', linestyle='--')
