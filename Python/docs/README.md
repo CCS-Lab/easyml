@@ -15,13 +15,13 @@ sphinx-autobuild . _build
 
 Then go to http://127.0.0.1:8000/.
 
-To run notebooks:
+To run notebooks, execute the following from the `./Python/docs/vignettes` directory:
 
 ```bash
 jupyter notebook
 ```
 
-To build vignettes:
+To build vignettes, execute the following from the `./Python/docs/vignettes` directory:
 
 ```bash
 jupyter nbconvert cocaine.ipynb --to markdown
