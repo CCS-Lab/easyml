@@ -40,3 +40,5 @@ python setup.py install
 sphinx-build ./docs ./docs/_build
 sphinx-autobuild ./docs ./docs/_build
 ```
+
+Then go to http://127.0.0.1:8000/.

@@ -19,12 +19,12 @@ sns.set_style('whitegrid')
 
 class easy_glmnet(easy_analysis):
     """
-    To be edited.
+    Easily build and evaluate a penalized regression model.
 
-    To be edited.
+    This function wraps the easyml core framework, allowing a user
+    to easily run the easyml methodology for a glmnet model.
 
-    :param x: To be edited.
-    :return: To be edited.
+    Please see the core class `easy_analysis` for more details on arguments.
     """
     def __init__(self, data, dependent_variable,
                  algorithm='glmnet', family='gaussian',
@@ -52,12 +52,11 @@ class easy_glmnet(easy_analysis):
 
     def create_estimator(self):
         """
-        To be edited.
+        Create an estimator.
 
-        To be edited.
+        Creates an estimator depending on the family of regression.
 
-        :param x: To be edited.
-        :return: To be edited.
+        :return: A scikit-learn estimator.
         """
         if self.family == 'gaussian':
             estimator = ElasticNet(standardize=False, cut_point=0)
@@ -67,12 +66,10 @@ class easy_glmnet(easy_analysis):
 
     def extract_coefficients(self, estimator):
         """
-        To be edited.
+        Extract coefficients from a penalized regression model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :param estimator: An estimator that has been fit to data.
+        :return: An ndarray.
         """
         if self.family == 'gaussian':
             coefficient = estimator.coef_
@@ -82,12 +79,12 @@ class easy_glmnet(easy_analysis):
 
     def process_coefficients(self, coefficients, column_names, survival_rate_cutoff=0.05):
         """
-        To be edited.
+        Process coefficients for plotting.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :param coefficients: An ndarray.
+        :param column_names: A list of strings, the columns of the data.
+        :param survival_rate_cutoff: The cutoff for survival.
+        :return: An object of class pandas.DataFrame.
         """
         n = coefficients.shape[0]
         survived = 1 * (abs(coefficients) > 0)
@@ -107,12 +104,13 @@ class easy_glmnet(easy_analysis):
 
     def predict_model(self, model, X):
         """
-        To be edited.
+        Predict values from model.
 
-        To be edited.
+        Generates predictions from a model depending on the family of regression.
 
-        :param x: To be edited.
-        :return: To be edited.
+        :param model: The model to use for generating predictions.
+        :param X: The data to use for generating predictions.
+        :return: An ndarray.
         """
         if self.family == 'gaussian':
             predictions = model.predict(X)
@@ -123,12 +121,9 @@ class easy_glmnet(easy_analysis):
 
     def plot_coefficients(self):
         """
-        To be edited.
+        Plots the coefficients.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe.
         """
         n = self.coefficients.shape[1]
         coefficients_mean = np.mean(self.coefficients, axis=0)

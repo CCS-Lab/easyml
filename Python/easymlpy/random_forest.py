@@ -17,12 +17,13 @@ sns.set_style('whitegrid')
 
 class easy_random_forest(easy_analysis):
     """
-    To be edited.
+    Easily build and evaluate a random forest model.
 
-    To be edited.
+    This function wraps the easyml core framework, allowing a user
+    to easily run the easyml methodology for a
+    random forest model.
 
-    :param x: To be edited.
-    :return: To be edited.
+    Please see the core class `easy_analysis` for more details on arguments.
     """
     def __init__(self, data, dependent_variable,
                  algorithm='random_forest', family='gaussian',
@@ -50,12 +51,11 @@ class easy_random_forest(easy_analysis):
 
     def create_estimator(self):
         """
-        To be edited.
+        Create an estimator.
 
-        To be edited.
+        Creates an estimator depending on the family of regression.
 
-        :param x: To be edited.
-        :return: To be edited.
+        :return: A scikit-learn estimator.
         """
         if self.family == 'gaussian':
             estimator = RandomForestRegressor()
@@ -65,34 +65,30 @@ class easy_random_forest(easy_analysis):
 
     def extract_variable_importances(self, estimator):
         """
-        To be edited.
+        Extract variable importances from a random forest model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :param estimator: An estimator that has been fit to data.
+        :return: An ndarray.
         """
         return estimator.feature_importances_
 
     def process_variable_importances(self, variable_importances):
         """
-        To be edited.
+        Process variable importances for plotting.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         return variable_importances
 
     def predict_model(self, model, X):
         """
-        To be edited.
+        Predict values from model.
 
-        To be edited.
+        Generates predictions from a model depending on the family of regression.
 
-        :param x: To be edited.
-        :return: To be edited.
+        :param model: The model to use for generating predictions.
+        :param X: The data to use for generating predictions.
+        :return: An ndarray.
         """
         if self.family == 'gaussian':
             predictions = model.predict(X)
@@ -103,12 +99,9 @@ class easy_random_forest(easy_analysis):
 
     def plot_variable_importances(self):
         """
-        To be edited.
+        Plots the variable importances.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe.
         """
         n = self.variable_importances.shape[1]
         importances_mean = np.mean(self.variable_importances, axis=0)

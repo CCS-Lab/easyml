@@ -15,24 +15,32 @@ __all__ = ['resample_fold_train_test_split',
 
 def resample_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
     """
-    To be edited.
+    Train test split.
 
-    To be edited.
+    This will split the data into train and test.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param X: An ndarray, the data to be resampled.
+    :param y: An ndarray with two classes, 0 and 1.
+    :param train_size: A float; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+    :param foldid: Not currently supported in this function.
+    :param random_state: An integer; specifies the seed to be used for the analysis. Defaults to None.
+    :return: A tuple of arrays; the arrays X, y split into X_train, X_test, y_train, y_test.
     """
     return train_test_split(X, y, train_size=train_size, random_state=random_state)
 
 
 def resample_stratified_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
     """
-    To be edited.
-
-    To be edited.
-
-    :param x: To be edited.
-    :return: To be edited.
+    Sample in equal proportion.
+    
+    This will sample in equal proportion.
+    
+    :param X: An ndarray, the data to be resampled.
+    :param y: An ndarray with two classes, 0 and 1.
+    :param train_size: A float; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+    :param foldid: A vector with length equal to len(y) which identifies cases belonging to the same fold.
+    :param random_state: An integer; specifies the seed to be used for the analysis. Defaults to None.
+    :return: A tuple of arrays; the arrays X, y split into X_train, X_test, y_train, y_test.
     """
     unique_foldids = np.unique(foldid)
     for i, unique_foldid in enumerate(unique_foldids):
@@ -56,13 +64,17 @@ def resample_stratified_simple_train_test_split(X, y, train_size=0.667, foldid=N
 
 
 def resample_stratified_class_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
-    """Sample in equal proportion.
-
-    :param y: array, shape (n_obs) Input data to be split.
-    :param train_size: float, default: 0.667 Proportion to split into train and test.
-
-    :return: array, shape (n_obs) A boolean array of length n_obs where True represents .
-    that observation should be in the train set.
+    """
+    Sample in equal proportion.
+    
+    This will sample in equal proportion.
+    
+    :param X: An ndarray, the data to be resampled.
+    :param y: An ndarray with two classes, 0 and 1.
+    :param train_size: A float; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+    :param foldid: Not currently supported in this function.
+    :param random_state: An integer; specifies the seed to be used for the analysis. Defaults to None.
+    :return: A tuple of arrays; the arrays X, y split into X_train, X_test, y_train, y_test.
     """
 
     # calculate number of observations
@@ -104,12 +116,16 @@ def resample_stratified_class_train_test_split(X, y, train_size=0.667, foldid=No
 
 def resample_fold_train_test_split(X, y, foldid=None, train_size=0.667, random_state=None):
     """
-    To be edited.
-
-    To be edited.
-
-    :param x: To be edited.
-    :return: To be edited.
+    Sample with respect to an identification vector
+    
+    This will sample the training and test sets so that case identifiers (e.g. subject ID's) are not shared across training and test sets.
+    
+    :param X: An ndarray, the data to be resampled.
+    :param y: An ndarray with two classes, 0 and 1.
+    :param train_size: A float; specifies what proportion of the data should be used for the training data set. Defaults to 0.667.
+    :param foldid: A vector with length equal to len(y) which identifies cases belonging to the same fold.
+    :param random_state: An integer; specifies the seed to be used for the analysis. Defaults to None.
+    :return: A tuple of arrays; the arrays X, y split into X_train, X_test, y_train, y_test.
     """
     unique_foldids = np.unique(foldid)
     unique_foldids_train, _ = train_test_split(unique_foldids, train_size=train_size, random_state=random_state)

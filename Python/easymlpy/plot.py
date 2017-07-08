@@ -21,12 +21,13 @@ sns.set_style('whitegrid')
 
 def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
     """
-    To be edited.
+    Plot histogram of the mean squared error metrics.
 
-    To be edited.
+    This function plots a histogram of the mean squared error metrics.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param x: An ndarray, the mean squared error metrics to be plotted as a histogram.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     bins = np.linspace(0, np.max(x), 30)
     x_mean = round(np.mean(x), 2)
@@ -42,12 +43,13 @@ def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
 
 def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
     """
-    To be edited.
+    Plot histogram of the correlation coefficient metrics.
 
-    To be edited.
+    This function plots a histogram of the correlation coefficient metrics.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param x: An ndarray, the correlation coefficient metrics to be plotted as a histogram.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
@@ -65,12 +67,13 @@ def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
 
 def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
     """
-    To be edited.
+    Plot histogram of the coefficient of determination (R^2) metrics.
 
-    To be edited.
+    This function plots a histogram of the coefficient of determination (R^2) metrics.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param x: An ndarray, the coefficient of determination (R^2) metrics to be plotted as a histogram.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
@@ -89,12 +92,13 @@ def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
 
 def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
     """
-    To be edited.
+    Plot histogram of the area under the curve (AUC) metrics.
 
-    To be edited.
+    This function plots a histogram of the area under the curve (AUC) metrics.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param x: An ndarray, the area under the curve (AUC) metrics to be plotted as a histogram.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
@@ -111,12 +115,15 @@ def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
 
 def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
     """
-    To be edited.
+    Plot gaussian predictions.
 
-    To be edited.
+    Plots a scatter plot of the ground truth (correct) target values
+    and the estimated target values.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param y_true: Ground truth (correct) target values.
+    :param y_pred: Estimated target values.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     # run the classifier
     clf = linear_model.LinearRegression()
@@ -138,12 +145,15 @@ def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
 
 def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
     """
-    To be edited.
+    Plot binomial predictions.
 
-    To be edited.
+    Plots a logistic plot of the ground truth (correct) target values
+    and the estimated target values.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param y_true: Ground truth (correct) target values.
+    :param y_pred: Estimated target values.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     # run the classifier
     X = y_pred[:, np.newaxis]
@@ -176,12 +186,15 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
 
 def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
     """
-    To be edited.
+    Plot ROC Curve.
 
-    To be edited.
+    Given the ground truth (correct) target values and the estimated
+    target values will plot an ROC curve.
 
-    :param x: To be edited.
-    :return: To be edited.
+    :param y_true: Ground truth (correct) target values.
+    :param y_pred: Estimated target values.
+    :param subtitle: A string, whether one is plotting the 'Train' or 'Test' Dataset.
+    :return: Figure and axe objects.
     """
     auc_label = round(roc_auc_score(y_true, y_pred), 2)
     title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc_label, subtitle)

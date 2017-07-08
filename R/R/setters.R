@@ -263,7 +263,7 @@ set_plot_predictions <- function(algorithm, family) {
 #' Sets the function responsible for plotting the measures of model performance generated from the predictions generated from a fitted model.
 #'
 #' @param measure A function; the function for measuring the results. Defaults to NULL.
-#' @return TA function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.
+#' @return A function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.
 #' @family setters
 #' @export
 set_plot_model_performance <- function(measure) {

@@ -14,12 +14,9 @@ __all__ = ['easy_analysis']
 
 class easy_analysis:
     """
-    Foo.
+    The core recipe of easyml.
 
-    To be edited.
-
-    :param x: To be edited.
-    :return: To be edited.
+    This recipe is the workhorse behind all of the easy_* functions.
     """
     def __init__(self, data, dependent_variable,
                  algorithm=None, family='gaussian',
@@ -133,100 +130,57 @@ class easy_analysis:
 
     def create_estimator(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def extract_coefficients(self, estimator):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def process_coefficients(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def plot_coefficients_processed(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def extract_variable_importances(self, estimator):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def process_variable_importances(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def plot_variable_importances_processed(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def predict_model(self):
         """
-        To be edited.
-
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        See the subclass documentation for more information on this method.
         """
         raise NotImplementedError
 
     def generate_coefficients_(self):
         """
-        To be edited.
+        Generate coefficients for a model (if applicable).
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Create estimator
         estimator = self.create_estimator()
@@ -246,12 +200,9 @@ class easy_analysis:
 
     def generate_coefficients(self):
         """
-        To be edited.
+        Generate coefficients for a model (if applicable).
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Initialize progress bar (optional)
         if self.progress_bar:
@@ -282,12 +233,9 @@ class easy_analysis:
 
     def generate_variable_importances_(self):
         """
-        To be edited.
+        Generate variable importances for a model (if applicable).
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Create estimator
         estimator = self.create_estimator()
@@ -307,12 +255,9 @@ class easy_analysis:
 
     def generate_variable_importances(self):
         """
-        To be edited.
+        Generate variable importances for a model (if applicable).
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Initialize progress bar (optional)
         if self.progress_bar:
@@ -343,12 +288,9 @@ class easy_analysis:
 
     def generate_predictions_(self):
         """
-        To be edited.
+        Generate predictions for a model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Create estimator
         estimator = self.create_estimator()
@@ -369,12 +311,9 @@ class easy_analysis:
 
     def generate_predictions(self):
         """
-        To be edited.
+        Generate predictions for a model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Initialize progress bar (optional)
         if self.progress_bar:
@@ -407,12 +346,9 @@ class easy_analysis:
 
     def generate_model_performance_(self):
         """
-        To be edited.
+        Generate measures of model performance for a model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Split data
         X_train, X_test, y_train, y_test = self.resample(self.X, self.y)
@@ -458,12 +394,9 @@ class easy_analysis:
 
     def generate_model_performance(self):
         """
-        To be edited.
+        Generate measures of model performance for a model.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: An ndarray.
         """
         # Initialize progress bar (optional)
         if self.progress_bar:
@@ -499,92 +432,74 @@ class easy_analysis:
 
     def plot_predictions_single_train_test_split_train(self):
         """
-        To be edited.
+        Plot predictions.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
         y_train = self.y_train
         y_train_pred = np.mean(self.predictions_train, axis=0)
         if self.family == 'gaussian':
-            fig = plot.plot_predictions_gaussian(y_train, y_train_pred)
+            fig, ax = plot.plot_predictions_gaussian(y_train, y_train_pred)
         else:
-            fig = plot.plot_predictions_binomial(y_train, y_train_pred)
-        return fig
+            fig, ax = plot.plot_predictions_binomial(y_train, y_train_pred)
+        return fig, ax
 
     def plot_predictions_single_train_test_split_test(self):
         """
-        To be edited.
+        Plot predictions.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
         y_test = self.y_test
         y_test_pred = np.mean(self.predictions_test, axis=0)
         if self.family == 'gaussian':
-            fig = plot.plot_predictions_gaussian(y_test, y_test_pred, subtitle='Test')
+            fig, ax = plot.plot_predictions_gaussian(y_test, y_test_pred, subtitle='Test')
         else:
-            fig = plot.plot_predictions_binomial(y_test, y_test_pred, subtitle='Test')
-        return fig
+            fig, ax = plot.plot_predictions_binomial(y_test, y_test_pred, subtitle='Test')
+        return fig, ax
 
     def plot_roc_single_train_test_split_train(self):
         """
-        To be edited.
+        Plot ROC Curve.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
         y_train = self.y_train
         y_train_pred = np.mean(self.predictions_train, axis=0)
         if self.family == 'gaussian':
             raise NotImplementedError
         else:
-            fig = plot.plot_roc_single_train_test_split(y_train, y_train_pred)
-        return fig
+            fig, ax = plot.plot_roc_single_train_test_split(y_train, y_train_pred)
+        return fig, ax
 
     def plot_roc_single_train_test_split_test(self):
         """
-        To be edited.
+        Plot ROC Curve.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
         y_test = self.y_test
         y_test_pred = np.mean(self.predictions_test, axis=0)
         if self.family == 'gaussian':
             raise NotImplementedError
         else:
-            fig = plot.plot_roc_single_train_test_split(y_test, y_test_pred, subtitle='Test')
-        return fig
+            fig, ax = plot.plot_roc_single_train_test_split(y_test, y_test_pred, subtitle='Test')
+        return fig, ax
 
     def plot_model_performance_train(self):
         """
-        To be edited.
+        Plot model performance.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
-        fig = self.plot_model_performance(self.model_performance_train)
-        return fig
+        fig, ax = self.plot_model_performance(self.model_performance_train)
+        return fig, ax
 
     def plot_model_performance_test(self):
         """
-        To be edited.
+        Plot model performance.
 
-        To be edited.
-
-        :param x: To be edited.
-        :return: To be edited.
+        :return: Figure and axe objects.
         """
-        fig = self.plot_model_performance(self.model_performance_test, subtitle='Test')
-        return fig
+        fig, ax = self.plot_model_performance(self.model_performance_test, subtitle='Test')
+        return fig, ax
