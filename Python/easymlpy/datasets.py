@@ -10,6 +10,11 @@ __all__ = ['load_cocaine_dependence', 'load_prostate']
 
 
 def load_cocaine_dependence():
+    """
+    Loads the cocaine dependence dataset.
+
+    :return: A pandas.DataFrame.
+    """
     url = 'https://raw.githubusercontent.com/CCS-Lab/easyml/master/Python/datasets/cocaine_dependence.csv'
     s = requests.get(url).content
     dataset = pd.read_csv(io.StringIO(s.decode('utf-8')))
@@ -17,6 +22,11 @@ def load_cocaine_dependence():
 
 
 def load_prostate():
+    """
+    Loads the prostate cancer dataset.
+
+    :return: A pandas.DataFrame.
+    """
     url = 'https://raw.githubusercontent.com/CCS-Lab/easyml/master/Python/datasets/prostate.csv'
     s = requests.get(url).content
     dataset = pd.read_csv(io.StringIO(s.decode('utf-8')))
