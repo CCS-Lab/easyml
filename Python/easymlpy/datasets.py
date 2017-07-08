@@ -13,7 +13,7 @@ def load_cocaine_dependence():
     """
     Loads the cocaine dependence dataset.
 
-    :return: A pandas.DataFrame.
+    :return: An object of class pandas.DataFrame.
     """
     url = 'https://raw.githubusercontent.com/CCS-Lab/easyml/master/Python/datasets/cocaine_dependence.csv'
     s = requests.get(url).content
@@ -25,7 +25,7 @@ def load_prostate():
     """
     Loads the prostate cancer dataset.
 
-    :return: A pandas.DataFrame.
+    :return: An object of class pandas.DataFrame.
     """
     url = 'https://raw.githubusercontent.com/CCS-Lab/easyml/master/Python/datasets/prostate.csv'
     s = requests.get(url).content

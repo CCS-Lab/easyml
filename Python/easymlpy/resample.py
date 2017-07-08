@@ -7,15 +7,33 @@ from sklearn.model_selection import train_test_split
 from . import setters
 
 
-__all__ = []
-
+__all__ = ['resample_fold_train_test_split',
+           'resample_simple_train_test_split',
+           'resample_stratified_class_train_test_split',
+           'resample_stratified_simple_train_test_split']
 
 
 def resample_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     return train_test_split(X, y, train_size=train_size, random_state=random_state)
 
 
 def resample_stratified_simple_train_test_split(X, y, train_size=0.667, foldid=None, random_state=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     unique_foldids = np.unique(foldid)
     for i, unique_foldid in enumerate(unique_foldids):
         mask = foldid == unique_foldid
@@ -85,6 +103,14 @@ def resample_stratified_class_train_test_split(X, y, train_size=0.667, foldid=No
 
 
 def resample_fold_train_test_split(X, y, foldid=None, train_size=0.667, random_state=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     unique_foldids = np.unique(foldid)
     unique_foldids_train, _ = train_test_split(unique_foldids, train_size=train_size, random_state=random_state)
     mask = np.in1d(foldid, unique_foldids_train)

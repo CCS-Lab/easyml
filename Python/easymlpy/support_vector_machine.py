@@ -11,6 +11,14 @@ __all__ = ['easy_support_vector_machine']
 
 
 class easy_support_vector_machine(easy_analysis):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     def __init__(self, data, dependent_variable,
                  algorithm='support_vector_machine', family='gaussian',
                  resample=None, preprocess=preprocess_scale, measure=None,
@@ -36,6 +44,14 @@ class easy_support_vector_machine(easy_analysis):
                          model_args=model_args)
 
     def create_estimator(self):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             estimator = SVR()
         elif self.family == 'binomial':
@@ -43,6 +59,14 @@ class easy_support_vector_machine(easy_analysis):
         return estimator
 
     def predict_model(self, model, X):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             predictions = model.predict(X)
         elif self.family == 'binomial':

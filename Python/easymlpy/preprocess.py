@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 
-__all__ = []
+__all__ = ['preprocess_identity', 'preprocess_scale']
 
 
 def preprocess_identity(*data, categorical_variables=None):

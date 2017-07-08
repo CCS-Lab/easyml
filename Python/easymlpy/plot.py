@@ -8,13 +8,26 @@ from sklearn import linear_model
 from sklearn.metrics import auc, roc_auc_score, roc_curve
 
 
-__all__ = []
+__all__ = ['plot_predictions_binomial', 'plot_predictions_gaussian',
+           'plot_model_performance_binomial_area_under_curve',
+           'plot_model_performance_gaussian_cor_score',
+           'plot_model_performance_gaussian_mean_squared_error',
+           'plot_model_performance_gaussian_r2_score',
+           'plot_roc_single_train_test_split']
 
 # Settings
 sns.set_style('whitegrid')
 
 
 def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     bins = np.linspace(0, np.max(x), 30)
     x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
@@ -28,6 +41,14 @@ def plot_model_performance_gaussian_mean_squared_error(x, subtitle='Train'):
 
 
 def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
@@ -43,6 +64,14 @@ def plot_model_performance_gaussian_cor_score(x, subtitle='Train'):
 
 
 def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
@@ -59,6 +88,14 @@ def plot_model_performance_gaussian_r2_score(x, subtitle='Train'):
 
 
 def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     bins = np.arange(0, 1.01, 0.01)
     x_mean = round(np.mean(x), 2)
     fig, ax = plt.subplots()
@@ -73,6 +110,14 @@ def plot_model_performance_binomial_area_under_curve(x, subtitle='Train'):
 
 
 def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     # run the classifier
     clf = linear_model.LinearRegression()
     clf.fit(y_pred.reshape(-1, 1), y_true.reshape(-1, 1))
@@ -92,6 +137,14 @@ def plot_predictions_gaussian(y_true, y_pred, subtitle='Train'):
 
 
 def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     # run the classifier
     X = y_pred[:, np.newaxis]
     y = y_true
@@ -122,6 +175,14 @@ def plot_predictions_binomial(y_true, y_pred, subtitle='Train'):
 
 
 def plot_roc_single_train_test_split(y_true, y_pred, subtitle='Train'):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     auc_label = round(roc_auc_score(y_true, y_pred), 2)
     title = 'ROC Curve (AUC Score = {})\n{} Dataset'.format(auc_label, subtitle)
     Y_true = np.concatenate((np.expand_dims(1 - y_true, axis=1), np.expand_dims(y_true, axis=1)), axis=1)

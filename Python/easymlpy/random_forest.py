@@ -16,6 +16,14 @@ sns.set_style('whitegrid')
 
 
 class easy_random_forest(easy_analysis):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     def __init__(self, data, dependent_variable,
                  algorithm='random_forest', family='gaussian',
                  resample=None, preprocess=None, measure=None,
@@ -41,6 +49,14 @@ class easy_random_forest(easy_analysis):
                          model_args=model_args)
 
     def create_estimator(self):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             estimator = RandomForestRegressor()
         elif self.family == 'binomial':
@@ -48,12 +64,36 @@ class easy_random_forest(easy_analysis):
         return estimator
 
     def extract_variable_importances(self, estimator):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         return estimator.feature_importances_
 
     def process_variable_importances(self, variable_importances):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         return variable_importances
 
     def predict_model(self, model, X):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             predictions = model.predict(X)
         elif self.family == 'binomial':
@@ -62,6 +102,14 @@ class easy_random_forest(easy_analysis):
         return predictions
 
     def plot_variable_importances(self):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         n = self.variable_importances.shape[1]
         importances_mean = np.mean(self.variable_importances, axis=0)
         column_names = [v[1] for v in sorted(zip(importances_mean, self.column_names))]

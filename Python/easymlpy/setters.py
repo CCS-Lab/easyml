@@ -9,16 +9,36 @@ from . import plot as plt
 from . import resample as res
 
 
-__all__ = ['set_random_state']
+__all__ = ['set_random_state', 'set_parallel', 'set_resample',
+           'set_categorical_variables', 'set_column_names',
+           'set_dependent_variable', 'set_independent_variables',
+           'set_measure', 'set_plot_model_performance',
+           'set_plot_predictions', 'set_preprocess']
 
 
 def set_random_state(random_state=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if random_state:
         np.random.seed(random_state)
     return None
 
 
 def set_parallel(n_core):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     n_core = int(n_core)
     if n_core == 1:
         parallel = False
@@ -30,6 +50,14 @@ def set_parallel(n_core):
 
 
 def set_resample(resample=None, family=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if not resample:
         if family == 'gaussian':
             resample = res.resample_simple_train_test_split
@@ -41,12 +69,28 @@ def set_resample(resample=None, family=None):
 
 
 def set_preprocess(preprocess=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if not preprocess:
         preprocess = prep.preprocess_identity
     return preprocess
 
 
 def set_measure(measure=None, family=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if not measure:
         if family == 'gaussian':
             measure = meas.measure_cor_score
@@ -60,6 +104,14 @@ def set_measure(measure=None, family=None):
 def set_column_names(column_names, dependent_variable,
                      exclude_variables=None, preprocess=None,
                      categorical_variables=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     column_names = [c for c in column_names if c != dependent_variable]
     if exclude_variables:
         column_names = [c for c in column_names if c not in exclude_variables]
@@ -70,22 +122,54 @@ def set_column_names(column_names, dependent_variable,
 
 
 def set_categorical_variables(column_names, categorical_variables=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if categorical_variables:
         categorical_variables = np.in1d(column_names, categorical_variables)
     return categorical_variables
 
 
 def set_dependent_variable(data, dependent_variable):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     y = data[dependent_variable].values
     return y
 
 
 def set_independent_variables(data, dependent_variable):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     X = data.drop(dependent_variable, axis=1).values
     return X
 
 
 def set_plot_predictions(family=None):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if family == 'gaussian':
         plot_predictions = plt.plot_predictions_gaussian
     elif family == 'binomial':
@@ -96,6 +180,14 @@ def set_plot_predictions(family=None):
 
 
 def set_plot_model_performance(measure):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     if measure == meas.measure_mean_squared_error:
         plot_model_performance = plt.plot_model_performance_gaussian_mean_squared_error
     elif measure == meas.measure_cor_score:

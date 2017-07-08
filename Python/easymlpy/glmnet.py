@@ -18,6 +18,14 @@ sns.set_style('whitegrid')
 
 
 class easy_glmnet(easy_analysis):
+    """
+    To be edited.
+
+    To be edited.
+
+    :param x: To be edited.
+    :return: To be edited.
+    """
     def __init__(self, data, dependent_variable,
                  algorithm='glmnet', family='gaussian',
                  resample=None, preprocess=preprocess_scale, measure=None,
@@ -43,6 +51,14 @@ class easy_glmnet(easy_analysis):
                          model_args=model_args)
 
     def create_estimator(self):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             estimator = ElasticNet(standardize=False, cut_point=0)
         elif self.family == 'binomial':
@@ -50,6 +66,14 @@ class easy_glmnet(easy_analysis):
         return estimator
 
     def extract_coefficients(self, estimator):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             coefficient = estimator.coef_
         elif self.family == 'binomial':
@@ -57,6 +81,14 @@ class easy_glmnet(easy_analysis):
         return coefficient
 
     def process_coefficients(self, coefficients, column_names, survival_rate_cutoff=0.05):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         n = coefficients.shape[0]
         survived = 1 * (abs(coefficients) > 0)
         survival_rate = np.sum(survived, axis=0) / float(n)
@@ -74,6 +106,14 @@ class easy_glmnet(easy_analysis):
         return betas
 
     def predict_model(self, model, X):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         if self.family == 'gaussian':
             predictions = model.predict(X)
         elif self.family == 'binomial':
@@ -82,6 +122,14 @@ class easy_glmnet(easy_analysis):
         return predictions
 
     def plot_coefficients(self):
+        """
+        To be edited.
+
+        To be edited.
+
+        :param x: To be edited.
+        :return: To be edited.
+        """
         n = self.coefficients.shape[1]
         coefficients_mean = np.mean(self.coefficients, axis=0)
         column_names = [v[1] for v in sorted(zip(coefficients_mean, self.column_names))]
