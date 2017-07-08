@@ -1,7 +1,7 @@
 Documentation
 -------------
 
-To contribute, edit the *.md files within the docs folder. Then execute the following from within the easyml/Python/docs folder:
+To contribute, edit the *.md files within the docs folder. Then execute the following from within the `/Python/docs` folder:
 
 ```bash
 sphinx-build . _build
