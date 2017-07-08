@@ -55,7 +55,7 @@ Now let's assess the results of the `easy_random_forest` model.
 
 ### Estimates of variable importances
 
-TO BE EDITED.
+First, let's examine the estimates of the variable importances.
 
 ```{r message=FALSE}
 results$plot_variable_importances
@@ -92,4 +92,5 @@ results$plot_model_performance_test
 
 ## Discuss
 
-In this vignette we used `easyml` to easily build and evaluate a random forest model TO BE EDITED.
+In this vignette we used easyml to easily build and evaluate a random forest model using a Cocaine Dependence dataset.
+

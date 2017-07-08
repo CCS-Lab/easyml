@@ -13,6 +13,7 @@ Installation
 ------------
 
 You can install the latest development version from CRAN:
+
 ``` r
 install.packages("easyml")
 ```

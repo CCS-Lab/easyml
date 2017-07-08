@@ -89,14 +89,14 @@ Now let’s assess the results of the easy_random_forest model.
 
 ## Estimates of variable importances
 
-TO BE EDITED.
+First, let's examine the estimates of the variable importances.
 
 
 ```python
 print(results.plot_variable_importances())
 ```
 
-    (<matplotlib.figure.Figure object at 0x106d54588>, <matplotlib.axes._subplots.AxesSubplot object at 0x10c6d82e8>)
+    (<matplotlib.figure.Figure object at 0x106e5e4a8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10cdce4a8>)
 
 
 
@@ -112,7 +112,7 @@ We can examine both the in-sample and out-of-sample ROC curve plots for one part
 print(results.plot_predictions_single_train_test_split_train())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10c5362e8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f165630>)
+    (<matplotlib.figure.Figure object at 0x10f9751d0>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f9634e0>)
 
 
 
@@ -124,7 +124,7 @@ print(results.plot_predictions_single_train_test_split_train())
 print(results.plot_predictions_single_train_test_split_test())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10f32bb70>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f2566d8>)
+    (<matplotlib.figure.Figure object at 0x10fc115c0>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fa56c88>)
 
 
 
@@ -140,7 +140,7 @@ We can examine both the in-sample and out-of-sample ROC curve plots for one part
 print(results.plot_roc_single_train_test_split_train())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10f305860>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f26f828>)
+    (<matplotlib.figure.Figure object at 0x10fc39b38>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fd9c6a0>)
 
 
 
@@ -152,7 +152,7 @@ print(results.plot_roc_single_train_test_split_train())
 print(results.plot_roc_single_train_test_split_test())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10f48f0b8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f4b6e10>)
+    (<matplotlib.figure.Figure object at 0x11000a7b8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10fdc0c18>)
 
 
 
@@ -168,7 +168,7 @@ We can examine both the in-sample and out-of-sample AUC metrics for n_divisions 
 print(results.plot_model_performance_train())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10f5fcb00>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f746978>)
+    (<matplotlib.figure.Figure object at 0x11019aba8>, <matplotlib.axes._subplots.AxesSubplot object at 0x110020ba8>)
 
 
 
@@ -180,7 +180,7 @@ print(results.plot_model_performance_train())
 print(results.plot_model_performance_test())
 ```
 
-    (<matplotlib.figure.Figure object at 0x10f35a198>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f478748>)
+    (<matplotlib.figure.Figure object at 0x10fda66d8>, <matplotlib.axes._subplots.AxesSubplot object at 0x10f7e8518>)
 
 
 
@@ -189,7 +189,7 @@ print(results.plot_model_performance_test())
 
 ## Discuss
 
-In this vignette we used easyml to easily build and evaluate a random forest model TO BE EDITED.
+In this vignette we used easyml to easily build and evaluate a random forest model using a Cocaine Dependence dataset.
 
 
 
