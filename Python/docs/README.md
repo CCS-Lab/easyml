@@ -28,3 +28,15 @@ jupyter nbconvert cocaine.ipynb --to markdown
 jupyter nbconvert prostate.ipynb --to markdown
 jupyter nbconvert titanic.ipynb --to markdown
 ```
+
+Workflow for updating documenation:
+
+1) Make any changes to the Python docstrings.
+2) Then execute the following from the `./Python` directory:
+
+```bash
+pip uninstall easymlpy -y
+python setup.py install
+sphinx-build ./docs ./docs/_build
+sphinx-autobuild ./docs ./docs/_build
+```
