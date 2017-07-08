@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='easymlpy',
-    version='0.1.1',
+    version='0.1.2',
     description='A Python toolkit for easily building and evaluating machine learning models.',
     url='https://github.com/CCS-Lab/easyml',
     author='OSU CCSL',
