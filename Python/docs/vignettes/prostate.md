@@ -21,6 +21,10 @@ from easymlpy import support_vector_machine
 %matplotlib inline
 ```
 
+    /Users/paulhendricks/miniconda3/envs/easyml/lib/python3.5/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+      "This module will be removed in 0.20.", DeprecationWarning)
+
+
 
 ```python
 prostate = load_prostate()
@@ -64,6 +68,90 @@ results = support_vector_machine.easy_support_vector_machine(prostate, 'lpsa',
 ## Assess results
 
 Now let’s assess the results of the `easy_support_vector_machine` model.
+
+### Predictions: ROC Curve
+
+We can examine both the in-sample and out-of-sample ROC curve plots for one particular trian-test split determined by the random state and determine the Area Under the Curve (AUC) as a goodness of fit metric. Here, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.
+
+
+```python
+results.plot_predictions_single_train_test_split_train()
+```
+
+    /Users/paulhendricks/miniconda3/envs/easyml/lib/python3.5/site-packages/scipy/linalg/basic.py:884: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to 'gelss' driver.
+      warnings.warn(mesg, RuntimeWarning)
+
+
+
+
+
+    (<matplotlib.figure.Figure at 0x10bfbab70>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10c586ac8>)
+
+
+
+
+![png](prostate_files/prostate_6_2.png)
+
+
+
+```python
+results.plot_predictions_single_train_test_split_test()
+```
+
+
+
+
+    (<matplotlib.figure.Figure at 0x10832e7b8>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f0e8198>)
+
+
+
+
+![png](prostate_files/prostate_7_1.png)
+
+
+### Metrics: AUC
+
+We can examine both the in-sample and out-of-sample AUC metrics for `n_divisions` train-test splits (ususally defaults to 1,000). Again, we see that the in-sample AUC is higher than the out-of-sample AUC, but that both metrics indicate the model fits relatively well.
+
+
+```python
+results.plot_model_performance_train()
+```
+
+
+
+
+    (<matplotlib.figure.Figure at 0x10f1a2cf8>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f226438>)
+
+
+
+
+![png](prostate_files/prostate_9_1.png)
+
+
+
+```python
+results.plot_model_performance_test()
+```
+
+
+
+
+    (<matplotlib.figure.Figure at 0x10f4fae10>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f4eeba8>)
+
+
+
+
+![png](prostate_files/prostate_10_1.png)
+
+
+## Discuss
+
+In this vignette we used `easyml` to easily build and evaluate a support vector machine model using a Prostate Cancer dataset. 
 
 
 ```python

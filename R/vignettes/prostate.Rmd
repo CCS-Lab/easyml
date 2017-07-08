@@ -15,7 +15,7 @@ In this vignette, we demonstrate the power of `easyml` using a Prostate Cancer d
 
 ## Load the data
 
-First we load our libraries and the Prostate dataset. 
+First we load our libraries and the Prostate Cancer dataset. 
 
 ```{r}
 library(easyml)
@@ -69,4 +69,4 @@ results$plot_model_performance_test
 
 ## Discuss
 
-In this vignette we used `easyml` to easily build and evaluate a support vector machine model TO BE EDITED.
+In this vignette we used `easyml` to easily build and evaluate a support vector machine model using a Prostate Cancer dataset. 
