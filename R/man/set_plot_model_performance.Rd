@@ -10,7 +10,7 @@ set_plot_model_performance(measure)
 \item{measure}{A function; the function for measuring the results. Defaults to NULL.}
 }
 \value{
-TA function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.
+A function; the function for plotting the measures of model performance generated from the predictions generated from a fitted model.
 }
 \description{
 Sets the function responsible for plotting the measures of model performance generated from the predictions generated from a fitted model.
