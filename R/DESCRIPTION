@@ -1,5 +1,5 @@
 Package: easyml
-Version: 0.1.0
+Version: 0.1.1
 Title: Easily Build and Evaluate Machine Learning Models
 Description: Easily build and evaluate machine learning models on a dataset. Machine 
     learning models supported include penalized linear models, penalized linear models 
