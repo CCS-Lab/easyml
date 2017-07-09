@@ -76,7 +76,7 @@
 <a href="#load-the-data" class="anchor"></a>Load the data</h2>
 <p>Install the <code>titanic</code> package from CRAN. This package contains datasets providing information on the fate of passengers on the fatal maiden voyage of the ocean liner “Titanic”, with variables such as economic status (class), sex, age and survival. These data sets are often used as an introduction to machine learning on <a href="https://www.kaggle.com/c/titanic">Kaggle</a>. More details about the dataset can be found there.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(easyml)</code></pre></div>
-<pre><code>## Loaded easyml 0.1.0. Also loading ggplot2.</code></pre>
+<pre><code>## Loaded easyml 0.1.1. Also loading ggplot2.</code></pre>
 <pre><code>## Loading required namespace: ggplot2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(titanic)
 <span class="kw">library</span>(dplyr)</code></pre></div>
@@ -208,14 +208,14 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(titanic_train)
 <li>Impute mean values of age where <code>Age</code> is <code>NA</code>.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titanic_train_2 &lt;-<span class="st"> </span>titanic_train %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(!<span class="kw">is.na</span>(Embarked), Embarked !=<span class="st"> ""</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Family_Size =</span> SibSp +<span class="st"> </span>Parch +<span class="st"> </span>1L) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Pclass =</span> <span class="kw">as.character</span>(Pclass)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Pclass_3 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "3"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Sex =</span> <span class="dv">1</span> *<span class="st"> </span>(Sex ==<span class="st"> "male"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Embarked_Q =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "Q"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Embarked_S =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "S"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Age =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Age), <span class="kw">mean</span>(Age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), Age))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!<span class="kw">is.na</span>(Embarked), Embarked !=<span class="st"> ""</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Family_Size =</span> SibSp +<span class="st"> </span>Parch +<span class="st"> </span>1L) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Pclass =</span> <span class="kw">as.character</span>(Pclass)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Pclass_3 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "3"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Sex =</span> <span class="dv">1</span> *<span class="st"> </span>(Sex ==<span class="st"> "male"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Embarked_Q =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "Q"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Embarked_S =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "S"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Age =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Age), <span class="kw">mean</span>(Age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), Age))</code></pre></div>
 </div>
 <div id="train-a-penalized-logistic-model" class="section level2">
 <h2 class="hasAnchor">
@@ -265,7 +265,7 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eas
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_coefficients</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$coefficients_processed
-knitr::<span class="kw">kable</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(output, <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/desc">desc</a></span>(mean)), <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw"><a href="http://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(output, <span class="kw"><a href="http://dplyr.tidyverse.org/reference/desc.html">desc</a></span>(mean)), <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">predictor</th>
