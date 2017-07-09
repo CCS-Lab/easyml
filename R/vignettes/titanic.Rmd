@@ -87,19 +87,18 @@ Now let's assess the results of the `easy_glmnet` model.
 
 We can interpret the weights in the following way:
 
-* A 1 standard deviation increase in `Fare` increases the log-odds of survival by 0.14 units, 
-* A 1 standard deviation increase in `Age` decreases the log-odds of survival by 0.47 units, 
-* If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.40 units, 
-* If a passenger is third class, the log-odds of survival decrease by 1.98 units, 
-* If a passenger is second class, the log-odds of survival decrease by 0.77 units, 
-* For every unit increase in a passenger's family size, the log-odds of survival decrease by 0.10 units, 
-* For every additional Sibling or Spouse in a passenger's family, the log-odds of survival decrease by 0.21 units, 
-* If a passenger is male, the log-odds of survival decrease by 2.64 units. 
+* A 1 standard deviation increase in `Fare` increases the log-odds of survival by 0.25 units, 
+* For every unit increase in a passenger's family size, the log-odds of survival decrease by 0.09 units, 
+* For every additional Sibling or Spouse in a passenger's family, the log-odds of survival decrease by 0.17 units, 
+* A 1 standard deviation increase in `Age` decreases the log-odds of survival by 0.37 units, 
+* If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.47 units, 
+* If a passenger is third class, the log-odds of survival decrease by 1.44 units, 
+* If a passenger is male, the log-odds of survival decrease by 2.53 units. 
 
 ```{r message=FALSE}
 results$plot_coefficients
 output <- results$coefficients_processed
-knitr::kable(output[nrow(output):1, ], digits  = 2)
+knitr::kable(arrange(output, desc(mean)), digits  = 2)
 ```
 
 ### Predictions: ROC Curve

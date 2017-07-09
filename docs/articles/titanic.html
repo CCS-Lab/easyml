@@ -208,14 +208,14 @@ knitr::<span class="kw">kable</span>(<span class="kw">head</span>(titanic_train)
 <li>Impute mean values of age where <code>Age</code> is <code>NA</code>.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titanic_train_2 &lt;-<span class="st"> </span>titanic_train %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!<span class="kw">is.na</span>(Embarked), Embarked !=<span class="st"> ""</span>) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Family_Size =</span> SibSp +<span class="st"> </span>Parch +<span class="st"> </span>1L) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Pclass =</span> <span class="kw">as.character</span>(Pclass)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Pclass_3 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "3"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Sex =</span> <span class="dv">1</span> *<span class="st"> </span>(Sex ==<span class="st"> "male"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Embarked_Q =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "Q"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Embarked_S =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "S"</span>)) %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Age =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Age), <span class="kw">mean</span>(Age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), Age))</code></pre></div>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/filter">filter</a></span>(!<span class="kw">is.na</span>(Embarked), Embarked !=<span class="st"> ""</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Family_Size =</span> SibSp +<span class="st"> </span>Parch +<span class="st"> </span>1L) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Pclass =</span> <span class="kw">as.character</span>(Pclass)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Pclass_3 =</span> <span class="dv">1</span> *<span class="st"> </span>(Pclass ==<span class="st"> "3"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Sex =</span> <span class="dv">1</span> *<span class="st"> </span>(Sex ==<span class="st"> "male"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Embarked_Q =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "Q"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Embarked_S =</span> <span class="dv">1</span> *<span class="st"> </span>(Embarked ==<span class="st"> "S"</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/mutate">mutate</a></span>(<span class="dt">Age =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Age), <span class="kw">mean</span>(Age, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), Age))</code></pre></div>
 </div>
 <div id="train-a-penalized-logistic-model" class="section level2">
 <h2 class="hasAnchor">
@@ -254,22 +254,20 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/eas
 <a href="#estimates-of-weights" class="anchor"></a>Estimates of weights</h3>
 <p>We can interpret the weights in the following way:</p>
 <ul>
-<li>A 1 standard deviation increase in <code>Fare</code> increases the log-odds of survival by 0.14 units,</li>
-<li>A 1 standard deviation increase in <code>Age</code> decreases the log-odds of survival by 0.47 units,</li>
-<li>If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.40 units,</li>
-<li>If a passenger is third class, the log-odds of survival decrease by 1.98 units,</li>
-<li>If a passenger is second class, the log-odds of survival decrease by 0.77 units,</li>
-<li>For every unit increase in a passenger’s family size, the log-odds of survival decrease by 0.10 units,</li>
-<li>For every additional Sibling or Spouse in a passenger’s family, the log-odds of survival decrease by 0.21 units,</li>
-<li>If a passenger is male, the log-odds of survival decrease by 2.64 units.</li>
+<li>A 1 standard deviation increase in <code>Fare</code> increases the log-odds of survival by 0.25 units,</li>
+<li>For every unit increase in a passenger’s family size, the log-odds of survival decrease by 0.09 units,</li>
+<li>For every additional Sibling or Spouse in a passenger’s family, the log-odds of survival decrease by 0.17 units,</li>
+<li>A 1 standard deviation increase in <code>Age</code> decreases the log-odds of survival by 0.37 units,</li>
+<li>If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.47 units,</li>
+<li>If a passenger is third class, the log-odds of survival decrease by 1.44 units,</li>
+<li>If a passenger is male, the log-odds of survival decrease by 2.53 units.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results$plot_coefficients</code></pre></div>
 <p><img src="titanic_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>results$coefficients_processed
-knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output):<span class="dv">1</span>, ], <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
+knitr::<span class="kw">kable</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/arrange">arrange</a></span>(output, <span class="kw"><a href="http://www.rdocumentation.org/packages/dplyr/topics/desc">desc</a></span>(mean)), <span class="dt">digits  =</span> <span class="dv">2</span>)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
-<th></th>
 <th align="left">predictor</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
@@ -283,7 +281,6 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>9</td>
 <td align="left">Fare</td>
 <td align="right">0.25</td>
 <td align="right">0.01</td>
@@ -296,33 +293,18 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="left">2</td>
 </tr>
 <tr class="even">
-<td>8</td>
-<td align="left">Age</td>
-<td align="right">-0.37</td>
-<td align="right">0.01</td>
-<td align="right">-0.39</td>
-<td align="right">-0.35</td>
+<td align="left">Parch</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">2</td>
+<td align="left">0</td>
 </tr>
 <tr class="odd">
-<td>7</td>
-<td align="left">Embarked_S</td>
-<td align="right">-0.47</td>
-<td align="right">0.01</td>
-<td align="right">-0.50</td>
-<td align="right">-0.45</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">2</td>
-</tr>
-<tr class="even">
-<td>6</td>
 <td align="left">Embarked_Q</td>
 <td align="right">0.00</td>
 <td align="right">0.01</td>
@@ -334,21 +316,7 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="right">2</td>
 <td align="left">2</td>
 </tr>
-<tr class="odd">
-<td>5</td>
-<td align="left">Pclass_3</td>
-<td align="right">-1.44</td>
-<td align="right">0.02</td>
-<td align="right">-1.47</td>
-<td align="right">-1.41</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">2</td>
-</tr>
 <tr class="even">
-<td>4</td>
 <td align="left">Family_Size</td>
 <td align="right">-0.09</td>
 <td align="right">0.01</td>
@@ -361,20 +329,6 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="left">2</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td align="left">Parch</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="left">0</td>
-</tr>
-<tr class="even">
-<td>2</td>
 <td align="left">SibSp</td>
 <td align="right">-0.17</td>
 <td align="right">0.01</td>
@@ -386,8 +340,43 @@ knitr::<span class="kw">kable</span>(output[<span class="kw">nrow</span>(output)
 <td align="right">2</td>
 <td align="left">2</td>
 </tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="right">-0.37</td>
+<td align="right">0.01</td>
+<td align="right">-0.39</td>
+<td align="right">-0.35</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">2</td>
+</tr>
 <tr class="odd">
-<td>1</td>
+<td align="left">Embarked_S</td>
+<td align="right">-0.47</td>
+<td align="right">0.01</td>
+<td align="right">-0.50</td>
+<td align="right">-0.45</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">Pclass_3</td>
+<td align="right">-1.44</td>
+<td align="right">0.02</td>
+<td align="right">-1.47</td>
+<td align="right">-1.41</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
 <td align="left">Sex</td>
 <td align="right">-2.53</td>
 <td align="right">0.03</td>

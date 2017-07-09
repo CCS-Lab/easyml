@@ -135,15 +135,13 @@ Now let's assess the results of the `easy_glmnet` model.
 
 We can interpret the weights in the following way:
 
-* A 1 standard deviation increase in `Fare` increases the log-odds of survival by 0.14 units, 
-* A 1 standard deviation increase in `Age` decreases the log-odds of survival by 0.47 units, 
-* If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.40 units, 
-* If a passenger is third class, the log-odds of survival decrease by 1.98 units, 
-* If a passenger is second class, the log-odds of survival decrease by 0.77 units, 
+* A 1 standard deviation increase in `Fare` increases the log-odds of survival by 0.29 units, 
 * For every unit increase in a passenger's family size, the log-odds of survival decrease by 0.10 units, 
-* For every additional Sibling or Spouse in a passenger's family, the log-odds of survival decrease by 0.21 units, 
-* If a passenger is male, the log-odds of survival decrease by 2.64 units. 
-
+* For every additional Sibling or Spouse in a passenger's family, the log-odds of survival decrease by 0.16 units, 
+* A 1 standard deviation increase in `Age` decreases the log-odds of survival by 0.37 units, 
+* If a passenger embarked at the Southampton port, the log-odds of survival decrease by 0.42 units, 
+* If a passenger is third class, the log-odds of survival decrease by 1.38 units, 
+* If a passenger is male, the log-odds of survival decrease by 2.52 units. 
 
 
 ```python
@@ -153,13 +151,152 @@ results.plot_coefficients()
 
 
 
-    (<matplotlib.figure.Figure at 0x10834c710>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10c845668>)
+    (<matplotlib.figure.Figure at 0x10834bb70>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x106d5e470>)
 
 
 
 
 ![png](titanic_files/titanic_9_1.png)
+
+
+
+```python
+results.coefficients_processed.sort_values('mean', ascending=False).reset_index(drop=True)
+```
+
+
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>predictor</th>
+      <th>mean</th>
+      <th>lb</th>
+      <th>ub</th>
+      <th>survival</th>
+      <th>sig</th>
+      <th>dotColor1</th>
+      <th>dotColor2</th>
+      <th>dotColor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fare</td>
+      <td>0.291336</td>
+      <td>0.291336</td>
+      <td>0.291336</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Parch</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Embarked_Q</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Family_Size</td>
+      <td>-0.122401</td>
+      <td>-0.122401</td>
+      <td>-0.122401</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SibSp</td>
+      <td>-0.160099</td>
+      <td>-0.160099</td>
+      <td>-0.160099</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Age</td>
+      <td>-0.379844</td>
+      <td>-0.379844</td>
+      <td>-0.379844</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Embarked_S</td>
+      <td>-0.423379</td>
+      <td>-0.423379</td>
+      <td>-0.423379</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Pclass_3</td>
+      <td>-1.384741</td>
+      <td>-1.384741</td>
+      <td>-1.384741</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Sex</td>
+      <td>-2.522490</td>
+      <td>-2.522490</td>
+      <td>-2.522490</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 
 ### Predictions: ROC Curve
@@ -175,13 +312,13 @@ results.plot_predictions_single_train_test_split_train()
 
 
 
-    (<matplotlib.figure.Figure at 0x109b9f940>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10eff20f0>)
+    (<matplotlib.figure.Figure at 0x10f255710>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f287a90>)
 
 
 
 
-![png](titanic_files/titanic_11_1.png)
+![png](titanic_files/titanic_12_1.png)
 
 
 
@@ -192,13 +329,13 @@ results.plot_predictions_single_train_test_split_test()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f0f5e80>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f0ea8d0>)
+    (<matplotlib.figure.Figure at 0x10f2512e8>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f02e5f8>)
 
 
 
 
-![png](titanic_files/titanic_12_1.png)
+![png](titanic_files/titanic_13_1.png)
 
 
 ### Metrics: AUC
@@ -213,13 +350,13 @@ results.plot_model_performance_train()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f673b38>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f53b2b0>)
+    (<matplotlib.figure.Figure at 0x10f581a90>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f4263c8>)
 
 
 
 
-![png](titanic_files/titanic_14_1.png)
+![png](titanic_files/titanic_15_1.png)
 
 
 
@@ -230,20 +367,15 @@ results.plot_model_performance_test()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f8fcc88>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f8f40b8>)
+    (<matplotlib.figure.Figure at 0x10f3edda0>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f905d68>)
 
 
 
 
-![png](titanic_files/titanic_15_1.png)
+![png](titanic_files/titanic_16_1.png)
 
 
 ## Discuss
 
 In this vignette we used `easyml` to easily build and evaluate a penalized binomial regression model to assess the likelihood of passenger surival given a number of attributes. We can continue to finetune the model and identify the most optimal alpha/lambda hyperparameter combination; however, our estimates of the weights make intutive sense and a mean out-of-sample AUC of 0.85 right off the bat is indicative of a good model. 
-
-
-```python
-
-```
