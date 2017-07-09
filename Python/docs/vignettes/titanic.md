@@ -113,7 +113,7 @@ results = easy_glmnet(titanic_train_2, 'Survived',
                       family = 'binomial',
                       exclude_variables = exclude_variables,
                       categorical_variables = categorical_variables,
-                      random_state = 12345, progress_bar = False,
+                      random_state = 43210, progress_bar = False,
                       n_samples = 10, n_divisions = 10,
                       n_iterations = 2, n_core = 1)
 ```
@@ -153,8 +153,8 @@ results.plot_coefficients()
 
 
 
-    (<matplotlib.figure.Figure at 0x108236b70>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x102f2a208>)
+    (<matplotlib.figure.Figure at 0x10834c710>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10c845668>)
 
 
 
@@ -175,8 +175,8 @@ results.plot_predictions_single_train_test_split_train()
 
 
 
-    (<matplotlib.figure.Figure at 0x107e66a90>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f1047f0>)
+    (<matplotlib.figure.Figure at 0x109b9f940>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10eff20f0>)
 
 
 
@@ -192,8 +192,8 @@ results.plot_predictions_single_train_test_split_test()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f2cbb70>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f2b9eb8>)
+    (<matplotlib.figure.Figure at 0x10f0f5e80>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f0ea8d0>)
 
 
 
@@ -213,8 +213,8 @@ results.plot_model_performance_train()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f57b7b8>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f140240>)
+    (<matplotlib.figure.Figure at 0x10f673b38>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f53b2b0>)
 
 
 
@@ -230,8 +230,8 @@ results.plot_model_performance_test()
 
 
 
-    (<matplotlib.figure.Figure at 0x10f93ee48>,
-     <matplotlib.axes._subplots.AxesSubplot at 0x10f909128>)
+    (<matplotlib.figure.Figure at 0x10f8fcc88>,
+     <matplotlib.axes._subplots.AxesSubplot at 0x10f8f40b8>)
 
 
 
