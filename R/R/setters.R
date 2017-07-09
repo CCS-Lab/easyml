@@ -152,7 +152,7 @@ set_categorical_variables <- function(column_names, categorical_variables = NULL
 #' @family setters
 #' @export
 set_dependent_variable <- function(.data, dependent_variable) {
-  y <- as.vector(.data[, dependent_variable, drop = TRUE])
+  y <- .data[, dependent_variable, drop = TRUE]
   y
 }
 

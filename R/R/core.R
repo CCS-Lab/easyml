@@ -238,8 +238,23 @@ easy_analysis <- function(.data, dependent_variable, algorithm,
   .data <- remove_variables(.data, exclude_variables)
   object[["data"]] <- .data
   
-  # Set and capture dependent variable
+  # Set dependent variable
   y <- set_dependent_variable(.data, dependent_variable)
+  
+  # Process dependent variable
+  if (family == "binomial") {
+    # Check that dependent variable has two classes
+    if (length(unique(y)) != 2) {
+      stop("Error! Dependent variable must have two classes!")
+    }
+    
+    # Check if dependent variable is a factor 
+    if (is.factor(y)) {
+      y <- as.numeric(y) - 1
+    }
+  }
+  
+  # Capture dependent variable
   object[["y"]] <- y
   
   # Set and capture independent variables
