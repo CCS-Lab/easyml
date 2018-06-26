@@ -16,7 +16,6 @@ Depends:
 Imports:
     caret, 
     corrplot, 
-    darch, 
     dummies, 
     e1071, 
     futile.logger, 
