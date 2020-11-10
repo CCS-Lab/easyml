@@ -59,7 +59,7 @@ predict_model <- function(object, newx = NULL) {
 #'
 #' @param .data A data.frame; the data to be analyzed.
 #' @param dependent_variable A character vector of length one; the dependent variable for this analysis.
-#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are currently one of c("deep_neural_network", "glinternet", "glmnet", "neural_network", "random_forest", "support_vector_machine").
+#' @param algorithm A character vector of length one; the algorithm to run on the data. Choices are currently one of c("glinternet", "glmnet", "neural_network", "random_forest", "support_vector_machine").
 #' @param family A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".
 #' @param resample A function; the function for resampling the data. Defaults to NULL.
 #' @param preprocess A function; the function for preprocessing the data. Defaults to NULL.

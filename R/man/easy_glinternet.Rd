@@ -92,7 +92,6 @@ results <- easy_glinternet(cocaine_dependence, "diagnosis",
 \seealso{
 Other recipes: \code{\link{easy_analysis}},
   \code{\link{easy_avNNet}},
-  \code{\link{easy_deep_neural_network}},
   \code{\link{easy_glmnet}},
   \code{\link{easy_neural_network}},
   \code{\link{easy_random_forest}},

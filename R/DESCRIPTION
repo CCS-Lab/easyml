@@ -3,8 +3,7 @@ Version: 0.1.1
 Title: Easily Build and Evaluate Machine Learning Models
 Description: Easily build and evaluate machine learning models on a dataset. Machine 
     learning models supported include penalized linear models, penalized linear models 
-    with interactions, random forest, support vector machines, neural networks, 
-    and deep neural networks.
+    with interactions, random forest, support vector machines, and neural networks.
 Authors@R: c(
   person("Woo-Young", "Ahn", , "ahn.280@osu.edu", c("aut", "cre")),
   person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", "aut"),
@@ -29,7 +28,6 @@ Imports:
     nnet, 
     randomForest, 
     scales, 
-    scorer
 Suggests:
     covr, 
     lintr, 
