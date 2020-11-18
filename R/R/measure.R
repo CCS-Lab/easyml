@@ -8,8 +8,9 @@
 #' @return A numeric vector of length one; the mean squared error metric.
 #' @family measure
 #' @export
-measure_mse_score <- scorer::mean_squared_error
-
+measure_mse_score <- function(y_true, y_pred) {
+  (y_true - y_pred) ^ 2
+}
 #' Measure Coefficient of Determination (R^2 Score).
 #' 
 #' Given the ground truth (correct) target values and the estimated target 

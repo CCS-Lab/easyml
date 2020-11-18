@@ -18,7 +18,7 @@ easy_analysis(.data, dependent_variable, algorithm, family = "gaussian",
 
 \item{dependent_variable}{A character vector of length one; the dependent variable for this analysis.}
 
-\item{algorithm}{A character vector of length one; the algorithm to run on the data. Choices are currently one of c("deep_neural_network", "glinternet", "glmnet", "neural_network", "random_forest", "support_vector_machine").}
+\item{algorithm}{A character vector of length one; the algorithm to run on the data. Choices are currently one of c("glinternet", "glmnet", "neural_network", "random_forest", "support_vector_machine").}
 
 \item{family}{A character vector of length one; the type of regression to run on the data. Choices are one of c("gaussian", "binomial"). Defaults to "gaussian".}
 
@@ -116,7 +116,6 @@ This recipe is the workhorse behind all of the easy_* functions.
 }
 \seealso{
 Other recipes: \code{\link{easy_avNNet}},
-  \code{\link{easy_deep_neural_network}},
   \code{\link{easy_glinternet}}, \code{\link{easy_glmnet}},
   \code{\link{easy_neural_network}},
   \code{\link{easy_random_forest}},
