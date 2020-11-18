@@ -1,3 +1,9 @@
+# easyml 0.1.2
+
+## Improvements
+
+* Removed codes related to some outdated library (darch, scorer).
+
 # easyml 0.1.0
 
 ## Improvements
