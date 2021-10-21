@@ -1,7 +1,7 @@
 alabaster==0.7.9
 argh==0.26.2
 awscli==1.11.54
-Babel==2.3.4
+Babel==2.9.1
 botocore==1.5.17
 colorama==0.3.7
 CommonMark==0.5.4
