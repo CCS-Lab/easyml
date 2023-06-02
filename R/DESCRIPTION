@@ -5,7 +5,7 @@ Description: Easily build and evaluate machine learning models on a dataset. Mac
     learning models supported include penalized linear models, penalized linear models 
     with interactions, random forest, support vector machines, and neural networks.
 Authors@R: c(
-  person("Woo-Young", "Ahn", , "ahn.280@osu.edu", c("aut", "cre")),
+  person("Woo-Young", "Ahn", , "wahn55@snu.ac.kr", c("aut", "cre")),
   person("Paul", "Hendricks", , "paul.hendricks.2013@owu.edu", "aut"),
   person("OSU-CCSL", role = "cph"))
 License: MIT + file LICENSE
@@ -15,7 +15,6 @@ Depends:
 Imports:
     caret, 
     corrplot, 
-    dummies, 
     e1071, 
     futile.logger, 
     ggplot2, 

@@ -19,7 +19,18 @@ fit_model.easy_neural_network <- function(object) {
     Y <- y
     model_args[["linout"]] <- TRUE
   } else if (family == "binomial") {
-    Y <- dummies::dummy(y)
+    #Y <- dummies::dummy(y)
+    
+    length_y = length(y) # length of y vector
+    Y <- array( c(1-y, y), c(2, length_y))
+    
+    #create data frame to use for regression
+    df_reg <- data.frame(income = df$income,
+                         age = df$age,
+                         married = married,
+                         divorced = divorced)
+    
+    
     colnames(Y) <- NULL
   }
   model_args[["y"]] <- Y
